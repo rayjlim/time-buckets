@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use App\Utility\FgParser;
 use Illuminate\Http\Request;
+use Log;
 
 class ParserController extends Controller
 {
@@ -22,7 +23,6 @@ class ParserController extends Controller
 
         $parser = new FgParser();
         $source = $request->input('source');
-        $source = urldecode($source);
         $parser->parse($source);
         $games = [];
         for ($i = 0; $i < count($parser->articles); $i++){
@@ -31,6 +31,7 @@ class ParserController extends Controller
 
 
         // $game = Game::create($request->all());
+        Log::info('request source: ' . json_encode($games));
         return [
             "status" => 1,
             "data" => $games

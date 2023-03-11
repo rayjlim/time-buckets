@@ -1,5 +1,5 @@
 (() => {
-  const target = 'http://localhost/projects/game-collection/backend/public/api/parser/?';
+  const target = 'http://localhost/projects/game-collection/backend/public/api/parser/';
   const html = document.documentElement.innerHTML;
 
   let loaded = 0;
@@ -19,7 +19,7 @@
 
   const form = document.createElement('form');
   form.method = 'POST';
-  form.action = target + Math.random();
+  form.action = target;
   form.target = iframe.name;
 
   const textarea = document.createElement('textarea');
@@ -30,8 +30,9 @@
   iframe.appendChild(form);
 
   document.body.appendChild(iframe);
-  alert('submitting');
   form.submit();
+  console.log(`sent form ${window.location}`);
 })();
 
 // https://mrcoles.com/bookmarklet/
+// remove these comments when converting or it will not work
