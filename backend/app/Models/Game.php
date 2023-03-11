@@ -32,15 +32,10 @@ class Game extends Model
         'fg_url',
     ];
 
-
     // 'platform',
-
     // 'graphic_style',
     // 'replayability',
     // 'priority',
     // 'tags',
-
     // 'fg_summary',
-
-
 }
