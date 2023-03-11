@@ -13,3 +13,4 @@ frontend/.env
 frontend/.htaccess.production
 backend/tracks_cron_script.php
 backend-old/*
+backend/node_modules/*

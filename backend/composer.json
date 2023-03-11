@@ -30,8 +30,9 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "test": [
-            "vendor/bin/phpunit"
-        ]
+            "vendor/bin/phpunit --color"
+        ],
+        "test:watch": "watch 'composer run test'"
     },
     "config": {
         "optimize-autoloader": true,
