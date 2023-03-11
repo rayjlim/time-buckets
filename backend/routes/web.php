@@ -24,4 +24,6 @@ $router->group(['prefix' => 'api/'], function () use ($router) {
     $router->get('games/{id}', 'GameController@show');
     $router->patch('games/{id}', 'GameController@update');
     $router->delete('games/{id}', 'GameController@destroy');
+
+    $router->post('parser', 'ParserController@store');
 });

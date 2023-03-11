@@ -22,30 +22,25 @@ class Game extends Model
         'title',
         'genre',
         'size',
-        'dtLastChecked',
+        'last_checked_at',
         'status',
         'summary',
         'thoughts',
-        'issues'
+        'issues',
+        'fg_article_date',
+        'image',
+        'fg_url',
     ];
 
-    // 'fgId',
-    // 'title',
-    // 'genre',
-    // 'size',
-    // 'last_checked_at',
-    // 'status',
-    // 'summary',
-    // 'thoughts',
-    // 'issues',
-// 'platform',
-    // 'image',
+
+    // 'platform',
+
     // 'graphic_style',
     // 'replayability',
     // 'priority',
     // 'tags',
-// 'fg_article_date',
+
     // 'fg_summary',
-    // 'fg_url',
+
 
 }
