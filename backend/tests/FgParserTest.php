@@ -36,10 +36,8 @@ class FgParserTest extends TestCase
         $this->assertEquals($game->size, "707 MB");
 
         $this->assertEquals($game->image, "https://i2.imageban.ru/out/2023/03/10/7fb3e33d0b59d2658ad0a376fce2a903.jpg");
-
-
-        // $this->assertEquals($game->fg_url, "https://fitgirl-repacks.site/the-last-stand-aftermath/");
-        // $this->assertEquals($game->fg_article_date, "March 10, 2023");
+        $this->assertEquals($game->fg_article_date, "March 11, 2023");
+        $this->assertEquals("https://fitgirl-repacks.site/the-last-spell/", $game->fg_url);
 
 
     }

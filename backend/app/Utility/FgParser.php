@@ -54,11 +54,16 @@ class FgParser
 
         // $game->image = $this->dom->saveXML($imgNodes[0]);
 
-        $game->image = $imgNodes[0]->getAttribute('src');
+        $game->image = $imgNodes[0]->getAttribute("src");
 
-        // $game->image
-        // $game->fg_article_date
-        // $game->fg_url
+        $entryDateNodes = $this->byClass($dom, "span", "entry-date");
+
+
+        $game->fg_article_date = $entryDateNodes[0]->textContent;
+
+
+        $game->fg_url = $entryDateNodes[0]->getElementsByTagName("a")[0]->getattribute("href");
+
 
         // $game->fg_summary
 
