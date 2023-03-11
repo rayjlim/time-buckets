@@ -13,7 +13,7 @@ class FgParserTest extends TestCase
      */
     public function test_parse()
     {
-        $fullfilename = "/opt/lampp/htdocs/projects/game-collection/backend/tests/fitgirl_page1.html";
+        $fullfilename = getcwd() . "/tests/fitgirl_page1.html";
         $readtext = file_get_contents($fullfilename,"r");
         $parser = new FgParser();
         $parser->parse($readtext);
@@ -23,7 +23,7 @@ class FgParserTest extends TestCase
     }
 
     public function test_parse_item0(){
-        $fullfilename = "/opt/lampp/htdocs/projects/game-collection/backend/tests/fitgirl_page1.html";
+        $fullfilename =  getcwd() . "/tests/fitgirl_page1.html";
         $readtext = file_get_contents($fullfilename,"r");
         $parser = new FgParser();
         $parser->parse($readtext);
