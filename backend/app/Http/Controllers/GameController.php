@@ -39,9 +39,7 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'title' => 'required',
-        // ]);
+        // see https://stackoverflow.com/questions/44001030/laravel-validate-json-object
         $this->validate($request, [
             'title' => 'required',
         ]);
@@ -87,7 +85,7 @@ class GameController extends Controller
      */
     public function update(Request $request, Game $game)
     {
-        $request->validate([
+        $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
         ]);
@@ -115,5 +113,11 @@ class GameController extends Controller
             "data" => $game,
             "msg" => "Game deleted successfully"
         ];
+    }
+
+    public function parse(Request $request){
+        // read payload
+        // call parser to get array of items
+        // on insert , check if fgid exists and date entry equal or earlier; log the capture
     }
 }

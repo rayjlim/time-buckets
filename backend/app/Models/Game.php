@@ -18,7 +18,7 @@ class Game extends Model
      * @var array
      */
     protected $fillable = [
-        'fitgirlId',
+        'fgId',
         'title',
         'genre',
         'size',
@@ -28,5 +28,24 @@ class Game extends Model
         'thoughts',
         'issues'
     ];
+
+    // 'fgId',
+    // 'title',
+    // 'genre',
+    // 'size',
+    // 'last_checked_at',
+    // 'status',
+    // 'summary',
+    // 'thoughts',
+    // 'issues',
+// 'platform',
+    // 'image',
+    // 'graphic_style',
+    // 'replayability',
+    // 'priority',
+    // 'tags',
+// 'fg_article_date',
+    // 'fg_summary',
+    // 'fg_url',
 
 }
