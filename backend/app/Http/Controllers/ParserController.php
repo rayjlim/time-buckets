@@ -30,8 +30,11 @@ class ParserController extends Controller
         }
 
 
-        // $game = Game::create($request->all());
         Log::info('request source: ' . json_encode($games));
+
+        // TODOimplement duplicate checks before insert to DB
+        // $game = Game::create($request->all());
+
         return [
             "status" => 1,
             "data" => $games

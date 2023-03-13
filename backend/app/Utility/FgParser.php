@@ -70,6 +70,26 @@ class FgParser
         return $game;
     }
 
+    public static function convertSizeString(string $target){
+
+        $output = str_ireplace("from", "", $target);
+        $output = str_ireplace("selective download", "", $output);
+        $output = str_ireplace(",", ".", $output);
+        $output = str_ireplace("[", "", $output);
+        $output = str_ireplace("]", "", $output);
+        $output = str_ireplace("(", "", $output);
+        $output = str_ireplace(")", "", $output);
+        $multiplier = 1;
+        if(stripos($output, 'mb')){
+            $multiplier = .001;
+        }
+        $output = str_ireplace("MB", "", $output);
+        $output = str_ireplace("GB", "", $output);
+        $output = trim($output);
+        $output = explode('\\', $output)[0];
+        $output = explode('~', $output)[0];
+        return $output * $multiplier;
+    }
 
     private function byClass(\DOMElement $a,$b,$c){
         $r = [];
