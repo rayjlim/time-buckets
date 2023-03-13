@@ -30,7 +30,7 @@ class FgParserTest extends TestCase
         $game = $parser->getInfo(0);
 
         $this->assertEquals('Lossless Repack', $game->category);
-        $this->assertEquals('3285', $game->fgId);
+        $this->assertEquals('3285', $game->fg_id);
         $this->assertEquals("The Last Spell v1.0.2.7 (Release)", $game->title);
         $this->assertEquals("RPG, Strategy, Tactics, Isometric, 2D, Turn-based", $game->genre);
         $this->assertEquals("707 MB", $game->size);
@@ -38,6 +38,44 @@ class FgParserTest extends TestCase
         $this->assertEquals("https://i2.imageban.ru/out/2023/03/10/7fb3e33d0b59d2658ad0a376fce2a903.jpg", $game->image);
         $this->assertEquals("March 11, 2023", $game->fg_article_date);
         $this->assertEquals("https://fitgirl-repacks.site/the-last-spell/", $game->fg_url);
+    }
+
+    public function test_parse_item1(){
+        // testing no genre field
+        $fullfilename =  getcwd() . "/tests/fitgirl_page1.html";
+        $readtext = file_get_contents($fullfilename,"r");
+        $parser = new FgParser();
+        $parser->parse($readtext);
+        $game = $parser->getInfo(1);
+
+        $this->assertEquals('060', $game->fg_id);
+        $this->assertEquals("Resident Evil HD Remaster", $game->title);
+        $this->assertEquals("", $game->genre);
+
+    }
+
+    public function test_parse_item2(){
+        // test when fg has extra characters
+        $fullfilename =  getcwd() . "/tests/fitgirl_page1.html";
+        $readtext = file_get_contents($fullfilename,"r");
+        $parser = new FgParser();
+        $parser->parse($readtext);
+        $game = $parser->getInfo(2);
+
+        $this->assertEquals('2926', $game->fg_id);
+        $this->assertEquals("Way of the Hunter v1.22.0.93361 + 3 DLCs + Windows 7 Fix", $game->title);
+
+    }
+
+    public function test_parse_item3(){
+        // test when fg has special characters
+        $fullfilename =  getcwd() . "/tests/fitgirl_page1.html";
+        $readtext = file_get_contents($fullfilename,"r");
+        $parser = new FgParser();
+        $parser->parse($readtext);
+        $game = $parser->getInfo(3);
+
+        $this->assertEquals(-1, $game->fg_id);
 
     }
 

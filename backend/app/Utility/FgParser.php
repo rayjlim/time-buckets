@@ -36,8 +36,9 @@ class FgParser
         $h3Nodes = $entryNode[0]->getElementsByTagName("h3");
         $fgIdNodes = $h3Nodes[0]->getElementsByTagName("span");
         $parsed = substr($fgIdNodes[0]->textContent, 1);
+        $parsed = trim(str_ireplace("updated", "", $parsed));
+        $game->fg_id = is_numeric($parsed) ? $parsed : -1;
 
-        $game->fgId = $parsed;
 
         $titleNodes = $h3Nodes[0]->getElementsByTagName("strong");
         $parsed = $titleNodes[0]->textContent;
@@ -46,7 +47,9 @@ class FgParser
         $entryNode = $this->byClass($dom, "div", "entry-content");
         $pNodes = $entryNode[0]->getElementsByTagName("p");
         $strongNodes = $pNodes[0]->getElementsByTagName("strong");
-        $game->genre = $strongNodes[0]->textContent;
+        if(strpos($pNodes[0]->textContent, "Genres")){
+            $game->genre = $strongNodes[0]->textContent;
+        }
 
         $game->size = $strongNodes[count($strongNodes)-1]->textContent;
 
@@ -72,8 +75,8 @@ class FgParser
 
     public static function convertSizeString(string $target){
 
-        $output = str_ireplace("from", "", $target);
-        $output = str_ireplace("selective download", "", $output);
+        $parsed = str_ireplace("from", "", $target);
+        $output = str_ireplace("selective download", "", $parsed);
         $output = str_ireplace(",", ".", $output);
         $output = str_ireplace("[", "", $output);
         $output = str_ireplace("]", "", $output);
