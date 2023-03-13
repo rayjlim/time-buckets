@@ -1,6 +1,7 @@
 build/
 vendor/
 tests/
+node_modules/
 
 *.xml
 *.md
@@ -13,3 +14,7 @@ tests/
 .editorconfig
 .styleci.yml
 .phpunit.result.cache
+
+artisan
+package.json
+package-lock.json

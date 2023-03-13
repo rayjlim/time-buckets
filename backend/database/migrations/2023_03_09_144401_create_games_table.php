@@ -15,11 +15,11 @@ class CreateGamesTable extends Migration
     {
         Schema::create('gc_games', function (Blueprint $table) {
             $table->id();
-            $table->integer('fgId')->nullable();
+            $table->integer('fg_id')->nullable();
             $table->string('title', 255);
             $table->string('genre', 255)->nullable();
             $table->string('size', 100)->nullable();
-            $table->date('last_checked_at');
+            $table->date('last_checked_at')->nullable();
             $table->string('status', 50)->nullable();
             $table->text('summary')->nullable();
             $table->text('thoughts')->nullable();
@@ -33,7 +33,6 @@ class CreateGamesTable extends Migration
             $table->text('tags')->nullable();  // will use space delimited
 
             $table->date('fg_article_date')->nullable();
-            $table->text('fg_summary')->nullable();
             $table->string('fg_url')->nullable();
 
             $table->timestamps();
