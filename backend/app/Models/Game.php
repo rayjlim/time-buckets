@@ -18,11 +18,11 @@ class Game extends Model
      * @var array
      */
     protected $fillable = [
-        'fgId',
+        'fg_id',
         'title',
         'genre',
         'size',
-        'last_checked_at',
+        'size_calculated',
         'status',
         'summary',
         'thoughts',
@@ -37,5 +37,4 @@ class Game extends Model
     // 'replayability',
     // 'priority',
     // 'tags',
-    // 'fg_summary',
 }

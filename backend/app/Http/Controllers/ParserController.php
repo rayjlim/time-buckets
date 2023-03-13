@@ -29,11 +29,23 @@ class ParserController extends Controller
             $games[] = $parser->getInfo($i);
         }
 
-
         Log::info('request source: ' . json_encode($games));
+        echo "store games" . json_encode($games);
+        // TODO: implement duplicate checks before insert to DB
+        foreach ($games as $parsed){
+            $game = new Game;
+            $game->fg_id = $parsed->fg_id;
+            $game->title = $parsed->title;
+            $game->genre = $parsed->genre;
+            $game->size = $parsed->size;
+            $game->size_calculated = FgParser::convertSizeString($parsed->size);
+            $game->image = $parsed->image;
+            $game->fg_url = $parsed->fg_url;
+            $time = strtotime($parsed->fg_article_date);
+            $game->fg_article_date = date('Y-m-d',$time);
 
-        // TODOimplement duplicate checks before insert to DB
-        // $game = Game::create($request->all());
+            $game->save();
+        }
 
         return [
             "status" => 1,

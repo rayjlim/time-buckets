@@ -89,7 +89,9 @@ class FgParserTest extends TestCase
         $this->assertEquals("7.5", FgParser::convertSizeString("SELECTIVE DOWNLOAD 7,5~20 GB"));
         $this->assertEquals("2", FgParser::convertSizeString("2~3 GB (Selective Download)"));
         $this->assertEquals("4.3", FgParser::convertSizeString("4,3~6 GB [Selective Download]"));
-        $this->assertEquals(".593", FgParser::convertSizeString("593\/749 MB [Selective Download]"));
+        $this->assertEquals("11.9", FgParser::convertSizeString("11.9/12 GB"));
+
+
 
     }
 }

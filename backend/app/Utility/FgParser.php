@@ -90,6 +90,7 @@ class FgParser
         $output = str_ireplace("GB", "", $output);
         $output = trim($output);
         $output = explode('\\', $output)[0];
+        $output = explode('/', $output)[0];
         $output = explode('~', $output)[0];
         return $output * $multiplier;
     }
