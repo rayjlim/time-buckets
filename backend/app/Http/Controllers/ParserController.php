@@ -19,14 +19,20 @@ class ParserController extends Controller
     {
         $this->validate($request, [
             'source' => 'required',
+            'fg_url' => 'required'
         ]);
 
         $parser = new FgParser();
+        $fg_url = $request->input('fg_url');
+        Log::info('source for: ' . $fg_url);
         $source = $request->input('source');
         $parser->parse($source);
         $games = [];
         for ($i = 0; $i < count($parser->articles); $i++){
-            $games[] = $parser->getInfo($i);
+            $found = $parser->getInfo($i);
+            if($found){
+                $games[] = $found;
+            }
         }
 
         Log::info('request source: ' . json_encode($games));

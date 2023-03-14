@@ -34,6 +34,9 @@ class FgParser
 
         $entryNode = $this->byClass($dom, "div", "entry-content");
         $h3Nodes = $entryNode[0]->getElementsByTagName("h3");
+        if(count($h3Nodes) === 0){
+            return null;
+        }
         $fgIdNodes = $h3Nodes[0]->getElementsByTagName("span");
         $parsed = substr($fgIdNodes[0]->textContent, 1);
         $parsed = trim(str_ireplace("updated", "", $parsed));

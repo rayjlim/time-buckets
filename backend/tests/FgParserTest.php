@@ -79,6 +79,18 @@ class FgParserTest extends TestCase
 
     }
 
+    public function test_parse_item4(){
+        // test when fg has special characters
+        $fullfilename =  getcwd() . "/tests/fitgirl_page1.html";
+        $readtext = file_get_contents($fullfilename,"r");
+        $parser = new FgParser();
+        $parser->parse($readtext);
+        $game = $parser->getInfo(4);
+
+        $this->assertEquals(null, $game);
+
+    }
+
     public function test_convertSizeString_item0(){
 
         $this->assertEquals(".707", FgParser::convertSizeString("707 MB"));
