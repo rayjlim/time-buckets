@@ -2,6 +2,23 @@
   const target = 'https://lilplaytime.com/games-collection-api/public/api/parser/';
   const html = document.documentElement.innerHTML;
 
+  function nextUrl(url) {
+    const regex = /\/[\d]+\//;
+    const str = `${url}`;
+    const found = str.match(regex);
+    console.log(found);
+    if (found) {
+      console.log(found);
+      const page = found[0];
+      const newPage = page.substring(1, page.length - 1) - 1;
+      const newStr = str.replace(regex, `/${newPage}/`);
+      console.log(newStr);
+      return newStr;
+    }
+    console.log(`no match ${url}`);
+    return null;
+  }
+
   let loaded = 0;
 
   const iframe = document.createElement('iframe');
@@ -37,7 +54,12 @@
 
   document.body.appendChild(iframe);
   form.submit();
-  console.log(`sent form ${window.location}`);
+  console.log(`parsed page ${window.location}`);
+
+  const nextPage = nextUrl(window.location);
+  if (nextPage) {
+    window.location = nextPage;
+  }
 })();
 
 // https://mrcoles.com/bookmarklet/
