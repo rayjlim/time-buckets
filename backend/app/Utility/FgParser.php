@@ -40,6 +40,13 @@ class FgParser
         $fgIdNodes = $h3Nodes[0]->getElementsByTagName("span");
         $parsed = substr($fgIdNodes[0]->textContent, 1);
         $parsed = trim(str_ireplace("updated", "", $parsed));
+        $parsed = trim(str_ireplace("Add-on", "", $parsed));
+        $parsed = trim(str_ireplace("PATCH", "", $parsed));
+        $parsed = trim(str_ireplace("DC", "", $parsed));
+        $parsed = trim(str_ireplace("Unrated", "", $parsed));
+
+
+
         $game->fg_id = is_numeric($parsed) ? $parsed : -1;
 
 
@@ -79,7 +86,8 @@ class FgParser
     public static function convertSizeString(string $target){
 
         $parsed = str_ireplace("from", "", $target);
-        $output = str_ireplace("selective download", "", $parsed);
+        $output = str_ireplace("fom", "", $parsed);
+        $output = str_ireplace("selective download", "", $output);
         $output = str_ireplace(",", ".", $output);
         $output = str_ireplace("[", "", $output);
         $output = str_ireplace("]", "", $output);
@@ -95,7 +103,10 @@ class FgParser
         $output = explode('\\', $output)[0];
         $output = explode('/', $output)[0];
         $output = explode('~', $output)[0];
-        return $output * $multiplier;
+        $output = explode('o', $output)[0];
+
+        $output = trim($output);
+        return is_numeric($output) ? $output * $multiplier : -1;
     }
 
     private function byClass(\DOMElement $a,$b,$c){

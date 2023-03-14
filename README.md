@@ -20,7 +20,11 @@ Color code: red is high size calculated,
 Status: on_bluray, on_harddrive, to_download. Skip
 Larger than 20gb. Is auto assigned skip
 
-
+fix: title parsing
+https://fitgirl-repacks.site/halo-the-master-chief-collection/
+https://fitgirl-repacks.site/hackg-u-last-recode/
+https://fitgirl-repacks.site/observer/
+https://fitgirl-repacks.site/112-operator/
 ----
 
 ## SQL
@@ -28,8 +32,7 @@ Larger than 20gb. Is auto assigned skip
 ```sql
 SELECT  id, fg_id, title
 FROM gc_games
-where fg_id != -1
-GROUP BY fg_id
+GROUP BY fg_url
 HAVING COUNT(id) > 1
 ```
 
@@ -38,7 +41,6 @@ DELETE t1 FROM gc_games t1
 INNER JOIN gc_games t2 
 WHERE 
     t1.id > t2.id AND 
-    t1.fg_id = t2.fg_id AND
-    t1.fg_id != -1;
+    t1.fg_url = t2.fg_url;
     
 ```
