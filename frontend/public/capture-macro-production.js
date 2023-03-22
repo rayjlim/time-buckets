@@ -58,7 +58,9 @@
 
   const nextPage = nextUrl(window.location);
   if (nextPage) {
-    window.location = nextPage;
+    setTimeout(() => {
+      window.location = nextPage;
+    }, 2000);
   }
 })();
 

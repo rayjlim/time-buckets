@@ -17,6 +17,7 @@ class ParserController extends Controller
      */
     public function store(Request $request)
     {
+        Log::info('parser called ');
         $this->validate($request, [
             'source' => 'required',
             'fg_url' => 'required'
@@ -31,11 +32,12 @@ class ParserController extends Controller
         for ($i = 0; $i < count($parser->articles); $i++){
             $found = $parser->getInfo($i);
             if($found){
+                Log::info('request source: ' . json_encode($found->title));
                 $games[] = $found;
             }
         }
 
-        Log::info('request source: ' . json_encode($games));
+
         echo "store games" . json_encode($games);
         // TODO: implement duplicate checks before insert to DB
         foreach ($games as $parsed){
