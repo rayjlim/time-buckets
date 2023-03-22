@@ -8,24 +8,32 @@ TODO:
 
 Gc: how to migrate the sheets data to the db?
 
-Tagging: play, noplay dlhigh 
-Keep list in table 
-Use thoughts field for more context on tag dlhigh 
+Use thoughts field for more context on tag dlhigh
 Front end read list and have buttons to add/ subtract from textarea
 
-
-Set a boundary of 20gb for too big;configurable 
-Function that takes two games return Boolean if first is older than second 
-Color code: red is high size calculated, 
+Set a boundary of 20gb for too big;configurable
+Function that takes two games return Boolean if first is older than second
+Color code: red is high size calculated,
 Status: on_bluray, on_harddrive, to_download. Skip
 Larger than 20gb. Is auto assigned skip
 
-fix: title parsing
+feat: View duplicates,with button to remove them
+feat:View by date desc, so know where last parsed
+
+Keep list of tags in table
+Use tags: installed, to-download, to-install, uninstalled, to-review, no-play, dl-high-priority
+Prioritize by lowest top, table UI to input priorities
+
+## fix: title parsing
+
 https://fitgirl-repacks.site/halo-the-master-chief-collection/
 https://fitgirl-repacks.site/hackg-u-last-recode/
 https://fitgirl-repacks.site/observer/
 https://fitgirl-repacks.site/112-operator/
+
 ----
+
+handle category: SWITCH EMULATED
 
 ## SQL
 
