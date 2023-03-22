@@ -38,6 +38,7 @@ handle category: SWITCH EMULATED
 ## SQL
 
 ```sql
+# find duplicates
 SELECT  id, fg_id, title
 FROM gc_games
 GROUP BY fg_url
@@ -45,6 +46,7 @@ HAVING COUNT(id) > 1
 ```
 
 ```sql
+# delete duplicates
 DELETE t1 FROM gc_games t1
 INNER JOIN gc_games t2 
 WHERE 
