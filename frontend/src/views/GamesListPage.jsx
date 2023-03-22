@@ -39,7 +39,7 @@ const GamesListPage = () => {
     setIsLoading(true);
     try {
       const response = await fetch(endpoint, {
-        mode: 'cors',
+        mode: 'no-cors',
         cache: 'no-cache',
         credentials: 'same-origin',
         redirect: 'follow',
@@ -75,7 +75,7 @@ const GamesListPage = () => {
 
   useEffect(() => {
     (async () => {
-      loadGames();
+      await loadGames();
     })();
   }, [pageRef.current]);
 
