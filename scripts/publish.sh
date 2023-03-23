@@ -56,8 +56,11 @@ pwd
 if [ -z "$NOFRONTENDBUILD" ]; then
 
   cd ./frontend
+  mv .env .env.local
+  cp .env.production .env
   npm run build
   buildresult=$?
+  mv .env.local .env
   if [ $buildresult != 0 ]; then
     echo "Frontend Build Fail"
     exit 1
@@ -97,7 +100,7 @@ if [ -z "$NOFRONTENDBUILD" ]; then
   echo $FTP_TARGETFOLDER_UI
   rsync --rsh='ssh -p2222' -rave 'ssh -oHostKeyAlgorithms=+ssh-dss' \
     --delete . $FTP_USER@$FTP_HOST:$FTP_TARGETFOLDER_UI/
-  
+
   cd ..
   rsync --rsh='ssh -p2222' -rave 'ssh -oHostKeyAlgorithms=+ssh-dss' \
     .htaccess.production $FTP_USER@$FTP_HOST:$FTP_TARGETFOLDER_UI/.htaccess
