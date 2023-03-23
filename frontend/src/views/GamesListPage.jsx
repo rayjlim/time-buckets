@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import ReactPaginate from 'react-paginate';
 
 import { REST_ENDPOINT } from '../constants';
 import GameListItems from '../components/GameListItems';
+import PaginationBar from '../components/PaginationBar';
 
 import './GamesListPage.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -130,31 +130,14 @@ const GamesListPage = () => {
         Size Max:
         <input type="text" ref={formSizeMax} size="5" />
       </div>
-      <nav aria-label="Page navigation" className="mt-4">
-        <ReactPaginate
-          containerClassName="pagination justify-content-center"
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          activeClassName="active"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={4}
-          pageCount={pageMeta.last_page}
-          previousLabel="< previous"
-          breakLabel="..."
-          nextLabel="next >"
-          renderOnZeroPageCount={null}
-        />
-      </nav>
-      page:
-      {pageMeta.current_page}
-      total:
-      {pageMeta.total}
+      <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
+
+      <div>
+        page:
+        {pageMeta.current_page}
+        total:
+        {pageMeta.total}
+      </div>
       {!gameId && !isLoading && (
         <GameListItems
           games={games}
@@ -162,6 +145,8 @@ const GamesListPage = () => {
           onSelectGame={selectGame}
         />
       )}
+      <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
+
       <button type="button" onClick={() => removeDuplicates()}>Remove Duplicates</button>
     </>
   );
