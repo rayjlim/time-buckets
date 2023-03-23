@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GameController extends Controller
 {
@@ -131,9 +132,12 @@ class GameController extends Controller
         ];
     }
 
-    public function parse(Request $request){
-        // read payload
-        // call parser to get array of items
-        // on insert , check if fgid exists and date entry equal or earlier; log the capture
+    public function removeDuplicates(Request $request){
+        $affected = DB::connection('mysql')->select('DELETE t1 FROM gc_games t1
+        INNER JOIN gc_games t2
+        WHERE
+            t1.id > t2.id AND
+            t1.fg_url = t2.fg_url;');
+        return $affected;
     }
 }
