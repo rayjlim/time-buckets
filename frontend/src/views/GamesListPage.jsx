@@ -40,13 +40,13 @@ const GamesListPage = () => {
   async function loadGames() {
     const endpoint = `${REST_ENDPOINT}/api/games/?page=${page}`;
     let searchFields = '';
-    if (formSearchTitle !== '') {
+    if (formSearchTitle.current.value !== '') {
       searchFields += `&search_title=${formSearchTitle.current.value}`;
     }
-    if (formSizeMin !== '') {
+    if (formSizeMin.current.value !== '') {
       searchFields += `&size_min=${formSizeMin.current.value}`;
     }
-    if (formSizeMax !== '') {
+    if (formSizeMax.current.value !== '') {
       searchFields += `&size_max=${formSizeMax.current.value}`;
     }
     setIsLoading(true);

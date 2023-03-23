@@ -58,6 +58,7 @@ if [ -z "$NOFRONTENDBUILD" ]; then
   cd ./frontend
   mv .env .env.local
   cp .env.production .env
+  read -t 1 -N 1 -p "pause"
   npm run build
   buildresult=$?
   mv .env.local .env
