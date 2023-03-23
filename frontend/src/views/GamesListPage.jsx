@@ -73,6 +73,23 @@ const GamesListPage = () => {
       setIsLoading(false);
     }
   }
+  async function removeDuplicates() {
+    toast.error('Removing...');
+    const endpoint = `${REST_ENDPOINT}/api/games/removeDuplicates/`;
+
+    try {
+      const response = await fetch(`${endpoint}`);
+      if (!response.ok) {
+        console.log('response.status :', response.status);
+        throw new Error(response.status);
+      } else {
+        toast.error('Duplicates removed');
+      }
+    } catch (err) {
+      console.log(`Error: ${err}`);
+      toast.error(`loading error : ${err}`);
+    }
+  }
 
   /** Search functions */
   const debouncedLoadGames = debounce(loadGames, DEBOUNCE_TIME);
@@ -134,6 +151,7 @@ const GamesListPage = () => {
           onSelectGame={selectGame}
         />
       )}
+      <button type="button" onClick={() => removeDuplicates()}>Remove Duplicates</button>
     </>
   );
 };
