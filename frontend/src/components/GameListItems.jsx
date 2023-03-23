@@ -28,8 +28,14 @@ const GameList = ({ games, onSelectGame }) => {
               {entry.fg_id}
               , genre:
               {entry.genre}
-              , size:
-              {entry.size_calculated}
+              ,
+              <span className={entry.size_calculated > 20
+                ? 'game-size-large'
+                : ''}
+              >
+                size:
+                {entry.size_calculated}
+              </span>
             </div>
             <div>
               priority:
