@@ -1,0 +1,13 @@
+.game-list-row {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    padding: 0.5rem;
+    margin: 0.25rem;
+    border: 1px solid blue;
+    text-align: left;
+
+}
+.game-image {
+    height: 100px;
+}

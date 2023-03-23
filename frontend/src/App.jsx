@@ -6,7 +6,7 @@ import GamesListPage from './views/GamesListPage';
 import './App.css';
 
 const App = () => (
-  <div>
+  <div id="container">
     <BrowserRouter>
       <Routes>
         <Route path="*" element={<GamesListPage />} />

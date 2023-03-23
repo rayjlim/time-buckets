@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import ReactPaginate from 'react-paginate';
 
 import { REST_ENDPOINT } from '../constants';
-import GameList from '../components/GameList';
+import GameListItems from '../components/GameListItems';
 
 import './GamesListPage.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -31,7 +31,7 @@ const GamesListPage = () => {
   const [gameId, setGameId] = useState(null);
   const [games, setGames] = useState([]);
   const [page, setPage] = useState(1);
-  const [pageMeta, setPageMeta] = useState({});
+  const [pageMeta, setPageMeta] = useState({ last_page: 1 });
   const formSizeMin = useRef();
   const formSizeMax = useRef();
   const formSearchTitle = useRef();
@@ -120,8 +120,7 @@ const GamesListPage = () => {
   return (
     <>
       <ToastContainer />
-      <span>Nav Goes Here</span>
-      <h1> Game List</h1>
+      <h1>Game List</h1>
       {isLoading && <h2>LOADING</h2>}
       <div>
         Search Title:
@@ -131,21 +130,33 @@ const GamesListPage = () => {
         Size Max:
         <input type="text" ref={formSizeMax} size="5" />
       </div>
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        pageCount={pageMeta.last_page}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-      />
+      <nav aria-label="Page navigation" className="mt-4">
+        <ReactPaginate
+          containerClassName="pagination justify-content-center"
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          activeClassName="active"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={4}
+          pageCount={pageMeta.last_page}
+          previousLabel="< previous"
+          breakLabel="..."
+          nextLabel="next >"
+          renderOnZeroPageCount={null}
+        />
+      </nav>
       page:
       {pageMeta.current_page}
       total:
       {pageMeta.total}
       {!gameId && !isLoading && (
-        <GameList
+        <GameListItems
           games={games}
           onUpdate={updateView}
           onSelectGame={selectGame}
