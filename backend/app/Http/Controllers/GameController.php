@@ -10,15 +10,17 @@ class GameController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $games = Game::latest()->paginate(20);
-        return [
-            "status" => 1,
-            "data" => $games
-        ];
+        $pageSize = is_numeric($request->input('per_page'))
+            ? $request->input('per_page')
+            : 20;  // DEFAULT page size
+        $games = Game::latest()->paginate($pageSize);
+
+        return $games;
     }
 
     /**

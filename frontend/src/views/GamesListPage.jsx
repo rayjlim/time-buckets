@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import ReactPaginate from 'react-paginate';
 
 import { REST_ENDPOINT } from '../constants';
 import GameList from '../components/GameList';
@@ -26,24 +27,21 @@ function debounce(func, wait, immediate) {
 }
 
 const GamesListPage = () => {
-  const pageRef = useRef();
-
   const [isLoading, setIsLoading] = useState(false);
   const [gameId, setGameId] = useState(null);
   const [games, setGames] = useState([]);
-
+  const [page, setPage] = useState(1);
+  const [pageMeta, setPageMeta] = useState({});
   /** Page Data look up */
   async function loadGames() {
-    const endpoint = `${REST_ENDPOINT}games/`;
+    const endpoint = `${REST_ENDPOINT}/api/games/?page=${page}`;
 
     setIsLoading(true);
+    // TODO: if production, then pass mode: 'no-cors', in fetch options
+
     try {
       const response = await fetch(endpoint, {
-        mode: 'no-cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
+
       });
       console.log('response :', response);
       if (!response.ok) {
@@ -51,8 +49,9 @@ const GamesListPage = () => {
         throw new Error(response.status);
       } else {
         const data = await response.json();
-        console.log('data :', data.data.data);
-        setGames(data.data.data);
+        console.log('data :', data);
+        setGames(data.data);
+        setPageMeta(data);
       }
     } catch (err) {
       console.log(`Error: ${err}`);
@@ -73,11 +72,20 @@ const GamesListPage = () => {
     setGameId(id);
   };
 
+  const handlePageClick = event => {
+    const newOffset = (event.selected * pageMeta.itemsPerPage) % games.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`,
+    );
+    // setItemOffset(newOffset);
+    setPage(event.selected + 1);
+  };
+
   useEffect(() => {
     (async () => {
       await loadGames();
     })();
-  }, [pageRef.current]);
+  }, [page]);
 
   return (
     <>
@@ -86,6 +94,17 @@ const GamesListPage = () => {
       <h1> Game List</h1>
 
       {isLoading && <h2>LOADING</h2>}
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={3}
+        pageCount={pageMeta.last_page}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+      />
+      page:
+      {pageMeta.current_page}
       {!gameId && !isLoading && (
         <GameList
           games={games}
