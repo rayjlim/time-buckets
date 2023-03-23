@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import ReactPaginate from 'react-paginate';
 
@@ -32,15 +32,28 @@ const GamesListPage = () => {
   const [games, setGames] = useState([]);
   const [page, setPage] = useState(1);
   const [pageMeta, setPageMeta] = useState({});
+  const formSizeMin = useRef();
+  const formSizeMax = useRef();
+  const formSearchTitle = useRef();
+
   /** Page Data look up */
   async function loadGames() {
     const endpoint = `${REST_ENDPOINT}/api/games/?page=${page}`;
-
+    let searchFields = '';
+    if (formSearchTitle !== '') {
+      searchFields += `&search_title=${formSearchTitle.current.value}`;
+    }
+    if (formSizeMin !== '') {
+      searchFields += `&size_min=${formSizeMin.current.value}`;
+    }
+    if (formSizeMax !== '') {
+      searchFields += `&size_max=${formSizeMax.current.value}`;
+    }
     setIsLoading(true);
     // TODO: if production, then pass mode: 'no-cors', in fetch options
 
     try {
-      const response = await fetch(endpoint, {
+      const response = await fetch(`${endpoint}${searchFields}`, {
 
       });
       console.log('response :', response);
@@ -92,8 +105,15 @@ const GamesListPage = () => {
       <ToastContainer />
       <span>Nav Goes Here</span>
       <h1> Game List</h1>
-
       {isLoading && <h2>LOADING</h2>}
+      <div>
+        Search Title:
+        <input type="text" ref={formSearchTitle} />
+        Size Min:
+        <input type="text" ref={formSizeMin} size="5" />
+        Size Max:
+        <input type="text" ref={formSizeMax} size="5" />
+      </div>
       <ReactPaginate
         breakLabel="..."
         nextLabel="next >"
@@ -105,6 +125,8 @@ const GamesListPage = () => {
       />
       page:
       {pageMeta.current_page}
+      total:
+      {pageMeta.total}
       {!gameId && !isLoading && (
         <GameList
           games={games}
