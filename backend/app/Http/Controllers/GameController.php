@@ -18,7 +18,7 @@ class GameController extends Controller
     {
         $pageSize = is_numeric($request->input('per_page'))
             ? $request->input('per_page')
-            : 10;  // DEFAULT page size
+            : 20;  // DEFAULT page size
 
         $searchTitle = $request->input('search_title');
         $sizeMinParam = $request->input('size_min');
@@ -33,6 +33,7 @@ class GameController extends Controller
         $games = Game::where('title', 'like', '%'.$searchTitle.'%')
             ->where('size_calculated', '>', $sizeMin)
             ->where('size_calculated', '<', $sizeMax)
+            ->orderBy('updated_at', 'desc')
             ->paginate($pageSize);
 
         return $games;

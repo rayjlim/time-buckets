@@ -37,9 +37,6 @@ class ParserController extends Controller
             }
         }
 
-
-        echo "store games" . json_encode($games);
-        // TODO: implement duplicate checks before insert to DB
         foreach ($games as $parsed){
             $game = new Game;
             $game->fg_id = $parsed->fg_id;
