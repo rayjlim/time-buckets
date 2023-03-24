@@ -17,7 +17,7 @@ class FgParser
             $classname="cat-links";
             $nodes = $this->byClass($article, 'span', $classname);
             $parsed = $nodes[0]->textContent;
-            if ($parsed == 'Lossless Repack') {
+            if (str_contains($parsed, 'Repack')) {
                 array_push($result, $article);
             }
         }
