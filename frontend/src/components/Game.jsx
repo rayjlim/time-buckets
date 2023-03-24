@@ -12,6 +12,7 @@ const Game = ({ game }) => {
   const formGraphicStyle = useRef();
   const formTags = useRef();
   const formThoughts = useRef();
+  const [current, setCurrent] = useState(game);
 
   const [isEditing, setIsEditing] = useState(false);
   function externalLink(url) {
@@ -41,6 +42,16 @@ const Game = ({ game }) => {
       } else {
         const data = await response.json();
         console.log('data :', data);
+        setCurrent({
+          ...current,
+          priority: formPriority.current.value,
+          platform: formPlatform.current.value,
+          status: formStatus.current.value,
+          graphic_style: formGraphicStyle.current.value,
+          tags: formTags.current.value,
+          thoughts: formThoughts.current.value,
+        });
+        setIsEditing(false);
       }
     } catch (err) {
       console.log(`Error: ${err}`);
@@ -49,32 +60,32 @@ const Game = ({ game }) => {
   }
 
   return (
-    <section key={game.id} className="game-list-row">
-      <img src={game.image} alt={game.title} className="game-image" />
+    <section key={current.id} className="game-list-row">
+      <img src={current.image} alt={current.title} className="game-image" />
       <div>
         <button
           onClick={() => setIsEditing(!isEditing)}
           className="plainLink"
           type="button"
         >
-          {game.title}
+          {current.title}
         </button>
-        <button type="button" onClick={() => externalLink(game.fg_url)}>
+        <button type="button" onClick={() => externalLink(current.fg_url)}>
           fg link
         </button>
         <div>
           fg id:
-          {game.fg_id}
+          {current.fg_id}
           , genre:
-          {game.genre}
+          {current.genre}
           ,
-          <span className={game.size_calculated > 20 ? 'game-size-large' : ''}>
+          <span className={current.size_calculated > 20 ? 'game-size-large' : ''}>
             size:
-            {game.size_calculated}
+            {current.size_calculated}
           </span>
           <span> Article date: (</span>
           {format(
-            parse(game.fg_article_date, 'yyyy-MM-dd', new Date()),
+            parse(current.fg_article_date, 'yyyy-MM-dd', new Date()),
             'MM-yyyy',
           )}
           <span>)</span>
@@ -83,73 +94,73 @@ const Game = ({ game }) => {
           <>
             <label htmlFor={formPriority}>
               Priority:
-              <input name="myInput" ref={formPriority} value={game.priority} />
+              <input name="myInput" ref={formPriority} defaultValue={current.priority} />
             </label>
             <label htmlFor={formPlatform}>
               Platform:
-              <input ref={formPlatform} value={game.platform} />
+              <input ref={formPlatform} defaultValue={current.platform} />
             </label>
 
             <label htmlFor={formStatus}>
               Status:
-              <input ref={formStatus} value={game.status} />
+              <input ref={formStatus} defaultValue={current.status} />
             </label>
 
             <label htmlFor={formGraphicStyle}>
               Graphic Style:
-              <input ref={formGraphicStyle} value={game.graphic_style} />
+              <input ref={formGraphicStyle} defaultValue={current.graphic_style} />
             </label>
 
             <label htmlFor={formTags}>
               Tags:
-              <input ref={formTags} value={game.tags} />
+              <input ref={formTags} defaultValue={current.tags} />
             </label>
 
             <label htmlFor={formThoughts}>
               Thoughts:
-              <textarea ref={formThoughts} value={game.thoughts} />
+              <textarea ref={formThoughts} defaultValue={current.thoughts} />
             </label>
-            {/* {game.replayability}
-            {game.issues}
-            {game.summary} */}
+            {/* {current.replayability}
+            {current.issues}
+            {current.summary} */}
             <button type="button" onClick={() => saveGame()}>Save</button>
           </>
         ) : (
           <div className="manual">
             <span>
               Priority:
-              {game.priority}
+              {current.priority}
             </span>
             <span>
               Platform:
-              {game.platform}
+              {current.platform}
             </span>
             <span>
               Status:
-              {game.status}
+              {current.status}
             </span>
             <span>
               Graphic style:
-              {game.graphic_style}
+              {current.graphic_style}
             </span>
             <span>
               Tags:
-              {game.tags}
+              {current.tags}
             </span>
             <span>
               Thoughts:
-              {game.thoughts}
+              {current.thoughts}
             </span>
-            {/* {game.replayability}
-          {game.issues}
-          {game.summary} */}
+            {/* {current.replayability}
+          {current.issues}
+          {current.summary} */}
           </div>
         )}
 
         {/*
-        {game.size}
-        {game.created_at}
-        {game.updated_at}
+        {current.size}
+        {current.created_at}
+        {current.updated_at}
 
         */}
       </div>
