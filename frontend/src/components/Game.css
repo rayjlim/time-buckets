@@ -9,3 +9,9 @@
 .manual > span{
     margin: 0 0.5rem;
 }
+
+.tagBtn {
+    background-color: transparent;
+    border-radius: 8px;
+
+}

@@ -58,9 +58,11 @@ const Game = ({ game }) => {
     //   toast.error(`loading error : ${err}`);
     }
   }
-  function addTag(content) {
+  function addRemoveTag(content) {
     if (!formTags.current.value.includes(content)) {
       formTags.current.value = `${formTags.current.value} ${content}`;
+    } else {
+      formTags.current.value = formTags.current.value.replace(content, '').trim();
     }
   }
 
@@ -122,7 +124,9 @@ const Game = ({ game }) => {
               Tags:
               <input ref={formTags} defaultValue={current.tags} />
             </label>
-            <button type="button" onClick={() => addTag('to-download')}>to-download</button>
+            <button type="button" onClick={() => addRemoveTag('to-download')} className="tagBtn">to-download</button>
+            <button type="button" onClick={() => addRemoveTag('to-install')} className="tagBtn">to-install</button>
+            <button type="button" onClick={() => addRemoveTag('pink-paw')} className="tagBtn">pink-paw</button>
             <label htmlFor={formThoughts}>
               Thoughts:
               <textarea ref={formThoughts} defaultValue={current.thoughts} />
