@@ -29,27 +29,50 @@ class ParserController extends Controller
         $source = $request->input('source');
         $parser->parse($source);
         $games = [];
-        for ($i = 0; $i < count($parser->articles); $i++){
+        for ($i = 0; $i < count($parser->articles); $i++) {
             $found = $parser->getInfo($i);
-            if($found){
+            if ($found) {
                 Log::info('request source: ' . json_encode($found->title));
                 $games[] = $found;
             }
         }
 
-        foreach ($games as $parsed){
-            $game = new Game;
-            $game->fg_id = $parsed->fg_id;
-            $game->title = $parsed->title;
-            $game->genre = $parsed->genre;
-            $game->size = $parsed->size;
-            $game->size_calculated = FgParser::convertSizeString($parsed->size);
-            $game->image = $parsed->image;
-            $game->fg_url = $parsed->fg_url;
-            $time = strtotime($parsed->fg_article_date);
-            $game->fg_article_date = date('Y-m-d',$time);
+        foreach ($games as $parsed) {
+            $game = Game::where('fg_url', $parsed->fg_url)->first();
 
-            $game->save();
+            if (is_null($game)) {
+                Log::info('Does not exist ' . $parsed->title);
+                $game = new Game;
+                $game->fg_id = $parsed->fg_id;
+                $game->title = $parsed->title;
+                $game->genre = $parsed->genre;
+                $game->size = $parsed->size;
+                $game->size_calculated = FgParser::convertSizeString($parsed->size);
+                $game->image = $parsed->image;
+                $game->fg_url = $parsed->fg_url;
+                $time = strtotime($parsed->fg_article_date);
+                $game->fg_article_date = date('Y-m-d', $time);
+
+                $game->save();
+            } else {
+                Log::info('Updating Existing ' . $parsed->title);
+                $game->fg_id = $parsed->fg_id;
+                $game->title = $parsed->title;
+                $game->genre = $parsed->genre;
+                $game->size = $parsed->size;
+                $game->size_calculated = FgParser::convertSizeString($parsed->size);
+                $game->image = $parsed->image;
+                $parsed_article_time = strtotime($parsed->fg_article_date);
+                $original_time = strtotime($game->fg_article_date);
+                $game->fg_article_date = date('Y-m-d', $parsed_article_time);
+
+                if ($parsed_article_time > $original_time) {
+                    Log::info('Saved');
+                    $game->save();
+                }else{
+                    Log::info('Not Saved ' . $game->fg_article_date);
+                }
+            }
         }
 
         return [
