@@ -58,10 +58,15 @@ const Game = ({ game }) => {
     //   toast.error(`loading error : ${err}`);
     }
   }
+  function addTag(content) {
+    if (!formTags.current.value.includes(content)) {
+      formTags.current.value = `${formTags.current.value} ${content}`;
+    }
+  }
 
   return (
     <section key={current.id} className="game-list-row">
-      <img src={current.image} alt={current.title} className="game-image" />
+      <img src={current.image} alt="game poster" className="game-image" />
       <div>
         <button
           onClick={() => setIsEditing(!isEditing)}
@@ -73,9 +78,11 @@ const Game = ({ game }) => {
         <button type="button" onClick={() => externalLink(current.fg_url)}>
           fg link
         </button>
-        <div>
+        <span>
           fg id:
           {current.fg_id}
+        </span>
+        <div>
           , genre:
           {current.genre}
           ,
@@ -115,7 +122,7 @@ const Game = ({ game }) => {
               Tags:
               <input ref={formTags} defaultValue={current.tags} />
             </label>
-
+            <button type="button" onClick={() => addTag('to-download')}>to-download</button>
             <label htmlFor={formThoughts}>
               Thoughts:
               <textarea ref={formThoughts} defaultValue={current.thoughts} />
