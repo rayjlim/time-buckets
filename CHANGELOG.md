@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/rayjlim/game-collection/compare/v1.1.0...v1.2.0) (2023-03-24)
+
+
+### Features
+
+* [#10](https://github.com/rayjlim/game-collection/issues/10) editable game ([cbed8ef](https://github.com/rayjlim/game-collection/commit/cbed8eff725046c27aa12039448f9f7bb00438c5))
+* visual highlight when large size ([d27f048](https://github.com/rayjlim/game-collection/commit/d27f0481631073cb9e6df554ce489f0ae524c719))
+
+
+### Bug Fixes
+
+* change order by date desc ([67eab19](https://github.com/rayjlim/game-collection/commit/67eab1946453d260bd34c98f8eb873110f2680ef))
+* css and layoug updates ([974494c](https://github.com/rayjlim/game-collection/commit/974494c6b37979159b77d77aabc21ef8051a0b21))
+* default for editable field and update current value ([67eb88c](https://github.com/rayjlim/game-collection/commit/67eb88cc265617801222f3fe6bab0b819f8dcd27))
+* refactor to paginationbar component ([01dd5df](https://github.com/rayjlim/game-collection/commit/01dd5dfe8ec46ad6436cbeed6abc76f2e7b428fc))
+* refs not checking proper value ([71cb380](https://github.com/rayjlim/game-collection/commit/71cb3809d77581e1bb6191fbc431356fc8288424))
+
 ## 1.1.0 (2023-03-23)
 
 
