@@ -32,7 +32,7 @@ class ParserController extends Controller
         for ($i = 0; $i < count($parser->articles); $i++) {
             $found = $parser->getInfo($i);
             if ($found) {
-                Log::info('request source: ' . json_encode($found->title));
+                Log::info('game: ' . json_encode($found->title));
                 $games[] = $found;
             }
         }
@@ -41,7 +41,7 @@ class ParserController extends Controller
             $game = Game::where('fg_url', $parsed->fg_url)->first();
 
             if (is_null($game)) {
-                Log::info('Does not exist ' . $parsed->title);
+                Log::info('NEW GAME ' . $parsed->title);
                 $game = new Game;
                 $game->fg_id = $parsed->fg_id;
                 $game->title = $parsed->title;
@@ -68,7 +68,7 @@ class ParserController extends Controller
                 $game->fg_article_date = date('Y-m-d', $parsed_article_time);
 
                 if ($parsed_article_time > $original_time) {
-                    Log::info('Saved');
+                    Log::info('====------Saved-----=====');
                     $game->save();
                 }else{
                     Log::info('Not Saved ' . $game->fg_article_date);
