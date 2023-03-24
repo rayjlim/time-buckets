@@ -63,7 +63,14 @@ const GamesListPage = () => {
       } else {
         const data = await response.json();
         console.log('data :', data);
-        setGames(data.data);
+        const localGames = data.data.map(x => {
+          const newVal = { ...x };
+          if (x.platform === null) {
+            newVal.platform = 1;
+          }
+          return newVal;
+        });
+        setGames(localGames);
         setPageMeta(data);
       }
     } catch (err) {
