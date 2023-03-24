@@ -101,14 +101,18 @@ class GameController extends Controller
      * @param  \App\Models\Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Game $game)
+    public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'body' => 'required',
-        ]);
+        $formData = json_decode($request->getContent());
+        $game = Game::find($id);
+        $game->priority = $formData->priority;
+        $game->platform = $formData->platform;
+        $game->status = $formData->status;
+        $game->graphic_style = $formData->graphic_style;
+        $game->tags = $formData->tags;
+        $game->thoughts = $formData->thoughts;
 
-        $game->update($request->all());
+        $game->update();
 
         return [
             "status" => 1,
