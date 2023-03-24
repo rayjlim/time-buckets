@@ -132,6 +132,7 @@ const GamesListPage = () => {
       <div>
         Search Title:
         <input type="text" ref={formSearchTitle} />
+        <button type="button" onClick={() => loadGames()}>Search</button>
         Size Min:
         <input type="text" ref={formSizeMin} size="5" />
         Size Max:
