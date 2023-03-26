@@ -123,26 +123,26 @@ const Game = ({ game }) => {
         </div>
         {isEditing ? (
           <>
-            <label htmlFor={formPriority}>
+            <label htmlFor="formPriority">
               Priority:
-              <input name="myInput" ref={formPriority} defaultValue={current.priority} />
+              <input ref={formPriority} defaultValue={current.priority} />
             </label>
-            <label htmlFor={formPlatform}>
+            <label htmlFor="formPlatform">
               Platform:
               <input ref={formPlatform} defaultValue={current.platform} />
             </label>
 
-            <label htmlFor={formStatus}>
+            <label htmlFor="formStatus">
               Status:
               <input ref={formStatus} defaultValue={current.status} />
             </label>
 
-            <label htmlFor={formGraphicStyle}>
+            <label htmlFor="formGraphicStyle">
               Graphic Style:
               <input ref={formGraphicStyle} defaultValue={current.graphic_style} />
             </label>
 
-            <label htmlFor={formTags}>
+            <label htmlFor="formTags">
               Tags:
               <input ref={formTags} defaultValue={current.tags} />
               { tags.map(tag => (
@@ -151,7 +151,7 @@ const Game = ({ game }) => {
                 </button>
               ))}
             </label>
-            <label htmlFor={formThoughts} className="notesField">
+            <label htmlFor="formThoughts" className="notesField">
               Notes:
               <a href="#a" title="progression types: level (Geometry Wars), storyline: Pine, Lightbringer, In Nightmare, Tech-tree (Craft the world, Old World, Patron)">I</a>
               <textarea ref={formThoughts} defaultValue={current.thoughts} />
@@ -165,7 +165,11 @@ const Game = ({ game }) => {
           <div className="manual">
             <span>
               Priority:
-              {current.priority}
+              {current.priority !== -1 && (
+                <span>
+                  {current.priority}
+                </span>
+              )}
             </span>
             <span>
               Platform:

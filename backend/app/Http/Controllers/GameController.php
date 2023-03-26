@@ -30,10 +30,14 @@ class GameController extends Controller
             ? $sizeMaxParam
             : 1000;
         $orderByParam = $request->input('order_by');
+        $priorityOperand = '!=';
+        $priority = '-2';
         switch($orderByParam){
             case 'priority':
                 $orderByField = 'priority';
                 $orderByValue = 'asc';
+                $priorityOperand = '!=';
+                $priority = '-1';
                 break;
             case 'updated-at-asc':
                 $orderByField = 'updated_at';
@@ -47,6 +51,7 @@ class GameController extends Controller
         $games = Game::where('title', 'like', '%'.$searchTitle.'%')
             ->where('size_calculated', '>', $sizeMin)
             ->where('size_calculated', '<', $sizeMax)
+            ->where('priority', $priorityOperand, $priority)
             ->orderBy($orderByField, $orderByValue)
             ->paginate($pageSize);
 
