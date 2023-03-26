@@ -43,7 +43,7 @@ CREATE TABLE `gc_games` (
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `graphic_style` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `replayability` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `priority` int(4) DEFAULT NULL,
+  `priority` int(4) DEFAULT -1,
   `tags` text COLLATE utf8mb4_unicode_ci,
   `fg_article_date` date DEFAULT NULL,
   `fg_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
