@@ -29,11 +29,25 @@ class GameController extends Controller
         $sizeMax = $sizeMaxParam && is_numeric($sizeMaxParam)
             ? $sizeMaxParam
             : 1000;
+        $orderByParam = $request->input('order_by');
+        switch($orderByParam){
+            case 'priority':
+                $orderByField = 'priority';
+                $orderByValue = 'asc';
+                break;
+            case 'updated-at-asc':
+                $orderByField = 'updated_at';
+                $orderByValue = 'ASC';
+                break;
+            default:
+                $orderByField = 'updated_at';
+                $orderByValue = 'desc';
+        }
 
         $games = Game::where('title', 'like', '%'.$searchTitle.'%')
             ->where('size_calculated', '>', $sizeMin)
             ->where('size_calculated', '<', $sizeMax)
-            ->orderBy('updated_at', 'desc')
+            ->orderBy($orderByField, $orderByValue)
             ->paginate($pageSize);
 
         return $games;
