@@ -1,8 +1,10 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { parse, format } from 'date-fns';
+import { ToastContainer, toast } from 'react-toastify';
 import { REST_ENDPOINT } from '../constants';
 
+import 'react-toastify/dist/ReactToastify.css';
 import './Game.css';
 
 const tags = ['to-download', 'to-install', 'installed', 'pink-paw', 'tried', 'to-review', 'skip', 'dl-high'];
@@ -23,6 +25,10 @@ const Game = ({ game }) => {
 
   async function saveGame() {
     console.log('save game');
+    if (formPriority.current.value === '') {
+      toast.error('Missing Priority value');
+      return;
+    }
     const endpoint = `${REST_ENDPOINT}/api/games/${game.id}`;
     const config = {
       method: 'POST',
@@ -57,7 +63,7 @@ const Game = ({ game }) => {
       }
     } catch (err) {
       console.log(`Error: ${err}`);
-    //   toast.error(`loading error : ${err}`);
+      toast.error(`loading error : ${err}`);
     }
   }
   function addRemoveTag(content) {
@@ -76,10 +82,11 @@ const Game = ({ game }) => {
       mainClassName = `${mainClassName} medium-size`;
       break;
     default:
-      console.log(`no extra class ${current.size_calculated}`);
+      console.log('');
   }
   return (
     <section key={current.id} className={mainClassName}>
+      <ToastContainer />
       <img src={current.image} alt="game poster" className="game-image" />
       <div style={{ margin: '.2rem' }}>
         <button
