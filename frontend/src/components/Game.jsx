@@ -5,6 +5,8 @@ import { REST_ENDPOINT } from '../constants';
 
 import './Game.css';
 
+const tags = ['to-download', 'to-install', 'installed', 'pink-paw', 'tried', 'to-review', 'skip', 'dl-high'];
+
 const Game = ({ game }) => {
   const formPriority = useRef();
   const formPlatform = useRef();
@@ -65,19 +67,31 @@ const Game = ({ game }) => {
       formTags.current.value = formTags.current.value.replace(content, '').trim();
     }
   }
-
+  let mainClassName = 'game-list-row';
+  switch (true) {
+    case current.size_calculated > 20:
+      mainClassName = `${mainClassName} large-size`;
+      break;
+    case current.size_calculated > 10:
+      mainClassName = `${mainClassName} medium-size`;
+      break;
+    default:
+      console.log(`no extra class ${current.size_calculated}`);
+  }
   return (
-    <section key={current.id} className="game-list-row">
+    <section key={current.id} className={mainClassName}>
       <img src={current.image} alt="game poster" className="game-image" />
-      <div>
+      <div style={{ margin: '.2rem' }}>
         <button
           onClick={() => setIsEditing(!isEditing)}
           className="plainLink"
           type="button"
+          style={{ margin: '0 .2rem' }}
         >
-          {current.title}
+          Edit
         </button>
-        <button type="button" onClick={() => externalLink(current.fg_url)}>
+        {current.title}
+        <button type="button" onClick={() => externalLink(current.fg_url)} style={{ margin: '0 .2rem' }}>
           fg link
         </button>
         <span>
@@ -85,9 +99,10 @@ const Game = ({ game }) => {
           {current.fg_id}
         </span>
         <div>
-          , genre:
-          {current.genre}
-          ,
+          <span>
+            genre:
+            {current.genre}
+          </span>
           <span className={current.size_calculated > 20 ? 'game-size-large' : ''}>
             size:
             {current.size_calculated}
@@ -123,18 +138,20 @@ const Game = ({ game }) => {
             <label htmlFor={formTags}>
               Tags:
               <input ref={formTags} defaultValue={current.tags} />
+              { tags.map(tag => (
+                <button type="button" onClick={() => addRemoveTag(tag)} className="tagBtn">
+                  {tag}
+                </button>
+              ))}
             </label>
-            <button type="button" onClick={() => addRemoveTag('to-download')} className="tagBtn">to-download</button>
-            <button type="button" onClick={() => addRemoveTag('to-install')} className="tagBtn">to-install</button>
-            <button type="button" onClick={() => addRemoveTag('pink-paw')} className="tagBtn">pink-paw</button>
-            <label htmlFor={formThoughts}>
-              Thoughts:
+            <label htmlFor={formThoughts} className="notesField">
+              Notes:
               <textarea ref={formThoughts} defaultValue={current.thoughts} />
             </label>
             {/* {current.replayability}
             {current.issues}
             {current.summary} */}
-            <button type="button" onClick={() => saveGame()}>Save</button>
+            <button type="button" onClick={() => saveGame()} className="saveBtn">Save</button>
           </>
         ) : (
           <div className="manual">
