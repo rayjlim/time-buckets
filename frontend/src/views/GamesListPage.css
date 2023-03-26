@@ -1,4 +1,6 @@
-
+.searchField * {
+    margin: 0 .5em;
+  }
 .items {
   margin-bottom: 1rem;
 }

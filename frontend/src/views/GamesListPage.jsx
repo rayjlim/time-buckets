@@ -35,6 +35,7 @@ const GamesListPage = () => {
   const formSizeMin = useRef();
   const formSizeMax = useRef();
   const formSearchTitle = useRef();
+  const formOrderBy = useRef();
 
   /** Page Data look up */
   async function loadGames() {
@@ -48,6 +49,9 @@ const GamesListPage = () => {
     }
     if (formSizeMax.current.value !== '') {
       searchFields += `&size_max=${formSizeMax.current.value}`;
+    }
+    if (formOrderBy.current.value !== '') {
+      searchFields += `&order_by=${formOrderBy.current.value}`;
     }
     setIsLoading(true);
     // TODO: if production, then pass mode: 'no-cors', in fetch options
@@ -130,13 +134,27 @@ const GamesListPage = () => {
       <h1>Game List</h1>
       {isLoading && <h2>LOADING</h2>}
       <div>
-        Search Title:
-        <input type="text" ref={formSearchTitle} />
+        <label htmlFor="formSearchTitle" className="searchField">
+          Search Title:
+          <input name="formSearchTitle" type="text" ref={formSearchTitle} />
+        </label>
         <button type="button" onClick={() => loadGames()}>Search</button>
-        Size Min:
-        <input type="text" ref={formSizeMin} size="5" />
-        Size Max:
-        <input type="text" ref={formSizeMax} size="5" />
+        <label htmlFor="formSizeMin" className="searchField">
+          Size Min:
+          <input type="text" ref={formSizeMin} size="5" />
+        </label>
+        <label htmlFor="formSizeMax" className="searchField">
+          Size Max:
+          <input type="text" ref={formSizeMax} size="5" />
+        </label>
+        <label htmlFor="formSizeMax" className="searchField">
+          Order By:
+          <select ref={formOrderBy}>
+            <option value="">Updated At</option>
+            <option value="updated-at-asc">Updated At -  Asc</option>
+            <option value="priority">Priority</option>
+          </select>
+        </label>
       </div>
       <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
 
