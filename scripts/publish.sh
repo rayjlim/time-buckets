@@ -52,16 +52,12 @@ else
 fi
 
 echo "start frontend build"
-pwd
-if [ -z "$NOFRONTENDBUILD" ]; then
 
+if [ -z "$NOFRONTENDBUILD" ]; then
   cd ./frontend
-  mv .env .env.local
-  cp .env.production .env
-  read -t 1 -N 1 -p "pause"
+  pwd
   npm run build
   buildresult=$?
-  mv .env.local .env
   if [ $buildresult != 0 ]; then
     echo "Frontend Build Fail"
     exit 1
@@ -71,6 +67,8 @@ if [ -z "$NOFRONTENDBUILD" ]; then
 fi
 
 echo "start upload"
+
+exit 0
 
 # setup passwordless ssh
 if [ ! -z $RESETSSH ]; then
