@@ -153,6 +153,7 @@ const Game = ({ game }) => {
             </label>
             <label htmlFor={formThoughts} className="notesField">
               Notes:
+              <a href="#a" title="progression types: level (Geometry Wars), storyline: Pine, Lightbringer, In Nightmare, Tech-tree (Craft the world, Old World, Patron)">I</a>
               <textarea ref={formThoughts} defaultValue={current.thoughts} />
             </label>
             {/* {current.replayability}
@@ -186,6 +187,7 @@ const Game = ({ game }) => {
               Thoughts:
               {current.thoughts}
             </span>
+
             {/* {current.replayability}
           {current.issues}
           {current.summary} */}
