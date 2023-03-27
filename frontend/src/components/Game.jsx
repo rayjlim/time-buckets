@@ -85,26 +85,38 @@ const Game = ({ game }) => {
       console.log('');
   }
   return (
-    <section key={current.id} className={mainClassName}>
+    <section
+      key={current.id}
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        border: '1px solid lightgrey',
+        alignItems: 'center',
+      }}
+    >
       <ToastContainer />
-      <img src={current.image} alt="game poster" className="game-image" />
-      <div style={{ margin: '.2rem' }}>
-        <button
-          onClick={() => setIsEditing(!isEditing)}
-          className="plainLink"
-          type="button"
-          style={{ margin: '0 .2rem' }}
-        >
-          Edit
-        </button>
-        {current.title}
-        <button type="button" onClick={() => externalLink(current.fg_url)} style={{ margin: '0 .2rem' }}>
-          fg link
-        </button>
-        <span>
-          fg id:
-          {current.fg_id}
-        </span>
+      <img
+        src={current.image}
+        alt="game poster"
+        className="game-image"
+        onClick={() => externalLink(current.fg_url)}
+        aria-hidden="true"
+      />
+      <div className={mainClassName}>
+        <div className="manual" style={{ margin: '.2rem' }}>
+          <button
+            onClick={() => setIsEditing(!isEditing)}
+            type="button"
+            style={{ margin: '0 .2rem' }}
+          >
+            Edit
+          </button>
+          {current.title}
+          <span>
+            fg id:
+            {current.fg_id}
+          </span>
+        </div>
         <div>
           <span>
             genre:
@@ -114,7 +126,7 @@ const Game = ({ game }) => {
             size:
             {current.size_calculated}
           </span>
-          <span> Article date: (</span>
+          <span>Article date: (</span>
           {format(
             parse(current.fg_article_date, 'yyyy-MM-dd', new Date()),
             'MM-yyyy',
@@ -122,7 +134,7 @@ const Game = ({ game }) => {
           <span>)</span>
         </div>
         {isEditing ? (
-          <>
+          <div className="manual">
             <label htmlFor="formPriority">
               Priority:
               <input ref={formPriority} defaultValue={current.priority} />
@@ -160,7 +172,7 @@ const Game = ({ game }) => {
             {current.issues}
             {current.summary} */}
             <button type="button" onClick={() => saveGame()} className="saveBtn">Save</button>
-          </>
+          </div>
         ) : (
           <div className="manual">
             <span>

@@ -1,13 +1,14 @@
-
 .game-list-row {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background-color: white;
     padding: 0.5rem;
     margin: 0.25rem;
     border: 1px solid rgb(196, 195, 195);
     text-align: left;
+    width: 100%;
 }
+
 .large-size {
     border: 2px solid red;
 }
@@ -18,11 +19,10 @@
 .manual {
     display: flex;
     flex-direction: row;
-
     flex-wrap: wrap;
 }
 
-.manual > span{
+.manual > span {
     margin: 0 0.5rem;
 }
 
