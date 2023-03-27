@@ -26,6 +26,8 @@ function debounce(func, wait, immediate) {
   };
 }
 
+const searchTtags = ['<untagged>', 'to-download', 'to-install', 'installed', 'pink-paw', 'tried', 'to-review', 'skip', 'dl-high'];
+
 const GamesListPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [gameId, setGameId] = useState(null);
@@ -35,6 +37,8 @@ const GamesListPage = () => {
   const formSizeMin = useRef();
   const formSizeMax = useRef();
   const formSearchTitle = useRef();
+  const formSearchTags = useRef();
+  const formTagChoices = useRef();
   const formOrderBy = useRef();
 
   /** Page Data look up */
@@ -43,6 +47,9 @@ const GamesListPage = () => {
     let searchFields = '';
     if (formSearchTitle.current.value !== '') {
       searchFields += `&search_title=${formSearchTitle.current.value}`;
+    }
+    if (formSearchTags.current.value !== '') {
+      searchFields += `&tags=${formSearchTags.current.value}`;
     }
     if (formSizeMin.current.value !== '') {
       searchFields += `&size_min=${formSizeMin.current.value}`;
@@ -139,6 +146,21 @@ const GamesListPage = () => {
           <input name="formSearchTitle" type="text" ref={formSearchTitle} />
         </label>
         <button type="button" onClick={() => loadGames()}>Search</button>
+        <label htmlFor="formSearchTags" className="searchField">
+          Tag:
+          <input name="formSearchTags" type="text" ref={formSearchTags} />
+          <select
+            ref={formTagChoices}
+            onChange={() => {
+              console.log(formTagChoices.current.value);
+              formSearchTags.current.value = formTagChoices.current.value;
+            }}
+          >
+            { searchTtags.map(tag => (
+              <option value={tag}>{tag}</option>
+            ))}
+          </select>
+        </label>
         <label htmlFor="formSizeMin" className="searchField">
           Size Min:
           <input type="text" ref={formSizeMin} size="5" />

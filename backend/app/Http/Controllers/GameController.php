@@ -29,6 +29,10 @@ class GameController extends Controller
         $sizeMax = $sizeMaxParam && is_numeric($sizeMaxParam)
             ? $sizeMaxParam
             : 1000;
+        $searchTags = $request->input('tags') == "<untagged>"
+            ? ""
+            : '%'.$request->input('tags').'%';
+
         $orderByParam = $request->input('order_by');
         $priorityOperand = '!=';
         $priority = '-2';
@@ -49,6 +53,7 @@ class GameController extends Controller
         }
 
         $games = Game::where('title', 'like', '%'.$searchTitle.'%')
+            ->where('tags', 'like', $searchTags)
             ->where('size_calculated', '>', $sizeMin)
             ->where('size_calculated', '<', $sizeMax)
             ->where('priority', $priorityOperand, $priority)
