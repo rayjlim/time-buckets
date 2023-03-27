@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/rayjlim/game-collection/compare/v1.2.0...v1.3.0) (2023-03-26)
+
+
+### Features
+
+* [#16](https://github.com/rayjlim/game-collection/issues/16) order by options ([b94a026](https://github.com/rayjlim/game-collection/commit/b94a0260371e2f9b287fc43a219a3289bf1de1e6))
+* add/remove tags; more tags added ([fc437c1](https://github.com/rayjlim/game-collection/commit/fc437c127e4d5c1c503a1ddeb1c7b0b6cde07767))
+* priority defaults to -1 ([549fcb5](https://github.com/rayjlim/game-collection/commit/549fcb5bac0856697b08d0b35fc402a9c2221737))
+
+
+### Bug Fixes
+
+* [#16](https://github.com/rayjlim/game-collection/issues/16) backend for switching order by ([72468c0](https://github.com/rayjlim/game-collection/commit/72468c09736e79b1c477f653ecdc5601538f02d0))
+* [#19](https://github.com/rayjlim/game-collection/issues/19) dup check on insert ([2fbf6a1](https://github.com/rayjlim/game-collection/commit/2fbf6a19c372d4a3f820073a38d0e59516eb2622))
+* [#24](https://github.com/rayjlim/game-collection/issues/24) validate priority is set ([c9381e6](https://github.com/rayjlim/game-collection/commit/c9381e6be554d9c64eb8dc0a697450af9b1deb42))
+* add popup note for progression types ([0eff774](https://github.com/rayjlim/game-collection/commit/0eff774a20d3b9c00383890f6672af1690a6bc28))
+* button for to-download tag ([6e5b3cf](https://github.com/rayjlim/game-collection/commit/6e5b3cf8d6fcedb8a845ff0b07d37fb3baaa2668))
+* default platform value ([6b4297f](https://github.com/rayjlim/game-collection/commit/6b4297f7d606fb54d8a4ec53d26e9209af26fadf))
+* frontend build .env var definition ([8dd953d](https://github.com/rayjlim/game-collection/commit/8dd953d0694d86bf774a00502b4ef76912b6de5c))
+* parse all with repack in category ([c072a13](https://github.com/rayjlim/game-collection/commit/c072a1384977181ec836079df0d9db57b620fea3))
+* tags to array; color code med/large, colorize save btn, ([5e3322c](https://github.com/rayjlim/game-collection/commit/5e3322c90737fb768054f699930dc57cdfa56a7c))
+
 ## [1.2.0](https://github.com/rayjlim/game-collection/compare/v1.1.0...v1.2.0) (2023-03-24)
 
 
