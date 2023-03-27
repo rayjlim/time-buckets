@@ -68,8 +68,6 @@ fi
 
 echo "start upload"
 
-exit 0
-
 # setup passwordless ssh
 if [ ! -z $RESETSSH ]; then
     echo "Reset ssh key"

@@ -156,6 +156,7 @@ const GamesListPage = () => {
               formSearchTags.current.value = formTagChoices.current.value;
             }}
           >
+            <option value="">-</option>
             { searchTtags.map(tag => (
               <option value={tag}>{tag}</option>
             ))}

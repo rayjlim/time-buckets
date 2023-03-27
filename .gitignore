@@ -18,3 +18,4 @@ frontend/.env.production
 frontend/.htaccess.production
 frontend-movie/*
 frontend/.env.development
+lumen-*.log
