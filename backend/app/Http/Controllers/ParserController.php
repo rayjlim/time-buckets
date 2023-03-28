@@ -53,6 +53,7 @@ class ParserController extends Controller
                 $time = strtotime($parsed->fg_article_date);
                 $game->fg_article_date = date('Y-m-d', $time);
                 $game->platform = 1;
+                $game->tags = '';
 
                 $game->save();
             } else {
