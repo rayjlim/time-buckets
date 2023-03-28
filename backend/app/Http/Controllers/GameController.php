@@ -54,8 +54,8 @@ class GameController extends Controller
 
         $games = Game::where('title', 'like', '%'.$searchTitle.'%')
             ->where('tags', 'like', $searchTags)
-            ->where('size_calculated', '>', $sizeMin)
-            ->where('size_calculated', '<', $sizeMax)
+            ->where('size_calculated', '>=', $sizeMin)
+            ->where('size_calculated', '<=', $sizeMax)
             ->where('priority', $priorityOperand, $priority)
             ->orderBy($orderByField, $orderByValue)
             ->paginate($pageSize);

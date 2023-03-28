@@ -106,7 +106,7 @@ class FgParser
         $output = explode('o', $output)[0];
 
         $output = trim($output);
-        return is_numeric($output) ? $output * $multiplier : -1;
+        return is_numeric($output) ? $output * $multiplier : 0;
     }
 
     private function byClass(\DOMElement $a,$b,$c){
