@@ -1,5 +1,5 @@
 (() => {
-  const target = 'https://lilplaytime.com/games-collection-api/public/api/parser/';
+  const target = 'https://qty.pot.mybluehost.me/game-collection-api/public/api/parser/';
   const html = document.documentElement.innerHTML;
 
   function nextUrl(url) {
@@ -61,6 +61,8 @@
     setTimeout(() => {
       window.location = nextPage;
     }, 2000);
+  } else {
+    alert('captured');
   }
 })();
 
