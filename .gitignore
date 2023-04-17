@@ -8,14 +8,9 @@ scripts/.env
 
 backend/.env
 backend/.env.production
-backend/.htaccess.production
-backend/public/.htaccess.production
-backend-old/*
 backend/node_modules/*
 
 frontend/.env
 frontend/.env.production
 frontend/.htaccess.production
-frontend-movie/*
-frontend/.env.development
 lumen-*.log
