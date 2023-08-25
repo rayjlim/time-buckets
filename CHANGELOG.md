@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/rayjlim/game-collection/compare/v1.3.0...v1.4.0) (2023-08-25)
+
+
+### Features
+
+* [#23](https://github.com/rayjlim/game-collection/issues/23) quick filter of tags ([5090407](https://github.com/rayjlim/game-collection/commit/50904079783efe036521d7cd78b4b7c849e8ccbb))
+
+
+### Bug Fixes
+
+* .htaccess updates ([05575c8](https://github.com/rayjlim/game-collection/commit/05575c8cfa6a30aaa2f54376b739fd27c785180c))
+* add default blank option ([eef3aa7](https://github.com/rayjlim/game-collection/commit/eef3aa76dba5746e6bf4615a9983bfdc866cf21a))
+* change link to be on image, css/layout clean up ([af9e229](https://github.com/rayjlim/game-collection/commit/af9e2296a1634ce213ac22d15954e34dd4a7de58))
+* move icons to assets ([bf281a2](https://github.com/rayjlim/game-collection/commit/bf281a2cca62cf0240144035ceb099efeb3d1a8d))
+* size calc baseline is 0; ([e412484](https://github.com/rayjlim/game-collection/commit/e412484fd2d2a31074906b72bcca1b52268e69f1))
+* tags default is blank (not null) ([24d1af4](https://github.com/rayjlim/game-collection/commit/24d1af4bb92ecd575cedac58e6f6ad71162a81d3))
+* update capture bookmarklet ([4c88527](https://github.com/rayjlim/game-collection/commit/4c885276e8f5b30b1d78e6c352f76b6238b9b5b3))
+* update frontenv .env ([f0c3ee3](https://github.com/rayjlim/game-collection/commit/f0c3ee3878166712242201bfeb008703416432c2))
+
 ## [1.3.0](https://github.com/rayjlim/game-collection/compare/v1.2.0...v1.3.0) (2023-03-26)
 
 
