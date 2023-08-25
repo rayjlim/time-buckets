@@ -12,7 +12,7 @@ class GameController extends Controller
      * Display a listing of the resource.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Illuminate\Pagination\LengthAwarePaginator\ response status data
      */
     public function index(Request $request)
     {
@@ -39,7 +39,7 @@ class GameController extends Controller
         switch($orderByParam){
             case 'priority':
                 $orderByField = 'priority';
-                $orderByValue = 'asc';
+                $orderByValue = 'ASC';
                 $priorityOperand = '!=';
                 $priority = '-1';
                 break;
@@ -49,11 +49,11 @@ class GameController extends Controller
                 break;
             default:
                 $orderByField = 'updated_at';
-                $orderByValue = 'desc';
+                $orderByValue = 'DESC';
         }
 
-        $games = Game::where('title', 'like', '%'.$searchTitle.'%')
-            ->where('tags', 'like', $searchTags)
+        $games = Game::where('title', 'LIKE', '%' . $searchTitle . '%')
+            ->where('tags', 'LIKE', $searchTags)
             ->where('size_calculated', '>=', $sizeMin)
             ->where('size_calculated', '<=', $sizeMax)
             ->where('priority', $priorityOperand, $priority)
@@ -77,7 +77,7 @@ class GameController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return array response status data
      */
     public function store(Request $request)
     {
@@ -97,7 +97,7 @@ class GameController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Game  $game
-     * @return \Illuminate\Http\Response
+     * @return array response status data
      */
     public function show(Game $game)
     {
@@ -122,10 +122,10 @@ class GameController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Game  $game
-     * @return \Illuminate\Http\Response
+     * @param  int $id Id of Game
+     * @return array response status data
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): array
     {
         $formData = json_decode($request->getContent());
         $game = Game::find($id);
@@ -149,9 +149,9 @@ class GameController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Game  $game
-     * @return \Illuminate\Http\Response
+     * @return array response status data
      */
-    public function destroy(Game $game)
+    public function destroy(Game $game): array
     {
         $game->delete();
         return [
@@ -161,7 +161,14 @@ class GameController extends Controller
         ];
     }
 
-    public function removeDuplicates(Request $request){
+    /**
+     * removeDuplicates
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array response status data
+     */
+    public function removeDuplicates(Request $request): array
+    {
         $affected = DB::connection('mysql')->select('DELETE t1 FROM gc_games t1
         INNER JOIN gc_games t2
         WHERE
