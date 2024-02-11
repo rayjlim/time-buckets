@@ -7,6 +7,7 @@ import PaginationBar from '../components/PaginationBar';
 
 import './GamesListPage.css';
 import 'react-toastify/dist/ReactToastify.css';
+import pkg from '../../package.json';
 
 const DEBOUNCE_TIME = 300;
 
@@ -137,9 +138,7 @@ const GamesListPage = () => {
 
   return (
     <>
-      <h1>
-        Game List
-      </h1>
+      <h1>Game List</h1>
       {isLoading && <h2>LOADING</h2>}
       <div>
         <label htmlFor="formSearchTitle" className="searchField">
@@ -198,6 +197,7 @@ const GamesListPage = () => {
       <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
 
       <button type="button" onClick={() => removeDuplicates()}>Remove Duplicates</button>
+      <div>{`version ${pkg.version}`}</div>
     </>
   );
 };
