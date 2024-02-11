@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import { REST_ENDPOINT } from '../constants';
 import GameListItems from '../components/GameListItems';
@@ -137,7 +137,6 @@ const GamesListPage = () => {
 
   return (
     <>
-      <ToastContainer />
       <h1>Game List</h1>
       {isLoading && <h2>LOADING</h2>}
       <div>
