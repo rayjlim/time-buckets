@@ -138,7 +138,7 @@ const GamesListPage = () => {
 
   return (
     <>
-      <h1>Game List</h1>
+      <h1>Game Collection</h1>
       {isLoading && <h2>LOADING</h2>}
       <div>
         <label htmlFor="formSearchTitle" className="searchField">

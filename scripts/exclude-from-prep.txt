@@ -18,3 +18,7 @@ node_modules/
 artisan
 package.json
 package-lock.json
+
+.git/
+/Tests/
+/tests/
