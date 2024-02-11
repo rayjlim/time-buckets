@@ -37,6 +37,10 @@ class GameController extends Controller
         $priorityOperand = '!=';
         $priority = '-2';
         switch($orderByParam){
+            case 'title':
+                $orderByField = 'title';
+                $orderByValue = 'ASC';
+                break;
             case 'priority':
                 $orderByField = 'priority';
                 $orderByValue = 'ASC';

@@ -176,6 +176,7 @@ const GamesListPage = () => {
             <option value="">Updated At</option>
             <option value="updated-at-asc">Updated At -  Asc</option>
             <option value="priority">Priority</option>
+            <option value="title">Title</option>
           </select>
         </label>
       </div>
