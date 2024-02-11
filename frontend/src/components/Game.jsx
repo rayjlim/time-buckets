@@ -135,7 +135,17 @@ const Game = ({ game }) => {
         </div>
         {isEditing ? (
           <div className="manual">
-            <label htmlFor="formPriority">
+            <label
+              htmlFor="formPriority"
+              title="Priorities description
+-1
+- 1 - 20  Top tier to play
+- 50 - 80  Next to install
+- 80 - 100  Next to download + install
+- 200  finished, installed, uninstalled,
+- 300  Errors / Issues
+- 400  There's a newer version"
+            >
               Priority:
               <input ref={formPriority} defaultValue={current.priority} />
             </label>
@@ -175,7 +185,15 @@ const Game = ({ game }) => {
           </div>
         ) : (
           <div className="manual">
-            <span>
+            <span title="Priorities description
+-1
+- 1 - 20  Top tier to play
+- 50 - 80  Next to install
+- 80 - 100  Next to download + install
+- 200  finished, installed, uninstalled,
+- 300  Errors / Issues
+- 400  There's a newer version"
+            >
               Priority:
               {current.priority !== -1 && (
                 <span>
