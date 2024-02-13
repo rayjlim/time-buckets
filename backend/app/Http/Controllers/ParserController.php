@@ -164,18 +164,18 @@ class ParserController extends Controller
                     } else {
                         Log::info('Updating Missing ' . $fieldName . count($titleMatches));
                         $titleMatches[0]->playnite_title = $fieldName;
-                        $titleMatches[0]->playnite_last = $fields[3];
-                        $titleMatches[0]->playnite_added = $fields[4];
-                        $titleMatches[0]->playnite_playtime = $fields[5];
+                        $titleMatches[0]->playnite_last = $fields[$title_index+2];
+                        $titleMatches[0]->playnite_added = $fields[$title_index+3];
+                        $titleMatches[0]->playnite_playtime = $fields[$title_index+4];
 
                         // Log::info('====------Saved-----=====');
                         $titleMatches[0]->save();
                     }
                 } else {
                     Log::info('Updating Existing ' . $fieldName);
-                    $game->playnite_last = $fields[3];
-                    $game->playnite_added = $fields[4];
-                    $game->playnite_playtime = $fields[5];
+                    $game->playnite_last = $fields[$title_index+2];
+                    $game->playnite_added = $fields[$title_index+3];
+                    $game->playnite_playtime = $fields[$title_index+4];
 
                     // Log::info('====------Saved-----=====');
                     $game->save();
@@ -191,15 +191,7 @@ class ParserController extends Controller
 }
 
 
-// If no match,
-//   Then need to query like main title
-//   If find match then update fields
-//   Else
-//     Can not do much; make web app field editable for playnite_title;
 
-// else update
-//   Update fields, including playnite_check
-//    Check priority between 1-50
 
 // Search has playnite_title but check date not updated.
 // For each, remove playnite title, set priority to 200,log the change

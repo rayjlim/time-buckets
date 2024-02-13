@@ -206,8 +206,9 @@ const Game = ({ game }) => {
             </form>
           </div>
         ) : (
-          <div className="manual">
-            <span title="Priorities description
+          <>
+            <div className="manual">
+              <span title="Priorities description
 -1
 - 1 - 20  Top tier to play
 - 50 - 80  Next to install
@@ -215,27 +216,27 @@ const Game = ({ game }) => {
 - 200  finished, installed, uninstalled,
 - 300  Errors / Issues
 - 400  There's a newer version"
-            >
-              Priority:
-              {current.priority !== -1 && (
-                <span>
-                  {current.priority}
-                </span>
-              )}
-            </span>
-            <span>
-              {`Platform: ${current.platform} Status: ${current.status} Graphic style: ${current.graphic_style}`}
-            </span>
-            <span>
-              {`Tags: ${current.tags} Thoughts: ${current.thoughts}`}
-            </span>
-            <div>
-              {`pn: ${current.playnite_title}`}
+              >
+                Priority:
+                {current.priority !== -1 && (
+                  <span>
+                    {current.priority}
+                  </span>
+                )}
+                {`, Platform: ${current.platform} Status: ${current.status} Graphic style: ${current.graphic_style}, `}
+                {`Tags: ${current.tags} Thoughts: ${current.thoughts}`}
+              </span>
             </div>
+            {current.playnite_title !== '' && (
+              <div>
+                {`pn: ${current.playnite_title}`}
+                {current.playnite_last !== '' && `, ${current.playnite_last}, ${current.playnite_added}, ${current.playnite_playtime}`}
+              </div>
+            )}
             {/* {current.replayability}
           {current.issues}
           {current.summary} */}
-          </div>
+          </>
         )}
 
         {/*
