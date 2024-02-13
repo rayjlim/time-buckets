@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use App\Utility\FgParser;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use Log;
 
@@ -139,7 +140,6 @@ class ParserController extends Controller
             $fields = str_getcsv($row);
 
             if (count($fields) > 2) {
-                // Output each field
                 // foreach ($fields as $field) {
                 //     $data = $data. $field . ", "; // Example: output each field followed by a comma
                 // }
@@ -147,7 +147,6 @@ class ParserController extends Controller
                 $fieldName = $fields[$title_index];
                 // $data = $data. "Using ".$fieldName." to search. ";
                 $game = Game::where('playnite_title', $fieldName)->first();
-                // Loop over if has title but last checked not today if has playnite_title, but not in HTML then ask if deleted?
                 if (is_null($game)) {
                     // $data = $data.$fieldName . ' is not found, ';
                     $titleMatches = Game::where('title', 'LIKE', "%{$fieldName}%")->get();
@@ -164,19 +163,18 @@ class ParserController extends Controller
                     } else {
                         Log::info('Updating Missing ' . $fieldName . count($titleMatches));
                         $titleMatches[0]->playnite_title = $fieldName;
-                        $titleMatches[0]->playnite_last = $fields[$title_index+2];
-                        $titleMatches[0]->playnite_added = $fields[$title_index+3];
-                        $titleMatches[0]->playnite_playtime = $fields[$title_index+4];
-
-                        // Log::info('====------Saved-----=====');
+                        $titleMatches[0]->playnite_last = $fields[$title_index + 2];
+                        $titleMatches[0]->playnite_added = $fields[$title_index + 3];
+                        $titleMatches[0]->playnite_playtime = $fields[$title_index + 4];
+                        $titleMatches[0]->playnite_checktime = Carbon::now();
                         $titleMatches[0]->save();
                     }
                 } else {
-                    Log::info('Updating Existing ' . $fieldName);
-                    $game->playnite_last = $fields[$title_index+2];
-                    $game->playnite_added = $fields[$title_index+3];
-                    $game->playnite_playtime = $fields[$title_index+4];
-
+                    // Log::info('Updating Existing ' . $fieldName);
+                    $game->playnite_last = $fields[$title_index + 2];
+                    $game->playnite_added = $fields[$title_index + 3];
+                    $game->playnite_playtime = $fields[$title_index + 4];
+                    $game->playnite_checktime = Carbon::now();
                     // Log::info('====------Saved-----=====');
                     $game->save();
                 }
@@ -184,14 +182,30 @@ class ParserController extends Controller
                 // $data = $data. $field . "\n\n";
             }
         }
+
+        // Search has playnite_title but check date not updated.
+        // For each, remove playnite title, set priority to 200,log the change
+        $scriptTimeAgo = Carbon::now()->subSeconds(5);
+        Log::info('oneMinuteAgo ' . $scriptTimeAgo);
+        $removed = Game::where('playnite_title', 'not LIKE', "")
+            ->where('playnite_checktime', '<=', $scriptTimeAgo)
+            ->get();
+
+        // Loop over if has title but last checked not today if has playnite_title, but not in HTML then ask if deleted?
+        foreach ($removed as $game){
+            $game->playnite_title = '';
+            $game->priority = 201;
+
+            // Log::info('====------Saved-----=====');
+            $game->save();
+            Log::info('Removed from Playnite ' . $game->title);
+        }
+
+
         return [
-            "data" => $unfound
+            "data" => $unfound,
+            "removed" => $removed
+
         ];
     }
 }
-
-
-
-
-// Search has playnite_title but check date not updated.
-// For each, remove playnite title, set priority to 200,log the change
