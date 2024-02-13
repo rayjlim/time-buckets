@@ -139,6 +139,7 @@ class GameController extends Controller
         $game->graphic_style = $formData->graphic_style;
         $game->tags = $formData->tags;
         $game->thoughts = $formData->thoughts;
+        $game->playnite_title = $formData->playnite_title;
 
         $game->update();
 

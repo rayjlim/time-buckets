@@ -7,15 +7,10 @@ import { REST_ENDPOINT } from '../constants';
 import 'react-toastify/dist/ReactToastify.css';
 import './Game.css';
 
-const tags = ['to-download', 'to-install', 'installed', 'pink-paw', 'tried', 'to-review', 'skip', 'dl-high'];
+const tagsSet = ['to-download', 'to-install', 'installed', 'pink-paw', 'tried', 'to-review', 'skip', 'dl-high'];
 
 const Game = ({ game }) => {
-  const formPriority = useRef();
-  const formPlatform = useRef();
-  const formStatus = useRef();
-  const formGraphicStyle = useRef();
-  const formTags = useRef();
-  const formThoughts = useRef();
+  const formRef = useRef();
   const [current, setCurrent] = useState(game);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -23,9 +18,18 @@ const Game = ({ game }) => {
     window.open(url, '_blank');
   }
 
-  async function saveGame() {
+  async function saveGame(event) {
     console.log('save game');
-    if (formPriority.current.value === '') {
+    event.preventDefault();
+    const formData = new FormData(formRef.current);
+    const priority = formData.get('priority');
+    const platform = formData.get('platform');
+    const status = formData.get('status');
+    const graphicStyle = formData.get('graphicStyle');
+    const tags = formData.get('tags');
+    const thoughts = formData.get('thoughts');
+    const playniteTitle = formData.get('playniteTitle');
+    if (priority === '') {
       toast.error('Missing Priority value');
       return;
     }
@@ -33,12 +37,13 @@ const Game = ({ game }) => {
     const config = {
       method: 'POST',
       body: JSON.stringify({
-        priority: formPriority.current.value,
-        platform: formPlatform.current.value,
-        status: formStatus.current.value,
-        graphic_style: formGraphicStyle.current.value,
-        tags: formTags.current.value,
-        thoughts: formThoughts.current.value,
+        priority,
+        platform,
+        status,
+        graphic_style: graphicStyle,
+        tags,
+        thoughts,
+        playnite_title: playniteTitle,
       }),
     };
     try {
@@ -52,12 +57,13 @@ const Game = ({ game }) => {
         console.log('data :', data);
         setCurrent({
           ...current,
-          priority: formPriority.current.value,
-          platform: formPlatform.current.value,
-          status: formStatus.current.value,
-          graphic_style: formGraphicStyle.current.value,
-          tags: formTags.current.value,
-          thoughts: formThoughts.current.value,
+          priority,
+          platform,
+          status,
+          graphic_style: graphicStyle,
+          tags,
+          thoughts,
+          playnite_title: playniteTitle,
         });
         setIsEditing(false);
       }
@@ -66,13 +72,18 @@ const Game = ({ game }) => {
       toast.error(`loading error : ${err}`);
     }
   }
+
   function addRemoveTag(content) {
-    if (!formTags.current.value.includes(content)) {
-      formTags.current.value = `${formTags.current.value} ${content}`;
+    console.log('addRemove', content);
+
+    const tagsInput = formRef.current.querySelector('input[name="tags"]');
+    if (!tagsInput.value.includes(content)) {
+      tagsInput.value = `${tagsInput.value} ${content}`;
     } else {
-      formTags.current.value = formTags.current.value.replace(content, '').trim();
+      tagsInput.value = tagsInput.value.replace(content, '').trim();
     }
   }
+
   let mainClassName = 'game-list-row';
   switch (true) {
     case current.size_calculated > 20:
@@ -84,6 +95,7 @@ const Game = ({ game }) => {
     default:
       console.log('');
   }
+
   return (
     <section
       key={current.id}
@@ -113,31 +125,29 @@ const Game = ({ game }) => {
           </button>
           {current.title}
           <span>
-            fg id:
-            {current.fg_id}
+            {`fg id: ${current.fg_id}`}
           </span>
         </div>
         <div>
           <span>
-            genre:
-            {current.genre}
+            {`Genre: ${current.genre}`}
           </span>
           <span className={current.size_calculated > 20 ? 'game-size-large' : ''}>
-            size:
-            {current.size_calculated}
+            {` Size: ${current.size_calculated}`}
           </span>
-          <span>Article date: (</span>
-          {format(
-            parse(current.fg_article_date, 'yyyy-MM-dd', new Date()),
-            'MM-yyyy',
-          )}
-          <span>)</span>
+          <span>
+            {` Article date: (${format(
+              parse(current.fg_article_date, 'yyyy-MM-dd', new Date()),
+              'MM-yyyy',
+            )})`}
+          </span>
         </div>
         {isEditing ? (
           <div className="manual">
-            <label
-              htmlFor="formPriority"
-              title="Priorities description
+            <form ref={formRef} onSubmit={saveGame}>
+              <label
+                htmlFor="priority"
+                title="Priorities description
 -1
 - 1 - 20  Top tier to play
 - 50 - 80  Next to install
@@ -145,43 +155,55 @@ const Game = ({ game }) => {
 - 200  finished, installed, uninstalled,
 - 300  Errors / Issues
 - 400  There's a newer version"
-            >
-              Priority:
-              <input ref={formPriority} defaultValue={current.priority} />
-            </label>
-            <label htmlFor="formPlatform">
-              Platform:
-              <input ref={formPlatform} defaultValue={current.platform} />
-            </label>
+              >
+                Priority:
+                <input name="priority" defaultValue={current.priority} />
+              </label>
+              <label htmlFor="platform">
+                Platform:
+                <input name="platform" defaultValue={current.platform} />
+              </label>
 
-            <label htmlFor="formStatus">
-              Status:
-              <input ref={formStatus} defaultValue={current.status} />
-            </label>
+              <label htmlFor="status">
+                Status:
+                <input name="status" defaultValue={current.status} />
+              </label>
 
-            <label htmlFor="formGraphicStyle">
-              Graphic Style:
-              <input ref={formGraphicStyle} defaultValue={current.graphic_style} />
-            </label>
+              <label htmlFor="graphicStyle">
+                Graphic Style:
+                <input name="graphicStyle" defaultValue={current.graphic_style} />
+              </label>
 
-            <label htmlFor="formTags">
-              Tags:
-              <input ref={formTags} defaultValue={current.tags} />
-              { tags.map(tag => (
-                <button type="button" onClick={() => addRemoveTag(tag)} className="tagBtn">
-                  {tag}
-                </button>
-              ))}
-            </label>
-            <label htmlFor="formThoughts" className="notesField">
-              Notes:
-              <a href="#a" title="progression types: level (Geometry Wars), storyline: Pine, Lightbringer, In Nightmare, Tech-tree (Craft the world, Old World, Patron)">I</a>
-              <textarea ref={formThoughts} defaultValue={current.thoughts} />
-            </label>
-            {/* {current.replayability}
+              <label htmlFor="tags">
+                Tags:
+                <input name="tags" defaultValue={current.tags} />
+                {tagsSet.map(tag => (
+                  <button type="button" onClick={() => addRemoveTag(tag)} className="tagBtn">
+                    {tag}
+                  </button>
+                ))}
+              </label>
+              <label htmlFor="thoughts" className="notesField">
+                Notes:
+                <a
+                  href="#a"
+                  title="progression types: level (Geometry Wars);
+              storyline: Pine, Lightbringer, In Nightmare;
+              Tech-tree (Craft the world, Old World, Patron)"
+                >
+                  I
+                </a>
+                <textarea name="thoughts" defaultValue={current.thoughts} />
+              </label>
+              <label htmlFor="playniteTitle" className="notesField">
+                Playnite Title:
+                <input name="playniteTitle" defaultValue={current.playnite_title} />
+              </label>
+              {/* {current.replayability}
             {current.issues}
             {current.summary} */}
-            <button type="button" onClick={() => saveGame()} className="saveBtn">Save</button>
+              <button type="submit" className="saveBtn">Save</button>
+            </form>
           </div>
         ) : (
           <div className="manual">
@@ -202,26 +224,14 @@ const Game = ({ game }) => {
               )}
             </span>
             <span>
-              Platform:
-              {current.platform}
+              {`Platform: ${current.platform} Status: ${current.status} Graphic style: ${current.graphic_style}`}
             </span>
             <span>
-              Status:
-              {current.status}
+              {`Tags: ${current.tags} Thoughts: ${current.thoughts}`}
             </span>
-            <span>
-              Graphic style:
-              {current.graphic_style}
-            </span>
-            <span>
-              Tags:
-              {current.tags}
-            </span>
-            <span>
-              Thoughts:
-              {current.thoughts}
-            </span>
-
+            <div>
+              {`pn: ${current.playnite_title}`}
+            </div>
             {/* {current.replayability}
           {current.issues}
           {current.summary} */}

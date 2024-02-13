@@ -35,31 +35,37 @@ const GamesListPage = () => {
   const [games, setGames] = useState([]);
   const [page, setPage] = useState(1);
   const [pageMeta, setPageMeta] = useState({ last_page: 1 });
-  const formSizeMin = useRef();
-  const formSizeMax = useRef();
-  const formSearchTitle = useRef();
-  const formSearchTags = useRef();
+  const pnForm = useRef();
+  const searchForm = useRef();
+
   const formTagChoices = useRef();
-  const formOrderBy = useRef();
 
   /** Page Data look up */
-  async function loadGames() {
+  async function loadGames(event) {
+    event?.preventDefault();
+    const formData = new FormData(searchForm.current);
+    const searchTitle = formData.get('searchTitle');
+    const tags = formData.get('tags');
+    const sizeMin = formData.get('sizeMin');
+    const sizeMax = formData.get('sizeMax');
+    const orderBy = formData.get('orderBy');
+
     const endpoint = `${REST_ENDPOINT}/api/games/?page=${page}`;
     let searchFields = '';
-    if (formSearchTitle.current.value !== '') {
-      searchFields += `&search_title=${formSearchTitle.current.value}`;
+    if (searchTitle !== '') {
+      searchFields += `&search_title=${searchTitle}`;
     }
-    if (formSearchTags.current.value !== '') {
-      searchFields += `&tags=${formSearchTags.current.value}`;
+    if (tags !== '') {
+      searchFields += `&tags=${tags}`;
     }
-    if (formSizeMin.current.value !== '') {
-      searchFields += `&size_min=${formSizeMin.current.value}`;
+    if (sizeMin !== '') {
+      searchFields += `&size_min=${sizeMin}`;
     }
-    if (formSizeMax.current.value !== '') {
-      searchFields += `&size_max=${formSizeMax.current.value}`;
+    if (sizeMax !== '') {
+      searchFields += `&size_max=${sizeMax}`;
     }
-    if (formOrderBy.current.value !== '') {
-      searchFields += `&order_by=${formOrderBy.current.value}`;
+    if (orderBy !== '') {
+      searchFields += `&order_by=${orderBy}`;
     }
     setIsLoading(true);
     // TODO: if production, then pass mode: 'no-cors', in fetch options
@@ -92,6 +98,7 @@ const GamesListPage = () => {
       setIsLoading(false);
     }
   }
+
   async function removeDuplicates() {
     toast.error('Removing...');
     const endpoint = `${REST_ENDPOINT}/api/games/removeDuplicates/`;
@@ -103,6 +110,34 @@ const GamesListPage = () => {
         throw new Error(response.status);
       } else {
         toast.error('Duplicates removed');
+      }
+    } catch (err) {
+      console.log(`Error: ${err}`);
+      toast.error(`loading error : ${err}`);
+    }
+  }
+
+  async function sendPnHtml(event) {
+    toast.error('Removing...');
+    event.preventDefault();
+    const formData = new FormData(searchForm.current);
+    const pnHtml = formData.get('pnHtml');
+    const endpoint = `${REST_ENDPOINT}/api/playnite`;
+    const config = {
+      method: 'POST',
+      body: JSON.stringify({
+        pnHtml,
+      }),
+    };
+    try {
+      const response = await fetch(endpoint, config);
+      console.log('response :', response);
+      if (!response.ok) {
+        console.log('response.status :', response.status);
+        throw new Error(response.status);
+      } else {
+        const data = await response.json();
+        console.log('data :', data);
       }
     } catch (err) {
       console.log(`Error: ${err}`);
@@ -141,44 +176,47 @@ const GamesListPage = () => {
       <h1>Game Collection</h1>
       {isLoading && <h2>LOADING</h2>}
       <div>
-        <label htmlFor="formSearchTitle" className="searchField">
-          Search Title:
-          <input name="formSearchTitle" type="text" ref={formSearchTitle} />
-        </label>
-        <button type="button" onClick={() => loadGames()}>Search</button>
-        <label htmlFor="formSearchTags" className="searchField">
-          Tag:
-          <input name="formSearchTags" type="text" ref={formSearchTags} />
-          <select
-            ref={formTagChoices}
-            onChange={() => {
-              console.log(formTagChoices.current.value);
-              formSearchTags.current.value = formTagChoices.current.value;
-            }}
-          >
-            <option value="">-</option>
-            { searchTtags.map(tag => (
-              <option value={tag}>{tag}</option>
-            ))}
-          </select>
-        </label>
-        <label htmlFor="formSizeMin" className="searchField">
-          Size Min:
-          <input type="text" ref={formSizeMin} size="5" />
-        </label>
-        <label htmlFor="formSizeMax" className="searchField">
-          Size Max:
-          <input type="text" ref={formSizeMax} size="5" />
-        </label>
-        <label htmlFor="formSizeMax" className="searchField">
-          Order By:
-          <select ref={formOrderBy}>
-            <option value="">Updated At</option>
-            <option value="updated-at-asc">Updated At -  Asc</option>
-            <option value="priority">Priority</option>
-            <option value="title">Title</option>
-          </select>
-        </label>
+        <form ref={searchForm} onSubmit={loadGames}>
+          <label htmlFor="searchTitle" className="searchField">
+            Search Title:
+            <input name="searchTitle" type="text" />
+          </label>
+          <button type="submit">Search</button>
+          <label htmlFor="tags" className="searchField">
+            Tag:
+            <input name="tags" type="text" />
+            <select
+              ref={formTagChoices}
+              onChange={() => {
+                const tagsInput = searchForm.current.querySelector('input[name="tags"]');
+
+                tagsInput.value = formTagChoices.current.value;
+              }}
+            >
+              <option value="">-</option>
+              {searchTtags.map(tag => (
+                <option value={tag}>{tag}</option>
+              ))}
+            </select>
+          </label>
+          <label htmlFor="sizeMin" className="searchField">
+            Size Min:
+            <input name="sizeMin" type="text" size="5" />
+          </label>
+          <label htmlFor="sizeMax" className="searchField">
+            Size Max:
+            <input name="sizeMax" type="text" size="5" />
+          </label>
+          <label htmlFor="orderBy" className="searchField">
+            Order By:
+            <select name="orderBy">
+              <option value="">Updated At</option>
+              <option value="updated-at-asc">Updated At -  Asc</option>
+              <option value="priority">Priority</option>
+              <option value="title">Title</option>
+            </select>
+          </label>
+        </form>
       </div>
       <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
 
@@ -198,6 +236,11 @@ const GamesListPage = () => {
       <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
 
       <button type="button" onClick={() => removeDuplicates()}>Remove Duplicates</button>
+      <form ref={pnForm} onSubmit={sendPnHtml}>
+        <textarea name="pnHtml" />
+        <button type="submit">parse PN html</button>
+
+      </form>
       <div>{`version ${pkg.version}`}</div>
     </>
   );
