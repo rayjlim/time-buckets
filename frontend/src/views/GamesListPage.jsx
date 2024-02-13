@@ -118,9 +118,8 @@ const GamesListPage = () => {
   }
 
   async function sendPnHtml(event) {
-    toast.error('Removing...');
     event.preventDefault();
-    const formData = new FormData(searchForm.current);
+    const formData = new FormData(pnForm.current);
     const pnHtml = formData.get('pnHtml');
     const endpoint = `${REST_ENDPOINT}/api/playnite`;
     const config = {
@@ -135,9 +134,6 @@ const GamesListPage = () => {
       if (!response.ok) {
         console.log('response.status :', response.status);
         throw new Error(response.status);
-      } else {
-        const data = await response.json();
-        console.log('data :', data);
       }
     } catch (err) {
       console.log(`Error: ${err}`);

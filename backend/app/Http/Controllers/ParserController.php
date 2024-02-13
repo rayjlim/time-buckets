@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use App\Utility\FgParser;
 use Illuminate\Http\Request;
+
 use Log;
 
 class ParserController extends Controller
@@ -71,7 +72,7 @@ class ParserController extends Controller
                 if ($parsed_article_time > $original_time) {
                     Log::info('====------Saved-----=====');
                     $game->save();
-                }else{
+                } else {
                     Log::info('Not Saved ' . $game->fg_article_date);
                 }
             }
@@ -82,4 +83,123 @@ class ParserController extends Controller
             "data" => $games
         ];
     }
+
+    function htmlTableToCsv($html)
+    {
+        // Create a new DOMDocument
+        $dom = new \DOMDocument();
+
+        // Load HTML content
+        $dom->loadHTML($html);
+
+        // Find all tables in the HTML
+        $tables = $dom->getElementsByTagName('table');
+
+        $csv = '';
+
+        // Iterate through each table
+        foreach ($tables as $table) {
+            // Iterate through each row of the table
+            foreach ($table->getElementsByTagName('tr') as $row) {
+                $rowData = array();
+                // Iterate through each cell in the row
+                foreach ($row->getElementsByTagName('td') as $cell) {
+                    // Clean cell text (remove HTML tags and trim whitespace)
+                    $rowData[] = trim(strip_tags($cell->nodeValue));
+                }
+                // Convert row data to CSV format
+                $csv .= implode(',', $rowData) . "\n";
+            }
+        }
+
+        return $csv;
+    }
+
+    public function playnite(Request $request)
+    {
+        $formData = json_decode($request->getContent());
+        $html = $formData->pnHtml;
+
+        $html = str_replace('h2jscript', '', $html);
+        $html = str_replace('’', '\'', $html);
+        $html = str_replace('‘', '\'', $html);
+
+        // Parse HTML table and convert it to CSV
+        $csvData = $this->htmlTableToCsv($html);
+
+        $data = '';
+        // Output CSV data
+        // $data = $data.$csvData;
+        // Parse the CSV string into an array of rows
+        $rows = explode("\n", $csvData);
+        $unfound = [];
+        // Iterate over each row
+        foreach ($rows as $row) {
+            // Parse the row into an array of fields
+            $fields = str_getcsv($row);
+
+            if (count($fields) > 2) {
+                // Output each field
+                // foreach ($fields as $field) {
+                //     $data = $data. $field . ", "; // Example: output each field followed by a comma
+                // }
+                $title_index = 2;
+                $fieldName = $fields[$title_index];
+                // $data = $data. "Using ".$fieldName." to search. ";
+                $game = Game::where('playnite_title', $fieldName)->first();
+                // Loop over if has title but last checked not today if has playnite_title, but not in HTML then ask if deleted?
+                if (is_null($game)) {
+                    // $data = $data.$fieldName . ' is not found, ';
+                    $titleMatches = Game::where('title', 'LIKE', "%{$fieldName}%")->get();
+                    if (is_null($titleMatches) || count($titleMatches) == 0) {
+                        $data = $data . $fieldName . ' title match also not found';
+                        $data = $data . "\n\n";
+                        $unfound[] = $fieldName;
+                        Log::info('===No Title match found ' . $fieldName);
+                    } else if (count($titleMatches) > 1) {
+                        $data = $data . $fieldName . ' more than 1 title found';
+                        $data = $data . "\n\n";
+                        $unfound[] = $fieldName;
+                        Log::info('===Multiple Title match found ' . $fieldName);
+                    } else {
+                        Log::info('Updating Missing ' . $fieldName . count($titleMatches));
+                        $titleMatches[0]->playnite_title = $fieldName;
+                        $titleMatches[0]->playnite_last = $fields[3];
+                        $titleMatches[0]->playnite_added = $fields[4];
+                        $titleMatches[0]->playnite_playtime = $fields[5];
+
+                        // Log::info('====------Saved-----=====');
+                        $titleMatches[0]->save();
+                    }
+                } else {
+                    Log::info('Updating Existing ' . $fieldName);
+                    $game->playnite_last = $fields[3];
+                    $game->playnite_added = $fields[4];
+                    $game->playnite_playtime = $fields[5];
+
+                    // Log::info('====------Saved-----=====');
+                    $game->save();
+                }
+
+                // $data = $data. $field . "\n\n";
+            }
+        }
+        return [
+            "data" => $unfound
+        ];
+    }
 }
+
+
+// If no match,
+//   Then need to query like main title
+//   If find match then update fields
+//   Else
+//     Can not do much; make web app field editable for playnite_title;
+
+// else update
+//   Update fields, including playnite_check
+//    Check priority between 1-50
+
+// Search has playnite_title but check date not updated.
+// For each, remove playnite title, set priority to 200,log the change

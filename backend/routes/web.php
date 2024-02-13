@@ -28,5 +28,6 @@ $router->group(['prefix' => 'api/'], function () use ($router) {
     $router->get('removeDuplicates', 'GameController@removeDuplicates');
 
     $router->post('parser/', 'ParserController@store');
-
+    $router->post('playnite/', 'ParserController@playnite');
 });
+
