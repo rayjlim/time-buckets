@@ -49,6 +49,7 @@ const GamesListPage = () => {
     const sizeMin = formData.get('sizeMin');
     const sizeMax = formData.get('sizeMax');
     const orderBy = formData.get('orderBy');
+    const startsWith = formData.get('startsWith');
 
     const endpoint = `${REST_ENDPOINT}/api/games/?page=${page}`;
     let searchFields = '';
@@ -66,6 +67,9 @@ const GamesListPage = () => {
     }
     if (orderBy !== '') {
       searchFields += `&order_by=${orderBy}`;
+    }
+    if (startsWith !== '') {
+      searchFields += `&starts_with=${startsWith}`;
     }
     setIsLoading(true);
     // TODO: if production, then pass mode: 'no-cors', in fetch options
@@ -167,15 +171,37 @@ const GamesListPage = () => {
     })();
   }, [page]);
 
+  const letters = [];
+
+  for (let i = 97; i <= 122; i++) {
+    letters.push(String.fromCharCode(i));
+  }
+  const searchLetter = async letter => {
+    console.log(letter);
+
+    const startsWith = searchForm.current.querySelector('input[name="startsWith"]');
+    startsWith.value = letter;
+    const orderBy = searchForm.current.querySelector('select[name="orderBy"]');
+    orderBy.value = 'title';
+    setPage(1);
+    await loadGames();
+  };
+
+  const changeTitle = () => {
+    const startsWith = searchForm.current.querySelector('input[name="startsWith"]');
+    startsWith.value = '';
+  };
+
   return (
     <>
       <h1>Game Collection</h1>
       {isLoading && <h2>LOADING</h2>}
       <div>
         <form ref={searchForm} onSubmit={loadGames}>
+          <input name="startsWith" type="hidden" />
           <label htmlFor="searchTitle" className="searchField">
             Search Title:
-            <input name="searchTitle" type="text" />
+            <input name="searchTitle" type="text" onChange={changeTitle} />
           </label>
           <button type="submit">Search</button>
           <label htmlFor="tags" className="searchField">
@@ -213,6 +239,9 @@ const GamesListPage = () => {
             </select>
           </label>
         </form>
+        {letters.map(letter => (
+          <button type="button" onClick={() => searchLetter(letter)} className="letter">{letter}</button>
+        ))}
       </div>
       <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
 

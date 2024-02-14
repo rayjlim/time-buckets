@@ -20,7 +20,10 @@ class GameController extends Controller
             ? $request->input('per_page')
             : 20;  // DEFAULT page size
 
-        $searchTitle = $request->input('search_title');
+        $searchTitle = '%' . $request->input('search_title') . '%';
+        $searchTitle = $request->input('starts_with')
+            ? $request->input('starts_with') . '%'
+            : $searchTitle;
         $sizeMinParam = $request->input('size_min');
         $sizeMin = $sizeMinParam && is_numeric($sizeMinParam)
             ? $sizeMinParam
@@ -56,7 +59,7 @@ class GameController extends Controller
                 $orderByValue = 'DESC';
         }
 
-        $games = Game::where('title', 'LIKE', '%' . $searchTitle . '%')
+        $games = Game::where('title', 'LIKE', $searchTitle)
             ->where('tags', 'LIKE', $searchTags)
             ->where('size_calculated', '>=', $sizeMin)
             ->where('size_calculated', '<=', $sizeMax)
