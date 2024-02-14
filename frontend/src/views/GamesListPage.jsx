@@ -4,9 +4,9 @@ import { toast } from 'react-toastify';
 import { REST_ENDPOINT } from '../constants';
 import GameListItems from '../components/GameListItems';
 import PaginationBar from '../components/PaginationBar';
+import PnForm from '../components/PnForm';
 
 import './GamesListPage.css';
-import 'react-toastify/dist/ReactToastify.css';
 import pkg from '../../package.json';
 
 const DEBOUNCE_TIME = 300;
@@ -35,7 +35,6 @@ const GamesListPage = () => {
   const [games, setGames] = useState([]);
   const [page, setPage] = useState(1);
   const [pageMeta, setPageMeta] = useState({ last_page: 1 });
-  const pnForm = useRef();
   const searchForm = useRef();
 
   const formTagChoices = useRef();
@@ -114,30 +113,6 @@ const GamesListPage = () => {
         throw new Error(response.status);
       } else {
         toast.error('Duplicates removed');
-      }
-    } catch (err) {
-      console.log(`Error: ${err}`);
-      toast.error(`loading error : ${err}`);
-    }
-  }
-
-  async function sendPnHtml(event) {
-    event.preventDefault();
-    const formData = new FormData(pnForm.current);
-    const pnHtml = formData.get('pnHtml');
-    const endpoint = `${REST_ENDPOINT}/api/playnite`;
-    const config = {
-      method: 'POST',
-      body: JSON.stringify({
-        pnHtml,
-      }),
-    };
-    try {
-      const response = await fetch(endpoint, config);
-      console.log('response :', response);
-      if (!response.ok) {
-        console.log('response.status :', response.status);
-        throw new Error(response.status);
       }
     } catch (err) {
       console.log(`Error: ${err}`);
@@ -261,11 +236,7 @@ const GamesListPage = () => {
       <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
 
       <button type="button" onClick={() => removeDuplicates()}>Remove Duplicates</button>
-      <form ref={pnForm} onSubmit={sendPnHtml}>
-        <textarea name="pnHtml" />
-        <button type="submit">parse PN html</button>
-
-      </form>
+      <PnForm />
       <div>{`version ${pkg.version}`}</div>
     </>
   );
