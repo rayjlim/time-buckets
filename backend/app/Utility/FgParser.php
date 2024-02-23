@@ -7,14 +7,15 @@ class FgParser
     public $articles = [];
     public $dom = null;
 
-    function parse(String $html){
+    function parse(String $html)
+    {
         $this->dom = new \DomDocument();
-        @ $this->dom->loadHTML($html);
+        @$this->dom->loadHTML($html);
         $articles = $this->dom->getElementsByTagName('article');
         $result = [];
 
-        foreach($articles as $article){
-            $classname="cat-links";
+        foreach ($articles as $article) {
+            $classname = "cat-links";
             $nodes = $this->byClass($article, 'span', $classname);
             $parsed = $nodes[0]->textContent;
             if (str_contains($parsed, 'Repack')) {
@@ -24,7 +25,8 @@ class FgParser
         $this->articles = $result;
     }
 
-    function getInfo(int $index){
+    function getInfo(int $index)
+    {
         $dom = $this->articles[$index];
         $nodes = $this->byClass($dom, "span", "cat-links");
         $parsed = $nodes[0]->textContent;
@@ -34,21 +36,14 @@ class FgParser
 
         $entryNode = $this->byClass($dom, "div", "entry-content");
         $h3Nodes = $entryNode[0]->getElementsByTagName("h3");
-        if(count($h3Nodes) === 0){
+        if (count($h3Nodes) === 0) {
             return null;
         }
         $fgIdNodes = $h3Nodes[0]->getElementsByTagName("span");
-        $parsed = substr($fgIdNodes[0]->textContent, 1);
-        $parsed = trim(str_ireplace("updated", "", $parsed));
-        $parsed = trim(str_ireplace("Add-on", "", $parsed));
-        $parsed = trim(str_ireplace("PATCH", "", $parsed));
-        $parsed = trim(str_ireplace("DC", "", $parsed));
-        $parsed = trim(str_ireplace("Unrated", "", $parsed));
-
-
+        $parsed = substr($fgIdNodes[0]->textContent, 1); // skip # at begining
+        $parsed = preg_replace('/[\D]+/', '', $parsed);
 
         $game->fg_id = is_numeric($parsed) ? $parsed : -1;
-
 
         $titleNodes = $h3Nodes[0]->getElementsByTagName("strong");
         $parsed = $titleNodes[0]->textContent;
@@ -57,11 +52,11 @@ class FgParser
         $entryNode = $this->byClass($dom, "div", "entry-content");
         $pNodes = $entryNode[0]->getElementsByTagName("p");
         $strongNodes = $pNodes[0]->getElementsByTagName("strong");
-        if(strpos($pNodes[0]->textContent, "Genres")){
+        if (strpos($pNodes[0]->textContent, "Genres")) {
             $game->genre = $strongNodes[0]->textContent;
         }
 
-        $game->size = $strongNodes[count($strongNodes)-1]->textContent;
+        $game->size = $strongNodes[count($strongNodes) - 1]->textContent;
 
         $imgNodes = $pNodes[0]->getElementsByTagName("img");
 
@@ -83,7 +78,8 @@ class FgParser
         return $game;
     }
 
-    public static function convertSizeString(string $target){
+    public static function convertSizeString(string $target)
+    {
 
         $parsed = str_ireplace("from", "", $target);
         $output = str_ireplace("fom", "", $parsed);
@@ -94,7 +90,7 @@ class FgParser
         $output = str_ireplace("(", "", $output);
         $output = str_ireplace(")", "", $output);
         $multiplier = 1;
-        if(stripos($output, 'mb')){
+        if (stripos($output, 'mb')) {
             $multiplier = .001;
         }
         $output = str_ireplace("MB", "", $output);
@@ -109,10 +105,13 @@ class FgParser
         return is_numeric($output) ? $output * $multiplier : 0;
     }
 
-    private function byClass(\DOMElement $a,$b,$c){
+    private function byClass(\DOMElement $a, $b, $c)
+    {
         $r = [];
-        foreach($a->getElementsByTagName($b) as $e){
-            if($e->getAttribute('class')==$c){$r[]=$e;}
+        foreach ($a->getElementsByTagName($b) as $e) {
+            if ($e->getAttribute('class') == $c) {
+                $r[] = $e;
+            }
         }
         return $r;
     }

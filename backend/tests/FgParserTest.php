@@ -67,20 +67,21 @@ class FgParserTest extends TestCase
 
     }
 
-    public function test_parse_item3(){
-        // test when fg has special characters
+    public function test_parse_item3_special_characters_in_id(){
+        // test when fg id has special characters
         $fullfilename =  getcwd() . "/tests/fitgirl_page1.html";
         $readtext = file_get_contents($fullfilename,"r");
         $parser = new FgParser();
         $parser->parse($readtext);
         $game = $parser->getInfo(3);
 
-        $this->assertEquals(-1, $game->fg_id);
+        $this->assertEquals(29, $game->fg_id);
+        $this->assertEquals("The Long Dark v2.05 (106000) + >1 DLCs + 4 Bonus OSTs", $game->title);
 
     }
 
-    public function test_parse_item4(){
-        // test when fg has special characters
+    public function test_parse_item4_no_h3_tags(){
+        // test when article does not have H3
         $fullfilename =  getcwd() . "/tests/fitgirl_page1.html";
         $readtext = file_get_contents($fullfilename,"r");
         $parser = new FgParser();
@@ -88,6 +89,19 @@ class FgParserTest extends TestCase
         $game = $parser->getInfo(4);
 
         $this->assertEquals(null, $game);
+
+    }
+
+    public function test_parse_item_page2(){
+        // test when article does not have H3
+        $fullfilename =  getcwd() . "/tests/fitgirl_page2.html";
+        $readtext = file_get_contents($fullfilename,"r");
+        $parser = new FgParser();
+        $parser->parse($readtext);
+        $game = $parser->getInfo(1);
+
+        $this->assertEquals(4160, $game->fg_id);
+        $this->assertEquals("Akumi Wars", $game->title);
 
     }
 
