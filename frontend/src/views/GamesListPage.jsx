@@ -134,6 +134,16 @@ const GamesListPage = () => {
     setPage(1);
     await loadGames();
   };
+  const clearFields = async () => {
+    const searchTitle = searchForm.current.querySelector('input[name="searchTitle"]');
+    searchTitle.value = '';
+    const startsWith = searchForm.current.querySelector('input[name="startsWith"]');
+    startsWith.value = '';
+    const orderBy = searchForm.current.querySelector('select[name="orderBy"]');
+    orderBy.value = '';
+    setPage(1);
+    await loadGames();
+  };
 
   const changeTitle = () => {
     const startsWith = searchForm.current.querySelector('input[name="startsWith"]');
@@ -152,6 +162,7 @@ const GamesListPage = () => {
             <input name="searchTitle" type="text" onChange={changeTitle} />
           </label>
           <button type="submit">Search</button>
+          <button type="button" onClick={() => clearFields()}>Clear</button>
           <label htmlFor="tags" className="searchField">
             Tag:
             <input name="tags" type="text" />
