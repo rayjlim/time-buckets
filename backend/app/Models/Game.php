@@ -30,6 +30,11 @@ class Game extends Model
         'fg_article_date',
         'image',
         'fg_url',
+        'playnite_title',
+        'playnite_added',
+        'playnite_playtime',
+        'playnite_checktime',
+
     ];
 
     // 'platform',
