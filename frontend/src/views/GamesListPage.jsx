@@ -9,29 +9,10 @@ import PnForm from '../components/PnForm';
 import './GamesListPage.css';
 import pkg from '../../package.json';
 
-const DEBOUNCE_TIME = 300;
-
-function debounce(func, wait, immediate) {
-  let timeout;
-  return () => {
-    const context = this;
-    const args = arguments;
-    const later = () => {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    };
-    const callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
-  };
-}
-
 const searchTtags = ['<untagged>', 'to-download', 'to-install', 'installed', 'pink-paw', 'tried', 'to-review', 'skip', 'dl-high'];
 
 const GamesListPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [gameId, setGameId] = useState(null);
   const [games, setGames] = useState([]);
   const [page, setPage] = useState(1);
   const [pageMeta, setPageMeta] = useState({ last_page: 1 });
@@ -41,6 +22,7 @@ const GamesListPage = () => {
 
   /** Page Data look up */
   async function loadGames(event) {
+    console.log(event);
     event?.preventDefault();
     const formData = new FormData(searchForm.current);
     const searchTitle = formData.get('searchTitle');
@@ -121,15 +103,6 @@ const GamesListPage = () => {
   }
 
   /** Search functions */
-  const debouncedLoadGames = debounce(loadGames, DEBOUNCE_TIME);
-
-  const updateView = () => {
-    console.log('updateView called');
-    debouncedLoadGames();
-  };
-  const selectGame = id => {
-    setGameId(id);
-  };
 
   const handlePageClick = event => {
     const newOffset = (event.selected * pageMeta.itemsPerPage) % games.length;
@@ -226,11 +199,9 @@ const GamesListPage = () => {
         total:
         {pageMeta.total}
       </div>
-      {!gameId && !isLoading && (
+      {!isLoading && (
         <GameListItems
           games={games}
-          onUpdate={updateView}
-          onSelectGame={selectGame}
         />
       )}
       <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
