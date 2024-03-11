@@ -21,6 +21,10 @@ const PnForm = () => {
       if (!response.ok) {
         console.log('response.status :', response.status);
         throw new Error(response.status);
+      } else {
+        const output = await response.json();
+        const json = JSON.stringify(output);
+        alert(`${output.data.length}, ${json}`);
       }
     } catch (err) {
       console.log(`Error: ${err}`);
@@ -31,7 +35,12 @@ const PnForm = () => {
   return (
     <form ref={pnForm} onSubmit={sendPnHtml}>
       <textarea name="pnHtml" />
-      <button type="submit">parse PN html</button>
+      <button
+        type="submit"
+        title="Sync PlayNite to Game Collection required html export (pext file), double click to  install, configure under add-ons extensions > Html Exporter to export from playnite, view source of index.html copy and paste to game collector"
+      >
+        parse PN html
+      </button>
     </form>
   );
 };
