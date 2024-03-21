@@ -31,6 +31,7 @@ const GamesListPage = () => {
     const sizeMax = formData.get('sizeMax');
     const orderBy = formData.get('orderBy');
     const startsWith = formData.get('startsWith');
+    const priority = formData.get('priority');
 
     const endpoint = `${REST_ENDPOINT}/api/games/?page=${page}`;
     let searchFields = '';
@@ -51,6 +52,9 @@ const GamesListPage = () => {
     }
     if (startsWith !== '') {
       searchFields += `&starts_with=${startsWith}`;
+    }
+    if (priority !== '') {
+      searchFields += `&priority=${priority}`;
     }
     setIsLoading(true);
     // TODO: if production, then pass mode: 'no-cors', in fetch options
@@ -179,6 +183,10 @@ const GamesListPage = () => {
                 <option value={tag}>{tag}</option>
               ))}
             </select>
+          </label>
+          <label htmlFor="priority" className="searchField">
+            Priority:
+            <input name="priority" type="text" size="4" />
           </label>
           <label htmlFor="sizeMin" className="searchField">
             Size Min:

@@ -1,13 +1,12 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { parse, format } from 'date-fns';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { REST_ENDPOINT } from '../constants';
 
-import 'react-toastify/dist/ReactToastify.css';
 import './Game.css';
 
-const tagsSet = ['to-download', 'to-install', 'installed', 'pink-paw', 'tried', 'to-review', 'skip', 'dl-high'];
+const tagsSet = ['to-download', 'to-install', 'installed', 'pink-paw', 'tried', 'to-review', 'skip', 'dl-high', 'finished'];
 
 const Game = ({ game }) => {
   const formRef = useRef();
@@ -106,7 +105,6 @@ const Game = ({ game }) => {
         alignItems: 'center',
       }}
     >
-      <ToastContainer />
       <img
         src={current.image}
         alt="game poster"
@@ -213,9 +211,10 @@ const Game = ({ game }) => {
 - 1 - 20  Top tier to play
 - 50 - 80  Next to install
 - 80 - 100  Next to download + install
-- 200  finished, installed, uninstalled,
-- 300  Errors / Issues
-- 400  There's a newer version"
+- 200 finished, installed, uninstalled,
+- 300 Errors / Issues
+- 400 There's a newer version
+- 500 Not interested"
               >
                 Priority:
                 {current.priority !== -1 && (

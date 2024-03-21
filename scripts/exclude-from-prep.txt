@@ -19,6 +19,9 @@ artisan
 package.json
 package-lock.json
 
-.git/
-/Tests/
-/tests/
+.git*/
+*/Tests/
+*/tests/
+*/Test/
+*/test/
+

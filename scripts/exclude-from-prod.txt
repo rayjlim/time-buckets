@@ -2,6 +2,8 @@ composer.json
 composer.lock
 *.txt
 
-.git/
-/Tests/
-/tests/
+.git*/
+*/Tests/
+*/tests/
+*/Test/
+*/test/

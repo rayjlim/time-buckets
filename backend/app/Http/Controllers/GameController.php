@@ -34,12 +34,18 @@ class GameController extends Controller
             : 1000;
         $searchTags = $request->input('tags') == "<untagged>"
             ? ""
-            : '%'.$request->input('tags').'%';
+            : '%' . $request->input('tags') . '%';
+        $priorityParam = $request->input('priority');
+        $priority = $priorityParam && is_numeric($priorityParam)
+            ? $priorityParam
+            : -2;
+        $priorityOperand = $priorityParam && is_numeric($priorityParam)
+            ? '='
+            : '!=';
 
         $orderByParam = $request->input('order_by');
-        $priorityOperand = '!=';
-        $priority = '-2';
-        switch($orderByParam){
+
+        switch ($orderByParam) {
             case 'title':
                 $orderByField = 'title';
                 $orderByValue = 'ASC';
@@ -110,7 +116,7 @@ class GameController extends Controller
     {
         return [
             "status" => 1,
-            "data" =>$game
+            "data" => $game
         ];
     }
 
