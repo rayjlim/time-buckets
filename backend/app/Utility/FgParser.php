@@ -65,10 +65,9 @@ class FgParser
         $game->image = $imgNodes[0]->getAttribute("src");
 
         $entryDateNodes = $this->byClass($dom, "span", "entry-date");
-
-
-        $game->fg_article_date = $entryDateNodes[0]->textContent;
-
+        $timestamp = strtotime(str_replace('/', '-', $entryDateNodes[0]->textContent)); // Replacing '/' with '-' for strtotime compatibility
+        $sql_date = date('Y-m-d', $timestamp); // Format the date as 'YYYY-MM-DD' which is SQL compatible
+        $game->fg_article_date = $sql_date;
 
         $game->fg_url = $entryDateNodes[0]->getElementsByTagName("a")[0]->getattribute("href");
 

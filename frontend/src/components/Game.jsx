@@ -136,7 +136,7 @@ const Game = ({ game }) => {
           <span>
             {` Article date: (${format(
               parse(current.fg_article_date, 'yyyy-MM-dd', new Date()),
-              'MM-yyyy',
+              'MMM-dd-yyyy',
             )})`}
           </span>
         </div>

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 npx standard-version
 cd backend
 composer update
