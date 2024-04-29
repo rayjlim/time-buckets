@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/rayjlim/game-collection/compare/v1.4.0...v1.5.0) (2024-04-29)
+
+
+### Features
+
+* add search by priority ([de1e415](https://github.com/rayjlim/game-collection/commit/de1e4158a0f82895675303a0a040fac10059aad8))
+* add title for instructions. alert results ([9235e00](https://github.com/rayjlim/game-collection/commit/9235e00c318d81fbd45af9baa58269f3892456e6))
+* clear search button ([45a1403](https://github.com/rayjlim/game-collection/commit/45a140368075764ad3c210139b787f6a69a79686))
+* list by article date ([74753a4](https://github.com/rayjlim/game-collection/commit/74753a43598364fc09ac79c17fafdc884d9b7b69))
+* parse playnite html export data [#38](https://github.com/rayjlim/game-collection/issues/38) ([959e5cb](https://github.com/rayjlim/game-collection/commit/959e5cb042cb049c81d444364787734548371685))
+* remove from playnite [#38](https://github.com/rayjlim/game-collection/issues/38) ([a5dbf52](https://github.com/rayjlim/game-collection/commit/a5dbf52a2c22bf5119830a324d992886d4079424))
+* save pn_title edit field [#38](https://github.com/rayjlim/game-collection/issues/38) ([ea9d5bd](https://github.com/rayjlim/game-collection/commit/ea9d5bd3f328ea1680414fb802d9a3a2b7295b52))
+* show playnite info [#38](https://github.com/rayjlim/game-collection/issues/38) ([3bcd7a9](https://github.com/rayjlim/game-collection/commit/3bcd7a9894e4d4de6bfcceaba060d643683dd81a))
+* show starts with letter [#17](https://github.com/rayjlim/game-collection/issues/17) ([209cee4](https://github.com/rayjlim/game-collection/commit/209cee4233b8ba6ae25e918489bcca3095da2f0a))
+* sort by title [#17](https://github.com/rayjlim/game-collection/issues/17) ([6a7a16d](https://github.com/rayjlim/game-collection/commit/6a7a16da86f8714be0f137a3d6d51503739b2e67))
+* update search by priority min ([8aca5dc](https://github.com/rayjlim/game-collection/commit/8aca5dc3575b00b7338da4d9d3c5f7a384b88914))
+
+
+### Bug Fixes
+
+* add legend for Priorities [#32](https://github.com/rayjlim/game-collection/issues/32) ([8694c1f](https://github.com/rayjlim/game-collection/commit/8694c1fd2ee986be89401630082612b307f275ec))
+* add playnite fields ([5cd911c](https://github.com/rayjlim/game-collection/commit/5cd911cdc7069c8cdf5a77e4df4722f59dd42ffe))
+* change fg-id parsing to just check for digits ([cc8e25c](https://github.com/rayjlim/game-collection/commit/cc8e25ce5160affce7e6bfa215e5a22977527df3))
+* export with playnite fields ([cf01451](https://github.com/rayjlim/game-collection/commit/cf014516e2124cb07d1eb61252b4a0338b61c3e9))
+* move toastcontainer to app.jsx ([21dc469](https://github.com/rayjlim/game-collection/commit/21dc469e99e577945778096b9b20598e8921a687))
+* PnForm to component [#35](https://github.com/rayjlim/game-collection/issues/35) ([e720512](https://github.com/rayjlim/game-collection/commit/e720512823e4a2ff16cf9d95a6cc9a7089439626))
+* publish scripts and secrets ([6617ead](https://github.com/rayjlim/game-collection/commit/6617ead65ac0326795537fd1c6c60be812a28667))
+* remove debounced search ([cc3b9c3](https://github.com/rayjlim/game-collection/commit/cc3b9c372467f1f4a8270af3f8e3cbafa223f077))
+* show version number [#36](https://github.com/rayjlim/game-collection/issues/36) ([77708ff](https://github.com/rayjlim/game-collection/commit/77708ffaed394fecbcef50aa4aff29153fe1a64e))
+* update package-lock for caniuse ([5000cc3](https://github.com/rayjlim/game-collection/commit/5000cc3e7bdc44a78ed5cc3848e7d172c52bcb6e))
+
 ## [1.4.0](https://github.com/rayjlim/game-collection/compare/v1.3.0...v1.4.0) (2023-08-25)
 
 
