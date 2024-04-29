@@ -200,6 +200,7 @@ const GamesListPage = () => {
             Order By:
             <select name="orderBy">
               <option value="">Updated At</option>
+              <option value="fg_article_date">Article Date</option>
               <option value="updated-at-asc">Updated At -  Asc</option>
               <option value="priority">Priority</option>
               <option value="title">Title</option>

@@ -60,6 +60,10 @@ class GameController extends Controller
                 $orderByField = 'updated_at';
                 $orderByValue = 'ASC';
                 break;
+            case 'fg_article_date':
+                $orderByField = 'fg_article_date';
+                $orderByValue = 'DESC';
+                break;
             default:
                 $orderByField = 'updated_at';
                 $orderByValue = 'DESC';
