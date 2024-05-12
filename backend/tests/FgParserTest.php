@@ -36,7 +36,7 @@ class FgParserTest extends TestCase
         $this->assertEquals("707 MB", $game->size);
 
         $this->assertEquals("https://i2.imageban.ru/out/2023/03/10/7fb3e33d0b59d2658ad0a376fce2a903.jpg", $game->image);
-        $this->assertEquals("March 11, 2023", $game->fg_article_date);
+        $this->assertEquals("2023-03-11", $game->fg_article_date);
         $this->assertEquals("https://fitgirl-repacks.site/the-last-spell/", $game->fg_url);
     }
 
@@ -102,7 +102,6 @@ class FgParserTest extends TestCase
 
         $this->assertEquals(4160, $game->fg_id);
         $this->assertEquals("Akumi Wars", $game->title);
-
     }
 
     public function test_convertSizeString_item0(){
@@ -119,7 +118,5 @@ class FgParserTest extends TestCase
         $this->assertEquals("16.7", FgParser::convertSizeString("from 16.7 GB"));
         $this->assertEquals("21.8", FgParser::convertSizeString("from 21.8 or 28.9 GB [Selective Download]"));
         $this->assertEquals("0", FgParser::convertSizeString("from XX.VIII GB [Selective Download]"));
-
-
     }
 }
