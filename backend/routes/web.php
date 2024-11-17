@@ -19,15 +19,11 @@ $router->get('/', function () use ($router) {
 
 // Route::apiResource('projects', ProjectController::class);
 $router->group(['prefix' => 'api/'], function () use ($router) {
-    $router->get('games', 'GameController@index');
-    $router->post('games', 'GameController@store');
-    $router->get('games/{id}', 'GameController@show');
-    $router->post('games/{id}', 'GameController@update');
-    // $router->patch('games/{id}', 'GameController@update');
-    $router->delete('games/{id}', 'GameController@destroy');
-    $router->get('removeDuplicates', 'GameController@removeDuplicates');
-
-    $router->post('parser/', 'ParserController@store');
-    $router->post('playnite/', 'ParserController@playnite');
+    $router->get('goals', 'GoalController@index');
+    $router->post('goals', 'GoalController@store');
+    $router->get('goals/{id}', 'GoalController@show');
+    $router->post('goals/{id}', 'GoalController@update');
+    // $router->patch('goals/{id}', 'GoalController@update');
+    $router->delete('goals/{id}', 'GoalController@destroy');
 });
 
