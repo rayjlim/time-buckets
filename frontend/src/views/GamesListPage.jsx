@@ -33,7 +33,7 @@ const GamesListPage = () => {
     const startsWith = formData.get('startsWith');
     const priority = formData.get('priority');
 
-    const endpoint = `${REST_ENDPOINT}/api/games/?page=${page}`;
+    const endpoint = `${REST_ENDPOINT}/api/goals/?page=${page}`;
     let searchFields = '';
     if (searchTitle !== '') {
       searchFields += `&search_title=${searchTitle}`;
@@ -90,7 +90,7 @@ const GamesListPage = () => {
 
   async function removeDuplicates() {
     toast.error('Removing...');
-    const endpoint = `${REST_ENDPOINT}/api/games/removeDuplicates/`;
+    const endpoint = `${REST_ENDPOINT}/api/goals/removeDuplicates/`;
 
     try {
       const response = await fetch(`${endpoint}`);

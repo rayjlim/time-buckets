@@ -32,7 +32,7 @@ const Game = ({ game }) => {
       toast.error('Missing Priority value');
       return;
     }
-    const endpoint = `${REST_ENDPOINT}/api/games/${game.id}`;
+    const endpoint = `${REST_ENDPOINT}/api/goals/${game.id}`;
     const config = {
       method: 'POST',
       body: JSON.stringify({
