@@ -131,13 +131,13 @@ class GoalController extends Controller
     {
         $formData = json_decode($request->getContent());
         $goal = Goal::find($id);
+        $goal->title = $formData->title;
         $goal->priority = $formData->priority;
-        $goal->platform = $formData->platform;
-        $goal->status = $formData->status;
-        $goal->graphic_style = $formData->graphic_style;
+        $goal->reason = $formData->reason;
+        $goal->type = $formData->type;
+        $goal->note = $formData->note;
         $goal->tags = $formData->tags;
-        $goal->thoughts = $formData->thoughts;
-        $goal->playnite_title = $formData->playnite_title;
+        $goal->added_at = $formData->addedAt;
 
         $goal->update();
 

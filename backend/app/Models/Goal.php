@@ -18,7 +18,6 @@ class Goal extends Model
      * @var array
      */
     protected $fillable = [
-        'fg_id',
         'title',
         'priority',
         'reason',
@@ -26,7 +25,8 @@ class Goal extends Model
         'tags',
         'start_timeframe',
         'end_timeframe',
-        'added_at'
+        'added_at',
+        'type'
     ];
 
 

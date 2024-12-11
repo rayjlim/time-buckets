@@ -6,43 +6,43 @@ import { REST_ENDPOINT } from '../constants';
 
 import './Goal.css';
 
-const tagsSet = ['to-download', 'to-install', 'installed', 'pink-paw', 'tried', 'to-review', 'skip', 'dl-high', 'finished'];
+const typeSet = ['location', 'experience', 'achievement'];
+const tagsSet = ['watch', 'hike', 'animals'];
 
 const Goal = ({ goal }) => {
   const formRef = useRef();
   const [current, setCurrent] = useState(goal);
 
   const [isEditing, setIsEditing] = useState(false);
-  function externalLink(url) {
-    window.open(url, '_blank');
-  }
 
   async function saveGoal(event) {
     console.log('save goal');
     event.preventDefault();
     const formData = new FormData(formRef.current);
+    const title = formData.get('title');
     const priority = formData.get('priority');
-    const platform = formData.get('platform');
-    const status = formData.get('status');
-    const graphicStyle = formData.get('graphicStyle');
+    const reason = formData.get('reason');
+    const note = formData.get('note');
+    const addedAt = formData.get('addedAt');
     const tags = formData.get('tags');
     const thoughts = formData.get('thoughts');
-    const playniteTitle = formData.get('playniteTitle');
+    const type = formData.get('type');
     if (priority === '') {
       toast.error('Missing Priority value');
       return;
     }
-    const endpoint = `${REST_ENDPOINT}/api/goals/${goal.id}`;
+    const endpoint = `${REST_ENDPOINT}goals/${goal.id}`;
     const config = {
       method: 'POST',
       body: JSON.stringify({
+        title,
         priority,
-        platform,
-        status,
-        graphic_style: graphicStyle,
+        reason,
+        note,
+        addedAt,
         tags,
         thoughts,
-        playnite_title: playniteTitle,
+        type,
       }),
     };
     try {
@@ -56,13 +56,13 @@ const Goal = ({ goal }) => {
         console.log('data :', data);
         setCurrent({
           ...current,
+          title,
           priority,
-          platform,
-          status,
-          graphic_style: graphicStyle,
+          reason,
+          note,
           tags,
-          thoughts,
-          playnite_title: playniteTitle,
+          added_at: addedAt,
+          type,
         });
         setIsEditing(false);
       }
@@ -82,6 +82,16 @@ const Goal = ({ goal }) => {
       tagsInput.value = tagsInput.value.replace(content, '').trim();
     }
   }
+  function addRemoveType(content) {
+    console.log('addRemove', content);
+
+    const typeInput = formRef.current.querySelector('input[name="type"]');
+    if (!typeInput.value.includes(content)) {
+      typeInput.value = `${typeInput.value} ${content}`;
+    } else {
+      typeInput.value = typeInput.value.replace(content, '').trim();
+    }
+  }
 
   let mainClassName = 'goal-list-row';
   switch (true) {
@@ -96,117 +106,79 @@ const Goal = ({ goal }) => {
   }
 
   return (
-    <section
-      key={current.id}
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        border: '1px solid lightgrey',
-        alignItems: 'center',
-      }}
-    >
-      <img
-        src={current.image}
-        alt="goal poster"
-        className="goal-image"
-        onClick={() => externalLink(current.fg_url)}
-        aria-hidden="true"
-      />
-      <div className={mainClassName}>
-        <div className="manual" style={{ margin: '.2rem' }}>
-          <button
-            onClick={() => setIsEditing(!isEditing)}
-            type="button"
-            style={{ margin: '0 .2rem' }}
-          >
-            Edit
-          </button>
-          {current.title}
-          <span>
-            {`fg id: ${current.fg_id}`}
-          </span>
-        </div>
-        <div>
-          <span>
-            {`Genre: ${current.genre}`}
-          </span>
-          <span className={current.size_calculated > 20 ? 'goal-size-large' : ''}>
-            {` Size: ${current.size_calculated}`}
-          </span>
-          {/* <span>
-            {` Article date: (${format(
-              parse(current.fg_article_date, 'yyyy-MM-dd', new Date()),
-              'MMM-dd-yyyy',
-            )})`}
-          </span> */}
-        </div>
-        {isEditing ? (
-          <div className="manual">
-            <form ref={formRef} onSubmit={saveGoal}>
-              <label
-                htmlFor="priority"
-                title="Priorities description
+    <div className={mainClassName}>
+
+      {isEditing ? (
+        <div className="manual">
+          <form ref={formRef} onSubmit={saveGoal}>
+            <label htmlFor="title">
+              Title:
+              <input name="title" defaultValue={current.title} />
+            </label>
+            <label
+              htmlFor="priority"
+              title="Priorities description
 -1
 - 1 - 20  Top tier to play
 - 50 - 80  Next to install
 - 80 - 100  Next to download + install
-- 200  finished, installed, uninstalled,
-- 300  Errors / Issues
-- 400  There's a newer version"
-              >
-                Priority:
-                <input name="priority" defaultValue={current.priority} />
-              </label>
-              <label htmlFor="platform">
-                Platform:
-                <input name="platform" defaultValue={current.platform} />
-              </label>
+"
+            >
+              Priority:
+              <input name="priority" defaultValue={current.priority} />
+            </label>
+            <label htmlFor="reason">
+              Reason:
+              <input name="reason" defaultValue={current.reason} />
+            </label>
 
-              <label htmlFor="status">
-                Status:
-                <input name="status" defaultValue={current.status} />
-              </label>
-
-              <label htmlFor="graphicStyle">
-                Graphic Style:
-                <input name="graphicStyle" defaultValue={current.graphic_style} />
-              </label>
-
-              <label htmlFor="tags">
-                Tags:
-                <input name="tags" defaultValue={current.tags} />
-                {tagsSet.map(tag => (
-                  <button type="button" onClick={() => addRemoveTag(tag)} className="tagBtn">
-                    {tag}
-                  </button>
-                ))}
-              </label>
-              <label htmlFor="thoughts" className="notesField">
-                Notes:
-                <a
-                  href="#a"
-                  title="progression types: level (Geometry Wars);
-              storyline: Pine, Lightbringer, In Nightmare;
-              Tech-tree (Craft the world, Old World, Patron)"
-                >
-                  I
-                </a>
-                <textarea name="thoughts" defaultValue={current.thoughts} />
-              </label>
-              <label htmlFor="playniteTitle" className="notesField">
-                Playnite Title:
-                <input name="playniteTitle" defaultValue={current.playnite_title} />
-              </label>
-              {/* {current.replayability}
-            {current.issues}
-            {current.summary} */}
-              <button type="submit" className="saveBtn">Save</button>
-            </form>
-          </div>
-        ) : (
-          <>
-            <div className="manual">
-              <span title="Priorities description
+            <label htmlFor="type">
+              Type:
+              <input name="type" defaultValue={current.type} />
+              {typeSet.map(type => (
+                <button type="button" onClick={() => addRemoveType(type)} className="typeBtn">
+                  {type}
+                </button>
+              ))}
+            </label>
+            <label htmlFor="tags">
+              Tags:
+              <input name="tags" defaultValue={current.tags} />
+              {tagsSet.map(tag => (
+                <button type="button" onClick={() => addRemoveTag(tag)} className="tagBtn">
+                  {tag}
+                </button>
+              ))}
+            </label>
+            <label htmlFor="note" className="notesField">
+              Notes:
+              <textarea name="note" defaultValue={current.note} />
+            </label>
+            <label htmlFor="added_at">
+              Added At:
+              <input name="addedAt" defaultValue={current.added_at} />
+            </label>
+            <button type="submit" className="saveBtn">Save</button>
+            <button
+              onClick={() => setIsEditing(!isEditing)}
+              type="button"
+            >
+              Cancel
+            </button>
+          </form>
+        </div>
+      ) : (
+        <div>
+          {/* show non-editing format */}
+          <div className="manual">
+            {current.title}
+            <span>
+              {`Reason: ${current.reason}`}
+            </span>
+            <span>
+              {`Note: ${current.note}`}
+            </span>
+            <span title="Priorities description
 -1
 - 1 - 20  Top tier to play
 - 50 - 80  Next to install
@@ -215,37 +187,34 @@ const Goal = ({ goal }) => {
 - 300 Errors / Issues
 - 400 There's a newer version
 - 500 Not interested"
-              >
-                Priority:
-                {current.priority !== -1 && (
-                  <span>
-                    {current.priority}
-                  </span>
-                )}
-                {`, Platform: ${current.platform} Status: ${current.status} Graphic style: ${current.graphic_style}, `}
-                {`Tags: ${current.tags} Thoughts: ${current.thoughts}`}
-              </span>
-            </div>
-            {current.playnite_title !== '' && (
-              <div>
-                {`pn: ${current.playnite_title}`}
-                {current.playnite_last !== '' && `, ${current.playnite_last}, ${current.playnite_added}, ${current.playnite_playtime}`}
-              </div>
-            )}
-            {/* {current.replayability}
-          {current.issues}
-          {current.summary} */}
-          </>
-        )}
+            >
+              Priority:
+              {current.priority !== -1 && (
+                <span>
+                  {current.priority}
+                </span>
+              )}
+            </span>
+            <span>
+              {`Tags: ${current.tags}`}
+            </span>
+            <span>
+              {`Type: ${current.type}`}
+            </span>
+            <span>
+              {`Added At: ${current.added_at}`}
+            </span>
+          </div>
+          <button
+            onClick={() => setIsEditing(!isEditing)}
+            type="button"
+          >
+            Edit
+          </button>
+        </div>
+      )}
 
-        {/*
-        {current.size}
-        {current.created_at}
-        {current.updated_at}
-
-        */}
-      </div>
-    </section>
+    </div>
   );
 };
 export default Goal;
