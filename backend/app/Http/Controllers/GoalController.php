@@ -57,7 +57,6 @@ class GoalController extends Controller
                 $orderByValue = 'DESC';
         }
 
-
         $query = Goal::where('title', 'LIKE', $searchTitle)
             ->where('tags', 'LIKE', $searchTags)
             ->orWhereNull('tags')
@@ -67,10 +66,10 @@ class GoalController extends Controller
         // echo $query->toSql();
         // $bindings = $query->getBindings();
         // dd($query->toSql(), $bindings);
-        $games = $query->get();
+        $goal = $query->get();
         // ->paginate($pageSize);
 
-        return $games;
+        return $goal;
     }
 
     /**
@@ -97,6 +96,7 @@ class GoalController extends Controller
         ]);
 
         $goal = Goal::create($request->all());
+        // echo $request->all();
         return [
             "status" => 1,
             "data" => $goal
@@ -109,12 +109,15 @@ class GoalController extends Controller
      * @param  \App\Models\Goal  $Goal
      * @return array response status data
      */
-    public function show(Goal $goal)
+    public function show(int $id)
     {
-        return [
-            "status" => 1,
-            "data" => $goal
-        ];
+
+        $query = Goal::where('id', $id);
+        $goal = $query->get();
+        // ->paginate($pageSize);
+
+        return $goal;
+
     }
 
     /**

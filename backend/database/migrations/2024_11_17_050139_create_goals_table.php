@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('start_timeframe')->nullable();
             $table->date('end_timeframe')->nullable();
             $table->date('added_at')->nullable();
+            $table->string('type', 50)->nullable();
 
         });
     }
