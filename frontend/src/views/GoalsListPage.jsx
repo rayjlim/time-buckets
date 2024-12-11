@@ -11,13 +11,16 @@ import './GoalsListPage.css';
 
 import pkg from '../../package.json';
 
-const searchTtags = ['<untagged>', 'to-download', 'to-install', 'installed', 'pink-paw', 'tried', 'to-review', 'skip', 'dl-high'];
+const searchTags = ['<untagged>', 'watch', 'hike', 'animals'];
+
+// const typeSet = ['location', 'experience', 'achievement'];
+// const tagsSet = ['watch', 'hike', 'animals'];
 
 const GoalsListPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [goals, setGoals] = useState([]);
   const [page, setPage] = useState(1);
-  const [pageMeta, setPageMeta] = useState({ last_page: 1 });
+  const [pageMeta, setPageMeta] = useState({ last_page: 1, current_page: 1, total: -1 });
   const searchForm = useRef();
 
   const formTagChoices = useRef();
@@ -72,9 +75,8 @@ const GoalsListPage = () => {
       } else {
         const data = await response.json();
         console.log('data :', data);
-        const localGames = data;
-        setGoals(localGames);
-        setPageMeta(data);
+        setGoals(data.goals);
+        setPageMeta(data.meta);
       }
     } catch (err) {
       console.log(`Error: ${err}`);
@@ -119,21 +121,6 @@ const GoalsListPage = () => {
     })();
   }, [page]);
 
-  const letters = [];
-
-  for (let i = 97; i <= 122; i++) {
-    letters.push(String.fromCharCode(i));
-  }
-  const searchLetter = async letter => {
-    console.log(letter);
-
-    const startsWith = searchForm.current.querySelector('input[name="startsWith"]');
-    startsWith.value = letter;
-    const orderBy = searchForm.current.querySelector('select[name="orderBy"]');
-    orderBy.value = 'title';
-    setPage(1);
-    await loadGoals();
-  };
   const clearFields = async () => {
     const searchTitle = searchForm.current.querySelector('input[name="searchTitle"]');
     searchTitle.value = '';
@@ -150,9 +137,11 @@ const GoalsListPage = () => {
     startsWith.value = '';
   };
 
+  console.log(pageMeta);
+
   return (
     <>
-      <h1>Game Collection</h1>
+      <h1>Time Buckets</h1>
       {isLoading && <h2>LOADING</h2>}
       <div>
         <form ref={searchForm} onSubmit={loadGoals}>
@@ -175,7 +164,7 @@ const GoalsListPage = () => {
               }}
             >
               <option value="">-</option>
-              {searchTtags.map(tag => (
+              {searchTags.map(tag => (
                 <option value={tag}>{tag}</option>
               ))}
             </select>
@@ -203,17 +192,11 @@ const GoalsListPage = () => {
             </select>
           </label>
         </form>
-        {letters.map(letter => (
-          <button type="button" onClick={() => searchLetter(letter)} className="letter">{letter}</button>
-        ))}
       </div>
       <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
 
       <div>
-        page:
-        {pageMeta.current_page}
-        total:
-        {pageMeta.total}
+        { `page: ${pageMeta.current_page} total: ${pageMeta.total}`}
       </div>
       {!isLoading && (
         <GoalListItems

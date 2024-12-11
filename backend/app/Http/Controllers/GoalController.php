@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Goal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use stdClass;
 
 class GoalController extends Controller
 {
@@ -66,10 +67,19 @@ class GoalController extends Controller
         // echo $query->toSql();
         // $bindings = $query->getBindings();
         // dd($query->toSql(), $bindings);
-        $goal = $query->get();
+        $goals = $query->get();
         // ->paginate($pageSize);
 
-        return $goal;
+
+
+        return [
+            "meta" => (object) [
+                "last_page" => 1,
+                "current_page" => 1,
+                "total" => -1
+            ],
+            "goals" => $goals
+        ];
     }
 
     /**
@@ -117,7 +127,6 @@ class GoalController extends Controller
         // ->paginate($pageSize);
 
         return $goal;
-
     }
 
     /**
