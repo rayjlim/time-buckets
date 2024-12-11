@@ -1,24 +1,24 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { parse, format } from 'date-fns';
+// import { parse, format } from 'date-fns';
 import { toast } from 'react-toastify';
 import { REST_ENDPOINT } from '../constants';
 
-import './Game.css';
+import './Goal.css';
 
 const tagsSet = ['to-download', 'to-install', 'installed', 'pink-paw', 'tried', 'to-review', 'skip', 'dl-high', 'finished'];
 
-const Game = ({ game }) => {
+const Goal = ({ goal }) => {
   const formRef = useRef();
-  const [current, setCurrent] = useState(game);
+  const [current, setCurrent] = useState(goal);
 
   const [isEditing, setIsEditing] = useState(false);
   function externalLink(url) {
     window.open(url, '_blank');
   }
 
-  async function saveGame(event) {
-    console.log('save game');
+  async function saveGoal(event) {
+    console.log('save goal');
     event.preventDefault();
     const formData = new FormData(formRef.current);
     const priority = formData.get('priority');
@@ -32,7 +32,7 @@ const Game = ({ game }) => {
       toast.error('Missing Priority value');
       return;
     }
-    const endpoint = `${REST_ENDPOINT}/api/goals/${game.id}`;
+    const endpoint = `${REST_ENDPOINT}/api/goals/${goal.id}`;
     const config = {
       method: 'POST',
       body: JSON.stringify({
@@ -83,7 +83,7 @@ const Game = ({ game }) => {
     }
   }
 
-  let mainClassName = 'game-list-row';
+  let mainClassName = 'goal-list-row';
   switch (true) {
     case current.size_calculated > 20:
       mainClassName = `${mainClassName} large-size`;
@@ -107,8 +107,8 @@ const Game = ({ game }) => {
     >
       <img
         src={current.image}
-        alt="game poster"
-        className="game-image"
+        alt="goal poster"
+        className="goal-image"
         onClick={() => externalLink(current.fg_url)}
         aria-hidden="true"
       />
@@ -130,19 +130,19 @@ const Game = ({ game }) => {
           <span>
             {`Genre: ${current.genre}`}
           </span>
-          <span className={current.size_calculated > 20 ? 'game-size-large' : ''}>
+          <span className={current.size_calculated > 20 ? 'goal-size-large' : ''}>
             {` Size: ${current.size_calculated}`}
           </span>
-          <span>
+          {/* <span>
             {` Article date: (${format(
               parse(current.fg_article_date, 'yyyy-MM-dd', new Date()),
               'MMM-dd-yyyy',
             )})`}
-          </span>
+          </span> */}
         </div>
         {isEditing ? (
           <div className="manual">
-            <form ref={formRef} onSubmit={saveGame}>
+            <form ref={formRef} onSubmit={saveGoal}>
               <label
                 htmlFor="priority"
                 title="Priorities description
@@ -248,8 +248,8 @@ const Game = ({ game }) => {
     </section>
   );
 };
-export default Game;
+export default Goal;
 
-Game.propTypes = {
-  game: PropTypes.object.isRequired,
+Goal.propTypes = {
+  goal: PropTypes.object.isRequired,
 };

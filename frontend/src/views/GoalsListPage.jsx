@@ -2,18 +2,20 @@ import React, { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 import { REST_ENDPOINT } from '../constants';
-import GameListItems from '../components/GameListItems';
+import GoalListItems from '../components/GoalListItems';
 import PaginationBar from '../components/PaginationBar';
 import PnForm from '../components/PnForm';
 
-import './GamesListPage.css';
+import 'react-toastify/dist/ReactToastify.css';
+import './GoalsListPage.css';
+
 import pkg from '../../package.json';
 
 const searchTtags = ['<untagged>', 'to-download', 'to-install', 'installed', 'pink-paw', 'tried', 'to-review', 'skip', 'dl-high'];
 
-const GamesListPage = () => {
+const GoalsListPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [games, setGames] = useState([]);
+  const [goals, setGoals] = useState([]);
   const [page, setPage] = useState(1);
   const [pageMeta, setPageMeta] = useState({ last_page: 1 });
   const searchForm = useRef();
@@ -21,7 +23,7 @@ const GamesListPage = () => {
   const formTagChoices = useRef();
 
   /** Page Data look up */
-  async function loadGames(event) {
+  async function loadGoals(event) {
     console.log(event);
     event?.preventDefault();
     const formData = new FormData(searchForm.current);
@@ -33,7 +35,7 @@ const GamesListPage = () => {
     const startsWith = formData.get('startsWith');
     const priority = formData.get('priority');
 
-    const endpoint = `${REST_ENDPOINT}/api/goals/?page=${page}`;
+    const endpoint = `${REST_ENDPOINT}goals/?page=${page}`;
     let searchFields = '';
     if (searchTitle !== '') {
       searchFields += `&search_title=${searchTitle}`;
@@ -70,14 +72,8 @@ const GamesListPage = () => {
       } else {
         const data = await response.json();
         console.log('data :', data);
-        const localGames = data.data.map(x => {
-          const newVal = { ...x };
-          if (x.platform === null) {
-            newVal.platform = 1;
-          }
-          return newVal;
-        });
-        setGames(localGames);
+        const localGames = data;
+        setGoals(localGames);
         setPageMeta(data);
       }
     } catch (err) {
@@ -109,7 +105,7 @@ const GamesListPage = () => {
   /** Search functions */
 
   const handlePageClick = event => {
-    const newOffset = (event.selected * pageMeta.itemsPerPage) % games.length;
+    const newOffset = (event.selected * pageMeta.itemsPerPage) % goals.length;
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`,
     );
@@ -119,7 +115,7 @@ const GamesListPage = () => {
 
   useEffect(() => {
     (async () => {
-      await loadGames();
+      await loadGoals();
     })();
   }, [page]);
 
@@ -136,7 +132,7 @@ const GamesListPage = () => {
     const orderBy = searchForm.current.querySelector('select[name="orderBy"]');
     orderBy.value = 'title';
     setPage(1);
-    await loadGames();
+    await loadGoals();
   };
   const clearFields = async () => {
     const searchTitle = searchForm.current.querySelector('input[name="searchTitle"]');
@@ -146,7 +142,7 @@ const GamesListPage = () => {
     const orderBy = searchForm.current.querySelector('select[name="orderBy"]');
     orderBy.value = '';
     setPage(1);
-    await loadGames();
+    await loadGoals();
   };
 
   const changeTitle = () => {
@@ -159,7 +155,7 @@ const GamesListPage = () => {
       <h1>Game Collection</h1>
       {isLoading && <h2>LOADING</h2>}
       <div>
-        <form ref={searchForm} onSubmit={loadGames}>
+        <form ref={searchForm} onSubmit={loadGoals}>
           <input name="startsWith" type="hidden" />
           <label htmlFor="searchTitle" className="searchField">
             Search Title:
@@ -220,8 +216,8 @@ const GamesListPage = () => {
         {pageMeta.total}
       </div>
       {!isLoading && (
-        <GameListItems
-          games={games}
+        <GoalListItems
+          goals={goals}
         />
       )}
       <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
@@ -233,4 +229,4 @@ const GamesListPage = () => {
   );
 };
 
-export default GamesListPage;
+export default GoalsListPage;

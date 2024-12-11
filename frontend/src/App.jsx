@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import GamesListPage from './views/GamesListPage';
+import GoalsListPage from './views/GoalsListPage';
 
 import './App.css';
 
@@ -10,7 +10,7 @@ const App = () => (
     <ToastContainer />
     <BrowserRouter>
       <Routes>
-        <Route path="*" element={<GamesListPage />} />
+        <Route path="*" element={<GoalsListPage />} />
       </Routes>
     </BrowserRouter>
   </div>
