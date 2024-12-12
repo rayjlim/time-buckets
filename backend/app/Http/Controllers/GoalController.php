@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Goal;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use stdClass;
 
 class GoalController extends Controller
 {
@@ -87,9 +85,15 @@ class GoalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // $formData = json_decode($request->getContent());
+        // $goal = new Goal();
+        // $goal->title = $formData->title;
+        // $goal->type = $formData->type;
+        // $goal->added_at = $formData->addedAt;
+
+        // $goal->save();
     }
 
     /**
@@ -101,14 +105,11 @@ class GoalController extends Controller
     public function store(Request $request)
     {
         // see https://stackoverflow.com/questions/44001030/laravel-validate-json-object
-        $this->validate($request, [
-            'title' => 'required',
-        ]);
+        $formData = json_decode($request->getContent());
 
-        $goal = Goal::create($request->all());
+        $goal = Goal::create((array)$formData);
         // echo $request->all();
         return [
-            "status" => 1,
             "data" => $goal
         ];
     }
@@ -163,12 +164,12 @@ class GoalController extends Controller
      * @param  \App\Models\Goal  $game
      * @return array response status data
      */
-    public function destroy(Goal $game): array
+    public function destroy(Goal $goal): array
     {
-        $game->delete();
+        $goal->delete();
         return [
-            "status" => 1,
-            "data" => $game,
+
+            "data" => $goal,
             "msg" => "Goal deleted successfully"
         ];
     }

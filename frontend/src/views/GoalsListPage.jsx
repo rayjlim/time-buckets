@@ -5,6 +5,7 @@ import { REST_ENDPOINT } from '../constants';
 import GoalListItems from '../components/GoalListItems';
 import PaginationBar from '../components/PaginationBar';
 import PnForm from '../components/PnForm';
+import AddGoalForm from '../components/AddGoalForm';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './GoalsListPage.css';
@@ -144,6 +145,7 @@ const GoalsListPage = () => {
       <h1>Time Buckets</h1>
       {isLoading && <h2>LOADING</h2>}
       <div>
+        <AddGoalForm />
         <form ref={searchForm} onSubmit={loadGoals}>
           <input name="startsWith" type="hidden" />
           <label htmlFor="searchTitle" className="searchField">
