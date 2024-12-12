@@ -12,7 +12,12 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-
+$router->options(
+    '/{any:.*}',
+    function () {
+        return response()->json([], 200);
+    }
+);
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });

@@ -9,7 +9,7 @@ import './Goal.css';
 const typeSet = ['location', 'experience', 'achievement'];
 const tagsSet = ['watch', 'hike', 'animals'];
 
-const Goal = ({ goal }) => {
+const Goal = ({ goal, onRemoveGoal }) => {
   const formRef = useRef();
   const [current, setCurrent] = useState(goal);
 
@@ -71,7 +71,33 @@ const Goal = ({ goal }) => {
       toast.error(`loading error : ${err}`);
     }
   }
+  async function removeGoal() {
+    console.log('remove goal');
 
+    const endpoint = `${REST_ENDPOINT}goals/${goal.id}`;
+    const config = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json', // Optional: Specify if sending JSON data
+      },
+    };
+    try {
+      const response = await fetch(endpoint, config);
+      console.log('response :', response);
+      if (!response.ok) {
+        console.log('response.status :', response.status);
+        throw new Error(response.status);
+      } else {
+        const data = await response.json();
+        console.log('data :', data);
+        setIsEditing(false);
+        onRemoveGoal(goal.id);
+      }
+    } catch (err) {
+      console.log(`Error: ${err}`);
+      toast.error(`loading error : ${err}`);
+    }
+  }
   function addRemoveTag(content) {
     console.log('addRemove', content);
 
@@ -136,7 +162,7 @@ const Goal = ({ goal }) => {
               Type:
               <input name="type" defaultValue={current.type} />
               {typeSet.map(type => (
-                <button type="button" onClick={() => addRemoveType(type)} className="typeBtn">
+                <button type="button" onClick={() => addRemoveType(type)} className="typeBtn" key={type}>
                   {type}
                 </button>
               ))}
@@ -145,7 +171,7 @@ const Goal = ({ goal }) => {
               Tags:
               <input name="tags" defaultValue={current.tags} />
               {tagsSet.map(tag => (
-                <button type="button" onClick={() => addRemoveTag(tag)} className="tagBtn">
+                <button type="button" onClick={() => addRemoveTag(tag)} className="tagBtn" key={tag}>
                   {tag}
                 </button>
               ))}
@@ -166,6 +192,12 @@ const Goal = ({ goal }) => {
               Cancel
             </button>
           </form>
+          <button
+            onClick={() => removeGoal()}
+            type="button"
+          >
+            Delete
+          </button>
         </div>
       ) : (
         <div>
@@ -211,6 +243,7 @@ const Goal = ({ goal }) => {
           >
             Edit
           </button>
+
         </div>
       )}
 
@@ -221,4 +254,5 @@ export default Goal;
 
 Goal.propTypes = {
   goal: PropTypes.object.isRequired,
+  onRemoveGoal: PropTypes.func.isRequired,
 };

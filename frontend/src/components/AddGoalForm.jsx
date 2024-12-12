@@ -1,10 +1,11 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { REST_ENDPOINT } from '../constants';
 
 const typeSet = ['location', 'experience', 'achievement'];
 
-const AddGoalForm = () => {
+const AddGoalForm = ({ onAddGoal }) => {
   const addForm = useRef();
   async function sendAddForm(event) {
     event.preventDefault();
@@ -12,12 +13,13 @@ const AddGoalForm = () => {
     const title = formData.get('title');
     const type = formData.get('type');
     const endpoint = `${REST_ENDPOINT}goals/`;
+    const newGoal = {
+      title,
+      type,
+    };
     const config = {
       method: 'POST',
-      body: JSON.stringify({
-        title,
-        type,
-      }),
+      body: JSON.stringify(newGoal),
     };
     try {
       const response = await fetch(endpoint, config);
@@ -30,6 +32,7 @@ const AddGoalForm = () => {
         toast(`Added : ${JSON.stringify(output)}`);
         // const json = JSON.stringify(output);
         // alert(`${output.data.length}, ${json}`);
+        onAddGoal(output.data);
       }
     } catch (err) {
       console.log(`Error: ${err}`);
@@ -71,3 +74,6 @@ const AddGoalForm = () => {
   );
 };
 export default AddGoalForm;
+AddGoalForm.propTypes = {
+  onAddGoal: PropTypes.func.isRequired,
+};

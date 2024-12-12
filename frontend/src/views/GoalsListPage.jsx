@@ -2,9 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 import { REST_ENDPOINT } from '../constants';
-import GoalListItems from '../components/GoalListItems';
+import GoalList from '../components/GoalList';
 import PaginationBar from '../components/PaginationBar';
-import PnForm from '../components/PnForm';
 import AddGoalForm from '../components/AddGoalForm';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -86,24 +85,14 @@ const GoalsListPage = () => {
       setIsLoading(false);
     }
   }
-
-  async function removeDuplicates() {
-    toast.error('Removing...');
-    const endpoint = `${REST_ENDPOINT}/api/goals/removeDuplicates/`;
-
-    try {
-      const response = await fetch(`${endpoint}`);
-      if (!response.ok) {
-        console.log('response.status :', response.status);
-        throw new Error(response.status);
-      } else {
-        toast.error('Duplicates removed');
-      }
-    } catch (err) {
-      console.log(`Error: ${err}`);
-      toast.error(`loading error : ${err}`);
-    }
-  }
+  const onAddGoal = newGoal => {
+    const updatedItems = [...goals, newGoal];
+    setGoals(updatedItems);
+  };
+  const onRemoveGoal = id => {
+    const updatedGoals = goals.filter(item => item.id !== id);
+    setGoals(updatedGoals);
+  };
 
   /** Search functions */
 
@@ -145,7 +134,7 @@ const GoalsListPage = () => {
       <h1>Time Buckets</h1>
       {isLoading && <h2>LOADING</h2>}
       <div>
-        <AddGoalForm />
+        <AddGoalForm onAddGoal={onAddGoal} />
         <form ref={searchForm} onSubmit={loadGoals}>
           <input name="startsWith" type="hidden" />
           <label htmlFor="searchTitle" className="searchField">
@@ -201,14 +190,13 @@ const GoalsListPage = () => {
         { `page: ${pageMeta.current_page} total: ${pageMeta.total}`}
       </div>
       {!isLoading && (
-        <GoalListItems
+        <GoalList
           goals={goals}
+          onRemoveGoal={onRemoveGoal}
         />
       )}
       <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
 
-      <button type="button" onClick={() => removeDuplicates()}>Remove Duplicates</button>
-      <PnForm />
       <div>{`version ${pkg.version}`}</div>
     </>
   );

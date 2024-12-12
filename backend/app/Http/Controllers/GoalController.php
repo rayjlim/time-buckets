@@ -81,22 +81,6 @@ class GoalController extends Controller
     }
 
     /**
-     * Create the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        // $formData = json_decode($request->getContent());
-        // $goal = new Goal();
-        // $goal->title = $formData->title;
-        // $goal->type = $formData->type;
-        // $goal->added_at = $formData->addedAt;
-
-        // $goal->save();
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -164,13 +148,13 @@ class GoalController extends Controller
      * @param  \App\Models\Goal  $game
      * @return array response status data
      */
-    public function destroy(Goal $goal): array
+    public function destroy(int $id): array
     {
-        $goal->delete();
+        Goal::where('id', $id)->delete();
         return [
-
-            "data" => $goal,
+            "data" => $id,
             "msg" => "Goal deleted successfully"
         ];
     }
+
 }
