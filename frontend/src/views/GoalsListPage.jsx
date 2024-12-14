@@ -12,9 +12,7 @@ import './GoalsListPage.css';
 import pkg from '../../package.json';
 
 const searchTags = ['<untagged>', 'watch', 'hike', 'animals'];
-
-// const typeSet = ['location', 'experience', 'achievement'];
-// const tagsSet = ['watch', 'hike', 'animals'];
+const searchType = ['<untagged>', 'location', 'experience', 'achievement'];
 
 const GoalsListPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,6 +21,7 @@ const GoalsListPage = () => {
   const [pageMeta, setPageMeta] = useState({ last_page: 1, current_page: 1, total: -1 });
   const searchForm = useRef();
 
+  const formTypeChoices = useRef();
   const formTagChoices = useRef();
 
   /** Page Data look up */
@@ -31,9 +30,9 @@ const GoalsListPage = () => {
     event?.preventDefault();
     const formData = new FormData(searchForm.current);
     const searchTitle = formData.get('searchTitle');
+    const type = formData.get('type');
     const tags = formData.get('tags');
-    const sizeMin = formData.get('sizeMin');
-    const sizeMax = formData.get('sizeMax');
+
     const orderBy = formData.get('orderBy');
     const startsWith = formData.get('startsWith');
     const priority = formData.get('priority');
@@ -43,14 +42,12 @@ const GoalsListPage = () => {
     if (searchTitle !== '') {
       searchFields += `&search_title=${searchTitle}`;
     }
+    if (type !== '') {
+      searchFields += `&type=${type}`;
+    }
+
     if (tags !== '') {
       searchFields += `&tags=${tags}`;
-    }
-    if (sizeMin !== '') {
-      searchFields += `&size_min=${sizeMin}`;
-    }
-    if (sizeMax !== '') {
-      searchFields += `&size_max=${sizeMax}`;
     }
     if (orderBy !== '') {
       searchFields += `&order_by=${orderBy}`;
@@ -114,8 +111,6 @@ const GoalsListPage = () => {
   const clearFields = async () => {
     const searchTitle = searchForm.current.querySelector('input[name="searchTitle"]');
     searchTitle.value = '';
-    const startsWith = searchForm.current.querySelector('input[name="startsWith"]');
-    startsWith.value = '';
     const orderBy = searchForm.current.querySelector('select[name="orderBy"]');
     orderBy.value = '';
     setPage(1);
@@ -143,6 +138,23 @@ const GoalsListPage = () => {
           </label>
           <button type="submit">Search</button>
           <button type="button" onClick={() => clearFields()}>Clear</button>
+          <label htmlFor="type" className="searchField">
+            Type:
+            <input name="type" type="text" />
+            <select
+              ref={formTypeChoices}
+              onChange={() => {
+                const typeInput = searchForm.current.querySelector('input[name="type"]');
+
+                typeInput.value = formTypeChoices.current.value;
+              }}
+            >
+              <option value="">-</option>
+              {searchType.map(tag => (
+                <option value={tag}>{tag}</option>
+              ))}
+            </select>
+          </label>
           <label htmlFor="tags" className="searchField">
             Tag:
             <input name="tags" type="text" />
@@ -164,19 +176,10 @@ const GoalsListPage = () => {
             Priority:
             <input name="priority" type="text" size="4" />
           </label>
-          <label htmlFor="sizeMin" className="searchField">
-            Size Min:
-            <input name="sizeMin" type="text" size="5" />
-          </label>
-          <label htmlFor="sizeMax" className="searchField">
-            Size Max:
-            <input name="sizeMax" type="text" size="5" />
-          </label>
           <label htmlFor="orderBy" className="searchField">
             Order By:
             <select name="orderBy">
               <option value="">Updated At</option>
-              <option value="fg_article_date">Article Date</option>
               <option value="updated-at-asc">Updated At -  Asc</option>
               <option value="priority">Priority</option>
               <option value="title">Title</option>
@@ -187,7 +190,7 @@ const GoalsListPage = () => {
       <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
 
       <div>
-        { `page: ${pageMeta.current_page} total: ${pageMeta.total}`}
+        {`page: ${pageMeta.current_page} total: ${pageMeta.total}`}
       </div>
       {!isLoading && (
         <GoalList

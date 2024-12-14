@@ -26,8 +26,11 @@ class GoalController extends Controller
         $searchTags = $request->input('tags') == "<untagged>"
             ? ""
             : '%' . $request->input('tags') . '%';
+        $searchType = $request->input('type') == "<untagged>"
+            ? ""
+            : '%' . $request->input('type') . '%';
         $priorityParam = $request->input('priority');
-        $priority = $priorityParam && is_numeric($priorityParam)
+        $searchPriority = $priorityParam && is_numeric($priorityParam)
             ? $priorityParam
             : -2;
         $priorityOperand = $priorityParam && is_numeric($priorityParam)
@@ -45,7 +48,7 @@ class GoalController extends Controller
                 $orderByField = 'priority';
                 $orderByValue = 'ASC';
                 $priorityOperand = '>=';
-                $priority = $priorityParam;
+                $searchPriority = $priorityParam;
                 break;
             case 'updated-at-asc':
                 $orderByField = 'updated_at';
@@ -58,8 +61,8 @@ class GoalController extends Controller
 
         $query = Goal::where('title', 'LIKE', $searchTitle)
             ->where('tags', 'LIKE', $searchTags)
-            ->orWhereNull('tags')
-            ->where('priority', $priorityOperand, $priority)
+            ->where('type', 'LIKE', $searchType)
+            ->where('priority', $priorityOperand, $searchPriority)
             ->orWhereNull('priority')
             ->orderBy($orderByField, $orderByValue);
         // echo $query->toSql();
@@ -68,13 +71,19 @@ class GoalController extends Controller
         $goals = $query->get();
         // ->paginate($pageSize);
 
-
+        // echo $query->toSql();
 
         return [
             "meta" => (object) [
                 "last_page" => 1,
                 "current_page" => 1,
-                "total" => -1
+                "total" => -1,
+                "searchTitle" => $searchTitle,
+                "tags" => $searchTags,
+                "type" => $searchType,
+                "priority" => $searchPriority,
+                "orderByField" => $orderByField
+
             ],
             "goals" => $goals
         ];
@@ -126,12 +135,19 @@ class GoalController extends Controller
         $formData = json_decode($request->getContent());
         $goal = Goal::find($id);
         $goal->title = $formData->title;
-        $goal->priority = $formData->priority;
+        $priority = $formData->priority == ""
+        ? -1
+        : $formData->priority;
+        $goal->priority = $priority;
         $goal->reason = $formData->reason;
         $goal->type = $formData->type;
         $goal->note = $formData->note;
         $goal->tags = $formData->tags;
-        $goal->added_at = $formData->addedAt;
+        $addedAt = $formData->addedAt == ""
+        ? date("Y-m-d")
+        : $formData->addedAt;
+        $goal->added_at = $addedAt;
+
 
         $goal->update();
 
@@ -156,5 +172,4 @@ class GoalController extends Controller
             "msg" => "Goal deleted successfully"
         ];
     }
-
 }

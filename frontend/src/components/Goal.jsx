@@ -27,10 +27,7 @@ const Goal = ({ goal, onRemoveGoal }) => {
     const tags = formData.get('tags');
     const thoughts = formData.get('thoughts');
     const type = formData.get('type');
-    if (priority === '') {
-      toast.error('Missing Priority value');
-      return;
-    }
+
     const endpoint = `${REST_ENDPOINT}goals/${goal.id}`;
     const config = {
       method: 'POST',
