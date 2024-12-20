@@ -70,7 +70,7 @@ const GoalsListPage = () => {
 
   return (
     <>
-      <h1>Time Buckets</h1>
+      <h1 className="title">Time Buckets</h1>
       {isLoading && <h2>LOADING</h2>}
       <div>
         <AddGoalForm onAddGoal={onAddGoal} />

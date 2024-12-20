@@ -1,3 +1,11 @@
+.title {
+    background-image: url('../../public/assets/logo75.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    height: 75px;
+    padding-left: 80px;
+    display: inline-block;
+}
 .searchField * {
     margin: 0 .5em;
   }
