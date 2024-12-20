@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { toast } from 'react-toastify';
 
-import { REST_ENDPOINT } from '../constants';
 import GoalList from '../components/GoalList';
 import PaginationBar from '../components/PaginationBar';
 import AddGoalForm from '../components/AddGoalForm';
+import useLoadGoals from '../hooks/useLoadGoals';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './GoalsListPage.css';
@@ -25,63 +24,8 @@ const GoalsListPage = () => {
   const formTagChoices = useRef();
 
   /** Page Data look up */
-  async function loadGoals(event) {
-    console.log(event);
-    event?.preventDefault();
-    const formData = new FormData(searchForm.current);
-    const searchTitle = formData.get('searchTitle');
-    const type = formData.get('type');
-    const tags = formData.get('tags');
+  const { loadGoals } = useLoadGoals(searchForm, page, setIsLoading, setGoals, setPageMeta);
 
-    const orderBy = formData.get('orderBy');
-    const startsWith = formData.get('startsWith');
-    const priority = formData.get('priority');
-
-    const endpoint = `${REST_ENDPOINT}goals/?page=${page}`;
-    let searchFields = '';
-    if (searchTitle !== '') {
-      searchFields += `&search_title=${searchTitle}`;
-    }
-    if (type !== '') {
-      searchFields += `&type=${type}`;
-    }
-
-    if (tags !== '') {
-      searchFields += `&tags=${tags}`;
-    }
-    if (orderBy !== '') {
-      searchFields += `&order_by=${orderBy}`;
-    }
-    if (startsWith !== '') {
-      searchFields += `&starts_with=${startsWith}`;
-    }
-    if (priority !== '') {
-      searchFields += `&priority=${priority}`;
-    }
-    setIsLoading(true);
-    // TODO: if production, then pass mode: 'no-cors', in fetch options
-
-    try {
-      const response = await fetch(`${endpoint}${searchFields}`, {
-
-      });
-      console.log('response :', response);
-      if (!response.ok) {
-        console.log('response.status :', response.status);
-        throw new Error(response.status);
-      } else {
-        const data = await response.json();
-        console.log('data :', data);
-        setGoals(data.goals);
-        setPageMeta(data.meta);
-      }
-    } catch (err) {
-      console.log(`Error: ${err}`);
-      toast.error(`loading error : ${err}`);
-    } finally {
-      setIsLoading(false);
-    }
-  }
   const onAddGoal = newGoal => {
     const updatedItems = [...goals, newGoal];
     setGoals(updatedItems);
