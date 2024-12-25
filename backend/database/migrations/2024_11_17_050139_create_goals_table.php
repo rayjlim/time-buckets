@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('title', 255);
+            $table->integer('type');
             $table->integer('priority')->nullable();
             $table->text('reason')->nullable();
             $table->text('note')->nullable();
@@ -22,7 +23,6 @@ return new class extends Migration
             $table->date('start_timeframe')->nullable();
             $table->date('end_timeframe')->nullable();
             $table->date('added_at')->nullable();
-            $table->string('type', 50)->nullable();
 
         });
     }

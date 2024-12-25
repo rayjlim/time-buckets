@@ -30,7 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `tb_goals` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `priority` int(4) DEFAULT '-1',
+  `priority` int(4) DEFAULT '0',
+  `type` int(1) DEFAULT '0',
   `reason` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `note` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tags` text COLLATE utf8mb4_unicode_ci,

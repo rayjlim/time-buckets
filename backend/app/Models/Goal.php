@@ -19,14 +19,14 @@ class Goal extends Model
      */
     protected $fillable = [
         'title',
+        'type',
         'priority',
         'reason',
         'note',
         'tags',
         'start_timeframe',
         'end_timeframe',
-        'added_at',
-        'type'
+        'added_at'
     ];
 
 

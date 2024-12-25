@@ -10,8 +10,8 @@ import './GoalsListPage.css';
 
 import pkg from '../../package.json';
 
-const searchTags = ['<untagged>', 'watch', 'hike', 'animals'];
-const searchType = ['<untagged>', 'location', 'experience', 'achievement'];
+const searchTags = ['<untagged>', 'watch', 'hike', 'animals', 'achievement', 'skill'];
+const searchType = ['<untagged>', 'location', 'experience'];
 
 const GoalsListPage = () => {
   const [isLoading, setIsLoading] = useState(false);

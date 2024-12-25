@@ -28,7 +28,7 @@ class GoalController extends Controller
             : '%' . $request->input('tags') . '%';
         $searchType = $request->input('type') == "<untagged>"
             ? ""
-            : '%' . $request->input('type') . '%';
+            : $request->input('type');
         $priorityParam = $request->input('priority');
         $searchPriority = $priorityParam && is_numeric($priorityParam)
             ? $priorityParam
@@ -61,7 +61,7 @@ class GoalController extends Controller
 
         $query = Goal::where('title', 'LIKE', $searchTitle)
             ->where('tags', 'LIKE', $searchTags)
-            ->where('type', 'LIKE', $searchType)
+            ->where('type', '=', $searchType)
             ->where('priority', $priorityOperand, $searchPriority)
             ->orderBy($orderByField, $orderByValue);
         // echo $query->toSql();

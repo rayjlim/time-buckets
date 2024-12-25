@@ -5,7 +5,7 @@ import useSaveGoal from '../hooks/useSaveGoal';
 
 import './Goal.css';
 
-const typeSet = ['location', 'experience', 'achievement'];
+const typeSet = ['location', 'experience'];
 const tagsSet = ['watch', 'hike', 'animals'];
 
 const Goal = ({ goal, onRemoveGoal }) => {
@@ -21,14 +21,11 @@ const Goal = ({ goal, onRemoveGoal }) => {
 
   let mainClassName = 'goal-list-row';
   switch (true) {
-    case current.type === 'location':
+    case current.type === '1':
       mainClassName = `${mainClassName} location-type`;
       break;
-    case current.type === 'experience':
+    case current.type === '2':
       mainClassName = `${mainClassName} experience-type`;
-      break;
-    case current.type === 'achievement':
-      mainClassName = `${mainClassName} achievement-type`;
       break;
     default:
       console.log('');
@@ -134,7 +131,7 @@ const Goal = ({ goal, onRemoveGoal }) => {
               {`Tags: ${current.tags}`}
             </span>
             <span>
-              {`Type: ${current.type}`}
+              {`Type: ${typeSet[current.type]}`}
             </span>
             <span>
               {`Added At: ${current.added_at}`}

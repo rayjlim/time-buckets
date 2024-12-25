@@ -4,6 +4,18 @@ to run the phpunit with npm watch, I had to
 to change the default timeout from 300 to a large number  
 `export COMPOSER_PROCESS_TIMEOUT=50000`
 
+`Skill` and `Accomplishment` are just tags. Will only have two goal types, `Experience` and `Location`
+
+----
+
+## most common user workflows
+
+- Add a Location Goal
+- Update Details of Location
+- Add an Experience Goal
+- Update Details of Experience
+- Mark Goal as completed
+
 ----
 
 ## Helpful links
