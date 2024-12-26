@@ -11,6 +11,7 @@ const useAddForm = (onAddGoal, formRef) => {
     const newGoal = {
       title,
       type,
+      parent_id: 0,
     };
     const config = {
       method: 'POST',

@@ -26,7 +26,8 @@ class Goal extends Model
         'tags',
         'start_timeframe',
         'end_timeframe',
-        'added_at'
+        'added_at',
+        'parent_id'
     ];
 
 
