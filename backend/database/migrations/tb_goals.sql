@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tb_goals` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `priority` int(4) DEFAULT '0',
   `type` int(1) DEFAULT '0',
@@ -76,7 +76,7 @@ ALTER TABLE `gc_games`
 -- AUTO_INCREMENT for table `gc_games`
 --
 ALTER TABLE `gc_games`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4933;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
