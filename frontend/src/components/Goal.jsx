@@ -5,7 +5,7 @@ import useSaveGoal from '../hooks/useSaveGoal';
 
 import './Goal.css';
 
-const typeSet = ['location', 'experience'];
+const typeSet = ['0', '1'];
 const tagsSet = ['watch', 'hike', 'animals'];
 
 const Goal = ({ goal, onRemoveGoal }) => {
@@ -44,10 +44,11 @@ const Goal = ({ goal, onRemoveGoal }) => {
             <label
               htmlFor="priority"
               title="Priorities description
--1
-- 1 - 20  Top tier to play
-- 50 - 80  Next to install
-- 80 - 100  Next to download + install
+- Finance (1-10)
+- Relationship (1-10)
+- Physical (1-10)
+- Time Frame (1-10)
+- Total (1-50)
 "
             >
               Priority:
@@ -66,6 +67,10 @@ const Goal = ({ goal, onRemoveGoal }) => {
                   {type}
                 </button>
               ))}
+            </label>
+            <label htmlFor="parent_id">
+              Parent Id:
+              <input name="parent_id" defaultValue={current.parent_id} />
             </label>
             <label htmlFor="tags">
               Tags:
@@ -103,7 +108,7 @@ const Goal = ({ goal, onRemoveGoal }) => {
         <div>
           {/* show non-editing format */}
           <div className="manual">
-            {current.title}
+            {`${current.title} - ${current.id}`}
             <span>
               {`Reason: ${current.reason}`}
             </span>
@@ -111,14 +116,12 @@ const Goal = ({ goal, onRemoveGoal }) => {
               {`Note: ${current.note}`}
             </span>
             <span title="Priorities description
--1
-- 1 - 20  Top tier to play
-- 50 - 80  Next to install
-- 80 - 100  Next to download + install
-- 200 finished, installed, uninstalled,
-- 300 Errors / Issues
-- 400 There's a newer version
-- 500 Not interested"
+- Finance (1-10)
+- Relationship (1-10)
+- Physical (1-10)
+- Time Frame (1-10)
+- Total (1-50)
+"
             >
               Priority:
               {current.priority !== -1 && (
@@ -131,7 +134,7 @@ const Goal = ({ goal, onRemoveGoal }) => {
               {`Tags: ${current.tags}`}
             </span>
             <span>
-              {`Type: ${typeSet[current.type]}`}
+              {`Type: ${typeSet[current.type]} - Parent: ${current.parent_id}`}
             </span>
             <span>
               {`Added At: ${current.added_at}`}

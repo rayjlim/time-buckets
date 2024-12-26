@@ -13,6 +13,7 @@ const useLoadGoals = (searchForm, page, setIsLoading, setGoals, setPageMeta) => 
     const orderBy = formData.get('orderBy');
     const startsWith = formData.get('startsWith');
     const priority = formData.get('priority');
+    const parentId = formData.get('parentId');
 
     const endpoint = `${REST_ENDPOINT}goals/?page=${page}`;
     let searchFields = '';
@@ -35,6 +36,10 @@ const useLoadGoals = (searchForm, page, setIsLoading, setGoals, setPageMeta) => 
     if (priority !== '') {
       searchFields += `&priority=${priority}`;
     }
+    if (parentId !== '') {
+      searchFields += `&parent_id=${parentId}`;
+    }
+
     setIsLoading(true);
     // TODO: if production, then pass mode: 'no-cors', in fetch options
 

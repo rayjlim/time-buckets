@@ -19,7 +19,7 @@ class GoalController extends Controller
         //     ? $request->input('per_page')
         //     : 20;  // DEFAULT page size
 
-        $searchTitle = '%' . $request->input('search_title') . '%';
+        $searchTitle =  $request->input('search_title');
         // $searchTitle = $request->input('starts_with')
         //     ? $request->input('starts_with') . '%'
         //     : $searchTitle;
@@ -36,7 +36,11 @@ class GoalController extends Controller
         $priorityOperand = $priorityParam && is_numeric($priorityParam)
             ? '='
             : '!=';
+        // $parentIdParam = $searchType && is_numeric($searchType) && $searchType == "0" & $request->input('parent_id')
+        //     ? $request->input('parent_id')
+        //     : '';
 
+        $parentIdParam = $request->input('parent_id');
         $orderByParam = $request->input('order_by');
 
         switch ($orderByParam) {
@@ -59,11 +63,20 @@ class GoalController extends Controller
                 $orderByValue = 'DESC';
         }
 
-        $query = Goal::where('title', 'LIKE', $searchTitle)
-            ->where('tags', 'LIKE', $searchTags)
-            ->where('type', '=', $searchType)
-            ->where('priority', $priorityOperand, $searchPriority)
-            ->orderBy($orderByField, $orderByValue);
+        $query = Goal::where('type', '=', $searchType)
+            ->where('priority', $priorityOperand, $searchPriority);
+
+        if ($searchTitle && $searchTitle !== '') {
+            $query = $query->where('title', 'LIKE', '%' . $searchTitle . '%');
+        }
+        if ($searchTags !== '') {
+            $query = $query->where('tags', 'LIKE', $searchTags);
+        }
+        if ($parentIdParam != '') {
+            $query = $query->where('parent_id', '=', $parentIdParam);
+        }
+
+        $query = $query->orderBy($orderByField, $orderByValue);
         // echo $query->toSql();
         // $bindings = $query->getBindings();
         // dd($query->toSql(), $bindings);
@@ -81,6 +94,7 @@ class GoalController extends Controller
                 "tags" => $searchTags,
                 "type" => $searchType,
                 "priority" => $searchPriority,
+                "parent_id" => $parentIdParam,
                 "orderByField" => $orderByField
 
             ],
@@ -138,18 +152,18 @@ class GoalController extends Controller
         $goal = Goal::find($id);
         $goal->title = $formData->title;
         $priority = $formData->priority == ""
-        ? -1
-        : $formData->priority;
+            ? -1
+            : $formData->priority;
         $goal->priority = $priority;
         $goal->reason = $formData->reason;
         $goal->type = $formData->type;
         $goal->note = $formData->note;
         $goal->tags = $formData->tags;
         $addedAt = $formData->addedAt == ""
-        ? date("Y-m-d")
-        : $formData->addedAt;
+            ? date("Y-m-d")
+            : $formData->addedAt;
         $goal->added_at = $addedAt;
-
+        $goal->parent_id = $formData->parentId;
 
         $goal->update();
 

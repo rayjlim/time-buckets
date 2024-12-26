@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import useAddForm from '../hooks/useAddForm';
 
-const typeSet = ['location', 'experience'];
+const typeSet = ['0', '1'];
 
 const AddGoalForm = ({ onAddGoal }) => {
   const formRef = useRef();

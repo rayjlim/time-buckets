@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tb_goals` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` int(10) int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `priority` int(4) DEFAULT '0',
   `type` int(1) DEFAULT '0',
@@ -41,6 +41,7 @@ CREATE TABLE `tb_goals` (
   `added_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `parent_id` int(10) NULL DEFAULT NULL,
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -75,7 +76,7 @@ ALTER TABLE `gc_games`
 -- AUTO_INCREMENT for table `gc_games`
 --
 ALTER TABLE `gc_games`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4933;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

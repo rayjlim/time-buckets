@@ -11,7 +11,7 @@ import './GoalsListPage.css';
 import pkg from '../../package.json';
 
 const searchTags = ['<untagged>', 'watch', 'hike', 'animals', 'achievement', 'skill'];
-const searchType = ['<untagged>', 'location', 'experience'];
+const searchType = ['<untagged>', '0', '1'];
 
 const GoalsListPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -119,6 +119,10 @@ const GoalsListPage = () => {
           <label htmlFor="priority" className="searchField">
             Priority:
             <input name="priority" type="text" size="4" />
+          </label>
+          <label htmlFor="parentId">
+            Parent Id:
+            <input name="parentId" type="text" size="4" />
           </label>
           <label htmlFor="orderBy" className="searchField">
             Order By:
