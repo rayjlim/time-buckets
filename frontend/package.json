@@ -1,6 +1,6 @@
 {
-  "name": "gamecollection",
-  "version": "0.0.0",
+  "name": "timebuckets",
+  "version": "1.6.0",
   "private": true,
   "homepage": ".",
   "dependencies": {
