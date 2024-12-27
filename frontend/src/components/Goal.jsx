@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-
+import MarkdownDisplay from './MarkdownDisplay';
 import useSaveGoal from '../hooks/useSaveGoal';
 
 import './Goal.css';
@@ -113,7 +113,8 @@ const Goal = ({ goal, onRemoveGoal }) => {
               {`Reason: ${current.reason}`}
             </span>
             <span>
-              {`Note: ${current.note}`}
+              {'Note: '}
+              <MarkdownDisplay source={current.note} />
             </span>
             <span title="Priorities description
 - Finance (1-10)
