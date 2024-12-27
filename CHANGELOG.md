@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/rayjlim/time-buckets/compare/v1.6.0...v1.6.1) (2024-12-27)
+
+
+### Bug Fixes
+
+* [#14](https://github.com/rayjlim/time-buckets/issues/14) add Marked package ([148e6ac](https://github.com/rayjlim/time-buckets/commit/148e6acd4ec2ad594767b04ce5bfbfb04e8d0266))
+* [#14](https://github.com/rayjlim/time-buckets/issues/14) display note support for markdown format ([eea78db](https://github.com/rayjlim/time-buckets/commit/eea78dbff7571df619745235d01b5a3756c1a750))
+* version-update script for windows ([90ae204](https://github.com/rayjlim/time-buckets/commit/90ae204e306c5cca33dc3d6c470ed48cfd88d542))
+
 ## [1.6.0](https://github.com/rayjlim/time-buckets/compare/v1.5.0...v1.6.0) (2024-12-26)
 
 
