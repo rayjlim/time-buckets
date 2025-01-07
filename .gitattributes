@@ -1,5 +1,6 @@
-* text=auto
+* text eol=lf
 
+*.png -text
 *.blade.php diff=html
 *.css diff=css
 *.html diff=html
@@ -8,3 +9,4 @@
 
 /.github export-ignore
 CHANGELOG.md export-ignore
+
