@@ -57,6 +57,9 @@ const GoalsListPage = () => {
     searchTitle.value = '';
     const orderBy = searchForm.current.querySelector('select[name="orderBy"]');
     orderBy.value = '';
+    const parentId = searchForm.current.querySelector('input[name="parentId"]');
+    parentId.value = '';
+    orderBy.value = '';
     setPage(1);
     await loadGoals();
   };
@@ -122,7 +125,7 @@ const GoalsListPage = () => {
           </label>
           <label htmlFor="parentId">
             Parent Id:
-            <input name="parentId" type="text" size="4" />
+            <input name="parentId" id="searchFormParentId" type="text" size="4" />
           </label>
           <label htmlFor="orderBy" className="searchField">
             Order By:
