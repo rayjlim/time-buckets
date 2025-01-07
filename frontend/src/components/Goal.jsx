@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import MarkdownDisplay from './MarkdownDisplay';
+import AddGoalForm from './AddGoalForm';
 import useSaveGoal from '../hooks/useSaveGoal';
 
 import './Goal.css';
@@ -12,6 +13,8 @@ const Goal = ({ goal, onRemoveGoal }) => {
   const formRef = useRef();
   const [current, setCurrent] = useState(goal);
   const [isEditing, setIsEditing] = useState(false);
+  const [isAddingChild, setIsAddingChild] = useState(false);
+
   const {
     saveGoal,
     removeGoal,
@@ -30,6 +33,14 @@ const Goal = ({ goal, onRemoveGoal }) => {
     default:
       console.log('');
   }
+
+  function toggleIsAddingChild() {
+    setIsAddingChild(!isAddingChild);
+  }
+
+  const onAddGoal = () => {
+    setIsAddingChild(!isAddingChild);
+  };
 
   return (
     <div className={mainClassName}>
@@ -150,7 +161,18 @@ const Goal = ({ goal, onRemoveGoal }) => {
 
         </div>
       )}
-
+      {isAddingChild ? (
+        <>
+          <span>Add form</span>
+          <button onClick={toggleIsAddingChild} type="button">toggle</button>
+          <AddGoalForm parentId={current.id} onAddGoal={onAddGoal} />
+        </>
+      ) : (
+        <>
+          <span>Show Add form</span>
+          <button onClick={toggleIsAddingChild} type="button">toggle</button>
+        </>
+      )}
     </div>
   );
 };

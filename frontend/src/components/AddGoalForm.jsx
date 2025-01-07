@@ -5,7 +5,7 @@ import useAddForm from '../hooks/useAddForm';
 
 const typeSet = ['0', '1'];
 
-const AddGoalForm = ({ onAddGoal }) => {
+const AddGoalForm = ({ parentId, onAddGoal }) => {
   const formRef = useRef();
   const {
     sendAddForm,
@@ -27,6 +27,10 @@ const AddGoalForm = ({ onAddGoal }) => {
           </button>
         ))}
       </label>
+      <label htmlFor="parentId">
+        Parent Id:
+        <input name="parentId" defaultValue={parentId} />
+      </label>
       <button
         type="submit"
         title=""
@@ -37,6 +41,13 @@ const AddGoalForm = ({ onAddGoal }) => {
   );
 };
 export default AddGoalForm;
+
+// Set default props
+AddGoalForm.defaultProps = {
+  parentId: 0,
+};
+
 AddGoalForm.propTypes = {
+  parentId: PropTypes.number,
   onAddGoal: PropTypes.func.isRequired,
 };
