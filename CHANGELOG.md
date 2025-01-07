@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/rayjlim/time-buckets/compare/v1.6.2...v1.7.0) (2025-01-07)
+
+
+### Features
+
+* [#46](https://github.com/rayjlim/time-buckets/issues/46) child add form option in goal view ([80865a7](https://github.com/rayjlim/time-buckets/commit/80865a7de1e9273d8ab8a59f58df976d9bb72ac2))
+* link location to query children ([52d60b3](https://github.com/rayjlim/time-buckets/commit/52d60b336921311c26d79af43b2795fea0d5fecd))
+
 ### [1.6.2](https://github.com/rayjlim/time-buckets/compare/v1.6.1...v1.6.2) (2024-12-27)
 
 ### [1.6.1](https://github.com/rayjlim/time-buckets/compare/v1.6.0...v1.6.1) (2024-12-27)
