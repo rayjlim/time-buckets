@@ -7,11 +7,12 @@ const useAddForm = (onAddGoal, formRef) => {
     const formData = new FormData(formRef.current);
     const title = formData.get('title');
     const type = formData.get('type');
+    const parentId = formData.get('parentId');
     const endpoint = `${REST_ENDPOINT}goals/`;
     const newGoal = {
       title,
       type,
-      parent_id: 0,
+      parent_id: parentId,
     };
     const config = {
       method: 'POST',
