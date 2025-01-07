@@ -42,9 +42,22 @@ const Goal = ({ goal, onRemoveGoal }) => {
     setIsAddingChild(!isAddingChild);
   };
 
+  const changeSearchFormParent = () => {
+    document.getElementById('searchFormParentId').value = current.id;
+  };
+  const buttonAsLink = {
+    background: 'none!important',
+    border: 'none',
+    padding: '0!important',
+    fontFamily: 'arial, sans-serif',
+    color: '#069',
+    textDecoration: 'underline',
+    cursor: 'pointer',
+  };
+
   return (
     <div className={mainClassName}>
-
+      <button type="button" onClick={changeSearchFormParent} style={buttonAsLink}>Search for Children</button>
       {isEditing ? (
         <div className="manual">
           <form ref={formRef} onSubmit={saveGoal}>
