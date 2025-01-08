@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/rayjlim/time-buckets/compare/v1.7.0...v1.8.0) (2025-01-08)
+
+
+### Features
+
+* store gps coords and zoom level ([f3d5ebe](https://github.com/rayjlim/time-buckets/commit/f3d5ebeb3030e0a18a49e762aa55f2eae220ac16))
+
+
+### Bug Fixes
+
+* simplify goal display and search by ([4df2aee](https://github.com/rayjlim/time-buckets/commit/4df2aeef2ee62e4856cba8df91583187439f8991))
+
 ## [1.7.0](https://github.com/rayjlim/time-buckets/compare/v1.6.2...v1.7.0) (2025-01-07)
 
 
