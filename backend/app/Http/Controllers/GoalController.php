@@ -164,6 +164,8 @@ class GoalController extends Controller
             : $formData->addedAt;
         $goal->added_at = $addedAt;
         $goal->parent_id = $formData->parentId;
+        $goal->gps_coords = $formData->gpsCoords;
+        $goal->gps_zoom = $formData->gpsZoom;
 
         $goal->update();
 

@@ -24,10 +24,10 @@ const Goal = ({ goal, onRemoveGoal }) => {
 
   let mainClassName = 'goal-list-row';
   switch (true) {
-    case current.type === '1':
+    case current.type === '0':
       mainClassName = `${mainClassName} location-type`;
       break;
-    case current.type === '2':
+    case current.type === '1':
       mainClassName = `${mainClassName} experience-type`;
       break;
     default:
@@ -84,9 +84,9 @@ const Goal = ({ goal, onRemoveGoal }) => {
                 </button>
               ))}
             </label>
-            <label htmlFor="parent_id">
+            <label htmlFor="parentId">
               Parent Id:
-              <input name="parent_id" defaultValue={current.parent_id} />
+              <input name="parentId" defaultValue={current.parent_id} />
             </label>
             <label htmlFor="tags">
               Tags:
@@ -105,9 +105,13 @@ const Goal = ({ goal, onRemoveGoal }) => {
               Added At:
               <input name="addedAt" defaultValue={current.added_at} />
             </label>
-            <label htmlFor="gps_coords">
+            <label htmlFor="gpsCoords">
               GPS coords:
               <input name="gpsCoords" defaultValue={current.gps_coords} />
+            </label>
+            <label htmlFor="gpsZoom">
+              Zoom level:
+              <input name="gpsZoom" defaultValue={current.gps_zoom} />
             </label>
             <button type="submit" className="saveBtn">Save</button>
             <button

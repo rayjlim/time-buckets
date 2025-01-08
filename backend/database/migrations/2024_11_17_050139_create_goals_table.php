@@ -24,6 +24,8 @@ return new class extends Migration
             $table->date('end_timeframe')->nullable();
             $table->date('added_at')->nullable();
             $table->integer('parent_id')->nullable();
+            $table->string('gps_coords');
+            $table->integer('gps_zoom')->nullable();
         });
     }
 
