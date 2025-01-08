@@ -81,7 +81,7 @@ const GoalsListPage = () => {
           <input name="startsWith" type="hidden" />
           <label htmlFor="searchTitle" className="searchField">
             Search Title:
-            <input name="searchTitle" type="text" onChange={changeTitle} />
+            <input name="searchTitle" type="text" onChange={changeTitle} id="searchTitle" />
           </label>
           <button type="submit" id="searchFormSubmit">Search</button>
           <button type="button" onClick={() => clearFields()}>Clear</button>

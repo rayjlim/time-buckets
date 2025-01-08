@@ -43,6 +43,7 @@ const Goal = ({ goal, onRemoveGoal }) => {
   };
 
   const changeSearchFormParent = id => {
+    document.getElementById('searchTitle').value = '';
     document.getElementById('searchFormParentId').value = id;
     document.getElementById('searchFormSubmit').click();
   };
@@ -181,7 +182,7 @@ const Goal = ({ goal, onRemoveGoal }) => {
       )}
       {isAddingChild ? (
         <>
-          <h3>Add form</h3>
+          <h3>Add Children</h3>
           <button onClick={toggleIsAddingChild} type="button" style={{ width: '5rem' }}>Close</button>
           <AddGoalForm parentId={current.id} onAddGoal={onAddGoal} />
         </>
