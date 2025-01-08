@@ -5,7 +5,7 @@ import useAddForm from '../hooks/useAddForm';
 
 const typeSet = ['0', '1'];
 
-const AddGoalForm = ({ parentId, onAddGoal }) => {
+const AddGoalForm = ({ parentId = 0, onAddGoal }) => {
   const formRef = useRef();
   const {
     sendAddForm,
@@ -22,7 +22,7 @@ const AddGoalForm = ({ parentId, onAddGoal }) => {
         Type:
         <input name="type" defaultValue="" />
         {typeSet.map(type => (
-          <button type="button" onClick={() => addRemoveType(type)} className="typeBtn">
+          <button type="button" onClick={() => addRemoveType(type)} className="typeBtn" key={type}>
             {type}
           </button>
         ))}

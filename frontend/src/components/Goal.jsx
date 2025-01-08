@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import MarkdownDisplay from './MarkdownDisplay';
+// import MarkdownDisplay from './MarkdownDisplay';
 import AddGoalForm from './AddGoalForm';
 import useSaveGoal from '../hooks/useSaveGoal';
 
@@ -24,10 +24,10 @@ const Goal = ({ goal, onRemoveGoal }) => {
 
   let mainClassName = 'goal-list-row';
   switch (true) {
-    case current.type === '1':
+    case current.type === '0':
       mainClassName = `${mainClassName} location-type`;
       break;
-    case current.type === '2':
+    case current.type === '1':
       mainClassName = `${mainClassName} experience-type`;
       break;
     default:
@@ -42,22 +42,14 @@ const Goal = ({ goal, onRemoveGoal }) => {
     setIsAddingChild(!isAddingChild);
   };
 
-  const changeSearchFormParent = () => {
-    document.getElementById('searchFormParentId').value = current.id;
-  };
-  const buttonAsLink = {
-    background: 'none!important',
-    border: 'none',
-    padding: '0!important',
-    fontFamily: 'arial, sans-serif',
-    color: '#069',
-    textDecoration: 'underline',
-    cursor: 'pointer',
+  const changeSearchFormParent = id => {
+    document.getElementById('searchFormParentId').value = id;
+    document.getElementById('searchFormSubmit').click();
   };
 
   return (
     <div className={mainClassName}>
-      <button type="button" onClick={changeSearchFormParent} style={buttonAsLink}>Search for Children</button>
+      <button type="button" onClick={() => changeSearchFormParent(current.id)} className="buttonAsLink">Children</button>
       {isEditing ? (
         <div className="manual">
           <form ref={formRef} onSubmit={saveGoal}>
@@ -92,9 +84,9 @@ const Goal = ({ goal, onRemoveGoal }) => {
                 </button>
               ))}
             </label>
-            <label htmlFor="parent_id">
+            <label htmlFor="parentId">
               Parent Id:
-              <input name="parent_id" defaultValue={current.parent_id} />
+              <input name="parentId" defaultValue={current.parent_id} />
             </label>
             <label htmlFor="tags">
               Tags:
@@ -113,6 +105,14 @@ const Goal = ({ goal, onRemoveGoal }) => {
               Added At:
               <input name="addedAt" defaultValue={current.added_at} />
             </label>
+            <label htmlFor="gpsCoords">
+              GPS coords:
+              <input name="gpsCoords" defaultValue={current.gps_coords} />
+            </label>
+            <label htmlFor="gpsZoom">
+              Zoom level:
+              <input name="gpsZoom" defaultValue={current.gps_zoom} />
+            </label>
             <button type="submit" className="saveBtn">Save</button>
             <button
               onClick={() => setIsEditing(!isEditing)}
@@ -124,6 +124,7 @@ const Goal = ({ goal, onRemoveGoal }) => {
           <button
             onClick={() => removeGoal()}
             type="button"
+            style={{ width: '5rem' }}
           >
             Delete
           </button>
@@ -131,14 +132,13 @@ const Goal = ({ goal, onRemoveGoal }) => {
       ) : (
         <div>
           {/* show non-editing format */}
-          <div className="manual">
-            {`${current.title} - ${current.id}`}
+          <div className="manual goal-display">
             <span>
-              {`Reason: ${current.reason}`}
+              {`${current.title} - ${current.id}`}
             </span>
             <span>
-              {'Note: '}
-              <MarkdownDisplay source={current.note} />
+              {`Type: ${typeSet[current.type]} - Parent:`}
+              <button type="button" onClick={() => changeSearchFormParent(current.parent_id)}>{current.parent_id}</button>
             </span>
             <span title="Priorities description
 - Finance (1-10)
@@ -155,36 +155,40 @@ const Goal = ({ goal, onRemoveGoal }) => {
                 </span>
               )}
             </span>
+            {/* <span>
+              {`Reason: ${current.reason}`}
+            </span> */}
+            {/* <span>
+              {'Note: '}
+              <MarkdownDisplay source={current.note} />
+            </span> */}
             <span>
               {`Tags: ${current.tags}`}
             </span>
-            <span>
-              {`Type: ${typeSet[current.type]} - Parent: ${current.parent_id}`}
-            </span>
-            <span>
+
+            {/* <span>
               {`Added At: ${current.added_at}`}
-            </span>
+            </span> */}
+            <button
+              onClick={() => setIsEditing(!isEditing)}
+              type="button"
+            >
+              Edit
+            </button>
           </div>
-          <button
-            onClick={() => setIsEditing(!isEditing)}
-            type="button"
-          >
-            Edit
-          </button>
 
         </div>
       )}
       {isAddingChild ? (
         <>
-          <span>Add form</span>
-          <button onClick={toggleIsAddingChild} type="button">toggle</button>
+          <h3>Add form</h3>
+          <button onClick={toggleIsAddingChild} type="button" style={{ width: '5rem' }}>Close</button>
           <AddGoalForm parentId={current.id} onAddGoal={onAddGoal} />
         </>
       ) : (
-        <>
-          <span>Show Add form</span>
-          <button onClick={toggleIsAddingChild} type="button">toggle</button>
-        </>
+
+        <button onClick={toggleIsAddingChild} type="button" style={{ width: '10rem' }}>Show Add form</button>
+
       )}
     </div>
   );

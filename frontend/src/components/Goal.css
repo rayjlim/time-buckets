@@ -18,7 +18,7 @@
 }
 .manual {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
 }
 
@@ -45,3 +45,23 @@
     border-radius: 8px;
     color: white;
 }
+
+.buttonAsLink{
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    font-family: arial, sans-serif;
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+  };
+/* const goalStyle = {
+    display: 'inline-flex',
+    // justifyContent: 'space-between',
+    alignItems: 'center',
+    // gap: '1rem',
+    whiteSpace: 'nowrap',
+  };
+  const rightStyle = {
+    marginLeft: 'auto',
+  }; */

@@ -14,7 +14,9 @@ const useSaveGoal = (goal, onRemoveGoal, current, setCurrent, setIsEditing, form
     const tags = formData.get('tags');
     const thoughts = formData.get('thoughts');
     const type = formData.get('type');
-    const parentId = formData.get('parent_id');
+    const parentId = formData.get('parentId');
+    const gpsCoords = formData.get('gpsCoords');
+    const gpsZoom = formData.get('gpsZoom');
 
     const endpoint = `${REST_ENDPOINT}goals/${goal.id}`;
     const config = {
@@ -29,6 +31,8 @@ const useSaveGoal = (goal, onRemoveGoal, current, setCurrent, setIsEditing, form
         thoughts,
         type,
         parentId,
+        gpsCoords,
+        gpsZoom,
       }),
     };
     try {
@@ -49,6 +53,9 @@ const useSaveGoal = (goal, onRemoveGoal, current, setCurrent, setIsEditing, form
           tags,
           added_at: addedAt,
           type,
+          parent_id: parentId,
+          gps_coords: gpsCoords,
+          gps_zoom: gpsZoom,
         });
         setIsEditing(false);
       }

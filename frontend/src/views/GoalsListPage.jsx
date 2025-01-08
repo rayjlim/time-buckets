@@ -83,7 +83,7 @@ const GoalsListPage = () => {
             Search Title:
             <input name="searchTitle" type="text" onChange={changeTitle} />
           </label>
-          <button type="submit">Search</button>
+          <button type="submit" id="searchFormSubmit">Search</button>
           <button type="button" onClick={() => clearFields()}>Clear</button>
           <label htmlFor="type" className="searchField">
             Type:
