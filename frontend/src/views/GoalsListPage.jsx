@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import GoalList from '../components/GoalList';
 import PaginationBar from '../components/PaginationBar';
 import AddGoalForm from '../components/AddGoalForm';
+import CsvQuickParser from '../components/CsvQuickParser';
 import useLoadGoals from '../hooks/useLoadGoals';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -97,8 +98,8 @@ const GoalsListPage = () => {
               }}
             >
               <option value="">-</option>
-              {searchType.map(tag => (
-                <option value={tag}>{tag}</option>
+              {searchType.map(type => (
+                <option value={type} key={type}>{type}</option>
               ))}
             </select>
           </label>
@@ -115,7 +116,7 @@ const GoalsListPage = () => {
             >
               <option value="">-</option>
               {searchTags.map(tag => (
-                <option value={tag}>{tag}</option>
+                <option value={tag} key={tag}>{tag}</option>
               ))}
             </select>
           </label>
@@ -150,6 +151,7 @@ const GoalsListPage = () => {
         />
       )}
       <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
+      <CsvQuickParser />
 
       <div>{`version ${pkg.version}`}</div>
     </>

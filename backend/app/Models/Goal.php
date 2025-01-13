@@ -27,7 +27,8 @@ class Goal extends Model
         'start_timeframe',
         'end_timeframe',
         'added_at',
-        'parent_id'
+        'parent_id',
+        'gps_zoom'
     ];
 
 
