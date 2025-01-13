@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/rayjlim/time-buckets/compare/v1.8.0...v1.9.0) (2025-01-13)
+
+
+### Features
+
+* ✨new component for csvquickparser ([6fd37f7](https://github.com/rayjlim/time-buckets/commit/6fd37f73b0b139e145eb511550043141dd9a6d9d))
+
+
+### Bug Fixes
+
+* clear title for child search ([d634862](https://github.com/rayjlim/time-buckets/commit/d6348627622063a7cb9cef0bebc4a557c7ff63d2))
+
 ## [1.8.0](https://github.com/rayjlim/time-buckets/compare/v1.7.0...v1.8.0) (2025-01-08)
 
 
