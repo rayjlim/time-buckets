@@ -13,6 +13,7 @@ const useAddForm = (onAddGoal, formRef) => {
       title,
       type,
       parent_id: parentId,
+      gps_zoom: 0,
     };
     const config = {
       method: 'POST',
