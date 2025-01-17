@@ -16,7 +16,7 @@ function App() {
     return (
         <>
             <div>
-                <ChipToggleView buttonText='Show Add'>
+                <ChipToggleView>
                     <AddGoalForm onAddGoal={onAddGoal} />
                 </ChipToggleView>
 

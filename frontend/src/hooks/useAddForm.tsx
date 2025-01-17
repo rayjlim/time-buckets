@@ -1,9 +1,9 @@
-import { useAddMessage } from "@react-md/alert";
 
+import { useState } from 'react';
 import { REST_ENDPOINT } from '../constants';
 
 const useAddForm = (onAddGoal: (message: string) => void, formRef: React.RefObject<HTMLFormElement>) => {
-    const addMessage = useAddMessage();
+    const [messageInfo, setMessageInfo] = useState('');
     async function sendAddForm(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         const formData = formRef.current ? new FormData(formRef.current) : null;
@@ -29,18 +29,18 @@ const useAddForm = (onAddGoal: (message: string) => void, formRef: React.RefObje
                 throw new Error(`${response.status}`);
             } else {
                 const output = await response.json();
-                addMessage({children: `Added : ${JSON.stringify(output)}`});
+                setMessageInfo(`Added : ${JSON.stringify(output)}`);
                 // const json = JSON.stringify(output);
                 // alert(`${output.data.length}, ${json}`);
                 onAddGoal(output.data);
             }
         } catch (err) {
             console.log(`Error: ${err}`);
-            addMessage({children: `loading error : ${err}`});
+            setMessageInfo(`loading error : ${err}`);
         }
     }
 
-    return { sendAddForm };
+    return { sendAddForm, messageInfo, setMessageInfo };
 };
 
 export default useAddForm;
