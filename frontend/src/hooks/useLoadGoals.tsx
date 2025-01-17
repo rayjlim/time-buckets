@@ -4,6 +4,8 @@ import { REST_ENDPOINT } from '../constants';
 const useLoadGoals = (searchForm: React.RefObject<HTMLFormElement>, page: number, setIsLoading: (isLoading: boolean) => void, setGoals: (goals: any[]) => void, setPageMeta: (pageMeta: any) => void) => {
     const [messageInfo, setMessageInfo] = useState('');
     async function loadGoals(event?: React.FormEvent<HTMLFormElement>) {
+        if (!searchForm.current) return;
+
         console.log(event);
         event?.preventDefault();
         const formData = new FormData(searchForm.current);

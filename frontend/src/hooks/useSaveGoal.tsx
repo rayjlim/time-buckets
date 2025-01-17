@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 
 import { REST_ENDPOINT } from '../constants';
 
-const useSaveGoal = (goal, onRemoveGoal, current, setCurrent, setIsEditing, formRef) => {
+const useSaveGoal = (goal: any, onRemoveGoal: any, current: any, setCurrent: any, setIsEditing: any, formRef: any       ) => {
     const [messageInfo, setMessageInfo] = useState('');
 
-    async function saveGoal(event) {
+    async function saveGoal(event: any) {
         console.log('save goal');
         event.preventDefault();
         const formData = new FormData(formRef.current);
@@ -65,7 +64,7 @@ const useSaveGoal = (goal, onRemoveGoal, current, setCurrent, setIsEditing, form
             }
         } catch (err) {
             console.log(`Error: ${err}`);
-            toast.error(`loading error : ${err}`);
+            setMessageInfo(`loading error : ${err}`);
         }
     }
     async function removeGoal() {
@@ -83,7 +82,7 @@ const useSaveGoal = (goal, onRemoveGoal, current, setCurrent, setIsEditing, form
             console.log('response :', response);
             if (!response.ok) {
                 console.log('response.status :', response.status);
-                throw new Error(response.status);
+                throw new Error(`${response.status}`);
             } else {
                 const data = await response.json();
                 console.log('data :', data);
@@ -95,7 +94,7 @@ const useSaveGoal = (goal, onRemoveGoal, current, setCurrent, setIsEditing, form
             setMessageInfo(`loading error : ${err}`);
         }
     }
-    function addRemoveTag(content) {
+    function addRemoveTag(content: any) {
         console.log('addRemove', content);
 
         const tagsInput = formRef.current.querySelector('input[name="tags"]');
@@ -105,7 +104,7 @@ const useSaveGoal = (goal, onRemoveGoal, current, setCurrent, setIsEditing, form
             tagsInput.value = tagsInput.value.replace(content, '').trim();
         }
     }
-    function addRemoveType(content) {
+    function addRemoveType(content: any) {
         console.log('addRemove', content);
 
         const typeInput = formRef.current.querySelector('input[name="type"]');

@@ -1,7 +1,7 @@
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
-const PaginationBar = ({ pageCount, pageChange }) => (
+const PaginationBar = ({ pageCount, pageChange }: { pageCount: number, pageChange: any }) => (
     <Stack spacing={2}>
         <Pagination count={pageCount} variant="outlined" shape="rounded" />
         <button onClick={pageChange}>test</button>

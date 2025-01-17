@@ -19,7 +19,7 @@ const GoalsListPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [goals, setGoals] = useState<any[]>([]);
     const [page, setPage] = useState(1);
-    const [pageMeta, setPageMeta] = useState({ last_page: 1, current_page: 1, total: -1 });
+    const [pageMeta, setPageMeta] = useState({ last_page: 1, current_page: 1, total: -1, itemsPerPage: 10 });
     const searchForm = useRef<HTMLFormElement>(null);
 
     const formTypeChoices = useRef<HTMLSelectElement>(null);
@@ -40,6 +40,7 @@ const GoalsListPage = () => {
     /** Search functions */
 
     const handlePageClick = (event: any) => {
+        if (!pageMeta) return;
         const newOffset = (event.selected * pageMeta.itemsPerPage) % goals.length;
         console.log(
             `User requested page number ${event.selected}, which is offset ${newOffset}`,
@@ -98,7 +99,9 @@ const GoalsListPage = () => {
                         <select
                             ref={formTypeChoices}
                             onChange={() => {
-                                const typeInput = searchForm.current.querySelector('input[name="type"]');
+                                if (!searchForm.current) return;
+                                if (!formTypeChoices.current) return;
+                                const typeInput = searchForm.current.querySelector('input[name="type"]') as HTMLInputElement;
 
                                 typeInput.value = formTypeChoices.current.value;
                             }}
@@ -115,8 +118,10 @@ const GoalsListPage = () => {
                         <select
                             ref={formTagChoices}
                             onChange={() => {
-                                const tagsInput = searchForm.current.querySelector('input[name="tags"]');
-
+                                if (!searchForm.current) return;
+                                if (!formTagChoices.current) return;
+                                const tagsInput = searchForm.current.querySelector('input[name="tags"]') as HTMLInputElement;
+                                if (!tagsInput) return;
                                 tagsInput.value = formTagChoices.current.value;
                             }}
                         >

@@ -2,15 +2,15 @@ import { useRef, useState } from 'react';
 import AddGoalForm from './AddGoalForm';
 
 const CsvQuickParser = () => {
-  const textareaForCSV = useRef();
+  const textareaForCSV = useRef<HTMLTextAreaElement>(null);
   const [quickAddRows, setQuickAddRows] = useState([]);
 
-  const csvStringToArray = data => {
+  const csvStringToArray = (data: string) => {
     console.log(data);
     const re = /(,|\r?\n|\r|^)(?:"([^"]*(?:""[^"]*)*)"|([^,\r\n]*))/gi;
-    const result = [[]];
-    let matches;
-    // eslint-disable-next-line
+    const result: string[][] = [[]];
+    let matches: RegExpExecArray | null = null;
+    // eslint-disable-next-line no-cond-assign
     while ((matches = re.exec(data))) {
       if (matches[1].length && matches[1] !== ',') result.push([]);
       result[result.length - 1].push(
@@ -20,13 +20,15 @@ const CsvQuickParser = () => {
     return result;
   };
   const parseTextarea = () => {
+    if (!textareaForCSV.current) return;
+
     const parsed = csvStringToArray(textareaForCSV.current.value);
     console.log(parsed);
-    setQuickAddRows(parsed);
+    setQuickAddRows(parsed as any);
   };
   const defaultText = '';
 
-  const removeCsvRow = row => {
+  const removeCsvRow = (row: any) => {
     const filteredQuickAddRows = quickAddRows.filter(x => x[0] !== row[0]);
     setQuickAddRows(filteredQuickAddRows);
   };
