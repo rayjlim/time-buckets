@@ -17,29 +17,29 @@ const searchType = ['<untagged>', '0', '1'];
 
 const GoalsListPage = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const [goals, setGoals] = useState([]);
+    const [goals, setGoals] = useState<any[]>([]);
     const [page, setPage] = useState(1);
     const [pageMeta, setPageMeta] = useState({ last_page: 1, current_page: 1, total: -1 });
-    const searchForm = useRef();
+    const searchForm = useRef<HTMLFormElement>(null);
 
-    const formTypeChoices = useRef();
-    const formTagChoices = useRef();
+    const formTypeChoices = useRef<HTMLSelectElement>(null);
+    const formTagChoices = useRef<HTMLSelectElement>(null);
 
     /** Page Data look up */
     const { loadGoals } = useLoadGoals(searchForm, page, setIsLoading, setGoals, setPageMeta);
 
-    const onAddGoal = newGoal => {
+    const onAddGoal = (newGoal: any) => {
         const updatedItems = [...goals, newGoal];
         setGoals(updatedItems);
     };
-    const onRemoveGoal = id => {
+    const onRemoveGoal = (id: number) => {
         const updatedGoals = goals.filter(item => item.id !== id);
         setGoals(updatedGoals);
     };
 
     /** Search functions */
 
-    const handlePageClick = event => {
+    const handlePageClick = (event: any) => {
         const newOffset = (event.selected * pageMeta.itemsPerPage) % goals.length;
         console.log(
             `User requested page number ${event.selected}, which is offset ${newOffset}`,
@@ -55,19 +55,21 @@ const GoalsListPage = () => {
     }, [page]);
 
     const clearFields = async () => {
-        const searchTitle = searchForm.current.querySelector('input[name="searchTitle"]');
+        if (!searchForm.current) return;
+
+        const searchTitle = searchForm.current.querySelector('input[name="searchTitle"]') as HTMLInputElement;
         searchTitle.value = '';
-        const orderBy = searchForm.current.querySelector('select[name="orderBy"]');
+        const orderBy = searchForm.current.querySelector('select[name="orderBy"]') as HTMLSelectElement;
         orderBy.value = '';
-        const parentId = searchForm.current.querySelector('input[name="parentId"]');
+        const parentId = searchForm.current.querySelector('input[name="parentId"]') as HTMLInputElement;
         parentId.value = '';
-        orderBy.value = '';
         setPage(1);
         await loadGoals();
     };
 
     const changeTitle = () => {
-        const startsWith = searchForm.current.querySelector('input[name="startsWith"]');
+        if (!searchForm.current) return;
+        const startsWith = searchForm.current.querySelector('input[name="startsWith"]') as HTMLInputElement;
         startsWith.value = '';
     };
 

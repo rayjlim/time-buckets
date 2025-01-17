@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import MarkdownDisplay from './MarkdownDisplay';
+// import MarkdownDisplay from './MarkdownDisplay';
 import MapDisplay from './MapDisplay';
 import AddGoalForm from './AddGoalForm';
 import useSaveGoal from '../hooks/useSaveGoal';
@@ -10,8 +10,8 @@ import './Goal.css';
 const typeSet = ['0', '1'];
 const tagsSet = ['watch', 'hike', 'animals'];
 
-const Goal = ({ goal, onRemoveGoal }) => {
-    const formRef = useRef();
+const Goal = ({ goal, onRemoveGoal }: { goal: any, onRemoveGoal: any }) => {
+    const formRef = useRef<HTMLFormElement>(null);
     const [current, setCurrent] = useState(goal);
     const [isEditing, setIsEditing] = useState(false);
     const [isAddingChild, setIsAddingChild] = useState(false);
@@ -43,10 +43,14 @@ const Goal = ({ goal, onRemoveGoal }) => {
         setIsAddingChild(!isAddingChild);
     };
 
-    const changeSearchFormParent = id => {
-        document.getElementById('searchTitle').value = '';
-        document.getElementById('searchFormParentId').value = id;
-        document.getElementById('searchFormSubmit').click();
+    const changeSearchFormParent = (id: string) => {
+        const searchTitle = document.getElementById('searchTitle') as HTMLInputElement;
+        const searchFormParentId = document.getElementById('searchFormParentId') as HTMLInputElement;
+        const searchFormSubmit = document.getElementById('searchFormSubmit') as HTMLInputElement;
+
+        if (searchTitle) searchTitle.value = '';
+        if (searchFormParentId) searchFormParentId.value = id;
+        if (searchFormSubmit) searchFormSubmit.click();
     };
 
     return (

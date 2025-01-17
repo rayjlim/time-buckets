@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Goal from './Goal'
 import './GoalList.css';
 
-const GoalList = ({ goals, onRemoveGoal }) => (
+const GoalList = ({ goals, onRemoveGoal }: { goals: any[], onRemoveGoal: any }  ) => (
   <>
     {goals.map(entry => (
       <Goal

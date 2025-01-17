@@ -11,6 +11,9 @@ import 'leaflet/dist/leaflet.css';
 interface MapDisplayProps {
   // Add any props here if needed
   center: [number, number];
+  zoom?: number;
+  height?: number;
+  width?: number;
 }
 
 const MapDisplay: React.FC<MapDisplayProps> = ({ center, zoom = 6, height = 300, width = 500}) => {
