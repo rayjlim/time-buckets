@@ -62,10 +62,10 @@ const AddGoalForm: React.FC<MyComponentProps> = ({
                 />
             </label>
             <FormControl>
-                <FormLabel id="demo-row-radio-buttons-group-label">Type</FormLabel>
+                <FormLabel id="row-radio-buttons-group-label">Type</FormLabel>
                 <RadioGroup
                     row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    aria-labelledby="row-radio-buttons-group-label"
                     name="type"
                     value={typeForm}
                     onChange={(e) => setTypeForm(Number(e.target.value))}
@@ -93,12 +93,7 @@ const AddGoalForm: React.FC<MyComponentProps> = ({
             >
                 Add Goal
             </button>
-            <button
-                type="button"
-                onClick={() => setMessageInfo('test')}
-            >
-                show snackbar
-            </button>
+
             <Snackbar
                 key={messageInfo ? messageInfo : undefined}
                 open={messageInfo !== ''}
