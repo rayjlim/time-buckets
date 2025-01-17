@@ -17,6 +17,7 @@ type MyComponentProps = {
     parentId?: number,
     onAddGoal: (message: string) => void; // Function type
 };
+
 const AddGoalForm: React.FC<MyComponentProps> = ({
     title = '',
     type = 0,

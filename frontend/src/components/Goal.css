@@ -1,0 +1,67 @@
+.goal-list-row {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 0.5rem;
+    margin: 0.25rem;
+    border: 1px solid rgb(196, 195, 195);
+    text-align: left;
+    width: 100%;
+}
+
+.large-size {
+    border: 2px solid red;
+}
+
+.medium-size {
+    border: 2px solid orange;
+}
+.manual {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.manual > span {
+    margin: 0 0.5rem;
+}
+
+.tagBtn {
+    background-color: transparent;
+    border-radius: 8px;
+
+}
+.notesField {
+    width: 100%;
+    max-width: 100%;
+}
+.notesField textarea{
+    width: 100%;
+    max-width: 100%;
+}
+
+.saveBtn {
+    background-color: rgb(96, 96, 244);
+    border-radius: 8px;
+    color: white;
+}
+
+.buttonAsLink{
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    font-family: arial, sans-serif;
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+  };
+/* const goalStyle = {
+    display: 'inline-flex',
+    // justifyContent: 'space-between',
+    alignItems: 'center',
+    // gap: '1rem',
+    whiteSpace: 'nowrap',
+  };
+  const rightStyle = {
+    marginLeft: 'auto',
+  }; */

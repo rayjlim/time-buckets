@@ -13,13 +13,13 @@ interface MapDisplayProps {
   center: [number, number];
 }
 
-const MapDisplay: React.FC<MapDisplayProps> = ({ center }) => {
+const MapDisplay: React.FC<MapDisplayProps> = ({ center, zoom = 6, height = 300, width = 500}) => {
     console.log(center);
     return (
-  <div style={{ height: '300px', width: '500px', border: '1px solid blue' }}>
+  <div style={{ height, width, border: '1px solid blue' }}>
     <MapContainer
       center={center}
-      zoom={14}
+      zoom={zoom}
       style={{ height: '100%', width: '100%' }}
     >
       <TileLayer
