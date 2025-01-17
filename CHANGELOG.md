@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/rayjlim/time-buckets/compare/v1.9.0...v1.10.0) (2025-01-17)
+
+
+### Features
+
+* ✨ convert to vite to support leaflet ([5e65bab](https://github.com/rayjlim/time-buckets/commit/5e65babf18edb13f858f917ef0cc442e93e53a1d))
+* add CsvQuickParser ([ae95237](https://github.com/rayjlim/time-buckets/commit/ae95237c97cbe505c3ca5fd7554e83d824e31f78))
+* add theme and dev ribbon ([b87c738](https://github.com/rayjlim/time-buckets/commit/b87c738f3f15f0ee798ba04cd892b86d064d37bb))
+* get goal list page to show goals ([14744a0](https://github.com/rayjlim/time-buckets/commit/14744a0ca7835c1a04aecdbe7286ff37202b0715))
+
+
+### Bug Fixes
+
+* typescript errors ([465c801](https://github.com/rayjlim/time-buckets/commit/465c8017dd080815e01b6fa5a90cf845bb1ff51e))
+* typescript fixes ([ff09f9a](https://github.com/rayjlim/time-buckets/commit/ff09f9a80d8e54b654ee06861388fe7414d913df))
+
 ## [1.9.0](https://github.com/rayjlim/time-buckets/compare/v1.8.0...v1.9.0) (2025-01-13)
 
 
