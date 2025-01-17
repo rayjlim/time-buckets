@@ -96,7 +96,7 @@ if [ -z "$NOPUBLISH" ]; then
 
     if [ -z "$NOFRONTENDBUILD" ]; then
     echo "start upload UI"
-    cd ./frontend/build/
+    cd ./frontend/dist/
     pwd
     echo $FTP_TARGETFOLDER_UI
     rsync --rsh='ssh -p2222' -rave 'ssh -oHostKeyAlgorithms=+ssh-dss' \
