@@ -5,8 +5,8 @@ import PaginationBar from '../components/PaginationBar';
 import ChipToggleView from '../components/ChipToggleView'
 import AddGoalForm from '../components/AddGoalForm'
 import CsvQuickParser from '../components/CsvQuickParser'
-import TreeView from '../components/TreeView';
 
+import TreeDrawer from '../components/TreeDrawer';
 import useLoadGoals from '../hooks/useLoadGoals';
 
 import './GoalsListPage.css';
@@ -81,7 +81,8 @@ const GoalsListPage = () => {
     return (
         <>
             <h1 className="title">Time Buckets</h1>
-            <TreeView />
+
+            <TreeDrawer />
             {isLoading && <h2>LOADING</h2>}
             <div>
                 <ChipToggleView>
