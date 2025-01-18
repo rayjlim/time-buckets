@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Goal;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class GoalController extends Controller
@@ -188,6 +189,35 @@ class GoalController extends Controller
         return [
             "data" => $id,
             "msg" => "Goal deleted successfully"
+        ];
+    }
+
+    /**
+     * tree of goals query
+     *
+     * @param  number  $id
+     * @return array response status data
+     */
+    public function treeInfo(int $id): array
+    {
+        $results = DB::select('
+            WITH RECURSIVE descendants AS (
+        SELECT * FROM tb_goals WHERE Id = ? -- Start with the root
+        UNION ALL
+        SELECT child.*
+        FROM tb_goals child
+        INNER JOIN descendants parent ON child.parent_id = parent.Id
+        )
+        SELECT id, title, parent_id FROM descendants;', [$id]);
+
+        // foreach ($results as $row) {
+        //     // Access properties using $row->column_name
+        //     echo $row->Title;
+        // }
+
+        return [
+            "data" => $results,
+            "msg" => ""
         ];
     }
 }
