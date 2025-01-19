@@ -57,7 +57,7 @@ const renderTree = (nodes: TreeViewItem) => (
 const MyTreeView = () => {
     const { treeView, isLoading, rootId, setRootId } = useTreeView();
     console.log('treeView :', treeView);
-    const treeData = buildTreeJson(treeView);
+    const treeData = buildTreeJson(treeView, rootId);
     console.log('treeData :', treeData);
     return (
         <>

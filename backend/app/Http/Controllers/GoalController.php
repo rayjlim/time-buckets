@@ -6,6 +6,28 @@ use App\Models\Goal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
+function getDescendants( $parentId)
+{
+    $descendants = [];
+
+    $query = Goal::select('id', 'title', 'parent_id')->where('parent_id', '=', $parentId);
+    $goals = $query->get();
+    // $goals = DB::select('SELECT id, title, parent_id FROM tb_goals WHERE Id = ?', [$parentId]);
+
+
+    foreach ($goals as $row) {
+
+        // Add the current child to the list
+        $descendants[] = $row;
+
+        // Recursively get the descendants of the current child
+        $descendants = array_merge($descendants, getDescendants($row['id']));
+    }
+
+
+    return $descendants;
+}
+
 class GoalController extends Controller
 {
     /**
@@ -192,6 +214,7 @@ class GoalController extends Controller
         ];
     }
 
+
     /**
      * tree of goals query
      *
@@ -200,23 +223,11 @@ class GoalController extends Controller
      */
     public function treeInfo(int $id): array
     {
-        $results = DB::select('
-            WITH RECURSIVE descendants AS (
-        SELECT * FROM tb_goals WHERE Id = ? -- Start with the root
-        UNION ALL
-        SELECT child.*
-        FROM tb_goals child
-        INNER JOIN descendants parent ON child.parent_id = parent.Id
-        )
-        SELECT id, title, parent_id FROM descendants;', [$id]);
 
-        // foreach ($results as $row) {
-        //     // Access properties using $row->column_name
-        //     echo $row->Title;
-        // }
+        $allDescendants = getDescendants($id);
 
         return [
-            "data" => $results,
+            "data" => $allDescendants,
             "msg" => ""
         ];
     }

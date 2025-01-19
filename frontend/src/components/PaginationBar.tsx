@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 const PaginationBar = ({ pageCount, pageChange }: { pageCount: number, pageChange: any }) => (
     <Stack spacing={2}>
         <Pagination count={pageCount} variant="outlined" shape="rounded" />
-        <button onClick={pageChange}>test</button>
+        <button onClick={pageChange}>test pagination</button>
     </Stack>
     //   <nav aria-label="Page navigation" className="mt-4">
     //     <ReactPaginate
