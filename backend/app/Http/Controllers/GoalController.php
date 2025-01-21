@@ -43,7 +43,7 @@ class GoalController extends Controller
             $children = $query2->get();
             return [
                 "meta" => (object) [],
-                "goal" => $goal,
+                "primary" => $goal,
                 "children" => $children
             ];
         }
@@ -124,7 +124,7 @@ class GoalController extends Controller
                 "priority" => $searchPriority,
                 "orderByField" => $orderByField
             ],
-            "goal" => [],
+            "primary" => [],
             "children" => $goals
         ];
     }

@@ -10,13 +10,19 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
-// const options = [{ label: 'location', value: 0 }, { label: 'experience', value: 1 }];
+type GoalType = {
+    id: number;
+    title: string;
+    gps_coords: string;
+}
+
 type MyComponentProps = {
     title?: string,
     type?: number,
     parentId?: number,
-    onAddGoal: (message: string) => void; // Function type
+    onAddGoal: (goal: GoalType) => void; // Function type
 };
+
 
 const AddGoalForm: React.FC<MyComponentProps> = ({
     title = '',

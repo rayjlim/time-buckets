@@ -140,7 +140,8 @@ const Goal = ({ goal, onRemoveGoal }: { goal: any, onRemoveGoal: any }) => {
                     {/* show non-editing format */}
                     <div className="manual goal-display">
                         <span>
-                            {`${current.title} - ${current.id}`}
+                            {`${current.title} - `}
+                            <button type="button" onClick={() => changeSearchFormParent(current.id)}>{current.id}</button>
                         </span>
                         <span>
                             {`Type: ${typeSet[current.type]} - Parent:`}
@@ -165,11 +166,13 @@ const Goal = ({ goal, onRemoveGoal }: { goal: any, onRemoveGoal: any }) => {
                             <>
                                 <span>
                                     {`GPS: ${current.gps_coords}`}
-                                </span>
-                                <MapDisplay center={current.gps_coords.split(",").map(Number)} zoom={current.gps_zoom}
-                                height={200}
-                                width={200}
-                                />
+                                </span>{
+                                    current.gps_coords.indexOf(',') !== -1 && (
+                                        <MapDisplay center={current.gps_coords.split(",").map(Number)} zoom={current.gps_zoom}
+                                            height={200}
+                                            width={200}
+                                        />)}
+
                             </>
                         )}
                         {/* <span>
