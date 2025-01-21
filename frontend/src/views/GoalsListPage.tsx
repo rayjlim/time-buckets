@@ -12,38 +12,60 @@ import useLoadGoals from '../hooks/useLoadGoals';
 import './GoalsListPage.css';
 
 import pkg from '../../package.json';
+import MapDisplayMulti from '../components/MapDisplayMulti';
+import { LatLngExpression } from 'leaflet';
 
 
 const searchTags = ['<untagged>', 'watch', 'hike', 'animals', 'achievement', 'skill'];
 const searchType = ['<untagged>', '0', '1'];
 
+interface GoalType {
+    id: number;
+    title: string;
+    gps_coords: string;
+}
+interface PageDataType {
+    primary: GoalType[];
+    children: GoalType[];
+    pageMeta: {
+        last_page: number;
+        current_page: number;
+        total: number;
+        itemsPerPage: number;
+    }
+}
+
 const GoalsListPage = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const [goals, setGoals] = useState<any[]>([]);
+    const [goals, setGoals] = useState<PageDataType | null>(null);
     const [page, setPage] = useState(1);
-    const [pageMeta, setPageMeta] = useState({ last_page: 1, current_page: 1, total: -1, itemsPerPage: 10 });
+    // const [pageMeta, setPageMeta] = useState({ last_page: 1, current_page: 1, total: -1, itemsPerPage: 10 });
     const searchForm = useRef<HTMLFormElement>(null);
 
     const formTypeChoices = useRef<HTMLSelectElement>(null);
     const formTagChoices = useRef<HTMLSelectElement>(null);
 
     /** Page Data look up */
-    const { loadGoals } = useLoadGoals(searchForm, page, setIsLoading, setGoals, setPageMeta);
+    const { loadGoals } = useLoadGoals(searchForm, page, setIsLoading, setGoals);
 
-    const onAddGoal = (newGoal: any) => {
-        const updatedItems = [...goals, newGoal];
-        setGoals(updatedItems);
+    const onAddGoal = (newGoal: GoalType) => {
+        if (!goals) return;
+        const newChildren = [...goals.children, newGoal];
+        goals.children = newChildren;
+        setGoals(goals);
     };
     const onRemoveGoal = (id: number) => {
-        const updatedGoals = goals.filter(item => item.id !== id);
-        setGoals(updatedGoals);
+        if (!goals) return;
+        const updatedGoals = goals.children.filter(item => item.id !== id);
+        goals.children = updatedGoals;
+        setGoals(goals);
     };
 
     /** Search functions */
 
     const handlePageClick = (event: any) => {
-        if (!pageMeta) return;
-        const newOffset = (event.selected * pageMeta.itemsPerPage) % goals.length;
+        if (!goals?.pageMeta) return;
+        const newOffset = (event.selected * goals.pageMeta.itemsPerPage) % goals.children.length;
         console.log(
             `User requested page number ${event.selected}, which is offset ${newOffset}`,
         );
@@ -76,13 +98,24 @@ const GoalsListPage = () => {
         startsWith.value = '';
     };
 
-    console.log(pageMeta);
+    console.log(goals?.pageMeta);
+
+    const arrayOutput: [number, number][] = goals?.children !== undefined ? goals.children.filter(item => item.gps_coords !== null && item.gps_coords !== '' && item.gps_coords.indexOf(',') !== -1)
+        .map(item => {
+            if (typeof item?.gps_coords !== 'string') return [0, 0];
+            const coords = item.gps_coords.split(',');
+            if (coords.length !== 2) return [0, 0];
+            const [lat, lng] = coords.map(Number);
+            if (isNaN(lat) || isNaN(lng)) return [0, 0];
+            return [lat, lng];
+        }) : [];
+    console.log(arrayOutput);
 
     return (
         <>
             <h1 className="title">Time Buckets</h1>
-
             <TreeDrawer />
+            <MapDisplayMulti coords={arrayOutput as LatLngExpression[]} />
             {isLoading && <h2>LOADING</h2>}
             <div>
                 <ChipToggleView>
@@ -154,18 +187,25 @@ const GoalsListPage = () => {
                 </form>
             </div>
 
-            <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
+            <PaginationBar pageCount={goals?.pageMeta?.last_page || 0} pageChange={handlePageClick} />
 
             <div>
-                {`page: ${pageMeta.current_page} total: ${pageMeta.total}`}
+                {`page: ${goals?.pageMeta?.current_page || 0} total: ${goals?.pageMeta?.total || 0}`}
             </div>
             {!isLoading && (
-                <GoalList
-                    goals={goals}
-                    onRemoveGoal={onRemoveGoal}
-                />
+                <>
+                    <GoalList
+                        goals={goals?.primary || []}
+                        onRemoveGoal={onRemoveGoal}
+                    />
+                    <hr />
+                    <GoalList
+                        goals={goals?.children || []}
+                        onRemoveGoal={onRemoveGoal}
+                    />
+                </>
             )}
-            <PaginationBar pageCount={pageMeta.last_page} pageChange={handlePageClick} />
+            <PaginationBar pageCount={goals?.pageMeta?.last_page || 0} pageChange={handlePageClick} />
             <ChipToggleView>
                 <CsvQuickParser />
             </ChipToggleView>

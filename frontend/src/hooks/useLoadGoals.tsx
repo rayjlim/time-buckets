@@ -1,7 +1,24 @@
 import { useState } from 'react';
 import { REST_ENDPOINT } from '../constants';
 
-const useLoadGoals = (searchForm: React.RefObject<HTMLFormElement>, page: number, setIsLoading: (isLoading: boolean) => void, setGoals: (goals: any[]) => void, setPageMeta: (pageMeta: any) => void) => {
+interface GoalType {
+    id: number;
+    title: string;
+    gps_coords: string;
+}
+
+interface PageDataType {
+    primary: GoalType[];
+    children: GoalType[];
+    pageMeta: {
+        last_page: number;
+        current_page: number;
+        total: number;
+        itemsPerPage: number;
+    }
+}
+
+const useLoadGoals = (searchForm: React.RefObject<HTMLFormElement>, page: number, setIsLoading: (isLoading: boolean) => void, setGoals: (goals: PageDataType) => void) => {
     const [messageInfo, setMessageInfo] = useState('');
     async function loadGoals(event?: React.FormEvent<HTMLFormElement>) {
         if (!searchForm.current) return;
@@ -57,9 +74,8 @@ const useLoadGoals = (searchForm: React.RefObject<HTMLFormElement>, page: number
             } else {
                 const data = await response.json();
                 console.log('data :', data);
-                const goals = data.goal.concat(data.children);
-                setGoals(goals);
-                setPageMeta(data.meta);
+                setGoals(data);
+
             }
         } catch (err) {
             console.log(`Error: ${err}`);

@@ -1,8 +1,13 @@
-
 import { useState } from 'react';
 import { REST_ENDPOINT } from '../constants';
 
-const useAddForm = (onAddGoal: (message: string) => void, formRef: React.RefObject<HTMLFormElement>) => {
+type GoalType = {
+    id: number;
+    title: string;
+    gps_coords: string;
+}
+
+const useAddForm = (onAddGoal: (goal: GoalType) => void, formRef: React.RefObject<HTMLFormElement>) => {
     const [messageInfo, setMessageInfo] = useState('');
     async function sendAddForm(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
