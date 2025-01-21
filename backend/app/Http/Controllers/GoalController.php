@@ -3,7 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Goal;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+
+function getDescendants( $parentId)
+{
+    $descendants = [];
+
+    $query = Goal::select('id', 'title', 'parent_id')->where('parent_id', '=', $parentId);
+    $goals = $query->get();
+    // $goals = DB::select('SELECT id, title, parent_id FROM tb_goals WHERE Id = ?', [$parentId]);
+
+
+    foreach ($goals as $row) {
+
+        // Add the current child to the list
+        $descendants[] = $row;
+
+        // Recursively get the descendants of the current child
+        $descendants = array_merge($descendants, getDescendants($row['id']));
+    }
+
+
+    return $descendants;
+}
 
 class GoalController extends Controller
 {
@@ -188,6 +211,24 @@ class GoalController extends Controller
         return [
             "data" => $id,
             "msg" => "Goal deleted successfully"
+        ];
+    }
+
+
+    /**
+     * tree of goals query
+     *
+     * @param  number  $id
+     * @return array response status data
+     */
+    public function treeInfo(int $id): array
+    {
+
+        $allDescendants = getDescendants($id);
+
+        return [
+            "data" => $allDescendants,
+            "msg" => ""
         ];
     }
 }

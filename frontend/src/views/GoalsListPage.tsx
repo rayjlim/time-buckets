@@ -6,11 +6,13 @@ import ChipToggleView from '../components/ChipToggleView'
 import AddGoalForm from '../components/AddGoalForm'
 import CsvQuickParser from '../components/CsvQuickParser'
 
+import TreeDrawer from '../components/TreeDrawer';
 import useLoadGoals from '../hooks/useLoadGoals';
 
 import './GoalsListPage.css';
 
 import pkg from '../../package.json';
+
 
 const searchTags = ['<untagged>', 'watch', 'hike', 'animals', 'achievement', 'skill'];
 const searchType = ['<untagged>', '0', '1'];
@@ -80,6 +82,7 @@ const GoalsListPage = () => {
         <>
             <h1 className="title">Time Buckets</h1>
 
+            <TreeDrawer />
             {isLoading && <h2>LOADING</h2>}
             <div>
                 <ChipToggleView>

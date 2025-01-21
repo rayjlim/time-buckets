@@ -30,5 +30,7 @@ $router->group(['prefix' => 'api/'], function () use ($router) {
     $router->post('goals/{id}', 'GoalController@update');
     // $router->patch('goals/{id}', 'GoalController@update');
     $router->delete('goals/{id}', 'GoalController@destroy');
+    $router->get('treeInfo/{id}', 'GoalController@treeInfo');
+
 });
 
