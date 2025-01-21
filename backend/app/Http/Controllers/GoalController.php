@@ -6,25 +6,17 @@ use App\Models\Goal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-function getDescendants( $parentId)
+function getDescendants($parentId)
 {
     $descendants = [];
 
     $query = Goal::select('id', 'title', 'parent_id')->where('parent_id', '=', $parentId);
     $goals = $query->get();
-    // $goals = DB::select('SELECT id, title, parent_id FROM tb_goals WHERE Id = ?', [$parentId]);
-
 
     foreach ($goals as $row) {
-
-        // Add the current child to the list
         $descendants[] = $row;
-
-        // Recursively get the descendants of the current child
         $descendants = array_merge($descendants, getDescendants($row['id']));
     }
-
-
     return $descendants;
 }
 
@@ -41,6 +33,21 @@ class GoalController extends Controller
         // $pageSize = is_numeric($request->input('per_page'))
         //     ? $request->input('per_page')
         //     : 20;  // DEFAULT page size
+
+        $idParam = $request->input('id');
+        if ($idParam != '') {
+            $query = Goal::where('id', '=', $idParam);
+            $goal = $query->get();
+
+            $query2 = Goal::where('parent_id', '=', $idParam);
+            $children = $query2->get();
+            return [
+                "meta" => (object) [],
+                "goal" => $goal,
+                "children" => $children
+            ];
+        }
+
 
         $searchTitle =  $request->input('search_title');
         // $searchTitle = $request->input('starts_with')
@@ -63,7 +70,7 @@ class GoalController extends Controller
         //     ? $request->input('parent_id')
         //     : '';
 
-        $parentIdParam = $request->input('parent_id');
+
         $orderByParam = $request->input('order_by');
 
         switch ($orderByParam) {
@@ -95,9 +102,7 @@ class GoalController extends Controller
         if ($searchTags !== '') {
             $query = $query->where('tags', 'LIKE', $searchTags);
         }
-        if ($parentIdParam != '') {
-            $query = $query->where('parent_id', '=', $parentIdParam);
-        }
+
 
         $query = $query->orderBy($orderByField, $orderByValue);
         // echo $query->toSql();
@@ -117,11 +122,10 @@ class GoalController extends Controller
                 "tags" => $searchTags,
                 "type" => $searchType,
                 "priority" => $searchPriority,
-                "parent_id" => $parentIdParam,
                 "orderByField" => $orderByField
-
             ],
-            "goals" => $goals
+            "goal" => [],
+            "children" => $goals
         ];
     }
 

@@ -40,7 +40,7 @@ const useLoadGoals = (searchForm: React.RefObject<HTMLFormElement>, page: number
             searchFields += `&priority=${priority}`;
         }
         if (parentId !== '') {
-            searchFields += `&parent_id=${parentId}`;
+            searchFields += `&id=${parentId}`;
         }
 
         setIsLoading(true);
@@ -57,7 +57,8 @@ const useLoadGoals = (searchForm: React.RefObject<HTMLFormElement>, page: number
             } else {
                 const data = await response.json();
                 console.log('data :', data);
-                setGoals(data.goals);
+                const goals = data.goal.concat(data.children);
+                setGoals(goals);
                 setPageMeta(data.meta);
             }
         } catch (err) {
