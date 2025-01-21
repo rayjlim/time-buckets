@@ -1,0 +1,21 @@
+{
+  "short_name": "Time Buckets App",
+  "name": "lilplaytime/TimeBuckets",
+  "icons": [
+    {
+      "src": "./images/favicon.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "./images/logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000",
+  "background_color": "#FFF"
+}

@@ -39,6 +39,16 @@ const renderLabelWithButton = (label: string, nodeId: string) => (
             onClick={(e) => {
                 e.stopPropagation(); // Prevents tree node toggle on button click
                 console.log(`Button clicked on node ${nodeId}`);
+                const input = document.getElementById('searchFormParentId') as HTMLInputElement;
+                if (input) {
+                    input.value = nodeId;
+                }
+                const form = document.getElementById('searchForm') as HTMLFormElement;
+                if (form) {
+                    form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    form.submit();
+                }
+
             }}
         >
             -&gt;
@@ -47,7 +57,7 @@ const renderLabelWithButton = (label: string, nodeId: string) => (
 );
 
 const renderTree = (nodes: TreeViewItem) => (
-    <TreeItem itemId={`${nodes.id}`} label={(renderLabelWithButton(nodes.label, `${nodes.id}`))}>
+    <TreeItem key={`${nodes.id}`} itemId={`${nodes.id}`} label={(renderLabelWithButton(nodes.label, `${nodes.id}`))}>
         {Array.isArray(nodes.children)
             ? nodes.children.map((child: TreeViewItem) => renderTree(child))
             : null}
@@ -56,20 +66,19 @@ const renderTree = (nodes: TreeViewItem) => (
 
 const MyTreeView = () => {
     const { treeView, isLoading, rootId, setRootId } = useTreeView();
-    console.log('treeView :', treeView);
+    // console.log('treeView :', treeView);
     const treeData = buildTreeJson(treeView, rootId);
-    console.log('treeData :', treeData);
+    // console.log('treeData :', treeData);
     return (
         <>
-
-        <div style={{ width: '100%', backgroundColor: 'grey' }}>
+            <div style={{ width: '100%', backgroundColor: 'grey' }}>
 
                 <SimpleTreeView>
                     {treeData.map((tree: TreeViewItem) => renderTree(tree))}
                 </SimpleTreeView>
                 {isLoading && (<div>Loading...</div>)}
-            <input type="number" value={rootId} onChange={(e) => setRootId(Number(e.target.value))} />
-            <hr />
+                <input type="number" value={rootId} onChange={(e) => setRootId(Number(e.target.value))} />
+                <hr />
             </div>
         </>
     );
