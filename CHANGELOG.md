@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.2](https://github.com/rayjlim/time-buckets/compare/v1.9.1...v1.9.2) (2025-01-22)
+
+
+### Bug Fixes
+
+* csvparse to take parent id ([7418037](https://github.com/rayjlim/time-buckets/commit/7418037b2b537ec607809dbed6b8f274fd5894d4))
+* put type defs in one place ([cdc1b09](https://github.com/rayjlim/time-buckets/commit/cdc1b09164deda9e8bead04e336a26c853d40627))
+
 ### [1.9.1](https://github.com/rayjlim/time-buckets/compare/v1.9.0...v1.9.1) (2025-01-22)
 
 
