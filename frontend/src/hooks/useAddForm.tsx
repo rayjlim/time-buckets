@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import { REST_ENDPOINT } from '../constants';
+import { GoalType } from '../types';
 
-type GoalType = {
-    id: number;
-    title: string;
-    gps_coords: string;
-}
 
 const useAddForm = (onAddGoal: (goal: GoalType) => void, formRef: React.RefObject<HTMLFormElement>) => {
     const [messageInfo, setMessageInfo] = useState('');

@@ -1,22 +1,6 @@
 import { useState } from 'react';
 import { REST_ENDPOINT } from '../constants';
-
-interface GoalType {
-    id: number;
-    title: string;
-    gps_coords: string;
-}
-
-interface PageDataType {
-    primary: GoalType[];
-    children: GoalType[];
-    pageMeta: {
-        last_page: number;
-        current_page: number;
-        total: number;
-        itemsPerPage: number;
-    }
-}
+import { PageDataType } from '../types';
 
 const useLoadGoals = (searchForm: React.RefObject<HTMLFormElement>, page: number, setIsLoading: (isLoading: boolean) => void, setGoals: (goals: PageDataType) => void) => {
     const [messageInfo, setMessageInfo] = useState('');

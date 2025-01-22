@@ -4,13 +4,18 @@ import PropTypes from 'prop-types';
 import MapDisplay from './MapDisplay';
 import AddGoalForm from './AddGoalForm';
 import useSaveGoal from '../hooks/useSaveGoal';
-
+import { GoalType } from '../types';
 import './Goal.css';
 
 const typeSet = ['0', '1'];
-const tagsSet = ['watch', 'hike', 'animals'];
+const tagsSet = ['watch', 'hike', 'animals', 'completed', 'archived', 'water park', 'event'];
 
-const Goal = ({ goal, onRemoveGoal }: { goal: any, onRemoveGoal: any }) => {
+interface GoalProps {
+    goal: GoalType;
+    onRemoveGoal: (id: number) => void;
+}
+
+const Goal: React.FC<GoalProps> = ({ goal, onRemoveGoal }) => {
     const formRef = useRef<HTMLFormElement>(null);
     const [current, setCurrent] = useState(goal);
     const [isEditing, setIsEditing] = useState(false);
@@ -55,7 +60,6 @@ const Goal = ({ goal, onRemoveGoal }: { goal: any, onRemoveGoal: any }) => {
 
     return (
         <div className={mainClassName}>
-            <button type="button" onClick={() => changeSearchFormParent(current.id)} className="buttonAsLink">Children</button>
             {isEditing ? (
                 <div className="manual">
                     <form ref={formRef} onSubmit={saveGoal}>

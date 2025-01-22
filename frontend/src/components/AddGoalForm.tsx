@@ -9,22 +9,16 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { GoalType } from '../types';
 
-type GoalType = {
-    id: number;
-    title: string;
-    gps_coords: string;
-}
-
-type MyComponentProps = {
+type AddGoalProps = {
     title?: string,
     type?: number,
     parentId?: number,
     onAddGoal: (goal: GoalType) => void; // Function type
 };
 
-
-const AddGoalForm: React.FC<MyComponentProps> = ({
+const AddGoalForm: React.FC<AddGoalProps> = ({
     title = '',
     type = 0,
     parentId = 0,
@@ -49,7 +43,6 @@ const AddGoalForm: React.FC<MyComponentProps> = ({
         if (reason === 'clickaway') {
             return;
         }
-
         setMessageInfo('');
     };
 
@@ -65,7 +58,6 @@ const AddGoalForm: React.FC<MyComponentProps> = ({
                     onChange={handleChange}
                     placeholder="Type new Goal..."
                     variant="filled"
-
                 />
             </label>
             <FormControl>

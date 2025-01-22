@@ -1,39 +1,24 @@
 import { useState, useRef, useEffect } from 'react';
-
-import GoalList from '../components/GoalList';
-import PaginationBar from '../components/PaginationBar';
-import ChipToggleView from '../components/ChipToggleView'
+import { LatLngExpression } from 'leaflet';
 import AddGoalForm from '../components/AddGoalForm'
+import ChipToggleView from '../components/ChipToggleView'
 import CsvQuickParser from '../components/CsvQuickParser'
-
+import GoalList from '../components/GoalList';
+import MapDisplayMulti from '../components/MapDisplayMulti';
+import PaginationBar from '../components/PaginationBar';
 import TreeDrawer from '../components/TreeDrawer';
 import useLoadGoals from '../hooks/useLoadGoals';
+
+import { GoalType, PageDataType } from '../types';
 
 import './GoalsListPage.css';
 
 import pkg from '../../package.json';
-import MapDisplayMulti from '../components/MapDisplayMulti';
-import { LatLngExpression } from 'leaflet';
-
 
 const searchTags = ['<untagged>', 'watch', 'hike', 'animals', 'achievement', 'skill'];
 const searchType = ['<untagged>', '0', '1'];
 
-interface GoalType {
-    id: number;
-    title: string;
-    gps_coords: string;
-}
-interface PageDataType {
-    primary: GoalType[];
-    children: GoalType[];
-    pageMeta: {
-        last_page: number;
-        current_page: number;
-        total: number;
-        itemsPerPage: number;
-    }
-}
+
 
 const GoalsListPage = () => {
     const [isLoading, setIsLoading] = useState(false);

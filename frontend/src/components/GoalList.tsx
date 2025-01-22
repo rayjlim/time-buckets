@@ -1,8 +1,14 @@
 import PropTypes from 'prop-types';
 import Goal from './Goal'
 import './GoalList.css';
+import { GoalType } from '../types';
 
-const GoalList = ({ goals, onRemoveGoal }: { goals: any[], onRemoveGoal: any }  ) => (
+interface GoalListProps {
+    goals: GoalType[];
+    onRemoveGoal: (id: number) => void;
+}
+
+const GoalList: React.FC<GoalListProps> = ({ goals, onRemoveGoal }) => (
   <>
     {goals.map(entry => (
       <Goal
