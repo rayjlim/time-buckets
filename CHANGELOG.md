@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/rayjlim/time-buckets/compare/v1.9.0...v1.10.0) (2025-01-22)
+
+
+### Features
+
+* ✨ convert to vite to support leaflet ([5e65bab](https://github.com/rayjlim/time-buckets/commit/5e65babf18edb13f858f917ef0cc442e93e53a1d))
+* add CsvQuickParser ([ae95237](https://github.com/rayjlim/time-buckets/commit/ae95237c97cbe505c3ca5fd7554e83d824e31f78))
+* add theme and dev ribbon ([b87c738](https://github.com/rayjlim/time-buckets/commit/b87c738f3f15f0ee798ba04cd892b86d064d37bb))
+* add treedrawer ([db5f6e7](https://github.com/rayjlim/time-buckets/commit/db5f6e7134a47ecb228a6b4e73459f6e1b0eaa55))
+* db query for children of location ([bf98162](https://github.com/rayjlim/time-buckets/commit/bf9816235fa95eed52504ae24aff72b32df33401))
+* dynamic tree by parent ([67a2144](https://github.com/rayjlim/time-buckets/commit/67a2144a312e0fc5b172af6793d9e3f10298673d))
+* get goal list page to show goals ([14744a0](https://github.com/rayjlim/time-buckets/commit/14744a0ca7835c1a04aecdbe7286ff37202b0715))
+* onClick in tree, update view ([35f2c83](https://github.com/rayjlim/time-buckets/commit/35f2c83aee61c70e5842667e57fac237cf718ae2))
+* show map with children of current id ([7eda07e](https://github.com/rayjlim/time-buckets/commit/7eda07e082cb8b856451ac191e64ae9156172786))
+
+
+### Bug Fixes
+
+* [#61](https://github.com/rayjlim/time-buckets/issues/61) search by id logic ([2bac4c1](https://github.com/rayjlim/time-buckets/commit/2bac4c17a8a43448d9ff6c292f30f3069b62e10e))
+* remove unused ([f77285c](https://github.com/rayjlim/time-buckets/commit/f77285c8b8311e716c42186da759a51d0e5a667c))
+* typescript errors ([465c801](https://github.com/rayjlim/time-buckets/commit/465c8017dd080815e01b6fa5a90cf845bb1ff51e))
+* typescript fixes ([ff09f9a](https://github.com/rayjlim/time-buckets/commit/ff09f9a80d8e54b654ee06861388fe7414d913df))
+
 ## [1.10.0](https://github.com/rayjlim/time-buckets/compare/v1.9.0...v1.10.0) (2025-01-21)
 
 
