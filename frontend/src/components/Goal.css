@@ -18,11 +18,14 @@
 }
 .manual {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 
-.manual > span {
+.manual > div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: 0 0.5rem;
 }
 
@@ -54,14 +57,14 @@
     color: #069;
     text-decoration: underline;
     cursor: pointer;
-  };
+  }
 /* const goalStyle = {
     display: 'inline-flex',
     // justifyContent: 'space-between',
     alignItems: 'center',
     // gap: '1rem',
     whiteSpace: 'nowrap',
-  };
+  }
   const rightStyle = {
     marginLeft: 'auto',
-  }; */
+  } */

@@ -36,10 +36,10 @@ class GoalController extends Controller
 
         $idParam = $request->input('id');
         if ($idParam != '') {
-            $query = Goal::where('id', '=', $idParam);
+            $query = Goal::where('id', '=', $idParam)->with('parent');
             $goal = $query->get();
 
-            $query2 = Goal::where('parent_id', '=', $idParam);
+            $query2 = Goal::where('parent_id', '=', $idParam)->with('parent');
             $children = $query2->get();
             return [
                 "meta" => (object) [],
@@ -94,7 +94,7 @@ class GoalController extends Controller
         }
 
         $query = Goal::where('type', '=', $searchType)
-            ->where('priority', $priorityOperand, $searchPriority);
+            ->where('priority', $priorityOperand, $searchPriority)->with('parent');
 
         if ($searchTitle && $searchTitle !== '') {
             $query = $query->where('title', 'LIKE', '%' . $searchTitle . '%');
@@ -159,11 +159,15 @@ class GoalController extends Controller
     public function show(int $id)
     {
 
-        $query = Goal::where('id', $id);
+        $query = Goal::with('parent')->where('id', $id);
         $goal = $query->get();
+        // $query = Goal::find($id);
+        // $parentName = $query->parent->title;
         // ->paginate($pageSize);
 
-        return $goal;
+        return [
+            "data" => $goal
+        ];
     }
 
     /**

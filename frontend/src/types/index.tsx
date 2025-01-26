@@ -10,6 +10,10 @@ export interface GoalType  {
     added_at: string;
     gps_coords: string;
     gps_zoom: number;
+    parent: {
+        id: number;
+        title: string;
+    }
 }
 
 export interface PageDataType {

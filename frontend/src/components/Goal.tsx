@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react';
-import PropTypes from 'prop-types';
 // import MarkdownDisplay from './MarkdownDisplay';
 import MapDisplay from './MapDisplay';
 import AddGoalForm from './AddGoalForm';
@@ -30,10 +29,10 @@ const Goal: React.FC<GoalProps> = ({ goal, onRemoveGoal }) => {
 
     let mainClassName = 'goal-list-row';
     switch (true) {
-        case current.type === '0':
+        case current.type === 0:
             mainClassName = `${mainClassName} location-type`;
             break;
-        case current.type === '1':
+        case current.type === 1:
             mainClassName = `${mainClassName} experience-type`;
             break;
         default:
@@ -57,6 +56,15 @@ const Goal: React.FC<GoalProps> = ({ goal, onRemoveGoal }) => {
         if (searchFormParentId) searchFormParentId.value = id;
         if (searchFormSubmit) searchFormSubmit.click();
     };
+    const displayMap = () => {
+        const mapDimension = 125;
+        return current.gps_coords.indexOf(',') !== -1 && (
+            <MapDisplay center={current.gps_coords.split(",").map(Number) as [number, number]} zoom={current.gps_zoom}
+                height={mapDimension}
+                width={mapDimension}
+            />)
+
+    }
 
     return (
         <div className={mainClassName}>
@@ -143,52 +151,45 @@ const Goal: React.FC<GoalProps> = ({ goal, onRemoveGoal }) => {
                 <div>
                     {/* show non-editing format */}
                     <div className="manual goal-display">
-                        <span>
+                        <div>
                             {`${current.title} - `}
-                            <button type="button" onClick={() => changeSearchFormParent(current.id)}>{current.id}</button>
-                        </span>
-                        <span>
+                            <button type="button" onClick={() => changeSearchFormParent(`${current.id}`)}>{current.id}</button>
                             {`Type: ${typeSet[current.type]} - Parent:`}
-                            <button type="button" onClick={() => changeSearchFormParent(current.parent_id)}>{current.parent_id}</button>
-                        </span>
-                        <span title="Priorities description
+                            <button type="button" onClick={() => changeSearchFormParent(`${current.parent_id}`)}>{current.parent?.title}</button>
+                            <span title="Priorities description
 - Finance (1-10)
 - Relationship (1-10)
 - Physical (1-10)
 - Time Frame (1-10)
 - Total (1-50)
 "
-                        >
-                            Priority:
-                            {current.priority !== -1 && (
-                                <span>
-                                    {current.priority}
-                                </span>
-                            )}
-                        </span>
+                            >
+                                Priority:
+                                {current.priority !== -1 && (
+                                    <>
+                                        {current.priority}
+                                    </>
+                                )}
+                            </span>
+                        </div>
                         {current.gps_coords && (
                             <>
-                                <span>
-                                    {`GPS: ${current.gps_coords}`}
-                                </span>{
-                                    current.gps_coords.indexOf(',') !== -1 && (
-                                        <MapDisplay center={current.gps_coords.split(",").map(Number)} zoom={current.gps_zoom}
-                                            height={200}
-                                            width={200}
-                                        />)}
-
+                                <div>
+                                    {`GPS: ${current.gps_coords.slice(0, 10)}`}
+                                </div>
+                                {displayMap()}
                             </>
                         )}
                         {/* <span>
               {`Reason: ${current.reason}`}
-            </span> */}
-                        {/* <span>
+            </span>
+             <span>
               {'Note: '}
               <MarkdownDisplay source={current.note} />
             </span> */}
-                        <span>
+                        <div>
                             {`Tags: ${current.tags}`}
-                        </span>
+                        </div>
 
                         {/* <span>
               {`Added At: ${current.added_at}`}
@@ -218,8 +219,3 @@ const Goal: React.FC<GoalProps> = ({ goal, onRemoveGoal }) => {
     );
 };
 export default Goal;
-
-Goal.propTypes = {
-    goal: PropTypes.object.isRequired,
-    onRemoveGoal: PropTypes.func.isRequired,
-};

@@ -31,5 +31,8 @@ class Goal extends Model
         'gps_zoom'
     ];
 
-
+    public function parent()
+    {
+        return $this->belongsTo(Goal::class, 'parent_id', 'id')->select('id', 'title');
+    }
 }
