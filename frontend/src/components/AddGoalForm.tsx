@@ -10,6 +10,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { GoalType } from '../types';
+import './AddGoalForm.css'
 
 type AddGoalProps = {
     title?: string,
@@ -47,9 +48,8 @@ const AddGoalForm: React.FC<AddGoalProps> = ({
     };
 
     return (
-        <form ref={formRef} onSubmit={sendAddForm} style={{ maxWidth: 400, margin: '0 auto' }}>
+        <form ref={formRef} onSubmit={sendAddForm} className="add-form">
             <label htmlFor="title">
-                Title:
                 <TextField
                     id="addform-title"
                     name="title"
@@ -61,20 +61,19 @@ const AddGoalForm: React.FC<AddGoalProps> = ({
                 />
             </label>
             <FormControl>
-                <FormLabel id="row-radio-buttons-group-label">Type</FormLabel>
                 <RadioGroup
                     row
                     aria-labelledby="row-radio-buttons-group-label"
                     name="type"
                     value={typeForm}
                     onChange={(e) => setTypeForm(Number(e.target.value))}
+                    className="type-radio"
                 >
                     <FormControlLabel value="0" control={<Radio />} label="Location" />
                     <FormControlLabel value="1" control={<Radio />} label="Experience" />
                 </RadioGroup>
             </FormControl>
             <label htmlFor="parentId">
-                Parent Id:
                 <TextField
                     id="addform-parentId"
                     name="parentId"
@@ -84,12 +83,11 @@ const AddGoalForm: React.FC<AddGoalProps> = ({
                     placeholder="Parent"
                     variant="filled"
                     type="number"
+                    size="small"
 
                 />
             </label>
-            <button
-                type="submit"
-            >
+            <button type="submit">
                 Add Goal
             </button>
 
