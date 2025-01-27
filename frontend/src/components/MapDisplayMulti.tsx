@@ -31,7 +31,7 @@ const FitBounds = ({ coordinates }: { coordinates: LatLngExpression[] }) => {
 };
 
 const MapDisplayMulti: React.FC<MapDisplayMultiProps> = ({ coords, height = 300, width = 500 }) => {
-    console.log(coords);
+
     return (
         <div style={{ height, width, border: '1px solid blue' }}>
             <MapContainer

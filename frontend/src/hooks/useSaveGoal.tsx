@@ -2,7 +2,13 @@ import { useState } from 'react';
 
 import { REST_ENDPOINT } from '../constants';
 
-const useSaveGoal = (goal: any, onRemoveGoal: any, current: any, setCurrent: any, setIsEditing: any, formRef: any       ) => {
+const useSaveGoal = (
+    goal: any,
+    onRemoveGoal: any,
+    current: any,
+    setCurrent: any,
+    setIsEditing: any,
+    formRef: any) => {
     const [messageInfo, setMessageInfo] = useState('');
 
     async function saveGoal(event: any) {
@@ -94,7 +100,7 @@ const useSaveGoal = (goal: any, onRemoveGoal: any, current: any, setCurrent: any
             setMessageInfo(`loading error : ${err}`);
         }
     }
-    function addRemoveTag(content: any) {
+    function addRemoveTag(content: string) {
         console.log('addRemove', content);
 
         const tagsInput = formRef.current.querySelector('input[name="tags"]');
@@ -104,7 +110,7 @@ const useSaveGoal = (goal: any, onRemoveGoal: any, current: any, setCurrent: any
             tagsInput.value = tagsInput.value.replace(content, '').trim();
         }
     }
-    function addRemoveType(content: any) {
+    function addRemoveType(content: string) {
         console.log('addRemove', content);
 
         const typeInput = formRef.current.querySelector('input[name="type"]');

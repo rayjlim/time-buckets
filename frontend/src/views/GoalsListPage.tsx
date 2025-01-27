@@ -1,5 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { LatLngExpression } from 'leaflet';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+
 import AddGoalForm from '../components/AddGoalForm'
 import ChipToggleView from '../components/ChipToggleView'
 import CsvQuickParser from '../components/CsvQuickParser'
@@ -16,13 +21,11 @@ import './GoalsListPage.css';
 import pkg from '../../package.json';
 
 const searchTags = ['<untagged>', 'watch', 'hike', 'animals', 'achievement', 'skill'];
-const searchType = ['<untagged>', '0', '1'];
-
-
 
 const GoalsListPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [goals, setGoals] = useState<PageDataType | null>(null);
+    const [typeForm, setTypeForm] = useState(0);
     const [page, setPage] = useState(1);
     // const [pageMeta, setPageMeta] = useState({ last_page: 1, current_page: 1, total: -1, itemsPerPage: 10 });
     const searchForm = useRef<HTMLFormElement>(null);
@@ -94,7 +97,6 @@ const GoalsListPage = () => {
             if (isNaN(lat) || isNaN(lng)) return [0, 0];
             return [lat, lng];
         }) : [];
-    console.log(arrayOutput);
 
     return (
         <>
@@ -107,68 +109,64 @@ const GoalsListPage = () => {
                     <AddGoalForm onAddGoal={onAddGoal} />
                 </ChipToggleView>
                 <form ref={searchForm} onSubmit={loadGoals}>
-                    <input name="startsWith" type="hidden" />
-                    <label htmlFor="searchTitle" className="searchField">
-                        Search Title:
-                        <input name="searchTitle" type="text" onChange={changeTitle} id="searchTitle" />
-                    </label>
-                    <button type="submit" id="searchFormSubmit">Search</button>
-                    <button type="button" onClick={() => clearFields()}>Clear</button>
-                    <label htmlFor="type" className="searchField">
-                        Type:
-                        <input name="type" type="text" />
-                        <select
-                            ref={formTypeChoices}
-                            onChange={() => {
-                                if (!searchForm.current) return;
-                                if (!formTypeChoices.current) return;
-                                const typeInput = searchForm.current.querySelector('input[name="type"]') as HTMLInputElement;
+                    <FormControl>
+                        <input name="startsWith" type="hidden" />
+                        <label htmlFor="searchTitle" className="searchField">
+                            Search Title:
+                            <input name="searchTitle" type="text" onChange={changeTitle} id="searchTitle" />
+                        </label>
+                        <button type="submit" id="searchFormSubmit">Search</button>
+                        <button type="button" onClick={() => clearFields()}>Clear</button>
+                        <RadioGroup
+                            row
+                            aria-labelledby="row-radio-buttons-group-label"
+                            name="type"
+                            value={typeForm}
+                            onChange={(e) => setTypeForm(Number(e.target.value))}
+                            className="type-radio"
+                        >
+                            <FormControlLabel value="-1" control={<Radio />} label="Untyped" />
+                            <FormControlLabel value="0" control={<Radio />} label="Location" />
+                            <FormControlLabel value="1" control={<Radio />} label="Experience" />
+                        </RadioGroup>
 
-                                typeInput.value = formTypeChoices.current.value;
-                            }}
-                        >
-                            <option value="">-</option>
-                            {searchType.map(type => (
-                                <option value={type} key={type}>{type}</option>
-                            ))}
-                        </select>
-                    </label>
-                    <label htmlFor="tags" className="searchField">
-                        Tag:
-                        <input name="tags" type="text" />
-                        <select
-                            ref={formTagChoices}
-                            onChange={() => {
-                                if (!searchForm.current) return;
-                                if (!formTagChoices.current) return;
-                                const tagsInput = searchForm.current.querySelector('input[name="tags"]') as HTMLInputElement;
-                                if (!tagsInput) return;
-                                tagsInput.value = formTagChoices.current.value;
-                            }}
-                        >
-                            <option value="">-</option>
-                            {searchTags.map(tag => (
-                                <option value={tag} key={tag}>{tag}</option>
-                            ))}
-                        </select>
-                    </label>
-                    <label htmlFor="priority" className="searchField">
-                        Priority:
-                        <input name="priority" type="text" size={4} />
-                    </label>
-                    <label htmlFor="parentId">
-                        Parent Id:
-                        <input name="parentId" id="searchFormParentId" type="text" size={4} />
-                    </label>
-                    <label htmlFor="orderBy" className="searchField">
-                        Order By:
-                        <select name="orderBy">
-                            <option value="">Updated At</option>
-                            <option value="updated-at-asc">Updated At -  Asc</option>
-                            <option value="priority">Priority</option>
-                            <option value="title">Title</option>
-                        </select>
-                    </label>
+                        <label htmlFor="tags" className="searchField">
+                            Tag:
+                            <input name="tags" type="text" />
+                            <select
+                                ref={formTagChoices}
+                                onChange={() => {
+                                    if (!searchForm.current) return;
+                                    if (!formTagChoices.current) return;
+                                    const tagsInput = searchForm.current.querySelector('input[name="tags"]') as HTMLInputElement;
+                                    if (!tagsInput) return;
+                                    tagsInput.value = formTagChoices.current.value;
+                                }}
+                            >
+                                <option value="">-</option>
+                                {searchTags.map(tag => (
+                                    <option value={tag} key={tag}>{tag}</option>
+                                ))}
+                            </select>
+                        </label>
+                        <label htmlFor="priority" className="searchField">
+                            Priority:
+                            <input name="priority" type="text" size={4} />
+                        </label>
+                        <label htmlFor="parentId">
+                            Parent Id:
+                            <input name="parentId" id="searchFormParentId" type="text" size={4} />
+                        </label>
+                        <label htmlFor="orderBy" className="searchField">
+                            Order By:
+                            <select name="orderBy">
+                                <option value="">Updated At</option>
+                                <option value="updated-at-asc">Updated At -  Asc</option>
+                                <option value="priority">Priority</option>
+                                <option value="title">Title</option>
+                            </select>
+                        </label>
+                    </FormControl>
                 </form>
             </div>
 
