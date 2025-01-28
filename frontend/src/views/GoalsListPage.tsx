@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { LatLngExpression } from 'leaflet';
+import { LatLngExpression, map } from 'leaflet';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -81,23 +81,34 @@ const GoalsListPage = () => {
         startsWith.value = '';
     };
 
-    console.log(goals?.pageMeta);
+    const strToLatLng = (item: string) => {
+        const coords = item.split(',');
+        const [lat, lng] = coords.map(Number);
+        if (isNaN(lat) || isNaN(lng)) return null;
+        return [lat, lng];
+    };
 
-    const arrayOutput: [number, number][] = goals?.children !== undefined ? goals.children.filter(item => item.gps_coords !== null && item.gps_coords !== '' && item.gps_coords.indexOf(',') !== -1)
-        .map(item => {
-            if (typeof item?.gps_coords !== 'string') return [0, 0];
-            const coords = item.gps_coords.split(',');
-            if (coords.length !== 2) return [0, 0];
-            const [lat, lng] = coords.map(Number);
-            if (isNaN(lat) || isNaN(lng)) return [0, 0];
-            return [lat, lng];
-        }) : [];
-
+    const arrayOutput: ([number, number]| null)[] = goals?.children !== undefined ?
+        goals.children.filter(item => item.gps_coords !== null)
+            .filter(item => item.gps_coords !== '')
+            .filter(item => item.gps_coords.indexOf(',') !== -1)
+            .filter(item => typeof item?.gps_coords === 'string')
+            .filter(item => {
+                const coords = item.gps_coords.split(',');
+                return coords.length === 2;
+            })
+            .map((item: GoalType) => {
+                const coords = item?.gps_coords.split(',');
+                const [lat, lng] = coords.map(Number);
+                if (isNaN(lat) || isNaN(lng)) return null;
+                return [lat, lng];
+            }) : [];
+    const primaryGpsCoords = strToLatLng(goals?.primary[0]?.gps_coords || '');
     return (
         <>
             <h1 className="title">Time Buckets</h1>
             <TreeDrawer />
-            <MapDisplayMulti coords={arrayOutput as LatLngExpression[]} />
+            <MapDisplayMulti coords={arrayOutput as LatLngExpression[]} primary={primaryGpsCoords as LatLngExpression}/>
             {isLoading && <h2>LOADING</h2>}
             <div>
                 <ChipToggleView>
