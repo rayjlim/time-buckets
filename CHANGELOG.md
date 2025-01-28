@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/rayjlim/time-buckets/compare/v1.9.2...v1.10.0) (2025-01-28)
+
+
+### Features
+
+* [#55](https://github.com/rayjlim/time-buckets/issues/55) show parent name in display ([2bb33b1](https://github.com/rayjlim/time-buckets/commit/2bb33b1acde1850c8b348af421d63f299019b3e8))
+* [#81](https://github.com/rayjlim/time-buckets/issues/81) add completed at date field ([111ef6a](https://github.com/rayjlim/time-buckets/commit/111ef6ae746b74ec94e1fdec713e8e9724613503))
+
+
+### Bug Fixes
+
+* [#41](https://github.com/rayjlim/time-buckets/issues/41) convert Type edits to radio buttons ([a264649](https://github.com/rayjlim/time-buckets/commit/a2646490fa50c502f35a9ad297d57f5e896a07e7))
+* [#82](https://github.com/rayjlim/time-buckets/issues/82) horizontal inline add form ([cfb6b3e](https://github.com/rayjlim/time-buckets/commit/cfb6b3e0f8b24f87cc03fcd742d0f5ed3b21208f))
+* new favicon image ([8e7655d](https://github.com/rayjlim/time-buckets/commit/8e7655d9622756a5cc00336dc382b76ca2e62546))
+
 ## [1.10.0](https://github.com/rayjlim/time-buckets/compare/v1.9.2...v1.10.0) (2025-01-27)
 
 
