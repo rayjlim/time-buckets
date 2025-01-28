@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/rayjlim/time-buckets/compare/v2.1.0...v2.2.0) (2025-01-28)
+
+
+### Features
+
+* [#87](https://github.com/rayjlim/time-buckets/issues/87) impl nuqs for search form state management ([2bc2931](https://github.com/rayjlim/time-buckets/commit/2bc2931ebacec8ab7ad00d176e1fdaec0acbae2d))
+
+
+### Bug Fixes
+
+* lint error ([1f3c724](https://github.com/rayjlim/time-buckets/commit/1f3c7249559147f129e935fa0f21884e8f11c3a1))
+
 ## [2.1.0](https://github.com/rayjlim/time-buckets/compare/v2.0.1...v2.1.0) (2025-01-28)
 
 
