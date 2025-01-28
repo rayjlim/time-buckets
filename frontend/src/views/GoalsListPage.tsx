@@ -4,6 +4,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
+import { useQueryState } from 'nuqs'
 
 import AddGoalForm from '../components/AddGoalForm'
 import ChipToggleView from '../components/ChipToggleView'
@@ -18,13 +19,16 @@ import { GoalType, PageDataType } from '../types';
 
 import './GoalsListPage.css';
 
-
 const searchTags = ['<untagged>', 'watch', 'hike', 'animals', 'achievement', 'skill'];
 
 const GoalsListPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [goals, setGoals] = useState<PageDataType | null>(null);
-    const [typeForm, setTypeForm] = useState(0);
+    const [titleForm, setTitleForm] = useQueryState('title');
+    const [typeForm, setTypeForm] = useQueryState('type');
+    const [tagForm, setTagForm] = useQueryState('tag');
+    const [parentIdForm, setParentIdForm] = useQueryState('parentId');
+
     const [page, setPage] = useState(1);
     // const [pageMeta, setPageMeta] = useState({ last_page: 1, current_page: 1, total: -1, itemsPerPage: 10 });
     const searchForm = useRef<HTMLFormElement>(null);
@@ -88,7 +92,7 @@ const GoalsListPage = () => {
         return [lat, lng];
     };
 
-    const arrayOutput: ([number, number]| null)[] = goals?.children !== undefined ?
+    const arrayOutput: ([number, number] | null)[] = goals?.children !== undefined ?
         goals.children.filter(item => item.gps_coords !== null)
             .filter(item => item.gps_coords !== '')
             .filter(item => item.gps_coords.indexOf(',') !== -1)
@@ -104,22 +108,49 @@ const GoalsListPage = () => {
                 return [lat, lng];
             }) : [];
     const primaryGpsCoords = strToLatLng(goals?.primary[0]?.gps_coords || '');
+
+    const submitSearch = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        // Update query parameters based on form values
+        const form = searchForm.current;
+        if (form) {
+            const titleInput = form.elements.namedItem('searchTitle') as HTMLInputElement;
+            console.log('Search Query:', titleInput.value);
+            setTitleForm(titleInput.value || '');
+
+            const typeInput = form.elements.namedItem('type') as HTMLInputElement;
+            console.log('typeInput:', typeInput.value);
+            setTypeForm(typeInput.value || '');
+
+            const tagsInput = form.elements.namedItem('tags') as HTMLInputElement;
+            console.log('tagsInput:', tagsInput.value);
+            setTagForm(tagsInput.value || '');
+
+            const parentIdInput = form.elements.namedItem('parentId') as HTMLInputElement;
+            console.log('parentIdInput:', parentIdInput.value);
+            setParentIdForm(parentIdInput.value || '');
+        }
+
+        loadGoals();
+    }
+
     return (
         <>
             <h1 className="title">Time Buckets</h1>
             <TreeDrawer />
-            <MapDisplayMulti coords={arrayOutput as LatLngExpression[]} primary={primaryGpsCoords as LatLngExpression}/>
+            <MapDisplayMulti coords={arrayOutput as LatLngExpression[]} primary={primaryGpsCoords as LatLngExpression} />
             {isLoading && <h2>LOADING</h2>}
             <div>
                 <ChipToggleView>
                     <AddGoalForm onAddGoal={onAddGoal} />
                 </ChipToggleView>
-                <form ref={searchForm} onSubmit={loadGoals}>
+                <form ref={searchForm} onSubmit={submitSearch}>
                     <FormControl>
                         <input name="startsWith" type="hidden" />
                         <label htmlFor="searchTitle" className="searchField">
                             Search Title:
-                            <input name="searchTitle" type="text" onChange={changeTitle} id="searchTitle" />
+                            <input name="searchTitle" type="text" onChange={changeTitle} id="searchTitle" defaultValue={titleForm as string} />
                         </label>
                         <button type="submit" id="searchFormSubmit">Search</button>
                         <button type="button" onClick={() => clearFields()}>Clear</button>
@@ -128,8 +159,8 @@ const GoalsListPage = () => {
                             aria-labelledby="row-radio-buttons-group-label"
                             name="type"
                             value={typeForm}
-                            onChange={(e) => setTypeForm(Number(e.target.value))}
                             className="type-radio"
+                            defaultValue={typeForm as string}
                         >
                             <FormControlLabel value="-1" control={<Radio />} label="Untyped" />
                             <FormControlLabel value="0" control={<Radio />} label="Location" />
@@ -138,15 +169,15 @@ const GoalsListPage = () => {
 
                         <label htmlFor="tags" className="searchField">
                             Tag:
-                            <input name="tags" type="text" />
+                            <input name="tags" type="text" defaultValue={tagForm as string} />
                             <select
                                 ref={formTagChoices}
-                                onChange={() => {
+                                onChange={e => {
                                     if (!searchForm.current) return;
-                                    if (!formTagChoices.current) return;
-                                    const tagsInput = searchForm.current.querySelector('input[name="tags"]') as HTMLInputElement;
+                                    const tagsInput = searchForm.current.elements.namedItem('tags') as HTMLInputElement;
+
                                     if (!tagsInput) return;
-                                    tagsInput.value = formTagChoices.current.value;
+                                    tagsInput.value = e.target.value;
                                 }}
                             >
                                 <option value="">-</option>
@@ -161,7 +192,8 @@ const GoalsListPage = () => {
                         </label>
                         <label htmlFor="parentId">
                             Parent Id:
-                            <input name="parentId" id="searchFormParentId" type="text" size={4} />
+                            <input name="parentId" id="searchFormParentId" type="text" size={4} defaultValue={parentIdForm as string}
+                            />
                         </label>
                         <label htmlFor="orderBy" className="searchField">
                             Order By:

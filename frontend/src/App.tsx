@@ -4,10 +4,8 @@ import './index.scss'
 import './App.css'
 
 function App() {
-
     return (
         <GoalsListPage />
-
     )
 }
 

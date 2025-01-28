@@ -4,6 +4,7 @@ import { PageDataType } from '../types';
 
 const useLoadGoals = (searchForm: React.RefObject<HTMLFormElement>, page: number, setIsLoading: (isLoading: boolean) => void, setGoals: (goals: PageDataType) => void) => {
     const [messageInfo, setMessageInfo] = useState('');
+
     async function loadGoals(event?: React.FormEvent<HTMLFormElement>) {
         if (!searchForm.current) return;
 
