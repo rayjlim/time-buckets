@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/rayjlim/time-buckets/compare/v2.0.1...v2.1.0) (2025-01-28)
+
+
+### Features
+
+* [#72](https://github.com/rayjlim/time-buckets/issues/72) show custom marker for primary ([b84c041](https://github.com/rayjlim/time-buckets/commit/b84c041b3f696b4b3aee8b0115874b04aafe4ed2))
+
+
+### Bug Fixes
+
+* missed image ([69828bd](https://github.com/rayjlim/time-buckets/commit/69828bd300f91d8ab86a81d50a05a58388451510))
+* update db rows ([75966f6](https://github.com/rayjlim/time-buckets/commit/75966f6463f45ef38f3a91339a767b8fe0cb6725))
+
 ### [2.0.1](https://github.com/rayjlim/time-buckets/compare/v2.0.0...v2.0.1) (2025-01-28)
 
 ## [2.0.0](https://github.com/rayjlim/time-buckets/compare/v1.9.4...v2.0.0) (2025-01-28)
