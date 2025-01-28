@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { LatLngExpression, map } from 'leaflet';
+import { LatLngExpression } from 'leaflet';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
