@@ -17,6 +17,7 @@ const useSaveGoal = (
         const formData = new FormData(formRef.current);
         const title = formData.get('title');
         const priority = formData.get('priority');
+        const completedAt = formData.get('completedAt');
         const reason = formData.get('reason');
         const note = formData.get('note');
         const addedAt = formData.get('addedAt');
@@ -42,6 +43,7 @@ const useSaveGoal = (
                 parentId,
                 gpsCoords,
                 gpsZoom,
+                completedAt
             }),
         };
         try {
@@ -65,6 +67,7 @@ const useSaveGoal = (
                     parent_id: parentId,
                     gps_coords: gpsCoords,
                     gps_zoom: gpsZoom,
+                    completed_at: completedAt
                 });
                 setIsEditing(false);
             }

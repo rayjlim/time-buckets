@@ -3,6 +3,7 @@ export interface GoalType  {
     title: string;
     type: number;
     parent_id: number;
+    completed_at: string;
     priority: number;
     reason: string;
     tags: string;

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Goal;
@@ -141,8 +140,6 @@ class GoalController extends Controller
         $formData = json_decode($request->getContent());
 
         $goal = Goal::create((array)$formData);
-        $goal->priority = 1;
-        $goal->tags = "";
         $goal->update();
         // echo $request->all();
         return [
@@ -197,13 +194,13 @@ class GoalController extends Controller
         $goal->parent_id = $formData->parentId;
         $goal->gps_coords = $formData->gpsCoords;
         $goal->gps_zoom = $formData->gpsZoom;
+        $goal->completed_at = trim($formData->completedAt) !== '' ? $formData->completedAt : null;
 
         $goal->update();
 
         return [
-            "status" => 1,
             "data" => $goal,
-            "msg" => "Goal updated successfully"
+            "msg" => "Goal updated"
         ];
     }
 
@@ -218,7 +215,7 @@ class GoalController extends Controller
         Goal::where('id', $id)->delete();
         return [
             "data" => $id,
-            "msg" => "Goal deleted successfully"
+            "msg" => "Goal deleted"
         ];
     }
 

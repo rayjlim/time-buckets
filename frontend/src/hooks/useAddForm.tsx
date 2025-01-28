@@ -17,6 +17,8 @@ const useAddForm = (onAddGoal: (goal: GoalType) => void, formRef: React.RefObjec
             type,
             parent_id: parentId,
             gps_zoom: 0,
+            priority: 1,
+            tags: ''
         };
         const config = {
             method: 'POST',

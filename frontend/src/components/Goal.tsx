@@ -123,10 +123,34 @@ const Goal: React.FC<GoalProps> = ({ goal, onRemoveGoal }) => {
                                 defaultValue={current.parent_id}
                             />
                             <TextField
+                                name="completedAt"
+                                id="form-completedAt"
+                                label="Date Completed"
+                                defaultValue={current.completed_at}
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        height: '30px', // Set the height
+                                        fontSize: '0.875rem', // Adjust font size
+                                    },
+                                    '& .MuiInputLabel-root': {
+                                        fontSize: '0.75rem', // Adjust label font size
+                                    },
+                                }}
+                            />
+                            <TextField
                                 name="tags"
                                 id="form-tags"
                                 label="Tags"
                                 defaultValue={current.tags}
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        height: '30px', // Set the height
+                                        fontSize: '0.875rem', // Adjust font size
+                                    },
+                                    '& .MuiInputLabel-root': {
+                                        fontSize: '0.75rem', // Adjust label font size
+                                    },
+                                }}
                             />
 
                             <br />
@@ -275,13 +299,15 @@ const Goal: React.FC<GoalProps> = ({ goal, onRemoveGoal }) => {
                             <div>
                                 {`Tags: ${current.tags}`}
                             </div>
-
-                            {/* <span>
-              {`Added At: ${current.added_at}`}
-            </span> */}
+                            <div style={{ fontSize: 'small' }}>
+                                {`Added At: ${current.added_at}`}
+                            </div>
+                            {current.completed_at !== null && current.completed_at !== '' && (<div style={{ fontSize: 'large', fontWeight: 'bold' }}>
+                                {`Completed At: ${current.completed_at}`}
+                            </div>)}
                         </div>
                     </div>
-                    {current.gps_coords && (
+                    {current.gps_coords && current.gps_coords !== '' && (
                         <div>
                             {`GPS: ${current.gps_coords.slice(0, 10)}`}
                             {displayMap()}

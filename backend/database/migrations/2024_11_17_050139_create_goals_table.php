@@ -26,6 +26,8 @@ return new class extends Migration
             $table->integer('parent_id')->nullable();
             $table->string('gps_coords');
             $table->integer('gps_zoom')->nullable();
+            $table->date('completed_at')->nullable();
+
         });
     }
 

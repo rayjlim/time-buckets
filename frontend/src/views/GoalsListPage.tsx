@@ -13,12 +13,11 @@ import MapDisplayMulti from '../components/MapDisplayMulti';
 import PaginationBar from '../components/PaginationBar';
 import TreeDrawer from '../components/TreeDrawer';
 import useLoadGoals from '../hooks/useLoadGoals';
-
+import pkg from '../../package.json';
 import { GoalType, PageDataType } from '../types';
 
 import './GoalsListPage.css';
 
-import pkg from '../../package.json';
 
 const searchTags = ['<untagged>', 'watch', 'hike', 'animals', 'achievement', 'skill'];
 
@@ -29,8 +28,6 @@ const GoalsListPage = () => {
     const [page, setPage] = useState(1);
     // const [pageMeta, setPageMeta] = useState({ last_page: 1, current_page: 1, total: -1, itemsPerPage: 10 });
     const searchForm = useRef<HTMLFormElement>(null);
-
-    const formTypeChoices = useRef<HTMLSelectElement>(null);
     const formTagChoices = useRef<HTMLSelectElement>(null);
 
     /** Page Data look up */
@@ -48,8 +45,6 @@ const GoalsListPage = () => {
         goals.children = updatedGoals;
         setGoals(goals);
     };
-
-    /** Search functions */
 
     const handlePageClick = (event: any) => {
         if (!goals?.pageMeta) return;
