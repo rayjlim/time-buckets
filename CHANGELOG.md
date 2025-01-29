@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/rayjlim/time-buckets/compare/v2.2.0...v2.3.0) (2025-01-29)
+
+
+### Features
+
+* [#3](https://github.com/rayjlim/time-buckets/issues/3) show child count ([7c81a40](https://github.com/rayjlim/time-buckets/commit/7c81a40504bfa28436f13024cfc7bfa9dde8a7d1))
+
+
+### Bug Fixes
+
+* search by type ([f96d8d7](https://github.com/rayjlim/time-buckets/commit/f96d8d7bb2a3da9c4b2e307b92f36be17ce5ef6a))
+
 ## [2.2.0](https://github.com/rayjlim/time-buckets/compare/v2.1.0...v2.2.0) (2025-01-28)
 
 
