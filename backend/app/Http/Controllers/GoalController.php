@@ -55,9 +55,10 @@ class GoalController extends Controller
         $searchTags = $request->input('tags') == "<untagged>"
             ? ""
             : '%' . $request->input('tags') . '%';
-        $searchType = $request->input('type') == "<untagged>"
+        $searchType = $request->input('type') == "-1"
             ? ""
             : $request->input('type');
+
         $priorityParam = $request->input('priority');
         $searchPriority = $priorityParam && is_numeric($priorityParam)
             ? $priorityParam
@@ -65,10 +66,6 @@ class GoalController extends Controller
         $priorityOperand = $priorityParam && is_numeric($priorityParam)
             ? '='
             : '!=';
-        // $parentIdParam = $searchType && is_numeric($searchType) && $searchType == "0" & $request->input('parent_id')
-        //     ? $request->input('parent_id')
-        //     : '';
-
 
         $orderByParam = $request->input('order_by');
 
@@ -92,14 +89,20 @@ class GoalController extends Controller
                 $orderByValue = 'DESC';
         }
 
-        $query = Goal::where('type', '=', $searchType)
-            ->where('priority', $priorityOperand, $searchPriority)->with('parent');
+        $query = Goal::with('parent');
 
-        if ($searchTitle && $searchTitle !== '') {
+        if ($searchTitle !== '') {
             $query = $query->where('title', 'LIKE', '%' . $searchTitle . '%');
+        }
+
+        if ($searchType !== '') {
+            $query = $query->where('type', $searchType);
         }
         if ($searchTags !== '') {
             $query = $query->where('tags', 'LIKE', $searchTags);
+        }
+        if($searchPriority > -2){
+            $query = $query->where('priority', $priorityOperand, $searchPriority);
         }
 
 
@@ -120,7 +123,7 @@ class GoalController extends Controller
                 "searchTitle" => $searchTitle,
                 "tags" => $searchTags,
                 "type" => $searchType,
-                "priority" => $searchPriority,
+                "priority" => $searchPriority >= 0 ? $searchPriority : 0,
                 "orderByField" => $orderByField
             ],
             "primary" => [],

@@ -161,6 +161,7 @@ const GoalsListPage = () => {
                             value={typeForm}
                             className="type-radio"
                             defaultValue={typeForm as string}
+                            onChange={e => setTypeForm(e.target.value)}
                         >
                             <FormControlLabel value="-1" control={<Radio />} label="Untyped" />
                             <FormControlLabel value="0" control={<Radio />} label="Location" />
