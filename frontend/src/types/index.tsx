@@ -1,4 +1,4 @@
-export interface GoalType  {
+export interface GoalType {
     id: number;
     title: string;
     type: number;
@@ -20,7 +20,10 @@ export interface GoalType  {
 
 export interface PageDataType {
     primary: GoalType[];
-    children: GoalType[];
+    children: {
+        per_page: number;
+        current_page: number;
+        data: GoalType[] };
     pageMeta: {
         last_page: number;
         current_page: number;

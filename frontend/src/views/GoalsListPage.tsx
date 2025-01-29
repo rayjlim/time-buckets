@@ -4,7 +4,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import { useQueryState } from 'nuqs'
+import { parseAsInteger, parseAsString, useQueryState } from 'nuqs'
 
 import AddGoalForm from '../components/AddGoalForm'
 import ChipToggleView from '../components/ChipToggleView'
@@ -24,12 +24,12 @@ const searchTags = ['<untagged>', 'watch', 'hike', 'animals', 'achievement', 'sk
 const GoalsListPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [goals, setGoals] = useState<PageDataType | null>(null);
-    const [titleForm, setTitleForm] = useQueryState('title');
-    const [typeForm, setTypeForm] = useQueryState('type');
-    const [tagForm, setTagForm] = useQueryState('tag');
-    const [parentIdForm, setParentIdForm] = useQueryState('parentId');
+    const [titleForm, setTitleForm] = useQueryState('title', parseAsString);
+    const [typeForm, setTypeForm] = useQueryState('type', parseAsString);
+    const [tagForm, setTagForm] = useQueryState('tag', parseAsString);
+    const [parentIdForm, setParentIdForm] = useQueryState('parentId', parseAsInteger.withDefault(0));
+    const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1));
 
-    const [page, setPage] = useState(1);
     // const [pageMeta, setPageMeta] = useState({ last_page: 1, current_page: 1, total: -1, itemsPerPage: 10 });
     const searchForm = useRef<HTMLFormElement>(null);
     const formTagChoices = useRef<HTMLSelectElement>(null);
@@ -39,25 +39,21 @@ const GoalsListPage = () => {
 
     const onAddGoal = (newGoal: GoalType) => {
         if (!goals) return;
-        const newChildren = [...goals.children, newGoal];
-        goals.children = newChildren;
+        const newChildren = [...goals.children.data, newGoal];
+        goals.children.data = newChildren;
         setGoals(goals);
     };
     const onRemoveGoal = (id: number) => {
         if (!goals) return;
-        const updatedGoals = goals.children.filter(item => item.id !== id);
-        goals.children = updatedGoals;
+        const updatedGoals = goals.children.data.filter(item => item.id !== id);
+        goals.children.data = updatedGoals;
         setGoals(goals);
     };
 
-    const handlePageClick = (event: any) => {
-        if (!goals?.pageMeta) return;
-        const newOffset = (event.selected * goals.pageMeta.itemsPerPage) % goals.children.length;
-        console.log(
-            `User requested page number ${event.selected}, which is offset ${newOffset}`,
-        );
-        // setItemOffset(newOffset);
-        setPage(event.selected + 1);
+    const handlePageClick = (event: any, pageNumber: number) => {
+        console.log(event, pageNumber);;
+        setPage(pageNumber);
+        loadGoals();
     };
 
     useEffect(() => {
@@ -93,7 +89,7 @@ const GoalsListPage = () => {
     };
 
     const arrayOutput: ([number, number] | null)[] = goals?.children !== undefined ?
-        goals.children.filter(item => item.gps_coords !== null)
+        goals.children.data.filter(item => item.gps_coords !== null)
             .filter(item => item.gps_coords !== '')
             .filter(item => item.gps_coords.indexOf(',') !== -1)
             .filter(item => typeof item?.gps_coords === 'string')
@@ -209,11 +205,9 @@ const GoalsListPage = () => {
                 </form>
             </div>
 
-            <PaginationBar pageCount={goals?.pageMeta?.last_page || 0} pageChange={handlePageClick} />
+            <PaginationBar pageCount={goals?.children.per_page || 0} page={goals?.children.current_page || 0} pageChange={handlePageClick} />
 
-            <div>
-                {`page: ${goals?.pageMeta?.current_page || 0} total: ${goals?.pageMeta?.total || 0}`}
-            </div>
+
             {!isLoading && (
                 <>
                     <GoalList
@@ -222,12 +216,12 @@ const GoalsListPage = () => {
                     />
                     <hr />
                     <GoalList
-                        goals={goals?.children || []}
+                        goals={goals?.children.data || []}
                         onRemoveGoal={onRemoveGoal}
                     />
                 </>
             )}
-            <PaginationBar pageCount={goals?.pageMeta?.last_page || 0} pageChange={handlePageClick} />
+            <PaginationBar pageCount={goals?.children.per_page || 0} page={goals?.children.current_page || 0} pageChange={handlePageClick} />
             <ChipToggleView>
                 <CsvQuickParser />
             </ChipToggleView>

@@ -8,7 +8,7 @@ interface GoalListProps {
     onRemoveGoal: (id: number) => void;
 }
 
-const GoalList: React.FC<GoalListProps> = ({ goals, onRemoveGoal }) => (
+const GoalList: React.FC<GoalListProps> = ({ goals=[], onRemoveGoal }) => (
   <>
     {goals.map(entry => (
       <Goal

@@ -49,7 +49,7 @@ class GoalController extends Controller
             ];
         }
 
-
+        $searchPage = $request->input('page');
         $searchTitle =  $request->input('search_title');
         // $searchTitle = $request->input('starts_with')
         //     ? $request->input('starts_with') . '%'
@@ -110,25 +110,17 @@ class GoalController extends Controller
 
 
         $query = $query->orderBy($orderByField, $orderByValue);
+        $goals = $query->paginate(10, ['*'], 'page', $searchPage);
+
         // echo $query->toSql();
         // $bindings = $query->getBindings();
         // dd($query->toSql(), $bindings);
-        $goals = $query->get();
+        // $goals = $query->get();
         // ->paginate($pageSize);
 
         // echo $query->toSql();
 
         return [
-            "meta" => (object) [
-                "last_page" => 1,
-                "current_page" => 1,
-                "total" => -1,
-                "searchTitle" => $searchTitle,
-                "tags" => $searchTags,
-                "type" => $searchType,
-                "priority" => $searchPriority >= 0 ? $searchPriority : 0,
-                "orderByField" => $orderByField
-            ],
             "primary" => [],
             "children" => $goals
         ];

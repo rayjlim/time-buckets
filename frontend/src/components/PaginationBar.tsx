@@ -1,32 +1,23 @@
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
-const PaginationBar = ({ pageCount, pageChange }: { pageCount: number, pageChange: any }) => (
-    <Stack spacing={2}>
-        <Pagination count={pageCount} variant="outlined" shape="rounded" />
-        <button onClick={pageChange}>test pagination</button>
-    </Stack>
-    //   <nav aria-label="Page navigation" className="mt-4">
-    //     <ReactPaginate
-    //       containerClassName="pagination justify-content-center"
-    //       breakClassName="page-item"
-    //       breakLinkClassName="page-link"
-    //       pageClassName="page-item"
-    //       pageLinkClassName="page-link"
-    //       previousClassName="page-item"
-    //       previousLinkClassName="page-link"
-    //       nextClassName="page-item"
-    //       nextLinkClassName="page-link"
-    //       activeClassName="active"
-    //       onPageChange={pageChange}
-    //       pageRangeDisplayed={4}
-    //       pageCount={pageCount}
-    //       previousLabel="< previous"
-    //       breakLabel="..."
-    //       nextLabel="next >"
-    //       renderOnZeroPageCount={null}
-    //     />
-    //   </nav>
+interface PaginationBarProps {
+    pageCount: number;
+    page: number;
+    pageChange: (e: any) => void;
+}
+
+const PaginationBar = ({ pageCount, page, pageChange }: PaginationBarProps) => (
+    <>
+        <Stack spacing={2}>
+            <Pagination count={pageCount} page={page} variant="outlined" shape="rounded" onChange={pageChange}/>
+
+        </Stack>
+        <p>Current Page: {page}</p>
+        <div>
+            {`page: ${page} total: ${pageCount}`}
+        </div>
+    </>
 );
 
 export default PaginationBar;
