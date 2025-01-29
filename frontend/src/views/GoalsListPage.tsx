@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { LatLngExpression } from 'leaflet';
+import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -28,6 +29,7 @@ const GoalsListPage = () => {
     const [typeForm, setTypeForm] = useQueryState('type', parseAsString);
     const [tagForm, setTagForm] = useQueryState('tag', parseAsString);
     const [parentIdForm, setParentIdForm] = useQueryState('parentId', parseAsInteger.withDefault(0));
+    const [idForm, setIdForm] = useQueryState('id', parseAsInteger);
     const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1));
 
     // const [pageMeta, setPageMeta] = useState({ last_page: 1, current_page: 1, total: -1, itemsPerPage: 10 });
@@ -71,6 +73,7 @@ const GoalsListPage = () => {
         orderBy.value = '';
         const parentId = searchForm.current.querySelector('input[name="parentId"]') as HTMLInputElement;
         parentId.value = '';
+
         setPage(1);
         await loadGoals();
     };
@@ -125,7 +128,10 @@ const GoalsListPage = () => {
 
             const parentIdInput = form.elements.namedItem('parentId') as HTMLInputElement;
             console.log('parentIdInput:', parentIdInput.value);
-            setParentIdForm(parentIdInput.value || '');
+            setParentIdForm(parseInt(parentIdInput.value) || null);
+            const idInput = form.elements.namedItem('idField') as HTMLInputElement;
+            console.log('idInput:', idInput.value);
+            setIdForm(parseInt(idInput.value) || null);
         }
 
         loadGoals();
@@ -189,7 +195,18 @@ const GoalsListPage = () => {
                         </label>
                         <label htmlFor="parentId">
                             Parent Id:
-                            <input name="parentId" id="searchFormParentId" type="text" size={4} defaultValue={parentIdForm as string}
+                            <input name="parentId" id="searchFormParentId" type="text" size={4} defaultValue={parentIdForm as number}
+                            />
+                        </label>
+                        <label htmlFor="title">
+                            <TextField
+                                id="searchform-id"
+                                name="idField"
+                                label="Id"
+                                defaultValue={idForm}
+                                placeholder="id"
+                                variant="filled"
+
                             />
                         </label>
                         <label htmlFor="orderBy" className="searchField">
@@ -205,7 +222,7 @@ const GoalsListPage = () => {
                 </form>
             </div>
 
-            <PaginationBar pageCount={goals?.children.per_page || 0} page={goals?.children.current_page || 0} pageChange={handlePageClick} />
+            <PaginationBar pageCount={goals?.children.last_page || 0} page={goals?.children.current_page || 0} pageChange={handlePageClick} />
 
 
             {!isLoading && (
@@ -221,7 +238,7 @@ const GoalsListPage = () => {
                     />
                 </>
             )}
-            <PaginationBar pageCount={goals?.children.per_page || 0} page={goals?.children.current_page || 0} pageChange={handlePageClick} />
+            <PaginationBar pageCount={goals?.children.last_page || 0} page={goals?.children.current_page || 0} pageChange={handlePageClick} />
             <ChipToggleView>
                 <CsvQuickParser />
             </ChipToggleView>

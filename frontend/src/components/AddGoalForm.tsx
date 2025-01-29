@@ -1,13 +1,14 @@
 import { useRef, useState } from 'react';
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import useAddForm from '../hooks/useAddForm';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
+import CloseIcon from '@mui/icons-material/Close';
+
+import useAddForm from '../hooks/useAddForm';
 import { GoalType } from '../types';
 import './AddGoalForm.css'
 

@@ -19,6 +19,7 @@ const useLoadGoals = (searchForm: React.RefObject<HTMLFormElement>, page: number
         const startsWith = formData.get('startsWith');
         const priority = formData.get('priority');
         const parentId = formData.get('parentId');
+        const id = formData.get('idField');
 
         const endpoint = `${REST_ENDPOINT}goals/?page=${page}`;
         let searchFields = '';
@@ -42,7 +43,10 @@ const useLoadGoals = (searchForm: React.RefObject<HTMLFormElement>, page: number
             searchFields += `&priority=${priority}`;
         }
         if (parentId !== '') {
-            searchFields += `&id=${parentId}`;
+            searchFields += `&parent_id=${parentId}`;
+        }
+        if (id !== '') {
+            searchFields += `&id=${id}`;
         }
 
         setIsLoading(true);

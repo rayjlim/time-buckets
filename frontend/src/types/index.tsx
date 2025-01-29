@@ -21,7 +21,7 @@ export interface GoalType {
 export interface PageDataType {
     primary: GoalType[];
     children: {
-        per_page: number;
+        last_page: number;
         current_page: number;
         data: GoalType[] };
     pageMeta: {

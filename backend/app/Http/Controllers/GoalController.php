@@ -32,24 +32,27 @@ class GoalController extends Controller
         // $pageSize = is_numeric($request->input('per_page'))
         //     ? $request->input('per_page')
         //     : 20;  // DEFAULT page size
+        $searchPage = $request->input('page');
 
         $idParam = $request->input('id');
         if ($idParam != '') {
-            $query = Goal::where('id', '=', $idParam)->with('parent');
+            $query = Goal::where('id', $idParam)->with('parent');
             $query = $query->withCount('children');
             $goal = $query->get();
 
             $query2 = Goal::where('parent_id', '=', $idParam)->with('parent');
             $query2 = $query2->withCount('children');
-            $children = $query2->get();
+            $children = $query2->paginate(10, ['*'], 'page', $searchPage);
+
             return [
-                "meta" => (object) [],
                 "primary" => $goal,
-                "children" => $children
+                "children" => $children,
+                "meta" => (object) [
+                    "id" => $idParam
+                ],
             ];
         }
 
-        $searchPage = $request->input('page');
         $searchTitle =  $request->input('search_title');
         // $searchTitle = $request->input('starts_with')
         //     ? $request->input('starts_with') . '%'
@@ -68,6 +71,9 @@ class GoalController extends Controller
         $priorityOperand = $priorityParam && is_numeric($priorityParam)
             ? '='
             : '!=';
+        $searchParentId = $request->input('parent_id') !== null
+            ? $request->input('parent_id')
+            : "";
 
         $orderByParam = $request->input('order_by');
 
@@ -101,14 +107,17 @@ class GoalController extends Controller
         if ($searchType !== '') {
             $query = $query->where('type', $searchType);
         }
+
         if ($searchTags !== '') {
             $query = $query->where('tags', 'LIKE', $searchTags);
         }
+
         if($searchPriority > -2){
             $query = $query->where('priority', $priorityOperand, $searchPriority);
         }
-
-
+        if($searchParentId >= 0){
+            $query = $query->where('parent_id', $searchParentId);
+        }
         $query = $query->orderBy($orderByField, $orderByValue);
         $goals = $query->paginate(10, ['*'], 'page', $searchPage);
 
@@ -122,7 +131,15 @@ class GoalController extends Controller
 
         return [
             "primary" => [],
-            "children" => $goals
+            "children" => $goals,
+            "meta" => (object) [
+                "searchTitle" => $searchTitle,
+                "tags" => $searchTags,
+                "type" => $searchType,
+                "priority" => $searchPriority >= 0 ? $searchPriority : 0,
+                "orderByField" => $orderByField,
+                "parentId" => $searchParentId
+            ],
         ];
     }
 

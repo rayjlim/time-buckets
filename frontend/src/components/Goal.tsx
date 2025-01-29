@@ -54,11 +54,14 @@ const Goal: React.FC<GoalProps> = ({ goal, onRemoveGoal }) => {
 
     const changeSearchFormParent = (id: string) => {
         const searchTitle = document.getElementById('searchTitle') as HTMLInputElement;
-        const searchFormParentId = document.getElementById('searchFormParentId') as HTMLInputElement;
+        const searchParentId = document.getElementById('searchFormParentId') as HTMLInputElement;
+
+        const searchFormId = document.getElementById('searchform-id') as HTMLInputElement;
         const searchFormSubmit = document.getElementById('searchFormSubmit') as HTMLInputElement;
 
         if (searchTitle) searchTitle.value = '';
-        if (searchFormParentId) searchFormParentId.value = id;
+        if (searchParentId) searchParentId.value = '';
+        if (searchFormId) searchFormId.value = id;
         if (searchFormSubmit) searchFormSubmit.click();
     };
     const displayMap = () => {
