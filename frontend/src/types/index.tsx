@@ -4,6 +4,7 @@ export interface GoalType  {
     type: number;
     parent_id: number;
     completed_at: string;
+    children_count: number;
     priority: number;
     reason: string;
     tags: string;

@@ -251,15 +251,16 @@ const Goal: React.FC<GoalProps> = ({ goal, onRemoveGoal }) => {
                     width: '100%',
                 }}>
                     {/* show non-editing format */}
-                    <div className="manual goal-display" style={{ display: 'flex', flexDirection: 'row' }}>
+                    <div className="manual goal-display" style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
-                                {`${current.title} - `}
-                                <button type="button" onClick={() => changeSearchFormParent(`${current.id}`)}>{current.id}</button>
+                            <button type="button" onClick={() => changeSearchFormParent(`${current.id}`)}>{current.id}</button>
+                            {`${current.title} `}
                             </div>
-                            <span>
-                                {typeSet[current.type]}
-                            </span>
+                            <div>
+                                {`${typeSet[current.type]}`}
+                                {current.children_count > 0 && `, Children: ${current.children_count}`}
+                            </div>
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
                                 Parent
                                 <button type="button" onClick={() => changeSearchFormParent(`${current.parent_id}`)}>{current.parent?.title || 'root'}</button>

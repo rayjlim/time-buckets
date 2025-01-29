@@ -36,9 +36,11 @@ class GoalController extends Controller
         $idParam = $request->input('id');
         if ($idParam != '') {
             $query = Goal::where('id', '=', $idParam)->with('parent');
+            $query = $query->withCount('children');
             $goal = $query->get();
 
             $query2 = Goal::where('parent_id', '=', $idParam)->with('parent');
+            $query2 = $query2->withCount('children');
             $children = $query2->get();
             return [
                 "meta" => (object) [],
@@ -90,6 +92,7 @@ class GoalController extends Controller
         }
 
         $query = Goal::with('parent');
+        $query = $query->withCount('children');
 
         if ($searchTitle !== '') {
             $query = $query->where('title', 'LIKE', '%' . $searchTitle . '%');

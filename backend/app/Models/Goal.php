@@ -35,4 +35,8 @@ class Goal extends Model
     {
         return $this->belongsTo(Goal::class, 'parent_id', 'id')->select('id', 'title');
     }
+    public function children()
+    {
+        return $this->hasMany(Goal::class, 'parent_id', 'id');
+    }
 }
