@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/rayjlim/time-buckets/compare/v2.3.0...v2.4.0) (2025-01-29)
+
+
+### Features
+
+* [#88](https://github.com/rayjlim/time-buckets/issues/88) pagination for search ([c1a401e](https://github.com/rayjlim/time-buckets/commit/c1a401ea4e7022e1e7b5e2347990af9afaf99886))
+
+
+### Bug Fixes
+
+* icons for ios homescreen ([c08db7c](https://github.com/rayjlim/time-buckets/commit/c08db7c06a6a58e1ba4f31cae7ff94a963ba0b7a))
+
 ## [2.3.0](https://github.com/rayjlim/time-buckets/compare/v2.2.0...v2.3.0) (2025-01-29)
 
 
