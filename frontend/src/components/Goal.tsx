@@ -8,11 +8,11 @@ import TextField from '@mui/material/TextField';
 import MapDisplay from './MapDisplay';
 import AddGoalForm from './AddGoalForm';
 import useSaveGoal from '../hooks/useSaveGoal';
+import { TAGS } from '../constants';
 import { GoalType } from '../types';
 import './Goal.css';
 
 const typeSet = ['Location', 'Experience'];
-const tagsSet = ['watch', 'hike', 'animals', 'completed', 'archived', 'water park', 'event'];
 
 interface GoalProps {
     goal: GoalType;
@@ -157,7 +157,7 @@ const Goal: React.FC<GoalProps> = ({ goal, onRemoveGoal }) => {
                             />
 
                             <br />
-                            {tagsSet.map(tag => (
+                            {TAGS.map(tag => (
                                 <button type="button" onClick={() => addRemoveTag(tag)} className="tagBtn" key={tag}>
                                     {tag}
                                 </button>

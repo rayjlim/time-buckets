@@ -15,12 +15,14 @@ import MapDisplayMulti from '../components/MapDisplayMulti';
 import PaginationBar from '../components/PaginationBar';
 import TreeDrawer from '../components/TreeDrawer';
 import useLoadGoals from '../hooks/useLoadGoals';
+import { TAGS } from '../constants';
+
 import pkg from '../../package.json';
 import { GoalType, PageDataType } from '../types';
 
 import './GoalsListPage.css';
 
-const searchTags = ['<untagged>', 'watch', 'hike', 'animals', 'achievement', 'skill'];
+const searchTags = ['<untagged>', ...TAGS];
 
 const GoalsListPage = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -53,7 +55,7 @@ const GoalsListPage = () => {
     };
 
     const handlePageClick = (event: any, pageNumber: number) => {
-        console.log(event, pageNumber);;
+        console.log(event, pageNumber);
         setPage(pageNumber);
         loadGoals();
     };
@@ -71,8 +73,12 @@ const GoalsListPage = () => {
         searchTitle.value = '';
         const orderBy = searchForm.current.querySelector('select[name="orderBy"]') as HTMLSelectElement;
         orderBy.value = '';
+        const tags = searchForm.current.querySelector('input[name="tags"]') as HTMLInputElement;
+        tags.value = '';
         const parentId = searchForm.current.querySelector('input[name="parentId"]') as HTMLInputElement;
         parentId.value = '';
+        const idField = searchForm.current.querySelector('input[name="idField"]') as HTMLInputElement;
+        idField.value = '';
 
         setPage(1);
         await loadGoals();
@@ -212,10 +218,12 @@ const GoalsListPage = () => {
                         <label htmlFor="orderBy" className="searchField">
                             Order By:
                             <select name="orderBy">
-                                <option value="">Updated At</option>
+                                <option value="title-asc">Title</option>
+                                <option value="title-desc">Title - desc</option>
+                                <option value="updated-at-desc">Updated At - DES</option>
                                 <option value="updated-at-asc">Updated At -  Asc</option>
                                 <option value="priority">Priority</option>
-                                <option value="title">Title</option>
+
                             </select>
                         </label>
                     </FormControl>

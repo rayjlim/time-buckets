@@ -42,6 +42,7 @@ class GoalController extends Controller
 
             $query2 = Goal::where('parent_id', '=', $idParam)->with('parent');
             $query2 = $query2->withCount('children');
+            $query2 = $query2->orderBy('title', 'ASC');
             $children = $query2->paginate(10, ['*'], 'page', $searchPage);
 
             return [
@@ -78,23 +79,31 @@ class GoalController extends Controller
         $orderByParam = $request->input('order_by');
 
         switch ($orderByParam) {
-            case 'title':
+            case 'title-asc':
                 $orderByField = 'title';
-                $orderByValue = 'ASC';
+                $orderByDirection = 'ASC';
+                break;
+            case 'title-desc':
+                $orderByField = 'title';
+                $orderByDirection = 'DESC';
                 break;
             case 'priority':
                 $orderByField = 'priority';
-                $orderByValue = 'ASC';
+                $orderByDirection = 'ASC';
                 $priorityOperand = '>=';
                 $searchPriority = $priorityParam;
                 break;
             case 'updated-at-asc':
                 $orderByField = 'updated_at';
-                $orderByValue = 'ASC';
+                $orderByDirection = 'ASC';
+                break;
+            case 'updated-at-desc':
+                $orderByField = 'updated_at';
+                $orderByDirection = 'DESC';
                 break;
             default:
-                $orderByField = 'updated_at';
-                $orderByValue = 'DESC';
+                $orderByField = 'title';
+                $orderByDirection = 'ASC';
         }
 
         $query = Goal::with('parent');
@@ -118,7 +127,7 @@ class GoalController extends Controller
         if($searchParentId >= 0){
             $query = $query->where('parent_id', $searchParentId);
         }
-        $query = $query->orderBy($orderByField, $orderByValue);
+        $query = $query->orderBy($orderByField, $orderByDirection);
         $goals = $query->paginate(10, ['*'], 'page', $searchPage);
 
         // echo $query->toSql();
