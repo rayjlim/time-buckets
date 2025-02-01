@@ -4,7 +4,6 @@ import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import TreeView from './TreeView';
 
-
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 export default function TreeDrawer() {
@@ -18,6 +17,8 @@ export default function TreeDrawer() {
     const toggleDrawer =
         (anchor: Anchor, open: boolean) =>
             (event: React.KeyboardEvent | React.MouseEvent) => {
+                console.log('toggleDrawer:', anchor, state);
+
                 if (
                     event.type === 'keydown' &&
                     ((event as React.KeyboardEvent).key === 'Tab' ||
@@ -36,7 +37,7 @@ export default function TreeDrawer() {
             onClick={toggleDrawer(anchor, true)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
-            <TreeView toggleDrawer={toggleDrawer} />
+            <TreeView />
         </Box>
     );
 
