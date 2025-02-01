@@ -77,7 +77,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ loadGoals, searchForm, setPage 
             setParentIdForm(parseInt(parentIdInput.value) || null);
             const idInput = form.elements.namedItem('idField') as HTMLInputElement;
             console.log('idInput:', idInput.value);
-            setIdForm(parseInt(idInput.value) || null);
+            setIdForm(idInput.value || null);
         }
         loadGoals();
     }

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { REST_ENDPOINT } from '../constants';
 
 const useTreeView = () => {
-    const [rootId, setRootId] = useState(3);
+    const [rootId, setRootId] = useState(0);
     const [treeView, setTreeView] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
