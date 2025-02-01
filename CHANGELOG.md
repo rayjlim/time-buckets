@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.1](https://github.com/rayjlim/time-buckets/compare/v2.4.0...v2.4.1) (2025-02-01)
+
+
+### Bug Fixes
+
+*  tree view toggle drawer close and submit on choice ([62ddaef](https://github.com/rayjlim/time-buckets/commit/62ddaef593a09f2960bdc763e482b0ca51d84c9c))
+* [#75](https://github.com/rayjlim/time-buckets/issues/75) show CSV example ([42e97f0](https://github.com/rayjlim/time-buckets/commit/42e97f0e392fea7247a2088d313580b56ee2fd82))
+* [#76](https://github.com/rayjlim/time-buckets/issues/76) order tree alphabetical ([61ff5ba](https://github.com/rayjlim/time-buckets/commit/61ff5bab126a2068d09fda0a759bb4c0a11bd9d9))
+* add id field to search form ([07f329d](https://github.com/rayjlim/time-buckets/commit/07f329d0d3c5132b3a275aa9da0e6e19cb2a51f9))
+* extract SearchForm to component ([882a13e](https://github.com/rayjlim/time-buckets/commit/882a13e98e0a966861c2fb37d4407b865df50c6e))
+* sort of results; clear search form button; move tags to constants ([a47e5b1](https://github.com/rayjlim/time-buckets/commit/a47e5b1bca986c5ffe7d2cb367bea3f4304ae540))
+
 ## [2.4.0](https://github.com/rayjlim/time-buckets/compare/v2.3.0...v2.4.0) (2025-01-29)
 
 
