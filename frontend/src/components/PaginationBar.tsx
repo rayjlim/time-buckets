@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 interface PaginationBarProps {
     pageCount: number;
     page: number;
-    pageChange: (e: any, page: number) => void;
+    pageChange: (e: React.ChangeEvent<unknown>, page: number) => void;
 }
 
 const PaginationBar = ({ pageCount, page, pageChange }: PaginationBarProps) => (

@@ -114,7 +114,7 @@ const Goal: React.FC<GoalProps> = ({ goal, onRemoveGoal }) => {
                                 aria-labelledby="row-radio-buttons-group-label"
                                 name="type"
                                 value={typeForm}
-                                onChange={(e) => setTypeForm(Number(e.target.value))}
+                                onChange={e => setTypeForm(Number(e.target.value))}
                                 className="type-radio"
                             >
                                 <FormControlLabel value="0" control={<Radio />} label="Location" />

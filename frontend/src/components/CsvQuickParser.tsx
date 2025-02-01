@@ -11,7 +11,6 @@ const CsvQuickParser = () => {
         const result: (string[] | number[])[] = [];
         let matches: RegExpExecArray | null = null;
 
-        // eslint-disable-next-line no-cond-assign
         while ((matches = re.exec(data))) {
             // Start a new row if a newline or row delimiter is found
             if (matches[1].length && matches[1] !== ',') {

@@ -3,8 +3,7 @@ import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 
 import useTreeView from '../hooks/useTreeView';
-
-
+type Anchor = 'top' | 'left' | 'bottom' | 'right';
 interface DBTreeItem {
     id: number;
     title: string;
@@ -16,7 +15,7 @@ interface TreeViewItem {
     children: TreeViewItem[];
 }
 
-
+let toggleDrawerFunc = (anchor: Anchor, open: boolean) => { console.log(anchor, open); };
 // Function to build the tree
 const buildTreeJson = (items: DBTreeItem[], parentId = 0): TreeViewItem[] => {
     return items
@@ -28,7 +27,21 @@ const buildTreeJson = (items: DBTreeItem[], parentId = 0): TreeViewItem[] => {
         }));
 };
 
-// console.log(JSON.stringify(treeData, null, 2));
+const handleNodeClick = (e: React.MouseEvent<HTMLButtonElement>, nodeId: string) => {
+    e.stopPropagation(); // Prevents tree node toggle on button click
+    console.log(`Button clicked on node ${nodeId} t`);
+    const input = document.getElementById('searchFormParentId') as HTMLInputElement;
+    if (input) {
+        input.value = nodeId;
+    }
+    const form = document.getElementById('searchForm') as HTMLFormElement;
+    console.log(`form`, form);
+    if (form) {
+        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        form.submit();
+        toggleDrawerFunc('top', false);
+    }
+}
 
 const renderLabelWithButton = (label: string, nodeId: string) => (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
@@ -36,20 +49,7 @@ const renderLabelWithButton = (label: string, nodeId: string) => (
         <Button
             variant="contained"
             size="small"
-            onClick={(e) => {
-                e.stopPropagation(); // Prevents tree node toggle on button click
-                console.log(`Button clicked on node ${nodeId}`);
-                const input = document.getElementById('searchFormParentId') as HTMLInputElement;
-                if (input) {
-                    input.value = nodeId;
-                }
-                const form = document.getElementById('searchForm') as HTMLFormElement;
-                if (form) {
-                    form.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    form.submit();
-                }
-
-            }}
+            onClick={e => handleNodeClick(e, nodeId)}
         >
             -&gt;
         </Button>
@@ -64,7 +64,12 @@ const renderTree = (nodes: TreeViewItem) => (
     </TreeItem>
 );
 
-const MyTreeView = () => {
+type MyTreeViewProps = {
+    toggleDrawer: (anchor: Anchor, open: boolean) => void;
+};
+
+const MyTreeView: React.FC<MyTreeViewProps> = ({ toggleDrawer }) => {
+    toggleDrawerFunc = toggleDrawer;
     const { treeView, isLoading, rootId, setRootId } = useTreeView();
     // console.log('treeView :', treeView);
     const treeData = buildTreeJson(treeView, rootId);
@@ -77,7 +82,7 @@ const MyTreeView = () => {
                     {treeData.map((tree: TreeViewItem) => renderTree(tree))}
                 </SimpleTreeView>
                 {isLoading && (<div>Loading...</div>)}
-                <input type="number" value={rootId} onChange={(e) => setRootId(Number(e.target.value))} />
+                <input type="number" value={rootId} onChange={e => setRootId(Number(e.target.value))} />
                 <hr />
             </div>
         </>

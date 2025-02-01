@@ -39,7 +39,7 @@ const GoalsListPage = () => {
         setGoals(goals);
     };
 
-    const handlePageClick = (event: any, pageNumber: number) => {
+    const handlePageClick = (event: React.ChangeEvent<unknown>, pageNumber: number) => {
         console.log(event, pageNumber);
         setPage(pageNumber);
         loadGoals();

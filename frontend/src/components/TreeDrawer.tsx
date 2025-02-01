@@ -36,7 +36,7 @@ export default function TreeDrawer() {
             onClick={toggleDrawer(anchor, true)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
-            <TreeView />
+            <TreeView toggleDrawer={toggleDrawer} />
         </Box>
     );
 

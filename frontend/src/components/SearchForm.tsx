@@ -1,4 +1,4 @@
-import {  useRef, RefObject } from 'react';
+import { useRef, RefObject } from 'react';
 import { parseAsInteger, parseAsString, useQueryState } from 'nuqs'
 
 import TextField from '@mui/material/TextField';
@@ -12,12 +12,12 @@ import { TAGS } from '../constants';
 const searchTags = ['<untagged>', ...TAGS];
 
 type SearchFormProps = {
-    loadGoals: () => void; // Function type
+    loadGoals: () => void;
     searchForm: RefObject<HTMLFormElement>,
     setPage: (page: number) => void;
 };
 
-const SearchForm: React.FC<SearchFormProps> = ({loadGoals, searchForm, setPage}) => {
+const SearchForm: React.FC<SearchFormProps> = ({ loadGoals, searchForm, setPage }) => {
     const [titleForm, setTitleForm] = useQueryState('title', parseAsString);
     const [typeForm, setTypeForm] = useQueryState('type', parseAsString);
     const [tagForm, setTagForm] = useQueryState('tag', parseAsString);
@@ -81,7 +81,7 @@ const SearchForm: React.FC<SearchFormProps> = ({loadGoals, searchForm, setPage})
     }
 
     return (
-        <form ref={searchForm} onSubmit={submitSearch}>
+        <form ref={searchForm} onSubmit={submitSearch} id="searchForm">
             <FormControl>
                 <input name="startsWith" type="hidden" />
                 <label htmlFor="searchTitle" className="searchField">
