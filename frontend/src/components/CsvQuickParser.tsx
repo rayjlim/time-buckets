@@ -55,6 +55,7 @@ const CsvQuickParser = () => {
     return (
         <div>
             <h2>CSV quick Add</h2>
+            <span style={{fontSize: 'small', display: 'block'}}>ex. &lt;title&gt;, &lt;0 | 1&gt;, &lt;parent id&gt;</span>
             <textarea id="csvTextarea" ref={textareaForCSV} defaultValue={defaultText} />
             <button type="button" onClick={parseTextarea}>
                 parse
