@@ -22,7 +22,10 @@ const SearchForm: React.FC<SearchFormProps> = ({ loadGoals, searchForm, setPage 
     const [typeForm, setTypeForm] = useQueryState('type', parseAsString);
     const [tagForm, setTagForm] = useQueryState('tag', parseAsString);
     const [parentIdForm, setParentIdForm] = useQueryState('parentId', parseAsInteger.withDefault(0));
-    const [idForm, setIdForm] = useQueryState('id', parseAsInteger);
+    const [idForm, setIdForm] = useQueryState('idField',
+        {
+            history: 'push', // Global history option for all state changes
+        });
 
     const formTagChoices = useRef<HTMLSelectElement>(null);
 
@@ -44,8 +47,8 @@ const SearchForm: React.FC<SearchFormProps> = ({ loadGoals, searchForm, setPage 
         tags.value = '';
         const parentId = searchForm.current.querySelector('input[name="parentId"]') as HTMLInputElement;
         parentId.value = '';
-        const idField = searchForm.current.querySelector('input[name="idField"]') as HTMLInputElement;
-        idField.value = '';
+        const searchId = searchForm.current.querySelector('input[name="idField"]') as HTMLInputElement;
+        searchId.value = '';
 
         setPage(1);
         await loadGoals();
@@ -76,7 +79,6 @@ const SearchForm: React.FC<SearchFormProps> = ({ loadGoals, searchForm, setPage 
             console.log('idInput:', idInput.value);
             setIdForm(parseInt(idInput.value) || null);
         }
-
         loadGoals();
     }
 
@@ -132,11 +134,11 @@ const SearchForm: React.FC<SearchFormProps> = ({ loadGoals, searchForm, setPage 
                     <input name="parentId" id="searchFormParentId" type="text" size={4} defaultValue={parentIdForm as number}
                     />
                 </label>
-                <label htmlFor="title">
+                <label htmlFor="idField">
                     <TextField
                         id="searchform-id"
                         name="idField"
-                        label="Id"
+                        label="ID"
                         defaultValue={idForm}
                         placeholder="id"
                         variant="filled"
