@@ -9,7 +9,7 @@ function getDescendants($parentId)
 {
     $descendants = [];
 
-    $query = Goal::select('id', 'title', 'parent_id')->where('parent_id', '=', $parentId);
+    $query = Goal::select('id', 'title', 'parent_id')->where('parent_id', '=', $parentId)->orderBy('title', 'ASC');
     $goals = $query->get();
 
     foreach ($goals as $row) {
