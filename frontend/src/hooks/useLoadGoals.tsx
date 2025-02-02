@@ -20,6 +20,7 @@ const useLoadGoals = (searchForm: React.RefObject<HTMLFormElement>, page: number
         const priority = formData.get('priority');
         const parentId = formData.get('parentId');
         const id = formData.get('idField');
+        const locationsWithoutCoords = formData.has('locationsWithoutCoords');
 
         const endpoint = `${REST_ENDPOINT}goals/?page=${page}`;
         let searchFields = '';
@@ -48,6 +49,10 @@ const useLoadGoals = (searchForm: React.RefObject<HTMLFormElement>, page: number
         if (id !== '') {
             searchFields += `&id=${id}`;
         }
+        if (locationsWithoutCoords === true) {
+            searchFields += `&locationsWithoutCoords=true`;
+        }
+
 
         setIsLoading(true);
         // TODO: if production, then pass mode: 'no-cors', in fetch options

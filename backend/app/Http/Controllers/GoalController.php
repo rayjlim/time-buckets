@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Goal;
@@ -33,6 +34,28 @@ class GoalController extends Controller
         //     ? $request->input('per_page')
         //     : 20;  // DEFAULT page size
         $searchPage = $request->input('page');
+
+        $locationsWithoutCoords = $request->input('locationsWithoutCoords');
+        if ($locationsWithoutCoords == 'true') {
+            $query = Goal::where('gps_coords', '');
+            $query = $query->where('type', 0);
+            $query = $query->with('parent');
+            $query = $query->withCount('children');
+            $query = $query->orderBy('title', 'ASC');
+            // echo $query->toSql();
+            // $bindings = $query->getBindings();
+            // dd($query->toSql(), $bindings);
+            $children = $query->get();
+
+
+            return [
+                "primary" => [],
+                "children" => ["data" => $children, "total" => count($children)],
+                "meta" => (object) [
+                    "locationsWithoutCoords" => true
+                ],
+            ];
+        }
 
         $idParam = $request->input('id');
         if ($idParam != '') {
@@ -121,10 +144,10 @@ class GoalController extends Controller
             $query = $query->where('tags', 'LIKE', $searchTags);
         }
 
-        if($searchPriority > -2){
+        if ($searchPriority > -2) {
             $query = $query->where('priority', $priorityOperand, $searchPriority);
         }
-        if($searchParentId >= 0){
+        if ($searchParentId >= -1) {
             $query = $query->where('parent_id', $searchParentId);
         }
         $query = $query->orderBy($orderByField, $orderByDirection);

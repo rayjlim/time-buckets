@@ -1,6 +1,7 @@
-import { useRef, RefObject } from 'react';
+import { useRef, RefObject, useState } from 'react';
 import { parseAsInteger, parseAsString, useQueryState } from 'nuqs'
 
+import Checkbox from "@mui/material/Checkbox";
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -26,6 +27,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ loadGoals, searchForm, setPage 
         {
             history: 'push', // Global history option for all state changes
         });
+    const [locationsWithoutCoords, setLocationsWithoutCoords] = useState(false);
 
     const formTagChoices = useRef<HTMLSelectElement>(null);
 
@@ -43,6 +45,9 @@ const SearchForm: React.FC<SearchFormProps> = ({ loadGoals, searchForm, setPage 
         searchTitle.value = '';
         const orderBy = searchForm.current.querySelector('select[name="orderBy"]') as HTMLSelectElement;
         orderBy.value = '';
+        // const typeInput = searchForm.current.querySelector('input[name="type"]') as HTMLInputElement;
+        // typeInput.value = '-1';
+        setTypeForm('-1');
         const tags = searchForm.current.querySelector('input[name="tags"]') as HTMLInputElement;
         tags.value = '';
         const parentId = searchForm.current.querySelector('input[name="parentId"]') as HTMLInputElement;
@@ -151,6 +156,11 @@ const SearchForm: React.FC<SearchFormProps> = ({ loadGoals, searchForm, setPage 
 
                     </select>
                 </label>
+                <FormControlLabel
+                    control={<Checkbox name="locationsWithoutCoords" checked={locationsWithoutCoords} onChange={()=> setLocationsWithoutCoords(!locationsWithoutCoords)} />}
+                    label="locationsWithoutCoords"
+                />
+
             </FormControl>
         </form>
     )
