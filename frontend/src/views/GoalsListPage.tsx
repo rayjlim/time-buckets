@@ -90,7 +90,11 @@ const GoalsListPage = () => {
                 <SearchForm loadGoals={loadGoals} searchForm={searchForm} setPage={setPage} />
             </div>
 
-            <PaginationBar pageCount={goals?.children.last_page || 0} page={goals?.children.current_page || 0} pageChange={handlePageClick} />
+            <PaginationBar
+                pageCount={goals?.children.last_page || 0}
+                page={goals?.children.current_page || 0}
+                total={goals?.children.total || 0}
+                pageChange={handlePageClick} />
 
             {!isLoading && (
                 <>
@@ -110,7 +114,11 @@ const GoalsListPage = () => {
                     />
                 </>
             )}
-            <PaginationBar pageCount={goals?.children.last_page || 0} page={goals?.children.current_page || 0} pageChange={handlePageClick} />
+            <PaginationBar
+                pageCount={goals?.children.last_page || 0}
+                page={goals?.children.current_page || 0}
+                total={goals?.children.total || 0}
+                pageChange={handlePageClick} />
 
             <ChipToggleView>
                 <CsvQuickParser />

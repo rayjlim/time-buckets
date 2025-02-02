@@ -15,7 +15,7 @@ export interface GoalType {
     parent: {
         id: number;
         title: string;
-    }
+    };
 }
 
 export interface PageDataType {
@@ -23,11 +23,13 @@ export interface PageDataType {
     children: {
         last_page: number;
         current_page: number;
-        data: GoalType[] };
+        data: GoalType[];
+        total: number;
+    };
     pageMeta: {
         last_page: number;
         current_page: number;
         total: number;
         itemsPerPage: number;
-    }
+    };
 }
