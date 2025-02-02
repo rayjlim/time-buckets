@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.2](https://github.com/rayjlim/time-buckets/compare/v2.4.1...v2.4.2) (2025-02-02)
+
+
+### Bug Fixes
+
+* [#74](https://github.com/rayjlim/time-buckets/issues/74) search option for locations without coords ([c7529c8](https://github.com/rayjlim/time-buckets/commit/c7529c8843a9fe88dabc191f0c72c11bd2eb6475))
+* [#85](https://github.com/rayjlim/time-buckets/issues/85) trigger drawer close ([dc81c7e](https://github.com/rayjlim/time-buckets/commit/dc81c7e49cb1c4d93a7f2bbb10bf7e61397f0f22))
+* add push history ([d50a9db](https://github.com/rayjlim/time-buckets/commit/d50a9dbcbf23fed7b60c87445ce5a1521539efb3))
+* default tree view to root ([338a3ab](https://github.com/rayjlim/time-buckets/commit/338a3abb786df721c015777bf7dcddf9ff9a23f2))
+* show count total in pagination ([4a2e4fb](https://github.com/rayjlim/time-buckets/commit/4a2e4fb382348c0da89e75aa270f60917f913814))
+
 ### [2.4.1](https://github.com/rayjlim/time-buckets/compare/v2.4.0...v2.4.1) (2025-02-01)
 
 
