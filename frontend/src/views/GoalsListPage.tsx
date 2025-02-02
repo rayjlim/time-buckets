@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { LatLngExpression } from 'leaflet';
 import { parseAsInteger, useQueryState } from 'nuqs'
 
@@ -17,6 +17,14 @@ import { GoalType, PageDataType } from '../types';
 import './GoalsListPage.css';
 import SearchForm from '../components/SearchForm';
 
+// Utility function
+const parseGpsCoords = (coordStr: string) => {
+    if (!coordStr || typeof coordStr !== 'string') return null;
+    const [lat, lng] = coordStr.split(',').map(Number);
+    if (isNaN(lat) || isNaN(lng)) return null;
+    return (!isNaN(lat) && !isNaN(lng)) ? [lat, lng] : null;
+};
+
 const GoalsListPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [goals, setGoals] = useState<PageDataType | null>(null);
@@ -24,19 +32,27 @@ const GoalsListPage = () => {
 
     const searchForm = useRef<HTMLFormElement>(null);
 
-    const { loadGoals } = useLoadGoals(searchForm, page, setIsLoading, setGoals);
+    const { loadGoals } = useLoadGoals({formRef: searchForm, page, setIsLoading, setGoals});
 
     const onAddGoal = (newGoal: GoalType) => {
         if (!goals) return;
-        const newChildren = [...goals.children.data, newGoal];
-        goals.children.data = newChildren;
-        setGoals(goals);
+        setGoals(prev => prev && {
+            ...prev,
+            children: {
+                ...prev.children,
+                data: [...prev.children.data, newGoal]
+            }
+        });
     };
     const onRemoveGoal = (id: number) => {
         if (!goals) return;
-        const updatedGoals = goals.children.data.filter(item => item.id !== id);
-        goals.children.data = updatedGoals;
-        setGoals(goals);
+        setGoals(prev => prev && {
+            ...prev,
+            children: {
+                ...prev.children,
+                data: prev.children.data.filter(item => item.id !== id)
+            }
+        });
     };
 
     const handlePageClick = (event: React.ChangeEvent<unknown>, pageNumber: number) => {
@@ -46,36 +62,21 @@ const GoalsListPage = () => {
     };
 
     useEffect(() => {
-        (async () => {
-            await loadGoals();
-        })();
+        loadGoals();
     }, [page]);
 
+    const arrayOutput: ([number, number] | null)[] = useMemo(() => {
+        if (!goals?.children?.data) return [];
 
-    const strToLatLng = (item: string) => {
-        const coords = item.split(',');
-        const [lat, lng] = coords.map(Number);
-        if (isNaN(lat) || isNaN(lng)) return null;
-        return [lat, lng];
-    };
+        return goals.children.data
+            .map(item => parseGpsCoords(item.gps_coords))
+            .filter((coords): coords is [number, number] => coords !== null);
+    }, [goals?.children.data]);
 
-    const arrayOutput: ([number, number] | null)[] = goals?.children !== undefined ?
-        goals.children.data.filter(item => item.gps_coords !== null)
-            .filter(item => item.gps_coords !== '')
-            .filter(item => item.gps_coords.indexOf(',') !== -1)
-            .filter(item => typeof item?.gps_coords === 'string')
-            .filter(item => {
-                const coords = item.gps_coords.split(',');
-                return coords.length === 2;
-            })
-            .map((item: GoalType) => {
-                const coords = item?.gps_coords.split(',');
-                const [lat, lng] = coords.map(Number);
-                if (isNaN(lat) || isNaN(lng)) return null;
-                return [lat, lng];
-            }) : [];
-
-    const primaryGpsCoords = strToLatLng(goals?.primary[0]?.gps_coords || '');
+    const primaryGpsCoords = useMemo(() =>
+        parseGpsCoords(goals?.primary[0]?.gps_coords || ''),
+        [goals?.primary]
+    );
 
     return (
         <>

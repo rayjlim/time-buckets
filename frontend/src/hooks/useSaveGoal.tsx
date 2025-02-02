@@ -1,128 +1,95 @@
-import { useState } from 'react';
-
+import { RefObject, useState } from 'react';
+import { GoalType } from '../types';
 import { REST_ENDPOINT } from '../constants';
 
+type SaveHookParams = {
+    goal: GoalType;
+    current: GoalType;
+    onRemoveGoal: (id: number) => void;
+    setCurrent: (goal: GoalType) => void;
+    setIsEditing: (isEditing: boolean) => void;
+    formRef: RefObject<HTMLFormElement> ;
+};
+
 const useSaveGoal = (
-    goal: any,
-    onRemoveGoal: any,
-    current: any,
-    setCurrent: any,
-    setIsEditing: any,
-    formRef: any) => {
+    { goal,
+        current,
+        onRemoveGoal,
+        setCurrent,
+        setIsEditing,
+        formRef }: SaveHookParams) => {
     const [messageInfo, setMessageInfo] = useState('');
 
-    async function saveGoal(event: any) {
-        console.log('save goal');
+    const handleFetchError = (err: Error) => {
+        console.error(`Error: ${err}`);
+        setMessageInfo(`Loading error: ${err}`);
+    };
+
+    const makeRequest = async (endpoint: string, config: RequestInit) => {
+        const response = await fetch(endpoint, config);
+        if (!response.ok) {
+            throw new Error(`${response.status}`);
+        }
+        return response.json();
+    };
+    const parseFormValues = (formValues: Record<string, string>) => {
+        return {
+            ...current,
+            title: formValues.title?.trim() || '',
+            priority: parseInt(formValues.priority) || 1,
+            reason: formValues.reason?.trim() || '',
+            note: formValues.note?.trim() || '',
+            tags: formValues.tags?.trim() || '',
+            added_at: formValues.addedAt || '',
+            type: parseInt(formValues.type) || 0,
+            parent_id: parseInt(formValues.parentId) || 0,
+            gps_coords: formValues.gpsCoords?.trim() || '',
+            gps_zoom: parseInt(formValues.gpsZoom) || 0,
+            completed_at: formValues.completedAt || ''
+        };
+    };
+    async function saveGoal(event: React.FormEvent) {
         event.preventDefault();
-        const formData = new FormData(formRef.current);
-        const title = formData.get('title');
-        const priority = formData.get('priority');
-        const completedAt = formData.get('completedAt');
-        const reason = formData.get('reason');
-        const note = formData.get('note');
-        const addedAt = formData.get('addedAt');
-        const tags = formData.get('tags');
-        const thoughts = formData.get('thoughts');
-        const type = formData.get('type');
-        const parentId = formData.get('parentId');
-        const gpsCoords = formData.get('gpsCoords');
-        const gpsZoom = formData.get('gpsZoom');
+        const formData = new FormData(formRef.current!);
+        const formValues = Object.fromEntries(formData);
 
-        const endpoint = `${REST_ENDPOINT}goals/${goal.id}`;
-        const config = {
-            method: 'POST',
-            body: JSON.stringify({
-                title,
-                priority,
-                reason,
-                note,
-                addedAt,
-                tags,
-                thoughts,
-                type,
-                parentId,
-                gpsCoords,
-                gpsZoom,
-                completedAt
-            }),
-        };
         try {
-            const response = await fetch(endpoint, config);
-            console.log('response :', response);
-            if (!response.ok) {
-                console.log('response.status :', response.status);
-                throw new Error(`${response.status}`);
-            } else {
-                const data = await response.json();
-                console.log('data :', data);
-                setCurrent({
-                    ...current,
-                    title,
-                    priority,
-                    reason,
-                    note,
-                    tags,
-                    added_at: addedAt,
-                    type,
-                    parent_id: parentId,
-                    gps_coords: gpsCoords,
-                    gps_zoom: gpsZoom,
-                    completed_at: completedAt
-                });
-                setIsEditing(false);
-            }
+            await makeRequest(`${REST_ENDPOINT}goals/${goal.id}`, {
+                method: 'POST',
+                body: JSON.stringify(formValues),
+            });
+            setCurrent(parseFormValues(formValues as Record<string,string>));
+            setIsEditing(false);
         } catch (err) {
-            console.log(`Error: ${err}`);
-            setMessageInfo(`loading error : ${err}`);
+            handleFetchError(err as Error);
         }
     }
+
     async function removeGoal() {
-        console.log('remove goal');
-
-        const endpoint = `${REST_ENDPOINT}goals/${goal.id}`;
-        const config = {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json', // Optional: Specify if sending JSON data
-            },
-        };
         try {
-            const response = await fetch(endpoint, config);
-            console.log('response :', response);
-            if (!response.ok) {
-                console.log('response.status :', response.status);
-                throw new Error(`${response.status}`);
-            } else {
-                const data = await response.json();
-                console.log('data :', data);
-                setIsEditing(false);
-                onRemoveGoal(goal.id);
-            }
+            await makeRequest(`${REST_ENDPOINT}goals/${goal.id}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+            });
+            setIsEditing(false);
+            onRemoveGoal(goal.id);
         } catch (err) {
-            console.log(`Error: ${err}`);
-            setMessageInfo(`loading error : ${err}`);
+            handleFetchError(err as Error);
         }
     }
-    function addRemoveTag(content: string) {
-        console.log('addRemove', content);
 
-        const tagsInput = formRef.current.querySelector('input[name="tags"]');
-        if (!tagsInput.value.includes(content)) {
-            tagsInput.value = `${tagsInput.value} ${content}`;
-        } else {
-            tagsInput.value = tagsInput.value.replace(content, '').trim();
-        }
-    }
-    function addRemoveType(content: string) {
-        console.log('addRemove', content);
+    function toggleFormValue(fieldName: string, content: string) {
+        const input = formRef.current?.querySelector(`input[name="${fieldName}"]`) as HTMLInputElement;
+        if (!input) return;
 
-        const typeInput = formRef.current.querySelector('input[name="type"]');
-        if (!typeInput.value.includes(content)) {
-            typeInput.value = `${typeInput.value} ${content}`;
-        } else {
-            typeInput.value = typeInput.value.replace(content, '').trim();
-        }
+        input.value = input.value.includes(content)
+            ? input.value.replace(content, '').trim()
+            : `${input.value} ${content}`.trim();
     }
+
+    const addRemoveTag = (content: string) => toggleFormValue('tags', content);
+
+    const addRemoveType = (content: string) => toggleFormValue('type', content);
 
     return {
         saveGoal,

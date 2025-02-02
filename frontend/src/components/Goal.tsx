@@ -21,7 +21,7 @@ interface GoalProps {
     onRemoveGoal: (id: number) => void;
 }
 
-const Goal: React.FC<GoalProps> = ({ goal, onRemoveGoal }) => {
+const Goal = ({ goal, onRemoveGoal }: GoalProps) => {
     const formRef = useRef<HTMLFormElement>(null);
     const [current, setCurrent] = useState(goal);
     const [isEditing, setIsEditing] = useState(false);
@@ -32,7 +32,7 @@ const Goal: React.FC<GoalProps> = ({ goal, onRemoveGoal }) => {
         saveGoal,
         removeGoal,
         addRemoveTag,
-    } = useSaveGoal(goal, onRemoveGoal, current, setCurrent, setIsEditing, formRef);
+    } = useSaveGoal({goal, onRemoveGoal, current, setCurrent, setIsEditing, formRef});
 
     let mainClassName = 'goal-list-row';
     switch (true) {

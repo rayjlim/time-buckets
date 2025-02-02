@@ -30,7 +30,7 @@ const AddGoalForm: React.FC<AddGoalProps> = ({
     const [titleForm, setTitleForm] = useState(title);
     const [typeForm, setTypeForm] = useState(type);
     const [parentIdForm, setParentIdForm] = useState(parentId);
-    const { sendAddForm, messageInfo, setMessageInfo } = useAddForm(onAddGoal, formRef);
+    const { sendAddForm, messageInfo, setMessageInfo } = useAddForm({onAddGoal, formRef});
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTitleForm(event.target.value);

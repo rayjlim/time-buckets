@@ -18,7 +18,7 @@ type SearchFormProps = {
     setPage: (page: number) => void;
 };
 
-const SearchForm: React.FC<SearchFormProps> = ({ loadGoals, searchForm, setPage }) => {
+const SearchForm = ({ loadGoals, searchForm, setPage }: SearchFormProps) => {
     const [titleForm, setTitleForm] = useQueryState('title', parseAsString);
     const [typeForm, setTypeForm] = useQueryState('type', parseAsString);
     const [tagForm, setTagForm] = useQueryState('tag', parseAsString);

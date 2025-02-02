@@ -1,16 +1,23 @@
-import { useState } from 'react';
+import { RefObject, useState } from 'react';
 import { REST_ENDPOINT } from '../constants';
 import { PageDataType } from '../types';
 
-const useLoadGoals = (searchForm: React.RefObject<HTMLFormElement>, page: number, setIsLoading: (isLoading: boolean) => void, setGoals: (goals: PageDataType) => void) => {
+type LoadHookParams = {
+    formRef: RefObject<HTMLFormElement>;
+    page: number;
+    setIsLoading: (isLoading: boolean) => void;
+    setGoals: (goals: PageDataType) => void;
+};
+
+const useLoadGoals = ({formRef, page, setIsLoading, setGoals}: LoadHookParams) => {
     const [messageInfo, setMessageInfo] = useState('');
 
     async function loadGoals(event?: React.FormEvent<HTMLFormElement>) {
-        if (!searchForm.current) return;
+        if (!formRef.current) return;
 
         console.log(event);
         event?.preventDefault();
-        const formData = new FormData(searchForm.current);
+        const formData = new FormData(formRef.current);
         const searchTitle = formData.get('searchTitle');
         const type = formData.get('type') || 0;
         const tags = formData.get('tags');

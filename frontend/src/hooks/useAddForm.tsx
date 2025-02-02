@@ -1,45 +1,55 @@
-import { useState } from 'react';
+import { RefObject, useState } from 'react';
 import { REST_ENDPOINT } from '../constants';
 import { GoalType } from '../types';
 
+type AddHookParams = {
+    onAddGoal: (goal: GoalType) => void,
+    formRef: RefObject<HTMLFormElement>
+};
 
-const useAddForm = (onAddGoal: (goal: GoalType) => void, formRef: React.RefObject<HTMLFormElement>) => {
+const useAddForm = ({ onAddGoal, formRef }: AddHookParams) => {
     const [messageInfo, setMessageInfo] = useState('');
+
     async function sendAddForm(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        const formData = formRef.current ? new FormData(formRef.current) : null;
-        const title = formData?.get('title');
-        const type = formData?.get('type');
-        const parentId = formData?.get('parentId');
-        const endpoint = `${REST_ENDPOINT}goals/`;
+        if (!formRef.current) {
+            setMessageInfo('Form reference not found');
+            return;
+        }
+
+        const formData = new FormData(formRef.current);
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0];
         const newGoal = {
-            title,
-            type,
-            parent_id: parentId,
+            title: formData.get('title'),
+            type: formData.get('type'),
+            parent_id: formData.get('parentId'),
             gps_zoom: 0,
             priority: 1,
-            tags: ''
+            tags: '',
+            added_at: formattedDate
         };
-        const config = {
-            method: 'POST',
-            body: JSON.stringify(newGoal),
-        };
+
         try {
-            const response = await fetch(endpoint, config);
-            console.log('response :', response);
+            const response = await fetch(`${REST_ENDPOINT}goals/`, {
+                method: 'POST',
+                body: JSON.stringify(newGoal),
+            });
             if (!response.ok) {
-                console.log('response.status :', response.status);
-                throw new Error(`${response.status}`);
-            } else {
-                const output = await response.json();
-                setMessageInfo(`Added : ${JSON.stringify(output)}`);
-                // const json = JSON.stringify(output);
-                // alert(`${output.data.length}, ${json}`);
-                onAddGoal(output.data);
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
+
+
+            const output = await response.json();
+            setMessageInfo(`Added : ${JSON.stringify(output)}`);
+            // const json = JSON.stringify(output);
+            // alert(`${output.data.length}, ${json}`);
+            onAddGoal(output.data);
+
         } catch (err) {
-            console.log(`Error: ${err}`);
-            setMessageInfo(`loading error : ${err}`);
+            const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
+            console.error('Error adding goal:', errorMessage);
+            setMessageInfo(`Error: ${errorMessage}`);
         }
     }
 
