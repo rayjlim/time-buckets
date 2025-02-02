@@ -61,22 +61,17 @@ const SearchForm: React.FC<SearchFormProps> = ({ loadGoals, searchForm, setPage 
         const form = searchForm.current;
         if (form) {
             const titleInput = form.elements.namedItem('searchTitle') as HTMLInputElement;
-            console.log('Search Query:', titleInput.value);
             setTitleForm(titleInput.value || '');
 
             const typeInput = form.elements.namedItem('type') as HTMLInputElement;
-            console.log('typeInput:', typeInput.value);
             setTypeForm(typeInput.value || '');
 
             const tagsInput = form.elements.namedItem('tags') as HTMLInputElement;
-            console.log('tagsInput:', tagsInput.value);
             setTagForm(tagsInput.value || '');
 
             const parentIdInput = form.elements.namedItem('parentId') as HTMLInputElement;
-            console.log('parentIdInput:', parentIdInput.value);
             setParentIdForm(parseInt(parentIdInput.value) || null);
             const idInput = form.elements.namedItem('idField') as HTMLInputElement;
-            console.log('idInput:', idInput.value);
             setIdForm(idInput.value || null);
         }
         loadGoals();

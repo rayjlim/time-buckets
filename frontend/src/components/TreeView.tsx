@@ -38,6 +38,8 @@ const handleNodeClick = (e: React.MouseEvent<HTMLButtonElement>, nodeId: string)
     if (formBtn) {
         formBtn.click();
     }
+    const treeBox = document.getElementById('tree-box-btn') as HTMLFormElement;
+    treeBox.click();
 }
 
 const renderLabelWithButton = (label: string, nodeId: string) => (
@@ -76,6 +78,7 @@ const MyTreeView = () => {
                 {isLoading && (<div>Loading...</div>)}
                 <input type="number" value={rootId} onChange={e => setRootId(Number(e.target.value))} />
                 <hr />
+
             </div>
         </>
     );

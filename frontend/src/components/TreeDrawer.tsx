@@ -17,8 +17,6 @@ export default function TreeDrawer() {
     const toggleDrawer =
         (anchor: Anchor, open: boolean) =>
             (event: React.KeyboardEvent | React.MouseEvent) => {
-                console.log('toggleDrawer:', anchor, state);
-
                 if (
                     event.type === 'keydown' &&
                     ((event as React.KeyboardEvent).key === 'Tab' ||
@@ -45,12 +43,14 @@ export default function TreeDrawer() {
         <div>
             <>
                 <Button onClick={toggleDrawer('top', true)}>Tree View</Button>
+                <Button onClick={toggleDrawer('top', false)} id="tree-box-btn" style={{display: 'none'}}>Tree View Close</Button>
+
                 <Drawer
                     anchor={'top'}
                     open={state['top']}
                     onClose={toggleDrawer('top', false)}
                 >
-                    {list('right')}
+                    {list('top')}
                 </Drawer>
             </>
         </div>
