@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/rayjlim/time-buckets/compare/v2.4.2...v2.5.0) (2025-03-16)
+
+
+### Features
+
+* [#17](https://github.com/rayjlim/time-buckets/issues/17) make date_added a date picker ([f91e9ba](https://github.com/rayjlim/time-buckets/commit/f91e9bada4ac2f5c6de54005c738fa4bfd59a209))
+* [#80](https://github.com/rayjlim/time-buckets/issues/80) pass the new goal up through callers ([0f98c94](https://github.com/rayjlim/time-buckets/commit/0f98c94ca9f921800ef273d375a56084e1a352d6))
+* [#80](https://github.com/rayjlim/time-buckets/issues/80) return parent info for newly added ([74302ed](https://github.com/rayjlim/time-buckets/commit/74302edaccb7e5908e327d57aa77d07de0971600))
+
+
+### Bug Fixes
+
+* [#86](https://github.com/rayjlim/time-buckets/issues/86) default added_at to today, clean up param passing ([0bc6e8c](https://github.com/rayjlim/time-buckets/commit/0bc6e8c9bd8d9091e872f72642573e041218cf0c))
+* add 'national park' ([ae97154](https://github.com/rayjlim/time-buckets/commit/ae97154dd46fd6e3007ad2a34eadb536352ca1a8))
+* refactor addgoalform ([cdd68e1](https://github.com/rayjlim/time-buckets/commit/cdd68e1e2c9a8b109920a163d7bb775eff365712))
+
 ### [2.4.2](https://github.com/rayjlim/time-buckets/compare/v2.4.1...v2.4.2) (2025-02-02)
 
 
