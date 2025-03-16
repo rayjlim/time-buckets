@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Goal;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
+/**
+ * Recursively retrieves all descendants of a goal
+ * 
+ * @param int $parentId The ID of the parent goal
+ * @return array Array of Goal objects containing id, title, and parent_id
+ */
 function getDescendants($parentId)
 {
     $descendants = [];
@@ -20,11 +25,17 @@ function getDescendants($parentId)
     return $descendants;
 }
 
+/**
+ * Controller for managing Goal resources
+ * 
+ * Handles CRUD operations and specialized queries for Goal entities,
+ * including tree structure operations and location-based queries
+ */
 class GoalController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return Illuminate\Pagination\LengthAwarePaginator\ response status data
      */
@@ -188,6 +199,7 @@ class GoalController extends Controller
 
         $goal = Goal::create((array)$formData);
         $goal->update();
+        $goal->load('parent');
         // echo $request->all();
         return [
             "data" => $goal
