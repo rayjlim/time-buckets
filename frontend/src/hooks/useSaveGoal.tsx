@@ -40,7 +40,7 @@ const useSaveGoal = (
             reason: formValues.reason?.trim() || '',
             note: formValues.note?.trim() || '',
             tags: formValues.tags?.trim() || '',
-            added_at: formValues.addedAt || '',
+            added_at: formValues.addedAt ?? '',
             type: parseInt(formValues.type) || 0,
             parent_id: parseInt(formValues.parentId) || 0,
             gps_coords: formValues.gpsCoords?.trim() || '',
@@ -52,7 +52,9 @@ const useSaveGoal = (
         event.preventDefault();
         const formData = new FormData(formRef.current!);
         const formValues = Object.fromEntries(formData);
-
+        if (formValues.addedAt) {
+            formValues.addedAt = new Date(formValues.addedAt as string).toLocaleDateString('en-CA');
+        }
         try {
             await makeRequest(`${REST_ENDPOINT}goals/${goal.id}`, {
                 method: 'POST',
