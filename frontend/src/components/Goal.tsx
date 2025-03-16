@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -175,18 +176,16 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                                 defaultValue={current.note}
                                 style={{ margin: '.5em auto', width: '75%' }}
                             />
-                            <TextField
-                                name="addedAt"
-                                id="form-addedAt"
+                            <DatePicker
                                 label="Date Added"
-                                defaultValue={current.added_at}
+                                defaultValue={new Date(current.added_at)}
                                 sx={{
                                     '& .MuiOutlinedInput-root': {
-                                        height: '30px', // Set the height
-                                        fontSize: '0.875rem', // Adjust font size
+                                        height: '30px',
+                                        fontSize: '0.875rem',
                                     },
                                     '& .MuiInputLabel-root': {
-                                        fontSize: '0.75rem', // Adjust label font size
+                                        fontSize: '0.75rem',
                                     },
                                 }}
                             />
@@ -197,11 +196,11 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                                 defaultValue={current.gps_coords}
                                 sx={{
                                     '& .MuiOutlinedInput-root': {
-                                        height: '30px', // Set the height
-                                        fontSize: '0.875rem', // Adjust font size
+                                        height: '30px',
+                                        fontSize: '0.875rem',
                                     },
                                     '& .MuiInputLabel-root': {
-                                        fontSize: '0.75rem', // Adjust label font size
+                                        fontSize: '0.75rem',
                                     },
                                 }}
                             />
@@ -244,7 +243,6 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                                 >
                                     Delete
                                 </button>
-
                             </div>
                         </FormControl>
                     </form>
