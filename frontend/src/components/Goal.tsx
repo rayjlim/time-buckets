@@ -18,10 +18,11 @@ const typeSet = ['Location', 'Experience'];
 
 interface GoalProps {
     goal: GoalType;
+    onAddGoal: (goal: GoalType) => void;
     onRemoveGoal: (id: number) => void;
 }
 
-const Goal = ({ goal, onRemoveGoal }: GoalProps) => {
+const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
     const formRef = useRef<HTMLFormElement>(null);
     const [current, setCurrent] = useState(goal);
     const [isEditing, setIsEditing] = useState(false);
@@ -32,7 +33,7 @@ const Goal = ({ goal, onRemoveGoal }: GoalProps) => {
         saveGoal,
         removeGoal,
         addRemoveTag,
-    } = useSaveGoal({goal, onRemoveGoal, current, setCurrent, setIsEditing, formRef});
+    } = useSaveGoal({ goal, onRemoveGoal, current, setCurrent, setIsEditing, formRef });
 
     let mainClassName = 'goal-list-row';
     switch (true) {
@@ -50,8 +51,9 @@ const Goal = ({ goal, onRemoveGoal }: GoalProps) => {
         setIsAddingChild(!isAddingChild);
     }
 
-    const onAddGoal = () => {
-        setIsAddingChild(!isAddingChild);
+    const _onAddGoal = (newGoal: GoalType) => {
+        toggleIsAddingChild();
+        onAddGoal(newGoal);
     };
 
     const changeSearchFormParent = (id: string) => {
@@ -259,8 +261,8 @@ const Goal = ({ goal, onRemoveGoal }: GoalProps) => {
                     <div className="manual goal-display" style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                             <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
-                            <button type="button" onClick={() => changeSearchFormParent(`${current.id}`)}>{current.id}</button>
-                            {`${current.title} `}
+                                <button type="button" onClick={() => changeSearchFormParent(`${current.id}`)}>{current.id}</button>
+                                {`${current.title} `}
                             </div>
                             <div>
                                 {`${typeSet[current.type]}`}
@@ -308,9 +310,11 @@ const Goal = ({ goal, onRemoveGoal }: GoalProps) => {
                             <div style={{ fontSize: 'small' }}>
                                 {`Added At: ${current.added_at}`}
                             </div>
-                            {current.completed_at !== null && current.completed_at !== '' && (<div style={{ fontSize: 'large', fontWeight: 'bold' }}>
-                                {`Completed At: ${current.completed_at}`}
-                            </div>)}
+                            {current.completed_at && (
+                                <div style={{ fontSize: 'large', fontWeight: 'bold' }}>
+                                    {`Completed At: ${current.completed_at}`}
+                                </div>
+                            )}
                         </div>
                     </div>
                     {current.gps_coords && current.gps_coords !== '' && (
@@ -328,12 +332,10 @@ const Goal = ({ goal, onRemoveGoal }: GoalProps) => {
                     <>
                         <h3>Add Children</h3>
                         <button onClick={toggleIsAddingChild} type="button" style={{ width: '5rem' }}>Close</button>
-                        <AddGoalForm parentId={current.id} onAddGoal={onAddGoal} />
+                        <AddGoalForm parentId={current.id} onAddGoal={_onAddGoal} />
                     </>
                 ) : (
-
                     <button onClick={toggleIsAddingChild} type="button" style={{ width: '10rem' }}>Show Add form</button>
-
                 )
             }
         </div >

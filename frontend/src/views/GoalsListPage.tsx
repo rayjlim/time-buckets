@@ -32,7 +32,7 @@ const GoalsListPage = () => {
 
     const searchForm = useRef<HTMLFormElement>(null);
 
-    const { loadGoals } = useLoadGoals({formRef: searchForm, page, setIsLoading, setGoals});
+    const { loadGoals } = useLoadGoals({ formRef: searchForm, page, setIsLoading, setGoals });
 
     const onAddGoal = (newGoal: GoalType) => {
         if (!goals) return;
@@ -99,18 +99,22 @@ const GoalsListPage = () => {
 
             {!isLoading && (
                 <>
-                    {goals?.primary.length && <><div style={{ border: '1px solid blue' }}>
-                        <GoalList
-                            goals={goals?.primary || []}
-                            onRemoveGoal={onRemoveGoal}
-                        />
-                    </div>
-                        <hr />
-                    </>
+                    {goals?.primary.length && (
+                        <>
+                            <div style={{ border: '1px solid blue' }}>
+                                <GoalList
+                                    goals={goals?.primary || []}
+                                    onAddGoal={onAddGoal}
+                                    onRemoveGoal={onRemoveGoal}
+                                />
+                            </div>
+                            <hr />
+                        </>)
                     }
 
                     <GoalList
                         goals={goals?.children.data || []}
+                        onAddGoal={onAddGoal}
                         onRemoveGoal={onRemoveGoal}
                     />
                 </>

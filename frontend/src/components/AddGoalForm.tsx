@@ -25,12 +25,12 @@ interface AddGoalProps {
     onAddGoal: (goal: GoalType) => void;
 }
 
-const AddGoalForm: React.FC<AddGoalProps> = ({
+const AddGoalForm = ({
     title = '',
     type = 0,
     parentId = 0,
     onAddGoal,
-}) => {
+}: AddGoalProps) => {
     const formRef = useRef<HTMLFormElement>(null);
     const [formState, setFormState] = useState<FormState>({
         title,
