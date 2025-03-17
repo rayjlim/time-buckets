@@ -159,7 +159,6 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                         }}
                     />
 
-                    <br />
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', margin: '8px 0' }}>
                         {TAGS.map(tag => (
                             <button
@@ -200,64 +199,69 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                             }
                         }}
                     />
-                      <TextField
-                        name="gpsCoords"
-                        id="form-gpsCoords"
-                        label="GPS coords"
-                        defaultValue={current.gps_coords}
-                        sx={{
-                            '& .MuiOutlinedInput-root': {
-                                height: '30px',
-                                fontSize: '0.875rem',
-                            },
-                            '& .MuiInputLabel-root': {
-                                fontSize: '0.75rem',
-                            },
-                        }}
-                    />
-                    <TextField
-                        name="gpsZoom"
-                        id="form-gpsZoom"
-                        label="GPS Zoom"
-                        defaultValue={current.gps_zoom}
-                        sx={{
-                            '& .MuiOutlinedInput-root': {
-                                height: '30px', // Set the height
-                                fontSize: '0.875rem', // Adjust font size
-                            },
-                            '& .MuiInputLabel-root': {
-                                fontSize: '0.75rem', // Adjust label font size
-                            },
-                        }}
-                    />
                     <div style={{
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
                         width: '100%',
-
+                        gap: '10px',
+                        margin: '1rem 0'
                     }}>
-                        <div style={{ display: 'flex', gap: '10px' }}>
-                            <button type="submit" className="saveBtn">Save</button>
-                            <button
-                                onClick={() => setIsEditing(!isEditing)}
-                                type="button"
-                            >
-                                Cancel
-                            </button>
 
-                        </div>
-                        <button
-                            onClick={() => removeGoal()}
-                            type="button"
-                            style={{ width: '5rem' }}
-                        >
-                            Delete
-                        </button>
+
+                        <TextField
+                            name="gpsCoords"
+                            id="form-gpsCoords"
+                            label="GPS coords"
+                            defaultValue={current.gps_coords}
+                            sx={{
+                                width: '50%',
+                                '& .MuiOutlinedInput-root': {
+                                    height: '30px',
+                                    fontSize: '0.875rem',
+                                },
+                                '& .MuiInputLabel-root': {
+                                    fontSize: '0.75rem',
+                                },
+                            }}
+                        />
+                        <TextField
+                            name="gpsZoom"
+                            id="form-gpsZoom"
+                            label="GPS Zoom"
+                            defaultValue={current.gps_zoom}
+                            sx={{
+                                width: '50%',
+                                '& .MuiOutlinedInput-root': {
+                                    height: '30px',
+                                    fontSize: '0.875rem',
+                                },
+                                '& .MuiInputLabel-root': {
+                                    fontSize: '0.75rem',
+                                },
+                            }}
+                        />
                     </div>
+                    <button type="submit" className="saveBtn">Save</button>
+                    <button
+                        onClick={() => setIsEditing(!isEditing)}
+                        type="button"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        onClick={() => removeGoal()}
+                        type="button"
+                        style={{ width: '5rem' }}
+                    >
+                        Delete
+                    </button>
+
                 </FormControl>
             </form>
-        </div>
+        </div >
     );
 
     const renderDisplayView = () => (
@@ -324,7 +328,10 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
             </div>
             {current.gps_coords && current.gps_coords !== '' && (
                 <div>
-                    {`GPS: ${current.gps_coords.slice(0, 10)}`}
+                    GPS:
+                    <a href={`https://www.google.com/maps/place/${current.gps_coords}`}>
+                        {current.gps_coords.slice(0, 10)}
+                    </a>
                     {displayMap()}
                 </div>
             )}
