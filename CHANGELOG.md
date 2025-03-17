@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/rayjlim/time-buckets/compare/v2.5.0...v2.6.0) (2025-03-17)
+
+
+### Features
+
+* [#36](https://github.com/rayjlim/time-buckets/issues/36) show green marker for locations completed ([a1d033e](https://github.com/rayjlim/time-buckets/commit/a1d033e0a1432c9ff6147a38576a930d562fc447))
+* [#79](https://github.com/rayjlim/time-buckets/issues/79) validate gps_coords ([e14548f](https://github.com/rayjlim/time-buckets/commit/e14548f55e83e8aa7b4c52c1424bd26d8c332da5))
+* [#89](https://github.com/rayjlim/time-buckets/issues/89) link to google in gps coords ([89ea955](https://github.com/rayjlim/time-buckets/commit/89ea955619055a10935e1fc8ac24f20c50994dbc))
+
 ## [2.5.0](https://github.com/rayjlim/time-buckets/compare/v2.4.2...v2.5.0) (2025-03-16)
 
 
