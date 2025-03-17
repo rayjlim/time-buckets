@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     MapContainer,
     TileLayer,
@@ -15,7 +14,7 @@ interface MapDisplayProps {
     width?: number;
 }
 
-const MapDisplay: React.FC<MapDisplayProps> = ({ center, zoom = 6, height = 300, width = 500 }) => {
+const MapDisplay = ({ center, zoom = 6, height = 300, width = 500 }: MapDisplayProps) => {
 
     return (
         <div style={{ height, width, border: '1px solid blue' }}>

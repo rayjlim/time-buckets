@@ -4,6 +4,7 @@ import {
     TileLayer,
     Marker,
     useMap,
+    CircleMarker
 } from 'react-leaflet';
 import L, { LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -11,7 +12,10 @@ import 'leaflet/dist/leaflet.css';
 // If you need to define props, create an interface
 interface MapDisplayMultiProps {
     // Add any props here if needed
-    coords: LatLngExpression[];
+    children: {
+        coords: LatLngExpression
+        completed: boolean
+    }[];
     primary: LatLngExpression
     height?: number;
     width?: number;
@@ -32,7 +36,7 @@ const FitBounds = ({ coordinates }: { coordinates: LatLngExpression[] }) => {
     return null;
 };
 
-const MapDisplayMulti: React.FC<MapDisplayMultiProps> = ({ coords, primary, height = 300, width = 500 }) => {
+const MapDisplayMulti = ({ children, primary, height = 300, width = 500 }: MapDisplayMultiProps) => {
     const Red_MARKER = `data:image/svg+xml;utf8,${encodeURIComponent(`<?xml version="1.0" encoding="iso-8859-1"?>
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36.059" height="36.059" viewBox="0 0 36.059 36.059" style="transform:rotate(${0}deg)">
           <defs>
@@ -52,13 +56,16 @@ const MapDisplayMulti: React.FC<MapDisplayMultiProps> = ({ coords, primary, heig
           </g>
         </svg>
         `)}`;
-        const BoatIcon = L.icon({
-            iconUrl: Red_MARKER,
-            iconSize: [40, 40],
-            iconAnchor: [12, 12],
-            popupAnchor: [0, 0],
-        });
-        const combined = [...coords, primary];
+
+    const RedIcon = L.icon({
+        iconUrl: Red_MARKER,
+        iconSize: [40, 40],
+        iconAnchor: [12, 12],
+        popupAnchor: [0, 0],
+    });
+
+    const coords = children.map(item => item.coords);
+    const combined = [...coords, primary];
     return (
         <div style={{ height, width, border: '1px solid grey' }}>
             <MapContainer
@@ -71,11 +78,17 @@ const MapDisplayMulti: React.FC<MapDisplayMultiProps> = ({ coords, primary, heig
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
 
-                {coords.map((coord, index) => (
-                    <Marker key={index} position={coord}/>
-                ))}
+                {children.map((location, index) => location.completed ? (
+                    <CircleMarker key={index} center={location.coords} radius={8}
+                        pathOptions={{
+                            fillColor: 'limegreen',
+                            fillOpacity: 0.7,
+                            color: 'white',
+                            weight: 2
+                        }} />
+                ) : <Marker key={index} position={location.coords} />)}
                 {primary && (
-                    <Marker position={primary} icon={BoatIcon}/>
+                    <Marker position={primary} icon={RedIcon} />
                 )}
                 {/* Fit bounds to the coordinates */}
                 <FitBounds coordinates={combined} />

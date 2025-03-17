@@ -17,6 +17,10 @@ import { GoalType, PageDataType } from '../types';
 import './GoalsListPage.css';
 import SearchForm from '../components/SearchForm';
 
+interface ChildrenType {
+    coords: LatLngExpression
+    completed: boolean
+}
 // Utility function
 const parseGpsCoords = (coordStr: string) => {
     if (!coordStr || typeof coordStr !== 'string') return null;
@@ -65,12 +69,18 @@ const GoalsListPage = () => {
         loadGoals();
     }, [page]);
 
-    const arrayOutput: ([number, number] | null)[] = useMemo(() => {
+    const arrayOutput = useMemo(() => {
         if (!goals?.children?.data) return [];
 
         return goals.children.data
-            .map(item => parseGpsCoords(item.gps_coords))
-            .filter((coords): coords is [number, number] => coords !== null);
+            .map(item => {
+                const coords = parseGpsCoords(item.gps_coords);
+                return coords ? {
+                    coords: coords,
+                    completed: !!item.completed_at
+                } : null;
+            })
+            .filter((item): item is { coords: [number, number], completed: boolean } => item !== null);
     }, [goals?.children.data]);
 
     const primaryGpsCoords = useMemo(() =>
@@ -82,7 +92,7 @@ const GoalsListPage = () => {
         <>
             <h1 className="title">Time Buckets</h1>
             <TreeDrawer />
-            <MapDisplayMulti coords={arrayOutput as LatLngExpression[]} primary={primaryGpsCoords as LatLngExpression} />
+            <MapDisplayMulti children={arrayOutput as ChildrenType[] } primary={primaryGpsCoords as LatLngExpression} />
             {isLoading && <h2>LOADING</h2>}
             <div>
                 <ChipToggleView>
