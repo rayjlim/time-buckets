@@ -52,6 +52,7 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const [isAddingChild, setIsAddingChild] = useState(false);
     const [typeForm, setTypeForm] = useState(goal.type);
+    const [gpsCoords, setGpsCoords] = useState(goal.gps_coords || '');
 
     const {
         saveGoal,
@@ -207,13 +208,14 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                         gap: '10px',
                         margin: '1rem 0'
                     }}>
-
-
                         <TextField
                             name="gpsCoords"
                             id="form-gpsCoords"
                             label="GPS coords"
-                            defaultValue={current.gps_coords}
+                            value={gpsCoords}
+                            onChange={e => setGpsCoords(e.target.value)}
+                            error={gpsCoords !== '' && !/^-?\d+\.?\d*,\s?-?\d+\.?\d*$/.test(gpsCoords)}
+                            helperText={gpsCoords !== '' && !/^-?\d+\.?\d*,\s?-?\d+\.?\d*$/.test(gpsCoords) ? 'Format: latitude,longitude (e.g., 41.40338,2.17403)' : ''}
                             sx={{
                                 width: '50%',
                                 '& .MuiOutlinedInput-root': {
@@ -249,8 +251,6 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                     >
                         Cancel
                     </button>
-
-
                     <button
                         onClick={() => removeGoal()}
                         type="button"
@@ -261,7 +261,7 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
 
                 </FormControl>
             </form>
-        </div >
+        </div>
     );
 
     const renderDisplayView = () => (
