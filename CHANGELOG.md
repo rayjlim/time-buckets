@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.1](https://github.com/rayjlim/time-buckets/compare/v2.6.0...v2.6.1) (2025-03-31)
+
+
+### Bug Fixes
+
+* add build badge to readme ([c7ac394](https://github.com/rayjlim/time-buckets/commit/c7ac394fb18eb89d90751522b4633fcb4f3170aa))
+* add Github build actions ([1df1a4b](https://github.com/rayjlim/time-buckets/commit/1df1a4be0c20d7ceee4744ec68927f37e81d4fe9))
+* config issue ([95e8a70](https://github.com/rayjlim/time-buckets/commit/95e8a70792035ff261d7e6961bd58bff9fef60f9))
+* get vitest running ([ea08740](https://github.com/rayjlim/time-buckets/commit/ea0874039b5a915119f8fd0bd999286d787234d9))
+* install vitest ([4acc50b](https://github.com/rayjlim/time-buckets/commit/4acc50b6eff1423965c7a81712576429b74f462b))
+* package.json react version issues ([da16c1a](https://github.com/rayjlim/time-buckets/commit/da16c1a2b7b9361f7e828f1b6a4ac7c4f55983c0))
+* remove unused ([564dd90](https://github.com/rayjlim/time-buckets/commit/564dd9064e79dadb9fa4bcd405a1ca74e18fb547))
+* vitest config ([91b48bb](https://github.com/rayjlim/time-buckets/commit/91b48bb7c304cc0a58ff6e6ae66d1adc77ecffef))
+* vitest configs ([bc49eef](https://github.com/rayjlim/time-buckets/commit/bc49eef6c266f69478f6d66175e5923cba7d9027))
+
 ## [2.6.0](https://github.com/rayjlim/time-buckets/compare/v2.5.0...v2.6.0) (2025-03-17)
 
 
