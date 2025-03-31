@@ -3,9 +3,11 @@ import { useState } from 'react';
 import Switch from '@mui/material/Switch';
 
 type MyComponentProps = {
-    children: React.ReactNode
-  };
-const ChipToggleView: React.FC<MyComponentProps> = ({ children }) => {
+    children: React.ReactNode;
+    label?: string;
+};
+
+const ChipToggleView: React.FC<MyComponentProps> = ({ children, label }) => {
     const [isChipView, setIsChipView] = useState(true);
 
     // Toggle between views
@@ -14,17 +16,15 @@ const ChipToggleView: React.FC<MyComponentProps> = ({ children }) => {
     };
 
     return (
-        <div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Switch size="small" onChange={toggleView}/>
-
-
+            {label && <span>{label}</span>}
             {isChipView ? (
                 <hr />
             ) : (
                 <>
                     {children}
                 </>
-
             )}
         </div>
     );

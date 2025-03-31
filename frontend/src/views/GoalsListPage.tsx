@@ -95,7 +95,7 @@ const GoalsListPage = () => {
             <MapDisplayMulti children={arrayOutput as ChildrenType[] } primary={primaryGpsCoords as LatLngExpression} />
             {isLoading && <h2>LOADING</h2>}
             <div>
-                <ChipToggleView>
+                <ChipToggleView label="Show Add Form">
                     <AddGoalForm onAddGoal={onAddGoal} />
                 </ChipToggleView>
                 <SearchForm loadGoals={loadGoals} searchForm={searchForm} setPage={setPage} />
