@@ -17,3 +17,4 @@ lumen-*.log
 
 .codegpt
 frontend-old/*
+frontend/coverage/*
