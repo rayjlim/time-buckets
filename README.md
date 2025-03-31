@@ -1,5 +1,8 @@
 # Time Buckets
 
+[![PHP](https://github.com/rayjlim/time-buckets/actions/workflows/php.yml/badge.svg)](https://github.com/rayjlim/time-buckets/actions/workflows/php.yml)
+[![Node.js](https://github.com/rayjlim/time-buckets/actions/workflows/node.js.yml/badge.svg)](https://github.com/rayjlim/time-buckets/actions/workflows/node.js.yml)
+
 to run the phpunit with npm watch, I had to  
 to change the default timeout from 300 to a large number  
 `export COMPOSER_PROCESS_TIMEOUT=50000`
