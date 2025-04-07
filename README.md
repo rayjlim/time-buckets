@@ -19,6 +19,9 @@ to change the default timeout from 300 to a large number
 - Update Details of Experience
 - Mark Goal as completed
 
+- put goals in a time frame
+- see completed goals
+
 ----
 
 ## Helpful links
