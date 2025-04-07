@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 /**
  * Recursively retrieves all descendants of a goal
- * 
+ *
  * @param int $parentId The ID of the parent goal
  * @return array Array of Goal objects containing id, title, and parent_id
  */
@@ -15,7 +15,7 @@ function getDescendants($parentId)
 {
     $descendants = [];
 
-    $query = Goal::select('id', 'title', 'parent_id')->where('parent_id', '=', $parentId)->orderBy('title', 'ASC');
+    $query = Goal::select('id', 'title', 'parent_id', 'completed_at', 'tags')->where('parent_id', '=', $parentId)->orderBy('title', 'ASC');
     $goals = $query->get();
 
     foreach ($goals as $row) {
@@ -27,7 +27,7 @@ function getDescendants($parentId)
 
 /**
  * Controller for managing Goal resources
- * 
+ *
  * Handles CRUD operations and specialized queries for Goal entities,
  * including tree structure operations and location-based queries
  */
@@ -35,7 +35,7 @@ class GoalController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return Illuminate\Pagination\LengthAwarePaginator\ response status data
      */

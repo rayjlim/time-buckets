@@ -8,6 +8,8 @@ interface DBTreeItem {
     id: number;
     title: string;
     parent_id: number;
+    completed_at?: string;
+    tags?: string[]; // Add this field
 }
 interface TreeViewItem {
     id: string;
@@ -21,7 +23,7 @@ const buildTreeJson = (items: DBTreeItem[], parentId = 0): TreeViewItem[] => {
         .filter((item: DBTreeItem) => item.parent_id === parentId)
         .map((item: DBTreeItem) => ({
             id: item.id.toString(),
-            label: item.title,
+            label: `${item.title}${item.completed_at ? ' ☑️' : ''}${item.tags?.includes('archived') ? ' ❌' : ''}`,
             children: buildTreeJson(items, item.id),
         }));
 };
@@ -44,7 +46,10 @@ const handleNodeClick = (e: React.MouseEvent<HTMLButtonElement>, nodeId: string)
 
 const renderLabelWithButton = (label: string, nodeId: string) => (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-        <span>{label}</span>
+        <span style={{ display: 'flex', alignItems: 'center' }}>
+            {label.replace(' ❌', '')}
+            {label.includes('❌') && <span style={{ color: 'red', marginLeft: '4px' }}>❌</span>}
+        </span>
         <Button
             variant="contained"
             size="small"
@@ -71,7 +76,6 @@ const MyTreeView = () => {
     return (
         <>
             <div style={{ width: '100%', backgroundColor: 'grey' }}>
-
                 <SimpleTreeView>
                     {treeData.map((tree: TreeViewItem) => renderTree(tree))}
                 </SimpleTreeView>
