@@ -76,6 +76,8 @@ const GoalsListPage = () => {
             .map(item => {
                 const coords = parseGpsCoords(item.gps_coords);
                 return coords ? {
+                    id: item.id,
+                    title: item.title,
                     coords: coords,
                     completed: !!item.completed_at
                 } : null;
@@ -111,7 +113,7 @@ const GoalsListPage = () => {
                 <>
                     {goals?.primary.length && (
                         <>
-                            <div style={{ border: '1px solid blue' }}>
+                            <div style={{ border: '1px solid blue', 'background-color': 'lightgrey' }}>
                                 <GoalList
                                     goals={goals?.primary || []}
                                     onAddGoal={onAddGoal}

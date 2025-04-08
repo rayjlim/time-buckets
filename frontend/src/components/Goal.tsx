@@ -270,7 +270,7 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
             <div className="manual goal-display" style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
-                        <button type="button" onClick={() => changeSearchFormParent(`${current.id}`)}>{current.id}</button>
+                        <button type="button" onClick={() => changeSearchFormParent(current.id + '')}>{current.id}</button>
                         {`${current.title} `}
                     </div>
                     <div>
