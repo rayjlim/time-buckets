@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/rayjlim/time-buckets/compare/v2.6.2...v2.7.0) (2025-04-08)
+
+
+### Features
+
+* **frontend:** ✨ map marker clickable ([1825940](https://github.com/rayjlim/time-buckets/commit/18259404c50627197d513a4195a615daea1e70e7))
+
 ### [2.6.2](https://github.com/rayjlim/time-buckets/compare/v2.6.1...v2.6.2) (2025-04-07)
 
 ### [2.6.1](https://github.com/rayjlim/time-buckets/compare/v2.6.0...v2.6.1) (2025-03-31)
