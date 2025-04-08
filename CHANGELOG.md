@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.7.1](https://github.com/rayjlim/time-buckets/compare/v2.7.0...v2.7.1) (2025-04-08)
+
+
+### Bug Fixes
+
+* ✨ [#31](https://github.com/rayjlim/time-buckets/issues/31) clean up code and improve CSS consistency ([5b662d2](https://github.com/rayjlim/time-buckets/commit/5b662d26aa50a2dea0b9b65fd753acdbfe84d291))
+
 ## [2.7.0](https://github.com/rayjlim/time-buckets/compare/v2.6.2...v2.7.0) (2025-04-08)
 
 
