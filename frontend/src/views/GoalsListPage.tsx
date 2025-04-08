@@ -18,6 +18,8 @@ import './GoalsListPage.css';
 import SearchForm from '../components/SearchForm';
 
 interface ChildrenType {
+    id: number
+    title: string
     coords: LatLngExpression
     completed: boolean
 }
@@ -82,7 +84,7 @@ const GoalsListPage = () => {
                     completed: !!item.completed_at
                 } : null;
             })
-            .filter((item): item is { coords: [number, number], completed: boolean } => item !== null);
+            .filter((item) => item !== null);
     }, [goals?.children.data]);
 
     const primaryGpsCoords = useMemo(() =>
@@ -113,7 +115,7 @@ const GoalsListPage = () => {
                 <>
                     {goals?.primary.length && (
                         <>
-                            <div style={{ border: '1px solid blue', 'background-color': 'lightgrey' }}>
+                            <div className="primary">
                                 <GoalList
                                     goals={goals?.primary || []}
                                     onAddGoal={onAddGoal}

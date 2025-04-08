@@ -3,8 +3,7 @@ import {
     MapContainer,
     TileLayer,
     Marker,
-    useMap,
-    CircleMarker
+    useMap
 } from 'react-leaflet';
 import L, { LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';

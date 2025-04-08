@@ -1,5 +1,5 @@
 .title {
-    background-image: url('/images/logo75.png');
+    background-image: url("/images/logo75.png");
     background-repeat: no-repeat;
     background-position: left center;
     height: 75px;
@@ -7,11 +7,11 @@
     display: inline-block;
 }
 .searchField * {
-    margin: 0 .5em;
-  }
+    margin: 0 0.5em;
+}
 
 .items {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 li a {
@@ -19,27 +19,27 @@ li a {
     padding: 0.1rem 1rem;
     border: gray 1px solid;
     cursor: pointer;
-  }
-  li.previous a,
-  li.next a,
-  li.break a {
+}
+li.previous a,
+li.next a,
+li.break a {
     border-color: transparent;
-  }
-  li.active a {
+}
+li.active a {
     background-color: #0366d6;
     border-color: transparent;
     color: white;
     min-width: 32px;
-  }
-  li.disabled a {
+}
+li.disabled a {
     color: grey;
-  }
-  li.disable,
-  li.disabled a {
+}
+li.disable,
+li.disabled a {
     cursor: default;
-  }
+}
 
-  button.letter {
+button.letter {
     background: none;
     border: none;
     padding: 0;
@@ -48,15 +48,19 @@ li a {
     cursor: pointer;
     text-decoration: underline; /* Make text underlined to mimic link */
     margin-right: 1rem;
-  }
+}
 
-  /* Optional: Remove default button focus outline */
-  button.letter:focus {
+/* Optional: Remove default button focus outline */
+button.letter:focus {
     outline: none;
-  }
+}
 
-  /* Optional: Hover effect */
-  button.letter:hover {
+/* Optional: Hover effect */
+button.letter:hover {
     color: blue; /* Change color on hover */
-  }
+}
 
+.primary {
+    border: "1px solid blue";
+    background-color: "lightgrey";
+}
