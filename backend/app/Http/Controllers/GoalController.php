@@ -45,6 +45,8 @@ class GoalController extends Controller
         //     ? $request->input('per_page')
         //     : 20;  // DEFAULT page size
         $searchPage = $request->input('page');
+        $pageSize = 20;  // DEFAULT page size
+
 
         $locationsWithoutCoords = $request->input('locationsWithoutCoords');
         if ($locationsWithoutCoords == 'true') {
@@ -165,11 +167,13 @@ class GoalController extends Controller
         $completedGoals = $request->input('completedGoals');
         if ($completedGoals == 'true') {
             $query = $query->whereNotNull('completed_at');
+            $orderByField = 'completed_at';
+            $orderByDirection = 'DESC';
+            $pageSize = 100;
         }
 
-
         $query = $query->orderBy($orderByField, $orderByDirection);
-        $goals = $query->paginate(10, ['*'], 'page', $searchPage);
+        $goals = $query->paginate($pageSize, ['*'], 'page', $searchPage);
 
         // echo $query->toSql();
         // $bindings = $query->getBindings();

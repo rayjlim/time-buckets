@@ -3,6 +3,7 @@ import {
     TileLayer,
     Marker,
 } from 'react-leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 // If you need to define props, create an interface
@@ -15,6 +16,12 @@ interface MapDisplayProps {
 }
 
 const MapDisplay = ({ center, zoom = 6, height = 300, width = 500 }: MapDisplayProps) => {
+    const MainIcon = L.divIcon({
+        html: '⭐',
+        className: 'emoji-icon',
+        iconSize: [20, 20],
+        iconAnchor: [12, 24],
+    });
 
     return (
         <div style={{ height, width, border: '1px solid blue' }}>
@@ -27,7 +34,7 @@ const MapDisplay = ({ center, zoom = 6, height = 300, width = 500 }: MapDisplayP
                     // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={center} />
+                <Marker position={center}  icon={MainIcon}/>
             </MapContainer>
         </div>
 
