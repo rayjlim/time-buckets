@@ -30,7 +30,6 @@ export default function TreeDrawer() {
 
     const list = (anchor: Anchor) => (
         <Box
-            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
             role="presentation"
             onClick={toggleDrawer(anchor, true)}
             onKeyDown={toggleDrawer(anchor, false)}
@@ -42,15 +41,15 @@ export default function TreeDrawer() {
     return (
         <div>
             <>
-                <Button onClick={toggleDrawer('top', true)}>Tree View</Button>
-                <Button onClick={toggleDrawer('top', false)} id="tree-box-btn" style={{display: 'none'}}>Tree View Close</Button>
+                <Button onClick={toggleDrawer('left', true)}>Tree View</Button>
+                <Button onClick={toggleDrawer('left', false)} id="tree-box-btn" style={{display: 'none'}}>Tree View Close</Button>
 
                 <Drawer
-                    anchor={'top'}
-                    open={state['top']}
-                    onClose={toggleDrawer('top', false)}
+                    anchor={'left'}
+                    open={state['left']}
+                    onClose={toggleDrawer('left', false)}
                 >
-                    {list('top')}
+                    {list('left')}
                 </Drawer>
             </>
         </div>

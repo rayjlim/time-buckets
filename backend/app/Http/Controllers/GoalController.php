@@ -50,7 +50,10 @@ class GoalController extends Controller
 
         $locationsWithoutCoords = $request->input('locationsWithoutCoords');
         if ($locationsWithoutCoords == 'true') {
-            $query = Goal::where('gps_coords', '');
+            $query = Goal::where(function($q) {
+                $q->where('gps_coords', '')
+                  ->orWhereNull('gps_coords');
+            });
             $query = $query->where('type', 0);
             $query = $query->with('parent');
             $query = $query->withCount('children');
