@@ -1,4 +1,4 @@
-import { useRef, RefObject, useState } from 'react';
+import { useEffect, useRef, RefObject, useState } from 'react';
 import { parseAsInteger, parseAsString, useQueryState } from 'nuqs'
 
 import Checkbox from "@mui/material/Checkbox";
@@ -32,6 +32,16 @@ const SearchForm = ({ loadGoals, searchForm, setPage, showCompleted }: SearchFor
 
     const formTagChoices = useRef<HTMLSelectElement>(null);
     const [showCompletedGoals, setShowCompletedGoals] = useState(showCompleted);
+
+    useEffect(() => {
+        if (showCompleted && searchForm.current) {
+            const parentId = searchForm.current.querySelector('input[name="parentId"]') as HTMLInputElement;
+            if (parentId) {
+                parentId.value = '';
+                setParentIdForm(null);
+            }
+        }
+    }, [showCompleted]);
 
     const changeTitle = () => {
         if (!searchForm.current) return;
@@ -130,22 +140,25 @@ const SearchForm = ({ loadGoals, searchForm, setPage, showCompleted }: SearchFor
                     Priority:
                     <input name="priority" type="text" size={4} />
                 </label>
-                <label htmlFor="parentId">
-                    Parent Id:
-                    <input name="parentId" id="searchFormParentId" type="text" size={4} defaultValue={parentIdForm as number}
-                    />
-                </label>
-                <label htmlFor="idField">
-                    <TextField
-                        id="searchform-id"
-                        name="idField"
-                        label="ID"
-                        defaultValue={idForm}
-                        placeholder="id"
-                        variant="filled"
+                <TextField
+                    id="searchFormParentId"
+                    name="parentId"
+                    size="small"
+                    label="Parent Id"
+                    defaultValue={parentIdForm}
+                    placeholder="Parent Id"
+                    variant="filled"
+                />
 
-                    />
-                </label>
+                <TextField
+                    id="searchform-id"
+                    name="idField"
+                    label="ID"
+                    defaultValue={idForm}
+                    placeholder="Id"
+                    variant="filled"
+                />
+
                 <label htmlFor="orderBy" className="searchField">
                     Order By:
                     <select name="orderBy">
@@ -158,12 +171,12 @@ const SearchForm = ({ loadGoals, searchForm, setPage, showCompleted }: SearchFor
                     </select>
                 </label>
                 <FormControlLabel
-                    control={<Checkbox name="locationsWithoutCoords" checked={locationsWithoutCoords} onChange={()=> setLocationsWithoutCoords(!locationsWithoutCoords)} />}
+                    control={<Checkbox name="locationsWithoutCoords" checked={locationsWithoutCoords} onChange={() => setLocationsWithoutCoords(!locationsWithoutCoords)} />}
                     label="Locations without Coords"
                 />
                 <FormControlLabel
                     control={<Checkbox name="completedGoals" checked={showCompletedGoals}
-                    onChange={() => setShowCompletedGoals(!showCompletedGoals)}/>}
+                        onChange={() => setShowCompletedGoals(!showCompletedGoals)} />}
                     label="Show Completed Goals"
                 />
             </FormControl>
