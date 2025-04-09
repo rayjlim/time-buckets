@@ -1,16 +1,18 @@
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
-import GoalsListPage from './views/GoalsListPage'
-
-import './index.scss'
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navigation from './components/Navigation';
+import GoalsListPage from './views/GoalsListPage';
+import CompletedGoalsView from './views/CompletedGoalsView';
 
 function App() {
     return (
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <GoalsListPage />
-        </LocalizationProvider >
-    )
+        <BrowserRouter>
+            <Navigation />
+            <Routes>
+                <Route path="/" element={<GoalsListPage />} />
+                <Route path="/completed" element={<CompletedGoalsView />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
-export default App
+export default App;
