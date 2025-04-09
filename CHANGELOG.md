@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.8.0](https://github.com/rayjlim/time-buckets/compare/v2.7.1...v2.8.0) (2025-04-09)
+
+
+### Features
+
+* **goals:** ✨ [#4](https://github.com/rayjlim/time-buckets/issues/4) add functionality to filter and display completed goals ([7a267a3](https://github.com/rayjlim/time-buckets/commit/7a267a3c508b67a2baea05ee6c24365815e9ee19))
+* **routing:** ✨ [#4](https://github.com/rayjlim/time-buckets/issues/4) add react-router-dom and implement navigation ([bd93349](https://github.com/rayjlim/time-buckets/commit/bd933492bc42ee23ec32e13d6aca4097237a207a))
+
 ### [2.7.1](https://github.com/rayjlim/time-buckets/compare/v2.7.0...v2.7.1) (2025-04-08)
 
 

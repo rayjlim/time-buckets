@@ -161,6 +161,13 @@ class GoalController extends Controller
         if ($searchParentId >= -1) {
             $query = $query->where('parent_id', $searchParentId);
         }
+
+        $completedGoals = $request->input('completedGoals');
+        if ($completedGoals == 'true') {
+            $query = $query->whereNotNull('completed_at');
+        }
+
+
         $query = $query->orderBy($orderByField, $orderByDirection);
         $goals = $query->paginate(10, ['*'], 'page', $searchPage);
 

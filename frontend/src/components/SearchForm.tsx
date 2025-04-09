@@ -16,9 +16,10 @@ type SearchFormProps = {
     loadGoals: () => void;
     searchForm: RefObject<HTMLFormElement>,
     setPage: (page: number) => void;
+    showCompleted?: boolean;
 };
 
-const SearchForm = ({ loadGoals, searchForm, setPage }: SearchFormProps) => {
+const SearchForm = ({ loadGoals, searchForm, setPage, showCompleted }: SearchFormProps) => {
     const [titleForm, setTitleForm] = useQueryState('title', parseAsString);
     const [typeForm, setTypeForm] = useQueryState('type', parseAsString);
     const [tagForm, setTagForm] = useQueryState('tag', parseAsString);
@@ -30,7 +31,7 @@ const SearchForm = ({ loadGoals, searchForm, setPage }: SearchFormProps) => {
     const [locationsWithoutCoords, setLocationsWithoutCoords] = useState(false);
 
     const formTagChoices = useRef<HTMLSelectElement>(null);
-
+    const [showCompletedGoals, setShowCompletedGoals] = useState(showCompleted);
 
     const changeTitle = () => {
         if (!searchForm.current) return;
@@ -158,9 +159,13 @@ const SearchForm = ({ loadGoals, searchForm, setPage }: SearchFormProps) => {
                 </label>
                 <FormControlLabel
                     control={<Checkbox name="locationsWithoutCoords" checked={locationsWithoutCoords} onChange={()=> setLocationsWithoutCoords(!locationsWithoutCoords)} />}
-                    label="locationsWithoutCoords"
+                    label="Locations without Coords"
                 />
-
+                <FormControlLabel
+                    control={<Checkbox name="completedGoals" checked={showCompletedGoals}
+                    onChange={() => setShowCompletedGoals(!showCompletedGoals)}/>}
+                    label="Show Completed Goals"
+                />
             </FormControl>
         </form>
     )
