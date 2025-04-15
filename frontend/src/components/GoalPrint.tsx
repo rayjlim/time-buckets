@@ -1,4 +1,5 @@
 import { GoalType } from '../types';
+import MarkdownDisplay from './MarkdownDisplay';
 import './Goal.css';
 
 const typeSet = ['Location', 'Experience'];
@@ -27,8 +28,9 @@ const Goal = ({ goal }: GoalProps) => {
                 {`Added At: ${current.added_at}`}
             </div>
             <div style={{ fontSize: 'small' }}>
-                {`${current.reason}`}
-                {`${current.note}`}
+                <MarkdownDisplay source={current.reason || ''} />
+                <MarkdownDisplay source={current.note || ''} />
+
             </div>
             {current.completed_at && (
                 <div style={{ fontSize: 'large', fontWeight: 'bold' }}>

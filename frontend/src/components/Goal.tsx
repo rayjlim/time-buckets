@@ -9,28 +9,10 @@ import { TAGS } from '../constants';
 import { GoalType } from '../types';
 import './Goal.css';
 
+import MarkdownDisplay from './MarkdownDisplay';
+
 const typeSet = ['Location', 'Experience'];
 
-interface FormTextFieldProps {
-    name: string;
-    label: string;
-    defaultValue?: string | number;
-    required?: boolean;
-    title?: string;
-}
-
-// Remove the inputStyles constant at the top
-
-const FormTextField = ({ name, label, defaultValue, ...props }: FormTextFieldProps) => (
-    <TextField
-        name={name}
-        id={`form-${name}`}
-        label={label}
-        defaultValue={defaultValue}
-        className="mui-text-field"
-        {...props}
-    />
-);
 
 interface GoalProps {
     goal: GoalType;
@@ -258,11 +240,10 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                     </div>
 
 
-                    {/*
-             <div>
-              {'Note: '}
-              <MarkdownDisplay source={current.note} />
-            </div> */}
+                    <div>
+                        {'Note: '}
+                        <MarkdownDisplay source={current.note || ''} />
+                    </div>
                     <div>
                         {`Tags: ${current.tags}`}
                     </div>
