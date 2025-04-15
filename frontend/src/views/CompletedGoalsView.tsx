@@ -7,9 +7,10 @@ import MapDisplayMulti from '../components/MapDisplayMulti';
 import PaginationBar from '../components/PaginationBar';
 import SearchForm from '../components/SearchForm';
 import useLoadGoals from '../hooks/useLoadGoals';
+import Switch from '@mui/material/Switch';
 
 import pkg from '../../package.json';
-import {  PageDataType } from '../types';
+import { PageDataType } from '../types';
 
 // import './CompletedGoals.css';
 
@@ -33,9 +34,14 @@ const CompletedGoals = () => {
     const [page, setPage] = useQueryState('page', parseAsInteger.withDefault(1));
 
     const searchForm = useRef<HTMLFormElement>(null);
+    const [isPrintView, setIsPrintView] = useState(true);
 
+    // Toggle between views
+    const toggleView = () => {
+        console.log('a', isPrintView, 'b');
+        setIsPrintView((prevView) => !prevView);
+    };
     const { loadGoals } = useLoadGoals({ formRef: searchForm, page, setIsLoading, setGoals });
-
 
     const handlePageClick = (event: React.ChangeEvent<unknown>, pageNumber: number) => {
         console.log(event, pageNumber);
@@ -68,14 +74,18 @@ const CompletedGoals = () => {
         [goals?.primary]
     );
 
+    const searchFormDisplay = isPrintView ? 'none' : 'block';
     return (
         <>
             <h1 className="title">Time Buckets</h1>
-            <MapDisplayMulti children={arrayOutput as ChildrenType[] } primary={primaryGpsCoords as LatLngExpression} />
+            {!isPrintView &&
+                <MapDisplayMulti children={arrayOutput as ChildrenType[]} primary={primaryGpsCoords as LatLngExpression} />
+            }
             {isLoading && <h2>LOADING</h2>}
-            <div>
-                <SearchForm loadGoals={loadGoals} searchForm={searchForm} setPage={setPage} showCompleted={true}/>
-            </div>
+            <div style={{display: searchFormDisplay}}>
+                <SearchForm loadGoals={loadGoals} searchForm={searchForm} setPage={setPage} showCompleted={true} />
+                </div>
+
 
             <PaginationBar
                 pageCount={goals?.children.last_page || 0}
@@ -85,7 +95,10 @@ const CompletedGoals = () => {
 
             {!isLoading && (
                 <>
-                    {goals?.primary.length && (
+                    <span>Print Format</span>
+                    <Switch size="small" onChange={toggleView} />
+
+                    {goals?.primary && goals.primary.length > 0 && (
                         <>
                             <div className="primary">
                                 <GoalList
@@ -95,9 +108,9 @@ const CompletedGoals = () => {
                             <hr />
                         </>)
                     }
-
                     <GoalList
                         goals={goals?.children.data || []}
+                        printFormat={isPrintView}
                     />
                 </>
             )}

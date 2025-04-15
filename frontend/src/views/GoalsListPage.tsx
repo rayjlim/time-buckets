@@ -96,14 +96,14 @@ const GoalsListPage = () => {
         <>
             <h1 className="title">Time Buckets</h1>
             <TreeDrawer />
-            <MapDisplayMulti children={arrayOutput as ChildrenType[] } primary={primaryGpsCoords as LatLngExpression} />
+            <MapDisplayMulti children={arrayOutput as ChildrenType[]} primary={primaryGpsCoords as LatLngExpression} />
             {isLoading && <h2>LOADING</h2>}
-            <div>
-                <ChipToggleView label="Show Add Form">
-                    <AddGoalForm onAddGoal={onAddGoal} />
-                </ChipToggleView>
-                <SearchForm loadGoals={loadGoals} searchForm={searchForm} setPage={setPage} />
-            </div>
+
+            <ChipToggleView label="Show Add Form">
+                <AddGoalForm onAddGoal={onAddGoal} />
+            </ChipToggleView>
+            <SearchForm loadGoals={loadGoals} searchForm={searchForm} setPage={setPage} />
+
 
             <PaginationBar
                 pageCount={goals?.children.last_page || 0}

@@ -64,9 +64,7 @@ const useLoadGoals = ({formRef, page, setIsLoading, setGoals}: LoadHookParams) =
             searchFields += `&completedGoals=true`;
         }
 
-
         setIsLoading(true);
-        // TODO: if production, then pass mode: 'no-cors', in fetch options
 
         try {
             const response = await fetch(`${endpoint}${searchFields}`, {
@@ -80,7 +78,6 @@ const useLoadGoals = ({formRef, page, setIsLoading, setGoals}: LoadHookParams) =
                 const data = await response.json();
                 console.log('data :', data);
                 setGoals(data);
-
             }
         } catch (err) {
             console.log(`Error: ${err}`);
