@@ -3,8 +3,6 @@ import './Goal.css';
 
 const typeSet = ['Location', 'Experience'];
 
-
-
 interface GoalProps {
     goal: GoalType
 }
@@ -27,6 +25,10 @@ const Goal = ({ goal }: GoalProps) => {
             </div>
             <div style={{ fontSize: 'small' }}>
                 {`Added At: ${current.added_at}`}
+            </div>
+            <div style={{ fontSize: 'small' }}>
+                {`${current.reason}`}
+                {`${current.note}`}
             </div>
             {current.completed_at && (
                 <div style={{ fontSize: 'large', fontWeight: 'bold' }}>

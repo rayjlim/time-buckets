@@ -16,15 +16,45 @@
     border: 2px solid orange;
 }
 
-
 .tagBtn {
     background-color: transparent;
     border-radius: 8px;
-
+    width: 'auto';
+    padding: '4px 8px';
 }
 
 .saveBtn {
     background-color: rgb(96, 96, 244);
     border-radius: 8px;
     color: white;
+}
+
+.mui-text-field {
+    & .MuiOutlinedInput-root {
+        height: 1.5rem;
+        font-size: 0.875rem;
+        margin: .5rem 0
+    }
+    & .MuiInputLabel-root {
+        font-size: 0.75rem;
+    }
+}
+.mui-wide-container {
+    display: 'flex';
+    justify-content: 'space-between';
+    align-items: 'center';
+    width: '100%';
+    gap: '10px';
+    margin: '1rem 0';
+}
+.mui-text-field-wide {
+    width: 50%;
+    & .MuiOutlinedInput-root {
+        height: 30px;
+        font-size: 0.875rem;
+        margin: .5rem 0
+    }
+    & .MuiInputLabel-root {
+        font-size: 0.75rem;
+    }
 }

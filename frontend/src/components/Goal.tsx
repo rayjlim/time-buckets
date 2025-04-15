@@ -11,16 +11,6 @@ import './Goal.css';
 
 const typeSet = ['Location', 'Experience'];
 
-const inputStyles = {
-    '& .MuiOutlinedInput-root': {
-        height: '30px',
-        fontSize: '0.875rem',
-    },
-    '& .MuiInputLabel-root': {
-        fontSize: '0.75rem',
-    },
-} as const;
-
 interface FormTextFieldProps {
     name: string;
     label: string;
@@ -29,13 +19,15 @@ interface FormTextFieldProps {
     title?: string;
 }
 
+// Remove the inputStyles constant at the top
+
 const FormTextField = ({ name, label, defaultValue, ...props }: FormTextFieldProps) => (
     <TextField
         name={name}
         id={`form-${name}`}
         label={label}
         defaultValue={defaultValue}
-        sx={inputStyles}
+        className="mui-text-field"
         {...props}
     />
 );
@@ -97,18 +89,20 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
         <div className="manual">
             <form ref={formRef} onSubmit={saveGoal}>
                 <FormControl>
-                    <FormTextField name="title" label="Title" defaultValue={current.title} required />
-                    <FormTextField
+                    <TextField name="title" label="Title" defaultValue={current.title} required className="mui-text-field" />
+                    <TextField
                         name="priority"
                         label="Priority"
                         defaultValue={current.priority}
                         title="Priorities description\n- Finance (1-10)\n- Relationship (1-10)\n- Physical (1-10)\n- Time Frame (1-10)\n- Total (1-50)"
+                        className="mui-text-field"
                     />
                     <TextField
                         name="reason"
                         id="form-reason"
                         label="Reason"
                         defaultValue={current.reason}
+                        className="mui-text-field"
                     />
 
                     <RadioGroup
@@ -128,36 +122,26 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                         id="form-parentId"
                         label="Parent"
                         defaultValue={current.parent_id}
+                        className="mui-text-field"
                     />
-                    <TextField
+                    <DatePicker
                         name="completedAt"
-                        id="form-completedAt"
                         label="Date Completed"
-                        defaultValue={current.completed_at}
-                        sx={{
-                            '& .MuiOutlinedInput-root': {
-                                height: '30px', // Set the height
-                                fontSize: '0.875rem', // Adjust font size
-                            },
-                            '& .MuiInputLabel-root': {
-                                fontSize: '0.75rem', // Adjust label font size
-                            },
+                        defaultValue={current.completed_at ? new Date(current.completed_at) : null}
+                        slotProps={{
+                            textField: {
+                                size: "small",
+                                className: "mui-text-field"
+                            }
                         }}
+
                     />
                     <TextField
                         name="tags"
                         id="form-tags"
                         label="Tags"
                         defaultValue={current.tags}
-                        sx={{
-                            '& .MuiOutlinedInput-root': {
-                                height: '30px', // Set the height
-                                fontSize: '0.875rem', // Adjust font size
-                            },
-                            '& .MuiInputLabel-root': {
-                                fontSize: '0.75rem', // Adjust label font size
-                            },
-                        }}
+                        className="mui-text-field"
                     />
 
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', margin: '8px 0' }}>
@@ -167,7 +151,6 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                                 onClick={() => addRemoveTag(tag)}
                                 className="tagBtn"
                                 key={tag}
-                                style={{ width: 'auto', padding: '4px 8px' }}
                             >
                                 {tag}
                             </button>
@@ -180,7 +163,7 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                         multiline
                         rows={4}
                         defaultValue={current.note}
-                        style={{ margin: '.5em auto', width: '75%' }}
+                        style={{ margin: '.5em auto', width: '85%' }}
                     />
                     <DatePicker
                         name="addedAt"
@@ -189,25 +172,12 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                         slotProps={{
                             textField: {
                                 size: "small",
-                                sx: {
-                                    '& .MuiOutlinedInput-root': {
-                                        fontSize: '0.875rem',
-                                    },
-                                    '& .MuiInputLabel-root': {
-                                        fontSize: '0.75rem',
-                                    },
-                                }
+                               className: "mui-text-field"
                             }
                         }}
+
                     />
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        width: '100%',
-                        gap: '10px',
-                        margin: '1rem 0'
-                    }}>
+                    <div className="mui-wide-container">
                         <TextField
                             name="gpsCoords"
                             id="form-gpsCoords"
@@ -216,32 +186,14 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                             onChange={e => setGpsCoords(e.target.value)}
                             error={gpsCoords !== '' && !/^-?\d+\.?\d*,\s?-?\d+\.?\d*$/.test(gpsCoords)}
                             helperText={gpsCoords !== '' && !/^-?\d+\.?\d*,\s?-?\d+\.?\d*$/.test(gpsCoords) ? 'Format: latitude,longitude (e.g., 41.40338,2.17403)' : ''}
-                            sx={{
-                                width: '50%',
-                                '& .MuiOutlinedInput-root': {
-                                    height: '30px',
-                                    fontSize: '0.875rem',
-                                },
-                                '& .MuiInputLabel-root': {
-                                    fontSize: '0.75rem',
-                                },
-                            }}
+                            className="mui-text-field-wide"
                         />
                         <TextField
                             name="gpsZoom"
                             id="form-gpsZoom"
                             label="GPS Zoom"
                             defaultValue={current.gps_zoom}
-                            sx={{
-                                width: '50%',
-                                '& .MuiOutlinedInput-root': {
-                                    height: '30px',
-                                    fontSize: '0.875rem',
-                                },
-                                '& .MuiInputLabel-root': {
-                                    fontSize: '0.75rem',
-                                },
-                            }}
+                            className="mui-text-field-wide"
                         />
                     </div>
                     <button type="submit" className="saveBtn">Save</button>
@@ -306,9 +258,7 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                     </div>
 
 
-                    {/* <div>
-              {`Reason: ${current.reason}`}
-            </div>
+                    {/*
              <div>
               {'Note: '}
               <MarkdownDisplay source={current.note} />
@@ -318,6 +268,9 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                     </div>
                     <div style={{ fontSize: 'small' }}>
                         {`Added At: ${current.added_at}`}
+                    </div>
+                    <div style={{ fontSize: 'small' }}>
+                        {`${current.note}`}
                     </div>
                     {current.completed_at && (
                         <div style={{ fontSize: 'large', fontWeight: 'bold' }}>

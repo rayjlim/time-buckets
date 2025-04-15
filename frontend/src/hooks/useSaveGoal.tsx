@@ -52,6 +52,9 @@ const useSaveGoal = (
         event.preventDefault();
         const formData = new FormData(formRef.current!);
         const formValues = Object.fromEntries(formData);
+        if (formValues.completedAt) {
+            formValues.completedAt = new Date(formValues.completedAt as string).toLocaleDateString('en-CA');
+        }
         if (formValues.addedAt) {
             formValues.addedAt = new Date(formValues.addedAt as string).toLocaleDateString('en-CA');
         }
