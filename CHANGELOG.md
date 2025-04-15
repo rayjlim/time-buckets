@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.9.0](https://github.com/rayjlim/time-buckets/compare/v2.8.0...v2.9.0) (2025-04-15)
+
+
+### Features
+
+* 🐛 add BASENAME env variable and update SearchForm ([200f7b6](https://github.com/rayjlim/time-buckets/commit/200f7b628f234b022004c570a9bd4c84905cc057))
+* **markdown:** ✨ [#33](https://github.com/rayjlim/time-buckets/issues/33) add MarkdownDisplay component and integrate it into Goal components ([7c5f47a](https://github.com/rayjlim/time-buckets/commit/7c5f47adfc553997edb45f6280781f59d24a6c9f))
+* **views:** ✨ [#13](https://github.com/rayjlim/time-buckets/issues/13) add print format toggle to CompletedGoalsView ([88254f7](https://github.com/rayjlim/time-buckets/commit/88254f70879d7a0400c9ab9d4ff44f20339c4226))
+
+
+### Bug Fixes
+
+* 🐛 update GoalController query and TreeDrawer anchor position ([4de62f9](https://github.com/rayjlim/time-buckets/commit/4de62f91b46a27f8905964e57a31312dcab1f9b1))
+* 🚑 add custom marker icon and improve pagination logic for completed ([f302d36](https://github.com/rayjlim/time-buckets/commit/f302d366b4c557b10ce571f1c89dcac822832fc6))
+* **Goal:** ♻️ migrate inline styles to CSS classes and clean up code ([f373fe5](https://github.com/rayjlim/time-buckets/commit/f373fe567756cbdffd07ac0d6b67f089b7f6725d))
+* redo add LocalizationProvider for date handling ([572a3d7](https://github.com/rayjlim/time-buckets/commit/572a3d79c81524b7fc90278d9d783b5e7ae67830))
+
 ## [2.8.0](https://github.com/rayjlim/time-buckets/compare/v2.7.1...v2.8.0) (2025-04-09)
 
 
