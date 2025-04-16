@@ -28,6 +28,8 @@ $router->group(['prefix' => 'api/'], function () use ($router) {
     $router->post('goals', 'GoalController@store');
     $router->get('goals/{id}', 'GoalController@show');
     $router->post('goals/{id}', 'GoalController@update');
+
+    $router->post('goals-timeframe/{id}', 'GoalController@updateTimeframe');
     // $router->patch('goals/{id}', 'GoalController@update');
     $router->delete('goals/{id}', 'GoalController@destroy');
     $router->get('treeInfo/{id}', 'GoalController@treeInfo');

@@ -228,12 +228,8 @@ class GoalController extends Controller
      */
     public function show(int $id)
     {
-
         $query = Goal::with('parent')->where('id', $id);
         $goal = $query->get();
-        // $query = Goal::find($id);
-        // $parentName = $query->parent->title;
-        // ->paginate($pageSize);
 
         return [
             "data" => $goal
@@ -292,6 +288,33 @@ class GoalController extends Controller
         ];
     }
 
+    /**
+     * Update timeframe for the specified goal
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int $id Id of Goal
+     * @return array response status data
+     */
+    public function updateTimeframe(Request $request, int $id): array
+    {
+        $formData = json_decode($request->getContent());
+        $goal = Goal::find($id);
+        
+        if (isset($formData->start_timeframe)) {
+            $goal->start_timeframe = $formData->start_timeframe;
+        }
+        
+        if (isset($formData->end_timeframe)) {
+            $goal->end_timeframe = $formData->end_timeframe;
+        }
+
+        $goal->update();
+
+        return [
+            "data" => $goal,
+            "msg" => "Timeframe updated"
+        ];
+    }
 
     /**
      * tree of goals query
@@ -301,7 +324,6 @@ class GoalController extends Controller
      */
     public function treeInfo(int $id): array
     {
-
         $allDescendants = getDescendants($id);
 
         return [
