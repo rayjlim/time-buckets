@@ -169,7 +169,10 @@ class GoalController extends Controller
             $orderByDirection = 'DESC';
             $pageSize = 100;
         }
-
+        $incompleted = $request->input('incompleted');
+        if ($incompleted == 'true') {
+            $query = $query->whereNull('completed_at');
+        }
         $query = $query->orderBy($orderByField, $orderByDirection);
         $goals = $query->paginate($pageSize, ['*'], 'page', $searchPage);
 

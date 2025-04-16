@@ -1,54 +1,44 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import Timeline from 'react-visjs-timeline';
 import { REST_ENDPOINT } from '../constants';
 import { Alert, Snackbar } from '@mui/material';
 
+interface TimelineProps {
+    id: number;
+    content: string;
+    start: string;
+    type: string;
+    [key: string]: string | number;
+}
+
+interface Goal {
+    id: number;
+    title: string;
+    start_timeframe: string | null;
+}
+
+interface StartUpdate {
+    event: string;
+    properties: {
+        id: number;
+        content: string;
+        start: string;
+    };
+}
+
 const TimelineView = () => {
-    const [timelineItems, setTimelineItems] = useState([]);
-    const [prospects, setProspects] = useState([]);
-    const [startUpdates, setStartUpdates] = useState([]);
+    const [goals, setGoals] = useState<Goal[]>([]);
+    const [startUpdates, setStartUpdates] = useState<StartUpdate[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    // Remove the TimelineRef interface and update the ref declaration
+    const timelineRef = useRef<Timeline>(null);
 
-    useEffect(() => {
-        const fetchGoals = async () => {
-            setIsLoading(true);
-            try {
-                const response = await fetch(`${REST_ENDPOINT}goals/?pageSize=1000&type=0`);
-                if (!response.ok) throw new Error(`${response.status}`);
-                const data = await response.json();
-                console.log('data :', data);
-                // Transform the goals data into timeline items format
-                const items = data.children.data
-                    .filter(goal => goal.start_timeframe !== null)
-                    .map(goal => ({
-                        id: goal.id,
-                        content: goal.title,
-                        start: goal.start_timeframe,
-                        type: 'point'
-                    }));
-
-                setTimelineItems(items);
-                const prospects = data.children.data
-                    .filter(goal => goal.start_timeframe === null)
-                    .map(goal => ({
-                        id: goal.id,
-                        content: goal.title,
-                        start: goal.start_timeframe,
-                        type: 'point'
-                    }));
-                setProspects(prospects);
-            } catch (err) {
-                console.error('Error fetching goals:', err);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchGoals();
-    }, []);
-
-    // Add state for toast
-    const [toast, setToast] = useState({ open: false, message: '', severity: 'success' });
+    const [toast, setToast] = useState<{
+        open: boolean;
+        message: string;
+        severity: 'success' | 'error' | 'info' | 'warning';
+    }>({ open: false, message: '', severity: 'success' });
 
     // Replace the alert in saveTimeframe
     const saveTimeframe = async (id: number, start: string) => {
@@ -59,7 +49,7 @@ const TimelineView = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    start_timeframe: new Date(start).toISOString().split('T')[0]
+                    start_timeframe: start ? new Date(start).toISOString().split('T')[0] : null
                 })
             });
             if (!response.ok) throw new Error('Failed to update timeframe');
@@ -82,18 +72,11 @@ const TimelineView = () => {
         }
     };
 
-    // Add to the return statement, before the closing </div>
-    <Snackbar
-        open={toast.open}
-        autoHideDuration={6000}
-        onClose={() => setToast({ ...toast, open: false })}
-    >
-        <Alert severity={toast.severity} onClose={() => setToast({ ...toast, open: false })}>
-            {toast.message}
-        </Alert>
-    </Snackbar>
-
-    function logEvent(event, properties) {
+    // Then update the logEvent function and basicExample props:
+    function logEvent(
+        event: string,
+        properties: TimelineProps
+    ) {
         const existingUpdateIndex = startUpdates.findIndex(update =>
             update.properties.id === properties.id
         );
@@ -109,13 +92,12 @@ const TimelineView = () => {
             setStartUpdates([...startUpdates]);
         }
 
-        // Update timelineItems with new position
-        const updatedItems = timelineItems.map(item =>
-            item.id === properties.id
-                ? { ...item, start: properties.start }
-                : item
+        const updatedItems = goals.map(goal =>
+            goal.id === properties.id
+                ? { ...goal, start_timeframe: properties.start }
+                : goal
         );
-        setTimelineItems(updatedItems);
+        setGoals(updatedItems);
     }
 
     const clearLog = () => {
@@ -125,43 +107,95 @@ const TimelineView = () => {
         }
     };
 
+    const prospects = goals.filter(goal => goal.start_timeframe === null)
+        .map(goal => ({
+            id: goal.id,
+            content: goal.title,
+            start: goal.start_timeframe,
+            type: 'point'
+        }));
+
+    const timelineItems = goals
+        .filter(goal => goal.start_timeframe !== null)
+        .map(goal => ({
+            id: goal.id,
+            content: goal.title,
+            start: goal.start_timeframe,
+            type: 'point'
+        }));
+
     const basicExample = {
         options: {
             start: new Date(new Date().getFullYear(), 0, 1).toISOString().split('T')[0],
             end: new Date(new Date().getFullYear() + 5, 11, 31).toISOString().split('T')[0],
             editable: true,
-            onMove: props => {
+            onMove: (props: TimelineProps) => {
                 logEvent('mouseUp', props);
             },
-            onRemove: props => {
-                const removedItem = timelineItems.find(item => item.id === props.id);
-                setTimelineItems(timelineItems.filter(item => item.id !== props.id));
+            onRemove: (props: TimelineProps) => {
+                const updatedItems = goals.map(goal =>
+                    goal.id === props.id
+                        ? { ...goal, start_timeframe: null }
+                        : goal
+                );
+                setGoals(updatedItems);
                 setStartUpdates(startUpdates.filter(update => update.properties.id !== props.id));
-                if (removedItem) {
-                    const newProspect = {
-                        id: removedItem.id,
-                        content: removedItem.content,
-                        start: null,
-                        type: 'point'
-                    };
-                    const sortedProspects = [...prospects, newProspect]
-                        .sort((a, b) => a.content.localeCompare(b.content));
-                    setProspects(sortedProspects);
-                }
+                saveTimeframe(props.id, '');
             }
         },
         items: timelineItems
     };
+    useEffect(() => {
+        const fetchGoals = async () => {
+            setIsLoading(true);
+            try {
+                const response = await fetch(`${REST_ENDPOINT}goals/?pageSize=1000&type=0&incompleted=true`);
+                if (!response.ok) throw new Error(`${response.status}`);
+                const data = await response.json();
+                console.log('data :', data);
+                setGoals(data.children.data); // Fix: access the data array from children
+
+            } catch (err) {
+                console.error('Error fetching goals:', err);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchGoals();
+    }, []);
+    // Add this useEffect to redraw timeline when data loads
+    useEffect(() => {
+        // if (timelineRef.current && !isLoading && timelineItems.length > 0) {
+            setTimeout(() => {
+                const timeline = timelineRef.current;
+                if (timeline?.timeline) {
+                    timeline.timeline.setWindow(
+                        basicExample.options.start,
+                        basicExample.options.end,
+                        { animation: false }
+                    );
+                    const container = timeline.timeline.dom.container;
+                    if (container) {
+                        const event = new Event('resize');
+                        window.dispatchEvent(event);
+                    }
+                }
+            }, 100);
+        // }
+    }, [isLoading, timelineItems, basicExample.options.start, basicExample.options.end]);
+
+    // Modify the Timeline component in the return statement
     return (
         <div className="App">
-            <p className="header">
-                A basic timeline. You can move and zoom the timeline, and select
-                items.
-            </p>
             {isLoading ? (
                 <div>Loading...</div>
             ) : (
-                <Timeline {...basicExample} items={timelineItems} />
+                <Timeline
+                    ref={timelineRef}
+                    {...basicExample}
+                    items={timelineItems}
+                />
             )}
             <button onClick={clearLog}>Clear Log</button>
             <div id="log">
@@ -193,14 +227,23 @@ const TimelineView = () => {
                             padding: '0.5rem',
                             border: '1px solid #ccc'
                         }}>
-                            <span>{prospect.content}</span>
+                            <span>
+                                <Link to={`/?idField=${prospect.id}`}>
+                                    {prospect.content}</Link></span>
                             <button onClick={() => {
+                                const updatedItems = goals.map(goal =>
+                                    goal.id === prospect.id
+                                        ? { ...goal, start_timeframe: new Date().toISOString().split('T')[0] }
+                                        : goal
+                                );
+                                setGoals(updatedItems);
                                 const newTimelineItem = {
-                                    ...prospect,
-                                    start: new Date().toISOString().split('T')[0]
-                                };
-                                setTimelineItems([...(timelineItems || []), newTimelineItem]);
-                                setProspects(prospects.filter(p => p.id !== prospect.id));
+                                    id: prospect.id,
+                                    content: prospect.content,
+                                    start: new Date().toISOString().split('T')[0],
+                                    type: 'point'
+
+                                }
                                 setStartUpdates([...startUpdates, {
                                     event: 'mouseUp',
                                     properties: newTimelineItem
