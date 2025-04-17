@@ -1,13 +1,20 @@
+interface TimelineProps {
+    id: number;
+    content: string;
+    start: string;
+    type: string;
+    [key: string]: string | number;
+}
 declare module 'react-visjs-timeline' {
-    import { Component, RefObject } from 'react';
+    import { Component } from 'react';
 
     interface TimelineComponentProps {
         options?: {
             start: string;
             end: string;
             editable?: boolean;
-            onMove?: (props: any) => void;
-            onRemove?: (props: any) => void;
+            onMove?: (props: TimelineProps) => void;
+            onRemove?: (prop: TimelineProps) => void;
         };
         items: Array<{
             id: number;
