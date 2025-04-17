@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.10.0](https://github.com/rayjlim/time-buckets/compare/v2.9.0...v2.10.0) (2025-04-17)
+
+
+### Features
+
+* 🚧 [#18](https://github.com/rayjlim/time-buckets/issues/18) add react-visjs-timeline and vis dependencies ([3df0791](https://github.com/rayjlim/time-buckets/commit/3df0791ea2333c8763f789597b46d7b837ff7eab))
+* **GoalController:** ✨ [#18](https://github.com/rayjlim/time-buckets/issues/18) update pagination logic to use dynamic pageSize ([fc65aad](https://github.com/rayjlim/time-buckets/commit/fc65aad4dd8772c9b213bae2ab1d70d33d4d5ae5))
+* **GoalController:** 🚧 [#18](https://github.com/rayjlim/time-buckets/issues/18) add updateTimeframe method to handle goal timeframe updates ([7764fb3](https://github.com/rayjlim/time-buckets/commit/7764fb3544ee1399ee2ceeeec42f68670a243e0c))
+* **navigation:** [#18](https://github.com/rayjlim/time-buckets/issues/18) add timeline link and route ([22643a2](https://github.com/rayjlim/time-buckets/commit/22643a273cee38ad1fe13698b1d41dc7b404802e))
+* **TimelineView:** ✨ [#18](https://github.com/rayjlim/time-buckets/issues/18) add support for filtering incomplete goals and improve timeline interaction ([d8cd100](https://github.com/rayjlim/time-buckets/commit/d8cd1005da22b32f4ebce2f940ffe9414e4a38e8))
+* **TimelineView:** ✨ [#18](https://github.com/rayjlim/time-buckets/issues/18) add toast notifications and improve timeline interactions ([6c41c1e](https://github.com/rayjlim/time-buckets/commit/6c41c1ea273f3845dd589f19d611569237ec756b))
+
 ## [2.9.0](https://github.com/rayjlim/time-buckets/compare/v2.8.0...v2.9.0) (2025-04-15)
 
 

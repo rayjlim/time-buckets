@@ -34,7 +34,7 @@ const Goal = ({ goal }: GoalProps) => {
             </div>
             {current.completed_at && (
                 <div style={{ fontSize: 'large', fontWeight: 'bold' }}>
-                    {`Completed At: ${current.completed_at}`}
+                    {current.completed_at}
                 </div>
             )}
         </article>

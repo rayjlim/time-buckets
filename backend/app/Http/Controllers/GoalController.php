@@ -41,12 +41,10 @@ class GoalController extends Controller
      */
     public function index(Request $request)
     {
-        // $pageSize = is_numeric($request->input('per_page'))
-        //     ? $request->input('per_page')
-        //     : 20;  // DEFAULT page size
         $searchPage = $request->input('page');
-        $pageSize = 20;  // DEFAULT page size
-
+        $pageSize = $request->input('pageSize')
+            ? (int)$request->input('pageSize')
+            : 20;  // DEFAULT page size
 
         $locationsWithoutCoords = $request->input('locationsWithoutCoords');
         if ($locationsWithoutCoords == 'true') {
@@ -82,7 +80,7 @@ class GoalController extends Controller
             $query2 = Goal::where('parent_id', '=', $idParam)->with('parent');
             $query2 = $query2->withCount('children');
             $query2 = $query2->orderBy('title', 'ASC');
-            $children = $query2->paginate(10, ['*'], 'page', $searchPage);
+            $children = $query2->paginate($pageSize, ['*'], 'page', $searchPage);
 
             return [
                 "primary" => $goal,
@@ -94,9 +92,6 @@ class GoalController extends Controller
         }
 
         $searchTitle =  $request->input('search_title');
-        // $searchTitle = $request->input('starts_with')
-        //     ? $request->input('starts_with') . '%'
-        //     : $searchTitle;
         $searchTags = $request->input('tags') == "<untagged>"
             ? ""
             : '%' . $request->input('tags') . '%';
@@ -174,7 +169,10 @@ class GoalController extends Controller
             $orderByDirection = 'DESC';
             $pageSize = 100;
         }
-
+        $incompleted = $request->input('incompleted');
+        if ($incompleted == 'true') {
+            $query = $query->whereNull('completed_at');
+        }
         $query = $query->orderBy($orderByField, $orderByDirection);
         $goals = $query->paginate($pageSize, ['*'], 'page', $searchPage);
 
@@ -195,7 +193,9 @@ class GoalController extends Controller
                 "type" => $searchType,
                 "priority" => $searchPriority >= 0 ? $searchPriority : 0,
                 "orderByField" => $orderByField,
-                "parentId" => $searchParentId
+                "parentId" => $searchParentId,
+                "pageSize" => $pageSize,
+                "searchPage" => $searchPage,
             ],
         ];
     }
@@ -228,12 +228,8 @@ class GoalController extends Controller
      */
     public function show(int $id)
     {
-
         $query = Goal::with('parent')->where('id', $id);
         $goal = $query->get();
-        // $query = Goal::find($id);
-        // $parentName = $query->parent->title;
-        // ->paginate($pageSize);
 
         return [
             "data" => $goal
@@ -292,6 +288,33 @@ class GoalController extends Controller
         ];
     }
 
+    /**
+     * Update timeframe for the specified goal
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int $id Id of Goal
+     * @return array response status data
+     */
+    public function updateTimeframe(Request $request, int $id): array
+    {
+        $formData = json_decode($request->getContent());
+        $goal = Goal::find($id);
+
+        if (isset($formData->start_timeframe)) {
+            $goal->start_timeframe = $formData->start_timeframe;
+        }
+
+        if (isset($formData->end_timeframe)) {
+            $goal->end_timeframe = $formData->end_timeframe;
+        }
+
+        $goal->update();
+
+        return [
+            "data" => $goal,
+            "msg" => "Timeframe updated"
+        ];
+    }
 
     /**
      * tree of goals query
@@ -301,7 +324,6 @@ class GoalController extends Controller
      */
     public function treeInfo(int $id): array
     {
-
         $allDescendants = getDescendants($id);
 
         return [
