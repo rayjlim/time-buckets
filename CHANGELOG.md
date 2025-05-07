@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.11.0](https://github.com/rayjlim/time-buckets/compare/v2.10.0...v2.11.0) (2025-05-07)
+
+
+### Features
+
+* **SearchForm:** ✨[#92](https://github.com/rayjlim/time-buckets/issues/92) add rows per page selection for pagination ([dc5e259](https://github.com/rayjlim/time-buckets/commit/dc5e259b94c2ee86ba2f9e1a8298c9a02e0694ea))
+
+
+### Bug Fixes
+
+* **types:** update react-visjs-timeline type definitions ([cbd038f](https://github.com/rayjlim/time-buckets/commit/cbd038f8d0ed83ff85bdf8986613bfed969efded))
+
 ## [2.10.0](https://github.com/rayjlim/time-buckets/compare/v2.9.0...v2.10.0) (2025-04-17)
 
 
