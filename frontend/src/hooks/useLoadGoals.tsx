@@ -29,6 +29,7 @@ const useLoadGoals = ({formRef, page, setIsLoading, setGoals}: LoadHookParams) =
         const id = formData.get('idField');
         const locationsWithoutCoords = formData.has('locationsWithoutCoords');
         const completedGoals = formData.has('completedGoals');
+        const rowsPerPage = formData.get('rowsPerPage');
 
         const endpoint = `${REST_ENDPOINT}goals/?page=${page}`;
         let searchFields = '';
@@ -62,6 +63,9 @@ const useLoadGoals = ({formRef, page, setIsLoading, setGoals}: LoadHookParams) =
         }
         if (completedGoals === true) {
             searchFields += `&completedGoals=true`;
+        }
+        if (rowsPerPage !== '') {
+            searchFields += `&pageSize=${rowsPerPage}`;
         }
 
         setIsLoading(true);

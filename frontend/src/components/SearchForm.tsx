@@ -89,9 +89,12 @@ const SearchForm = ({ loadGoals, searchForm, setPage, showCompleted }: SearchFor
             setParentIdForm(parseInt(parentIdInput.value) || null);
             const idInput = form.elements.namedItem('idField') as HTMLInputElement;
             setIdForm(idInput.value || null);
+
         }
         loadGoals();
     }
+
+    const [rowsPerPage, setRowsPerPage] = useQueryState('per_page', parseAsInteger.withDefault(25));
 
     return (
         <form ref={searchForm} onSubmit={submitSearch} id="searchForm">
@@ -168,6 +171,23 @@ const SearchForm = ({ loadGoals, searchForm, setPage, showCompleted }: SearchFor
                         <option value="updated-at-asc">Updated At -  Asc</option>
                         <option value="priority">Priority</option>
 
+                    </select>
+                </label>
+                <label htmlFor="rowsPerPage" className="searchField">
+                    Rows per page:
+                    <select
+                        name="rowsPerPage"
+                        value={rowsPerPage}
+                        onChange={(e) => {
+                            setRowsPerPage(parseInt(e.target.value));
+                            setPage(1);
+                            loadGoals();
+                        }}
+                    >
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
                     </select>
                 </label>
                 <FormControlLabel
