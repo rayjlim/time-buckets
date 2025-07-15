@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.11.2](https://github.com/rayjlim/time-buckets/compare/v2.11.1...v2.11.2) (2025-07-15)
+
+
+### Bug Fixes
+
+* **frontend:** [#106](https://github.com/rayjlim/time-buckets/issues/106)💄 adjust layout and styling across components ([cd0c9cb](https://github.com/rayjlim/time-buckets/commit/cd0c9cb899a320e238c4aba1f7f1325e7700f9cd))
+* **timeline:** 💄[#106](https://github.com/rayjlim/time-buckets/issues/106)  extract inline styles to css file for TimelineView ([92345f5](https://github.com/rayjlim/time-buckets/commit/92345f5f3a4636fe2a61a09e012d36b51000c6a1))
+
 ### [2.11.1](https://github.com/rayjlim/time-buckets/compare/v2.11.0...v2.11.1) (2025-05-07)
 
 ## [2.11.0](https://github.com/rayjlim/time-buckets/compare/v2.10.0...v2.11.0) (2025-05-07)
