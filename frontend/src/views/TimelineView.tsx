@@ -4,6 +4,7 @@ import Timeline from 'react-visjs-timeline';
 import { REST_ENDPOINT } from '../constants';
 import { Alert, Snackbar } from '@mui/material';
 
+import './Timeline.css';
 interface TimelineProps {
     id: number;
     content: string;
@@ -167,21 +168,21 @@ const TimelineView = () => {
     // Add this useEffect to redraw timeline when data loads
     useEffect(() => {
         // if (timelineRef.current && !isLoading && timelineItems.length > 0) {
-            setTimeout(() => {
-                const timeline = timelineRef.current;
-                if (timeline?.timeline) {
-                    timeline.timeline.setWindow(
-                        basicExample.options.start,
-                        basicExample.options.end,
-                        { animation: false }
-                    );
-                    const container = timeline.timeline.dom.container;
-                    if (container) {
-                        const event = new Event('resize');
-                        window.dispatchEvent(event);
-                    }
+        setTimeout(() => {
+            const timeline = timelineRef.current;
+            if (timeline?.timeline) {
+                timeline.timeline.setWindow(
+                    basicExample.options.start,
+                    basicExample.options.end,
+                    { animation: false }
+                );
+                const container = timeline.timeline.dom.container;
+                if (container) {
+                    const event = new Event('resize');
+                    window.dispatchEvent(event);
                 }
-            }, 100);
+            }
+        }, 100);
         // }
     }, [isLoading, timelineItems, basicExample.options.start, basicExample.options.end]);
 
@@ -202,31 +203,27 @@ const TimelineView = () => {
                 {startUpdates && startUpdates.map(newUpdate =>
                 (
                     <div key={`${newUpdate.properties.id}_${newUpdate.properties.start}`}
-                        style={{
-                            backgroundColor: '#fff3cd',
-                            borderRadius: '4px'
-                        }}>
+                        className="log-item"
+                    >
                         <p>
                             <span>
                                 {`${newUpdate.properties.content} :${new Date(newUpdate.properties.start).toISOString().split('T')[0]}`}
                             </span>
                             <button onClick={() => saveTimeframe(newUpdate.properties.id, newUpdate.properties.start)}>
                                 Save Date
-                            </button></p></div>)
+                            </button>
+                        </p>
+                    </div>)
                 )}
             </div>
 
-            <div style={{ marginTop: '2rem' }}>
+            <div className="prospects-container">
                 <h3>Prospects</h3>
-                <div style={{ display: 'grid', gap: '1rem' }}>
+                <div className="prospects-list">
                     {prospects?.map(prospect => (
-                        <div key={prospect.id} style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            padding: '0.5rem',
-                            border: '1px solid #ccc'
-                        }}>
+                        <div key={prospect.id}
+                            className="prospects-item"
+                        >
                             <span>
                                 <Link to={`/?idField=${prospect.id}`}>
                                     {prospect.content}</Link></span>
