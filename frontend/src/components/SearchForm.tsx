@@ -97,13 +97,19 @@ const SearchForm = ({ loadGoals, searchForm, setPage, showCompleted }: SearchFor
     const [rowsPerPage, setRowsPerPage] = useQueryState('per_page', parseAsInteger.withDefault(25));
 
     return (
-        <form ref={searchForm} onSubmit={submitSearch} id="searchForm">
+        <form ref={searchForm} onSubmit={submitSearch} id="searchForm" style={{textAlign: 'left', width: '90%'}}>
             <FormControl>
                 <input name="startsWith" type="hidden" />
-                <label htmlFor="searchTitle" className="searchField">
-                    Search Title:
-                    <input name="searchTitle" type="text" onChange={changeTitle} id="searchTitle" defaultValue={titleForm as string} />
-                </label>
+                <TextField
+                    id="searchTitle"
+                    name="searchTitle"
+                    size="small"
+                    label="Name"
+                    defaultValue={titleForm}
+                    placeholder="Name"
+                    variant="filled"
+                    onChange={changeTitle}
+                />
                 <button type="submit" id="searchFormSubmit">Search</button>
                 <button type="button" onClick={() => clearFields()}>Clear</button>
                 <RadioGroup
@@ -120,10 +126,12 @@ const SearchForm = ({ loadGoals, searchForm, setPage, showCompleted }: SearchFor
                     <FormControlLabel value="1" control={<Radio />} label="Experience" />
                 </RadioGroup>
 
-                <label htmlFor="tags" className="searchField">
+                <label htmlFor="tagsSearch" className="searchField">
                     Tag:
-                    <input name="tags" type="text" defaultValue={tagForm as string} />
+                    <input name="tags" type="text" defaultValue={tagForm as string} id="tagsSearch"/>
                     <select
+                        name="tagsSelect"
+                        id="tagsSelect"
                         ref={formTagChoices}
                         onChange={e => {
                             if (!searchForm.current) return;
@@ -139,9 +147,9 @@ const SearchForm = ({ loadGoals, searchForm, setPage, showCompleted }: SearchFor
                         ))}
                     </select>
                 </label>
-                <label htmlFor="priority" className="searchField">
+                <label htmlFor="prioritySearch" className="searchField">
                     Priority:
-                    <input name="priority" type="text" size={4} />
+                    <input name="priority" type="text" size={4} id="prioritySearch"/>
                 </label>
                 <TextField
                     id="searchFormParentId"
@@ -164,7 +172,7 @@ const SearchForm = ({ loadGoals, searchForm, setPage, showCompleted }: SearchFor
 
                 <label htmlFor="orderBy" className="searchField">
                     Order By:
-                    <select name="orderBy">
+                    <select name="orderBy" id="orderBy">
                         <option value="title-asc">Title</option>
                         <option value="title-desc">Title - desc</option>
                         <option value="updated-at-desc">Updated At - DES</option>
@@ -177,6 +185,7 @@ const SearchForm = ({ loadGoals, searchForm, setPage, showCompleted }: SearchFor
                     Rows per page:
                     <select
                         name="rowsPerPage"
+                        id="rowsPerPage"
                         value={rowsPerPage}
                         onChange={(e) => {
                             setRowsPerPage(parseInt(e.target.value));

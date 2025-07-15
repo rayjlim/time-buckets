@@ -7,7 +7,7 @@ import {
 } from 'react-leaflet';
 import L, { LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-const MAP_WIDTH = 500;
+const MAP_WIDTH = 370;
 const MAP_HEIGHT = 300;
 
 // If you need to define props, create an interface

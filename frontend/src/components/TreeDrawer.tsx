@@ -39,19 +39,17 @@ export default function TreeDrawer() {
     );
 
     return (
-        <div>
-            <>
-                <Button onClick={toggleDrawer('left', true)}>Tree View</Button>
-                <Button onClick={toggleDrawer('left', false)} id="tree-box-btn" style={{display: 'none'}}>Tree View Close</Button>
+        <div style={{margin: '0', width: '90%'}}>
+            <Button onClick={toggleDrawer('left', true)} style={{margin: '0', padding: '0'}}>Tree View</Button>
+            <Button onClick={toggleDrawer('left', false)} id="tree-box-btn" style={{ display: 'none' }}>Tree View Close</Button>
 
-                <Drawer
-                    anchor={'left'}
-                    open={state['left']}
-                    onClose={toggleDrawer('left', false)}
-                >
-                    {list('left')}
-                </Drawer>
-            </>
+            <Drawer
+                anchor={'left'}
+                open={state['left']}
+                onClose={toggleDrawer('left', false)}
+            >
+                {list('left')}
+            </Drawer>
         </div>
     );
 }

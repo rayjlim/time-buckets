@@ -13,7 +13,6 @@ import MarkdownDisplay from './MarkdownDisplay';
 
 const typeSet = ['Location', 'Experience'];
 
-
 interface GoalProps {
     goal: GoalType;
     onAddGoal: (goal: GoalType) => void;
@@ -58,7 +57,7 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
         if (searchFormSubmit) searchFormSubmit.click();
     };
     const displayMap = () => {
-        const mapDimension = 150;
+        const mapDimension = 170;
         return current.gps_coords.indexOf(',') !== -1 && (
             <MapDisplay center={current.gps_coords.split(",").map(Number) as [number, number]} zoom={current.gps_zoom}
                 height={mapDimension}
@@ -126,7 +125,7 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                         className="mui-text-field"
                     />
 
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', margin: '8px 0' }}>
+                    <div className="tagButtons-container">
                         {TAGS.map(tag => (
                             <button
                                 type="button"
@@ -154,7 +153,7 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                         slotProps={{
                             textField: {
                                 size: "small",
-                               className: "mui-text-field"
+                                className: "mui-text-field"
                             }
                         }}
 
@@ -186,9 +185,9 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                         Cancel
                     </button>
                     <button
+                        className="deleteBtn"
                         onClick={() => removeGoal()}
                         type="button"
-                        style={{ width: '5rem' }}
                     >
                         Delete
                     </button>
@@ -197,78 +196,75 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
             </form>
         </div>
     );
-
+    {/* show non-editing format */ }
     const renderDisplayView = () => (
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-            {/* show non-editing format */}
-            <div className="manual goal-display" style={{ display: 'flex', flexDirection: 'row', gap: '1rem' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
-                        <button type="button" onClick={() => changeSearchFormParent(current.id + '')}>{current.id}</button>
-                        {`${current.title} `}
-                    </div>
-                    <div>
-                        {`${typeSet[current.type]}`}
-                        {current.children_count > 0 && `, Children: ${current.children_count}`}
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
-                        Parent
-                        <button type="button" onClick={() => changeSearchFormParent(`${current.parent_id}`)}>{current.parent?.title || 'root'}</button>
-                    </div>
-                    <button
-                        onClick={() => setIsEditing(!isEditing)}
-                        type="button"
-                    >
-                        Edit
-                    </button>
+        <div className="manual goal-display">
+            <div className="goal-main-info">
+                <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+                    <button type="button" onClick={() => changeSearchFormParent(current.id + '')}>{current.id}</button>
+                    {`${current.title} `}
                 </div>
                 <div>
-                    <div title="Priorities description
+                    {`${typeSet[current.type]}`}
+                    {current.children_count > 0 && `, Children: ${current.children_count}`}
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+                    Parent
+                    <button type="button" onClick={() => changeSearchFormParent(`${current.parent_id}`)}>{current.parent?.title || 'root'}</button>
+                </div>
+                <button
+                    onClick={() => setIsEditing(!isEditing)}
+                    type="button"
+                >
+                    Edit
+                </button>
+            </div>
+            <div className="goal-secondary-info">
+                <div title="Priorities description
 - Finance (1-10)
 - Relationship (1-10)
 - Physical (1-10)
 - Time Frame (1-10)
 - Total (1-50)
 "
-                        style={{ 'margin': '0 auto' }}>
-                        Priority:
-                        {current.priority !== -1 && (
-                            <>
-                                {current.priority}
-                            </>
-                        )}
-                    </div>
-
-
-                    <div>
-                        {'Note: '}
-                        <MarkdownDisplay source={current.note || ''} />
-                    </div>
-                    <div>
-                        {`Tags: ${current.tags}`}
-                    </div>
-                    <div style={{ fontSize: 'small' }}>
-                        {`Added At: ${current.added_at}`}
-                    </div>
-                    <div style={{ fontSize: 'small' }}>
-                        {`${current.note}`}
-                    </div>
-                    {current.completed_at && (
-                        <div style={{ fontSize: 'large', fontWeight: 'bold' }}>
-                            {`Completed At: ${current.completed_at}`}
-                        </div>
+                    style={{ 'margin': '0 auto' }}>
+                    Priority:
+                    {current.priority !== -1 && (
+                        <>
+                            {current.priority}
+                        </>
                     )}
                 </div>
-            </div>
-            {current.gps_coords && current.gps_coords !== '' && (
+
+
                 <div>
-                    GPS:
-                    <a href={`https://www.google.com/maps/place/${current.gps_coords}`}>
-                        {current.gps_coords.slice(0, 10)}
-                    </a>
-                    {displayMap()}
+                    {'Note: '}
+                    <MarkdownDisplay source={current.note || ''} />
                 </div>
-            )}
+                <div>
+                    {`Tags: ${current.tags}`}
+                </div>
+                <div style={{ fontSize: 'small' }}>
+                    {`Added At: ${current.added_at}`}
+                </div>
+                <div style={{ fontSize: 'small' }}>
+                    {`${current.note}`}
+                </div>
+                {current.completed_at && (
+                    <div style={{ fontSize: 'large', fontWeight: 'bold' }}>
+                        {`Completed At: ${current.completed_at}`}
+                    </div>
+                )}
+                {current.gps_coords && current.gps_coords !== '' && (
+                    <div>
+                        GPS:
+                        <a href={`https://www.google.com/maps/place/${current.gps_coords}`}>
+                            {current.gps_coords.slice(0, 10)}
+                        </a>
+                        {displayMap()}
+                    </div>
+                )}
+            </div>
         </div>
     );
 

@@ -10,10 +10,10 @@ interface PaginationBarProps {
 
 const PaginationBar = ({ pageCount, page, total, pageChange }: PaginationBarProps) => (
     <>
-        <Stack spacing={2}>
+        <Stack spacing={2}  style={{width:'90%'}}>
             <Pagination count={pageCount} page={page} variant="outlined" shape="rounded" onChange={pageChange}/>
         </Stack>
-        <div>
+        <div  style={{width:'90%'}}>
             {`Page: ${page} of: ${pageCount}, total ${total}`}
         </div>
     </>

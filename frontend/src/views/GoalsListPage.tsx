@@ -104,7 +104,6 @@ const GoalsListPage = () => {
             </ChipToggleView>
             <SearchForm loadGoals={loadGoals} searchForm={searchForm} setPage={setPage} />
 
-
             <PaginationBar
                 pageCount={goals?.children.last_page || 0}
                 page={goals?.children.current_page || 0}
@@ -122,15 +121,16 @@ const GoalsListPage = () => {
                                     onRemoveGoal={onRemoveGoal}
                                 />
                             </div>
-                            <hr />
+                            <hr style={{width: '60%'}}/>
                         </>)
                     }
-
+ <div className="goal-list">
                     <GoalList
                         goals={goals?.children.data || []}
                         onAddGoal={onAddGoal}
                         onRemoveGoal={onRemoveGoal}
                     />
+                    </div>
                 </>
             )}
             <PaginationBar

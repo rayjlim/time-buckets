@@ -16,7 +16,7 @@ const ChipToggleView: React.FC<MyComponentProps> = ({ children, label }) => {
     };
 
     return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '.6rem', width: '90%'}}>
             <Switch size="small" onChange={toggleView}/>
             {label && <span>{label}</span>}
             {isChipView ? (
