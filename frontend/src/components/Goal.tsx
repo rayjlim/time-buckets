@@ -270,7 +270,7 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
     );
 
     return (
-        <div className={mainClassName}>
+        <article className={mainClassName}>
             {isEditing ? renderEditForm() : renderDisplayView()}
             {isAddingChild ? (
                 <>
@@ -283,7 +283,7 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
                     Show Add form
                 </button>
             )}
-        </div>
+        </article>
     );
 };
 
