@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.11.3](https://github.com/rayjlim/time-buckets/compare/v2.11.2...v2.11.3) (2025-07-22)
+
+
+### Bug Fixes
+
+* **components:** [#106](https://github.com/rayjlim/time-buckets/issues/106)💄 improve GoalPrint component styling and structure ([19f43c6](https://github.com/rayjlim/time-buckets/commit/19f43c663c4ccc8bcf0908bf85a9909888409767))
+* **Goal:** 💄improve layout and structure of goal component ([b248a5c](https://github.com/rayjlim/time-buckets/commit/b248a5cdc8490171026017436f34257d91c3a187))
+
 ### [2.11.2](https://github.com/rayjlim/time-buckets/compare/v2.11.1...v2.11.2) (2025-07-15)
 
 
