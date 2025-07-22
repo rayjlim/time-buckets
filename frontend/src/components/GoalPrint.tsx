@@ -12,31 +12,32 @@ const Goal = ({ goal }: GoalProps) => {
     const current = goal as GoalType;
     console.log(current);
     const renderDisplayView = () => (
-        <article style={{ display: 'flex', flexDirection: 'row', gap: '1rem', border: '1px solid grey' }}>
+        <article className="goal-print-article">
             <div>
-                {`${current.title} `}
+                <span>{`${current.title} `}</span>
+                <br></br>
+                <span className="goal-print-title">{`${typeSet[current.type]}`}</span>
             </div>
-            <div>
-                {`${typeSet[current.type]}`}
-                {current.children_count > 0 && `, Children: ${current.children_count}`}
+            <div className="goal-print-info">
+                {current.children_count > 0 && `Children: ${current.children_count}`}
             </div>
-
-            <div>
+            <div className="goal-print-info">
                 {`Tags: ${current.tags}`}
             </div>
-            <div style={{ fontSize: 'small' }}>
-                {`Added At: ${current.added_at}`}
-            </div>
-            <div style={{ fontSize: 'small' }}>
-                <MarkdownDisplay source={current.reason || ''} />
-                <MarkdownDisplay source={current.note || ''} />
-
-            </div>
-            {current.completed_at && (
-                <div style={{ fontSize: 'large', fontWeight: 'bold' }}>
-                    {current.completed_at}
+            <div className="goal-print-details">
+                <div className="goal-print-details-small">
+                    {`Added: ${current.added_at}`}
                 </div>
-            )}
+                <div className="goal-print-details-small">
+                    <MarkdownDisplay source={current.reason || ''} />
+                    <MarkdownDisplay source={current.note || ''} />
+                </div>
+                {current.completed_at && (
+                    <div className="goal-print-completion">
+                        {current.completed_at}
+                    </div>
+                )}
+            </div>
         </article>
     );
 

@@ -12,8 +12,6 @@ import Switch from '@mui/material/Switch';
 import pkg from '../../package.json';
 import { PageDataType } from '../types';
 
-// import './CompletedGoals.css';
-
 interface ChildrenType {
     id: number
     title: string
