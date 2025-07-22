@@ -66,23 +66,25 @@
 .goal-display {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
+    gap: .25rem;
     width: 95%;
 }
 
 .goal-main-info {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-
+    gap: .25rem;
     width: 50%;
 }
 .goal-secondary-info {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0rem;
 
     width: 50%;
+}
+.goal-secondary-info p {
+    margin: 0
 }
 .deleteBtn {
     background-color: rgb(244, 96, 96);
@@ -90,3 +92,2493 @@
     color: white;
     width: 7rem;
 }
+
+.goal-print-article {
+    display: flex;
+    flex-direction: row;
+    gap: .25rem;
+    border: 1px solid grey;
+}
+
+.goal-print-title {
+    font-size: small;
+    color: #666;
+}
+
+.goal-print-info {
+    font-size: small;
+    color: #666;
+}
+
+.goal-print-details {
+    flex-grow: 1;
+}
+
+.goal-print-details-small {
+    font-size: small;
+}
+
+.goal-print-completion {
+    font-size: large;
+    font-weight: bold;
+    width: 100%;
+    text-align: right;
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.deleteBtn {
+    background-color: rgb(244, 96, 96);
+    border-radius: 8px;
+    color: white;
+    width: 7rem;
+}
+.goal-secondary-info p {
+    margin: 0
+}
+.delete

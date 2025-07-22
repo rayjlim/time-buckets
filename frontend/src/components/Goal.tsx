@@ -202,24 +202,25 @@ const Goal = ({ goal, onAddGoal, onRemoveGoal }: GoalProps) => {
             <div className="goal-main-info">
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
                     <button type="button" onClick={() => changeSearchFormParent(current.id + '')}>{current.id}</button>
-                    {`${current.title} `}
+                    <span>{`${current.title} `}</span>
                 </div>
+                <div style={{fontSize: 'small', color:'#666'}}>{`${typeSet[current.type]}`}</div>
                 <div>
-                    {`${typeSet[current.type]}`}
-                    {current.children_count > 0 && `, Children: ${current.children_count}`}
+                    {current.children_count > 0 && `Children: ${current.children_count}`}
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
                     Parent
                     <button type="button" onClick={() => changeSearchFormParent(`${current.parent_id}`)}>{current.parent?.title || 'root'}</button>
                 </div>
+
+            </div>
+            <div className="goal-secondary-info">
                 <button
                     onClick={() => setIsEditing(!isEditing)}
                     type="button"
                 >
                     Edit
                 </button>
-            </div>
-            <div className="goal-secondary-info">
                 <div title="Priorities description
 - Finance (1-10)
 - Relationship (1-10)
